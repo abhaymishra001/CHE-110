@@ -1,0 +1,3181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHE 110 – Environmental Studies | Unit 1 Notes</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Kalam:wght@300;400;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ===================== CSS VARIABLES ===================== */
+    :root {
+      --paper: #faf8f2;
+      --paper-2: #f5f1e8;
+      --paper-3: #ede8db;
+      --ink: #1a1209;
+      --ink-2: #3d2e14;
+      --ink-light: #6b5a3e;
+      --blue: #2563a8;
+      --blue-light: #dbeafe;
+      --blue-mid: #93c5fd;
+      --green: #2d6a4f;
+      --green-light: #d1fae5;
+      --green-mid: #6ee7b7;
+      --amber: #92400e;
+      --amber-light: #fef3c7;
+      --amber-mid: #fcd34d;
+      --red: #991b1b;
+      --red-light: #fee2e2;
+      --purple: #6b21a8;
+      --purple-light: #f3e8ff;
+      --teal: #0f766e;
+      --teal-light: #ccfbf1;
+      --beige: #c9a96e;
+      --beige-light: #fdf6e3;
+      --brown: #78350f;
+      --shadow-sm: 0 2px 8px rgba(120, 80, 30, 0.10);
+      --shadow-md: 0 4px 20px rgba(120, 80, 30, 0.14);
+      --shadow-lg: 0 8px 40px rgba(120, 80, 30, 0.18);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --font-hand: 'Kalam', cursive;
+      --font-notes: 'Caveat', cursive;
+      --font-heading: 'DM Serif Display', serif;
+      --font-body: 'Crimson Pro', serif;
+    }
+
+    /* DARK MODE */
+    [data-theme="dark"] {
+      --paper: #1a1612;
+      --paper-2: #221e18;
+      --paper-3: #2a2520;
+      --ink: #f0ead8;
+      --ink-2: #d4c5a0;
+      --ink-light: #b0a080;
+      --blue: #60a5fa;
+      --blue-light: #1e3a5f;
+      --blue-mid: #1d4ed8;
+      --green: #34d399;
+      --green-light: #064e3b;
+      --amber: #fbbf24;
+      --amber-light: #451a03;
+      --amber-mid: #92400e;
+      --beige: #d4a760;
+      --beige-light: #2d2318;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ===================== RESET & BASE ===================== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      line-height: 1.7;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Paper texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(120, 80, 30, 0.06) 28px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(120, 80, 30, 0.02) 61px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===================== PROGRESS BAR ===================== */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--amber));
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ===================== NAVBAR ===================== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 248, 242, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--paper-3);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+      transition: background 0.3s;
+    }
+
+    [data-theme="dark"] nav {
+      background: rgba(26, 22, 18, 0.92);
+      border-bottom-color: var(--paper-3);
+    }
+
+    .nav-brand {
+      font-family: var(--font-notes);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      font-family: var(--font-notes);
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      background: var(--blue-light);
+      color: var(--blue);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-icon {
+      background: var(--paper-2);
+      border: 1.5px solid var(--paper-3);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+      color: var(--ink);
+    }
+
+    .btn-icon:hover {
+      background: var(--blue-light);
+      border-color: var(--blue);
+      color: var(--blue);
+      transform: scale(1.1);
+    }
+
+    /* ===================== SEARCH ===================== */
+    #search-box {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 200;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 80px;
+    }
+
+    #search-box.open {
+      display: flex;
+    }
+
+    #search-inner {
+      background: var(--paper);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      width: min(600px, 90vw);
+      box-shadow: var(--shadow-lg);
+    }
+
+    #search-input {
+      width: 100%;
+      font-family: var(--font-notes);
+      font-size: 1.3rem;
+      border: 2px solid var(--paper-3);
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      background: var(--paper-2);
+      color: var(--ink);
+      outline: none;
+    }
+
+    #search-input:focus {
+      border-color: var(--blue);
+    }
+
+    #search-results {
+      margin-top: 14px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .search-result-item {
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.15s;
+      font-family: var(--font-notes);
+    }
+
+    .search-result-item:hover {
+      background: var(--blue-light);
+    }
+
+    .search-result-item .match-text {
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 80px 24px 60px;
+      background: linear-gradient(175deg, var(--beige-light) 0%, var(--paper) 60%);
+      border-bottom: 3px solid var(--paper-3);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(37, 99, 168, 0.08) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(45, 106, 79, 0.07) 0%, transparent 70%);
+      bottom: -80px;
+      left: -80px;
+      border-radius: 50%;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-notes);
+      font-size: 1.1rem;
+      color: var(--beige);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      animation: fadeInUp 0.7s 0.1s ease both;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-unit-badge {
+      display: inline-block;
+      font-family: var(--font-hand);
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 6px 28px;
+      border-radius: 40px;
+      margin: 16px 0 24px;
+      letter-spacing: 2px;
+      animation: fadeInUp 0.7s 0.2s ease both;
+      box-shadow: 4px 4px 0 var(--beige);
+    }
+
+    .hero-desc {
+      font-family: var(--font-notes);
+      font-size: 1.15rem;
+      color: var(--ink-light);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      animation: fadeInUp 0.7s 0.3s ease both;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      animation: fadeInUp 0.7s 0.4s ease both;
+    }
+
+    .chip {
+      font-family: var(--font-notes);
+      font-size: 0.9rem;
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1.5px solid;
+    }
+
+    .chip-blue {
+      background: var(--blue-light);
+      color: var(--blue);
+      border-color: var(--blue-mid);
+    }
+
+    .chip-green {
+      background: var(--green-light);
+      color: var(--green);
+      border-color: var(--green-mid);
+    }
+
+    .chip-amber {
+      background: var(--amber-light);
+      color: var(--amber);
+      border-color: var(--amber-mid);
+    }
+
+    /* ===================== MAIN LAYOUT ===================== */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      padding: 56px 0 32px;
+      border-bottom: 1.5px dashed var(--paper-3);
+    }
+
+    section:last-child {
+      border-bottom: none;
+    }
+
+    /* ===================== SECTION HEADINGS ===================== */
+    .section-label {
+      font-family: var(--font-notes);
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--beige);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--beige);
+      border-radius: 2px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 28px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid var(--paper-3);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--blue);
+      border-radius: 2px;
+    }
+
+    /* ===================== NOTE CARDS ===================== */
+    .note-card {
+      background: var(--paper-2);
+      border: 1.5px solid var(--paper-3);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .note-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    /* Spiral binding dots */
+    .note-card::before {
+      content: '• • •';
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 0.7rem;
+      color: var(--paper-3);
+      letter-spacing: 4px;
+    }
+
+    .note-card h3 {
+      font-family: var(--font-hand);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .note-card h3 .icon {
+      font-size: 1.3rem;
+    }
+
+    .note-card h4 {
+      font-family: var(--font-hand);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink-2);
+      margin: 18px 0 8px;
+      padding-left: 12px;
+      border-left: 3px solid var(--amber);
+    }
+
+    .note-card p {
+      font-family: var(--font-notes);
+      font-size: 1.08rem;
+      color: var(--ink-2);
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+
+    /* ===================== HIGHLIGHT BOXES ===================== */
+    .highlight {
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-family: var(--font-notes);
+      font-size: 1.05rem;
+      border-left: 4px solid;
+      position: relative;
+    }
+
+    .highlight-blue {
+      background: var(--blue-light);
+      border-color: var(--blue);
+      color: var(--ink);
+    }
+
+    .highlight-green {
+      background: var(--green-light);
+      border-color: var(--green);
+      color: var(--ink);
+    }
+
+    .highlight-amber {
+      background: var(--amber-light);
+      border-color: var(--amber);
+      color: var(--ink);
+    }
+
+    .highlight-red {
+      background: var(--red-light);
+      border-color: var(--red);
+      color: var(--ink);
+    }
+
+    .highlight-purple {
+      background: var(--purple-light);
+      border-color: var(--purple);
+      color: var(--ink);
+    }
+
+    .highlight-teal {
+      background: var(--teal-light);
+      border-color: var(--teal);
+      color: var(--ink);
+    }
+
+    .highlight strong {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ===================== LISTS ===================== */
+    .note-list {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 14px;
+    }
+
+    .note-list li {
+      font-family: var(--font-notes);
+      font-size: 1.05rem;
+      color: var(--ink-2);
+      padding: 5px 0 5px 24px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .note-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .note-list.check li::before {
+      content: '✓';
+      color: var(--green);
+    }
+
+    .note-list.star li::before {
+      content: '★';
+      color: var(--amber);
+      font-size: 0.8rem;
+      top: 8px;
+    }
+
+    .note-list.dot li::before {
+      content: '●';
+      color: var(--beige);
+      font-size: 0.6rem;
+      top: 9px;
+    }
+
+    /* ===================== TABLES ===================== */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-notes);
+      font-size: 1rem;
+    }
+
+    thead th {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 12px 16px;
+      text-align: left;
+      font-family: var(--font-hand);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    thead th:first-child {
+      border-radius: var(--radius) 0 0 0;
+    }
+
+    thead th:last-child {
+      border-radius: 0 var(--radius) 0 0;
+    }
+
+    tbody tr {
+      transition: background 0.15s;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--paper-3);
+    }
+
+    tbody tr:hover {
+      background: var(--blue-light);
+    }
+
+    tbody td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--paper-3);
+      color: var(--ink-2);
+    }
+
+    /* ===================== SPHERE DIAGRAM ===================== */
+    .sphere-diagram {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    .sphere-card {
+      border-radius: var(--radius);
+      padding: 18px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid;
+      transition: transform 0.25s;
+    }
+
+    .sphere-card:hover {
+      transform: scale(1.03);
+    }
+
+    .sphere-card h4 {
+      font-family: var(--font-hand);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      border: none;
+      padding: 0;
+    }
+
+    .sphere-card p {
+      font-family: var(--font-notes);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    .sphere-litho {
+      background: linear-gradient(135deg, #fef9f0, #fde8c4);
+      border-color: #d97706;
+    }
+
+    .sphere-litho h4 {
+      color: #92400e;
+    }
+
+    .sphere-hydro {
+      background: linear-gradient(135deg, #eff6ff, #bfdbfe);
+      border-color: #3b82f6;
+    }
+
+    .sphere-hydro h4 {
+      color: #1d4ed8;
+    }
+
+    .sphere-atmo {
+      background: linear-gradient(135deg, #f0fdf4, #bbf7d0);
+      border-color: #22c55e;
+    }
+
+    .sphere-atmo h4 {
+      color: #15803d;
+    }
+
+    .sphere-bio {
+      background: linear-gradient(135deg, #fdf4ff, #e9d5ff);
+      border-color: #a855f7;
+    }
+
+    .sphere-bio h4 {
+      color: #7e22ce;
+    }
+
+    /* ===================== PILLARS DIAGRAM ===================== */
+    .pillars-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .pillar {
+      border-radius: var(--radius);
+      padding: 22px 16px;
+      text-align: center;
+      border: 2px solid;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .pillar:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .pillar-icon {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .pillar h4 {
+      font-family: var(--font-hand);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      border: none;
+      padding: 0;
+    }
+
+    .pillar p {
+      font-size: 0.92rem;
+      margin: 0;
+    }
+
+    .pillar-eco {
+      background: var(--amber-light);
+      border-color: var(--amber);
+    }
+
+    .pillar-eco h4 {
+      color: var(--amber);
+    }
+
+    .pillar-soc {
+      background: var(--blue-light);
+      border-color: var(--blue);
+    }
+
+    .pillar-soc h4 {
+      color: var(--blue);
+    }
+
+    .pillar-env {
+      background: var(--green-light);
+      border-color: var(--green);
+    }
+
+    .pillar-env h4 {
+      color: var(--green);
+    }
+
+    /* ===================== SDG GRID ===================== */
+    .sdg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .sdg-item {
+      border-radius: var(--radius);
+      padding: 12px 8px;
+      text-align: center;
+      font-family: var(--font-notes);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #fff;
+      transition: transform 0.2s;
+      cursor: default;
+      line-height: 1.3;
+    }
+
+    .sdg-item:hover {
+      transform: scale(1.07);
+    }
+
+    .sdg-item .num {
+      font-size: 1.3rem;
+      font-family: var(--font-hand);
+      font-weight: 700;
+      display: block;
+    }
+
+    /* SDG Colors */
+    .sdg-1 {
+      background: #E5243B;
+    }
+
+    .sdg-2 {
+      background: #DDA63A;
+    }
+
+    .sdg-3 {
+      background: #4C9F38;
+    }
+
+    .sdg-4 {
+      background: #C5192D;
+    }
+
+    .sdg-5 {
+      background: #FF3A21;
+    }
+
+    .sdg-6 {
+      background: #26BDE2;
+    }
+
+    .sdg-7 {
+      background: #FCC30B;
+    }
+
+    .sdg-8 {
+      background: #A21942;
+    }
+
+    .sdg-9 {
+      background: #FD6925;
+    }
+
+    .sdg-10 {
+      background: #DD1367;
+    }
+
+    .sdg-11 {
+      background: #FD9D24;
+    }
+
+    .sdg-12 {
+      background: #BF8B2E;
+    }
+
+    .sdg-13 {
+      background: #3F7E44;
+    }
+
+    .sdg-14 {
+      background: #0A97D9;
+    }
+
+    .sdg-15 {
+      background: #56C02B;
+    }
+
+    .sdg-16 {
+      background: #00689D;
+    }
+
+    .sdg-17 {
+      background: #19486A;
+    }
+
+    /* ===================== CALLOUT ===================== */
+    .callout {
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: var(--radius-lg);
+      padding: 22px 26px;
+      margin: 22px 0;
+      font-family: var(--font-hand);
+      font-size: 1.15rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .callout::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      font-size: 6rem;
+      color: rgba(255, 255, 255, 0.06);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .callout .quote-source {
+      font-family: var(--font-notes);
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-top: 8px;
+      display: block;
+    }
+
+    /* ===================== DEFINITION BOX ===================== */
+    .def-box {
+      background: var(--beige-light);
+      border: 2px dashed var(--beige);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 14px 0;
+      font-family: var(--font-notes);
+      font-size: 1.05rem;
+      position: relative;
+    }
+
+    .def-box::before {
+      content: 'Definition';
+      font-family: var(--font-hand);
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--beige);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* ===================== QUICK REVISION ===================== */
+    .revision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 18px 0;
+    }
+
+    .revision-card {
+      background: var(--paper-2);
+      border: 1.5px solid var(--paper-3);
+      border-radius: var(--radius);
+      padding: 18px;
+      transition: transform 0.2s;
+    }
+
+    .revision-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .revision-card h4 {
+      font-family: var(--font-hand);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--paper-3);
+    }
+
+    .revision-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .revision-card ul li {
+      font-family: var(--font-notes);
+      font-size: 0.95rem;
+      color: var(--ink-2);
+      padding: 3px 0 3px 16px;
+      position: relative;
+    }
+
+    .revision-card ul li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      color: var(--beige);
+      font-size: 1.2rem;
+      top: 0;
+    }
+
+    /* ===================== MCQ SECTION ===================== */
+    #mcqs {
+      background: var(--paper-2);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      margin-bottom: 40px;
+    }
+
+    .mcq-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .mcq-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: var(--font-notes);
+      font-size: 0.9rem;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1.5px solid var(--paper-3);
+      background: var(--paper);
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--ink);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .mcq-stats {
+      font-family: var(--font-notes);
+      font-size: 0.95rem;
+      color: var(--ink-light);
+    }
+
+    #score-display {
+      font-family: var(--font-hand);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-align: center;
+      padding: 14px;
+      background: var(--blue-light);
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .mcq-item {
+      background: var(--paper);
+      border: 1.5px solid var(--paper-3);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 16px;
+      transition: box-shadow 0.2s;
+    }
+
+    .mcq-item:hover {
+      box-shadow: var(--shadow-sm);
+    }
+
+    .mcq-item[data-difficulty="easy"] {
+      border-left: 4px solid var(--green);
+    }
+
+    .mcq-item[data-difficulty="medium"] {
+      border-left: 4px solid var(--amber);
+    }
+
+    .mcq-item[data-difficulty="hard"] {
+      border-left: 4px solid var(--red);
+    }
+
+    .mcq-q {
+      font-family: var(--font-hand);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .mcq-q .q-num {
+      font-size: 0.85rem;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+
+    .mcq-difficulty {
+      font-family: var(--font-notes);
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      float: right;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .diff-easy {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
+    .diff-medium {
+      background: var(--amber-light);
+      color: var(--amber);
+    }
+
+    .diff-hard {
+      background: var(--red-light);
+      color: var(--red);
+    }
+
+    .mcq-options {
+      display: grid;
+      gap: 8px;
+    }
+
+    .mcq-option {
+      font-family: var(--font-notes);
+      font-size: 1rem;
+      padding: 9px 14px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--paper-3);
+      background: var(--paper-2);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+      color: var(--ink);
+    }
+
+    .mcq-option:hover {
+      background: var(--blue-light);
+      border-color: var(--blue);
+    }
+
+    .mcq-option.correct {
+      background: var(--green-light);
+      border-color: var(--green);
+      font-weight: 600;
+    }
+
+    .mcq-option.wrong {
+      background: var(--red-light);
+      border-color: var(--red);
+    }
+
+    .mcq-option.revealed {
+      background: var(--green-light);
+      border-color: var(--green);
+    }
+
+    .option-letter {
+      font-family: var(--font-hand);
+      font-weight: 700;
+      font-size: 1rem;
+      min-width: 24px;
+      height: 24px;
+      background: var(--paper-3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+    }
+
+    .mcq-answer {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: var(--green-light);
+      border-radius: var(--radius);
+      font-family: var(--font-notes);
+      font-size: 0.95rem;
+      color: var(--green);
+      display: none;
+    }
+
+    .mcq-answer.show {
+      display: block;
+    }
+
+    .btn-show-answer {
+      font-family: var(--font-notes);
+      font-size: 0.88rem;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1.5px solid var(--paper-3);
+      background: var(--paper);
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.2s;
+      color: var(--ink);
+    }
+
+    .btn-show-answer:hover {
+      background: var(--amber-light);
+      border-color: var(--amber);
+    }
+
+    .mcq-actions {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-family: var(--font-hand);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 28px;
+      border: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue);
+      border-color: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      font-family: var(--font-hand);
+      font-size: 1rem;
+      padding: 10px 22px;
+      border-radius: 28px;
+      border: 2px solid var(--paper-3);
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--ink);
+    }
+
+    /* ===================== BACK TO TOP ===================== */
+    #back-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 44px;
+      height: 44px;
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 50;
+      box-shadow: var(--shadow-md);
+    }
+
+    #back-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #back-top:hover {
+      background: var(--blue);
+    }
+
+    /* ===================== PRINT STYLES ===================== */
+    @media print {
+
+      nav,
+      #back-top,
+      .btn-icon,
+      .mcq-filter,
+      .mcq-actions,
+      .btn-show-answer {
+        display: none !important;
+      }
+
+      body {
+        background: white;
+        color: black;
+        font-size: 11pt;
+      }
+
+      .note-card {
+        break-inside: avoid;
+      }
+
+      .mcq-item {
+        break-inside: avoid;
+      }
+
+      .mcq-answer {
+        display: block !important;
+      }
+    }
+
+    /* ===================== ANIMATIONS ===================== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .sphere-diagram,
+      .pillars-container {
+        grid-template-columns: 1fr;
+      }
+
+      #mcqs {
+        padding: 24px 16px;
+      }
+
+      .note-card {
+        padding: 20px 18px;
+      }
+
+      .hero {
+        padding: 50px 18px 40px;
+      }
+
+      .sdg-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .revision-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sdg-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-family: var(--font-notes);
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      background: var(--paper-3);
+      border-top: 2px solid var(--paper-3);
+    }
+
+    /* Tag labels */
+    .tag {
+      display: inline-block;
+      font-family: var(--font-notes);
+      font-size: 0.78rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--blue-light);
+      color: var(--blue);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* Flow diagram */
+    .flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+      margin: 18px 0;
+      justify-content: center;
+    }
+
+    .flow-box {
+      background: var(--blue-light);
+      border: 2px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      font-family: var(--font-hand);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--blue);
+      text-align: center;
+      min-width: 100px;
+    }
+
+    .flow-arrow {
+      font-size: 1.4rem;
+      color: var(--beige);
+      padding: 0 4px;
+    }
+
+    /* ===================== IMAGE STYLES ===================== */
+    .note-img {
+      width: 100%;
+      max-width: 600px;
+      margin: 18px auto;
+      display: block;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      border: 3px solid var(--paper-3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .note-img:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .img-caption {
+      text-align: center;
+      font-family: var(--font-notes);
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      margin: -8px 0 18px 0;
+      font-style: italic;
+    }
+
+    .img-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 18px 0;
+    }
+
+    .img-row .note-img {
+      max-width: 280px;
+      margin: 0;
+    }
+
+    .detail-box {
+      background: linear-gradient(135deg, var(--blue-light), var(--paper));
+      border-left: 4px solid var(--blue);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      font-family: var(--font-body);
+    }
+
+    .detail-box h4 {
+      font-family: var(--font-hand);
+      color: var(--blue);
+      margin: 0 0 8px 0;
+    }
+
+    .fun-fact {
+      background: linear-gradient(135deg, var(--amber-light), var(--paper));
+      border-left: 4px solid var(--amber);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 14px 0;
+      font-family: var(--font-body);
+    }
+
+    .fun-fact::before {
+      content: '💡 Did You Know?';
+      display: block;
+      font-family: var(--font-hand);
+      font-weight: 700;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+
+    .exam-tip {
+      background: linear-gradient(135deg, var(--green-light), var(--paper));
+      border-left: 4px solid var(--green);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 14px 0;
+      font-family: var(--font-body);
+    }
+
+    .exam-tip::before {
+      content: '📝 Exam Tip';
+      display: block;
+      font-family: var(--font-hand);
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+
+    .key-point {
+      background: linear-gradient(135deg, var(--purple-light), var(--paper));
+      border-left: 4px solid var(--purple);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 14px 0;
+      font-family: var(--font-body);
+    }
+
+    .key-point::before {
+      content: '⭐ Key Point';
+      display: block;
+      font-family: var(--font-hand);
+      font-weight: 700;
+      color: var(--purple);
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .img-row .note-img {
+        max-width: 100%;
+      }
+
+      .note-img {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body data-theme="light">
+
+  <!-- Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-brand">📗 CHE 110</div>
+    <div class="nav-links">
+      <a href="#intro">Intro</a>
+      <a href="#components">Components</a>
+      <a href="#spheres">Spheres</a>
+      <a href="#scope">Scope</a>
+      <a href="#sustainability">Sustainability</a>
+      <a href="#sdg">SDGs</a>
+      <a href="#revision">Revision</a>
+      <a href="#mcqs">MCQs</a>
+    </div>
+    <div class="nav-actions">
+      <a href="index.html" class="btn-icon" title="Home" style="text-decoration: none;">🏠</a>
+      <button class="btn-icon" id="search-btn" title="Search Notes">🔍</button>
+      <button class="btn-icon" id="theme-btn" title="Toggle Dark Mode">🌙</button>
+      <button class="btn-icon" id="print-btn" title="Print Notes">🖨️</button>
+    </div>
+  </nav>
+
+  <!-- Search Box -->
+  <div id="search-box">
+    <div id="search-inner">
+      <input type="text" id="search-input" placeholder="Search notes... (e.g. biosphere, SDG, carrying capacity)" />
+      <div id="search-results"></div>
+      <p style="font-family:var(--font-notes);font-size:0.85rem;color:var(--ink-light);margin-top:10px;">Press
+        <strong>Esc</strong> to close
+      </p>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-subtitle">B.Tech CSE • LPU • CHE 110</div>
+    <h1 class="hero-title"><em>Environmental</em> Studies</h1>
+    <div class="hero-unit-badge">UNIT 1</div>
+    <p class="hero-desc">Introduction & Sustainable Development — Complete Study Notes with 60 Practice MCQs</p>
+    <div class="hero-chips">
+      <span class="chip chip-blue">🌍 Environment</span>
+      <span class="chip chip-green">♻️ Sustainability</span>
+      <span class="chip chip-amber">🎯 17 SDGs</span>
+      <span class="chip chip-blue">⚖️ Carrying Capacity</span>
+      <span class="chip chip-green">🔬 60 MCQs</span>
+    </div>
+    <img src="images/Unit_1_CHE110/Unit_1_CHE110_img18.jpg" alt="Sustainable green city" class="note-img fade-in" />
+    <p class="img-caption">Vision of a sustainable green city — Wind energy, solar panels, and green spaces 🏙️</p>
+
+    <div class="exam-tip fade-in">
+      The Brundtland Commission (1987) defined sustainable development as: <em>"Development that meets the needs of the
+        present without compromising the ability of future generations to meet their own needs."</em> This definition is
+      frequently asked in exams. Remember the name — <strong>Gro Harlem Brundtland</strong>, the Norwegian PM who
+      chaired the commission.
+    </div>
+
+    <div class="detail-box fade-in">
+      <h4>📊 Three Pillars of Sustainability</h4>
+      <p>Sustainable development rests on three interconnected pillars:</p>
+      <ul class="note-list">
+        <li><strong>Economic Sustainability:</strong> Ensuring long-term economic growth without depleting natural
+          capital. Examples: Green jobs, circular economy, sustainable agriculture.</li>
+        <li><strong>Social Sustainability:</strong> Maintaining social well-being — equity, education, healthcare, and
+          cultural preservation for current and future generations.</li>
+        <li><strong>Environmental Sustainability:</strong> Protecting natural resources, reducing pollution, and
+          maintaining ecosystem health. Includes biodiversity conservation and climate action.</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+
+    <!-- ===== INTRODUCTION ===== -->
+    <section id="intro">
+      <div class="section-label">Topic 1</div>
+      <h2 class="section-title">Introduction to Environment</h2>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">🌿</span> What is Environment?</h3>
+        <div class="def-box">
+          The word <strong>Environment</strong> is derived from the French word <em>"Environner"</em> meaning <em>"to
+            surround"</em>. Environment refers to everything that surrounds a living organism — both living and
+          non-living components that affect and influence the survival, growth, development, and behaviour of organisms.
+        </div>
+        <img src="images/Unit_1_CHE110/Unit_1_CHE110_img1.jpg" alt="Lush green waterfall ecosystem"
+          class="note-img fade-in" />
+        <p class="img-caption">A pristine waterfall ecosystem — Nature in its purest form 🌿</p>
+
+        <div class="fun-fact fade-in">
+          The word <strong>'Environment'</strong> is derived from the French word <em>"Environer"</em> meaning 'to
+          surround'. Everything that surrounds us — air, water, soil, living organisms, sunlight — constitutes our
+          environment. The study of these interrelationships is called <strong>Environmental Studies</strong>, a
+          multidisciplinary field that integrates ecology, biology, chemistry, geography, sociology, economics, and law.
+        </div>
+        <p>In simpler words: <strong>Environment = Everything around us!</strong> The air we breathe, the water we
+          drink, the soil under our feet, the plants, animals, mountains, rivers — all of it is our environment.</p>
+        <div class="highlight highlight-blue">
+          <strong>📌 Remember this!</strong>
+          Environment includes all external conditions and factors — physical, chemical, and biological — that act upon
+          an organism or community of organisms and ultimately determine their form and survival.
+        </div>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">🗂️</span> Types of Environment</h3>
+        <p>Environment is broadly classified into two major types:</p>
+
+        <div class="sphere-diagram">
+          <div class="sphere-card sphere-hydro"
+            style="border-color:#16a34a; background:linear-gradient(135deg,#f0fdf4,#dcfce7);">
+            <h4 style="color:#15803d;">🌱 Natural Environment</h4>
+            <p style="font-family:var(--font-notes);font-size:0.9rem;">All naturally occurring components — air, water,
+              soil, forests, mountains, rivers, oceans, animals, plants. Created by nature, not by humans.</p>
+          </div>
+          <div class="sphere-card sphere-atmo"
+            style="border-color:#2563a8; background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+            <h4 style="color:#1d4ed8;">🏙️ Man-made (Built) Environment</h4>
+            <p style="font-family:var(--font-notes);font-size:0.9rem;">All components created by human activities —
+              cities, roads, dams, buildings, factories, farms, parks. Modified from nature by humans.</p>
+          </div>
+        </div>
+
+        <h4>Sub-types of Natural Environment</h4>
+        <ul class="note-list">
+          <li><strong>Physical Environment</strong> — Non-living (abiotic) components: air, water, soil, sunlight,
+            temperature, minerals</li>
+          <li><strong>Biological Environment</strong> — Living (biotic) components: plants, animals, microorganisms,
+            humans</li>
+          <li><strong>Social Environment</strong> — Human society, culture, economics, politics, and relationships</li>
+        </ul>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">⚠️</span> What Have We Done? (Threats to Environment)</h3>
+        <p>Human activities have severely damaged our environment. Here are the major issues:</p>
+        <ul class="note-list star">
+          <li><strong>Deforestation</strong> — Cutting of forests for agriculture, urbanisation</li>
+          <li><strong>Air Pollution</strong> — Burning fossil fuels, industrial emissions</li>
+          <li><strong>Water Pollution</strong> — Industrial waste, sewage disposal in rivers</li>
+          <li><strong>Land Pollution</strong> — Plastic waste, solid waste dumping</li>
+          <li><strong>Climate Change</strong> — Rising CO₂ levels causing global warming</li>
+          <li><strong>Biodiversity Loss</strong> — Species going extinct at alarming rates</li>
+          <li><strong>Overpopulation</strong> — Exponential human population growth straining resources</li>
+          <li><strong>Ozone Layer Depletion</strong> — CFCs destroying the protective ozone layer</li>
+        </ul>
+        <div class="highlight highlight-red">
+          <strong>🚨 Fact:</strong> Earth's CO₂ levels have risen from ~280 ppm (pre-industrial) to over 420 ppm today —
+          the highest in 800,000 years! Global temperatures have already risen ~1.1°C above pre-industrial levels.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COMPONENTS ===== -->
+    <section id="components">
+      <div class="section-label">Topic 2</div>
+      <h2 class="section-title">Components of Environment</h2>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">🧩</span> The Four Major Components</h3>
+        <p>Environment has <strong>four major components</strong> — often called the four spheres of Earth:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Description</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Atmosphere</strong></td>
+                <td>Gaseous layer surrounding Earth</td>
+                <td>Air, clouds, ozone layer</td>
+              </tr>
+              <tr>
+                <td><strong>Hydrosphere</strong></td>
+                <td>All water bodies on Earth</td>
+                <td>Oceans, rivers, lakes, groundwater</td>
+              </tr>
+              <tr>
+                <td><strong>Lithosphere</strong></td>
+                <td>Solid outer layer of Earth</td>
+                <td>Soil, rocks, minerals, mountains</td>
+              </tr>
+              <tr>
+                <td><strong>Biosphere</strong></td>
+                <td>Zone where life exists</td>
+                <td>All living organisms + their environment</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <img src="images/Unit_1_CHE110/Unit_1_CHE110_img12.jpg" alt="Components of Environment Diagram"
+          class="note-img fade-in" />
+        <p class="img-caption">Components of Environment — Natural, Human-made, and Human 🌍</p>
+
+        <div class="detail-box fade-in">
+          <h4>🔍 Detailed Breakdown</h4>
+          <p><strong>Biotic Components</strong> include all living organisms — from microscopic bacteria and fungi
+            (decomposers) to plants (producers) and animals (consumers). These interact through complex food chains and
+            food webs, creating a balanced ecosystem.</p>
+          <p><strong>Abiotic Components</strong> include non-living elements like temperature, humidity, pH, minerals,
+            topography, and climate. These set the stage for life and determine which organisms can survive in a
+            habitat.</p>
+          <p><strong>Energy Components</strong> — Solar energy drives nearly all ecosystems on Earth. It fuels
+            photosynthesis in producers and flows through the food chain, losing ~90% at each trophic level (10% Rule of
+            Ecology).</p>
+        </div>
+        <div class="highlight highlight-green">
+          <strong>🔑 Key Point:</strong> The <strong>Biosphere</strong> is the thin layer of Earth where all life
+          exists. It overlaps with parts of the atmosphere, hydrosphere, and lithosphere. It extends roughly 10 km below
+          sea level to 10 km above sea level.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SPHERES ===== -->
+    <section id="spheres">
+      <div class="section-label">Topic 3</div>
+      <h2 class="section-title">Spheres of Earth</h2>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">🌐</span> Overview of Earth's Spheres</h3>
+        <p>Earth's environment is divided into four major "spheres." Think of them as four giant systems that interact
+          with each other to make life possible on Earth:</p>
+        <div class="sphere-diagram">
+          <div class="sphere-card sphere-litho">
+            <h4>🗻 Lithosphere</h4>
+            <p><em>Lithos = Stone</em></p>
+            <p>The solid, rocky outer shell of Earth. It includes the crust and upper mantle.</p>
+            <ul class="note-list dot" style="text-align:left;">
+              <li>Made up of hard solid rocks, soil, and loose sediments</li>
+              <li>Extends to about 100 km depth</li>
+              <li>Contains minerals like copper, iron, coal, ruby, diamond</li>
+              <li>Divided into tectonic plates that move very slowly</li>
+              <li>Provides habitat, nutrients, support for all land organisms</li>
+            </ul>
+          </div>
+          <div class="sphere-card sphere-hydro">
+            <h4>💧 Hydrosphere</h4>
+            <p><em>Hydros = Water</em></p>
+            <p>All the water found on, under, and above Earth's surface.</p>
+            <ul class="note-list dot" style="text-align:left;">
+              <li>Covers ~71% of Earth's surface</li>
+              <li>Includes oceans, rivers, lakes, groundwater, glaciers</li>
+              <li>97% saltwater; only 3% freshwater</li>
+              <li>Regulates climate via the water cycle</li>
+              <li>Essential for all life processes</li>
+            </ul>
+          </div>
+          <div class="sphere-card sphere-atmo">
+            <h4>💨 Atmosphere</h4>
+            <p><em>Atmos = Vapour/Air</em></p>
+            <p>The gaseous envelope surrounding Earth, held by gravity.</p>
+            <ul class="note-list dot" style="text-align:left;">
+              <li>Composition: N₂ (78%), O₂ (21%), Ar (0.9%), CO₂ (0.04%)</li>
+              <li>Layers: Troposphere, Stratosphere, Mesosphere, Thermosphere, Exosphere</li>
+              <li>Ozone layer in stratosphere protects from UV radiation</li>
+              <li>Regulates temperature via greenhouse effect</li>
+              <li>Essential for breathing and photosynthesis</li>
+            </ul>
+          </div>
+          <div class="sphere-card sphere-bio">
+            <h4>🌱 Biosphere</h4>
+            <p><em>Bios = Life</em></p>
+            <p>The zone of Earth where living organisms exist and interact.</p>
+            <ul class="note-list dot" style="text-align:left;">
+              <li>Extends from deep ocean (-10 km) to high mountains (+10 km)</li>
+              <li>Includes all ecosystems — forest, ocean, desert, tundra</li>
+              <li>Organisms interact through food webs and nutrient cycles</li>
+              <li>Maintained by energy from Sun and nutrients from Earth</li>
+              <li>Currently under serious threat from human activities</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">🔄</span> Atmosphere Layers — Quick Reference</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Height</th>
+                <th>Key Feature</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Troposphere</strong></td>
+                <td>0–12 km</td>
+                <td>Weather occurs here; temperature decreases with altitude</td>
+              </tr>
+              <tr>
+                <td><strong>Stratosphere</strong></td>
+                <td>12–50 km</td>
+                <td>Contains ozone layer; temperature increases with altitude</td>
+              </tr>
+              <tr>
+                <td><strong>Mesosphere</strong></td>
+                <td>50–80 km</td>
+                <td>Coldest layer; meteors burn up here</td>
+              </tr>
+              <tr>
+                <td><strong>Thermosphere</strong></td>
+                <td>80–700 km</td>
+                <td>Very hot; auroras occur here</td>
+              </tr>
+              <tr>
+                <td><strong>Exosphere</strong></td>
+                <td>>700 km</td>
+                <td>Outermost layer; merges with outer space</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">🔗</span> Interactions Between Spheres</h3>
+        <p>The spheres don't work in isolation — they constantly interact:</p>
+        <ul class="note-list">
+          <li><strong>Lithosphere + Hydrosphere</strong> → Soil formation, weathering of rocks by water</li>
+          <li><strong>Atmosphere + Hydrosphere</strong> → Water cycle (evaporation, condensation, precipitation)</li>
+          <li><strong>Biosphere + Lithosphere</strong> → Plants take nutrients from soil; organisms decompose and add
+            organic matter to soil</li>
+          <li><strong>Biosphere + Atmosphere</strong> → Photosynthesis (plants absorb CO₂, release O₂); Respiration
+            (animals absorb O₂, release CO₂)</li>
+          <li><strong>Biosphere + Hydrosphere</strong> → Aquatic life; water is essential for all biological processes
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== MULTIDISCIPLINARY NATURE ===== -->
+    <section id="multidisciplinary">
+      <div class="section-label">Topic 4</div>
+      <h2 class="section-title">Multidisciplinary Nature of Environmental Studies</h2>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">🔬</span> Why is Environmental Studies Multidisciplinary?</h3>
+        <div class="def-box">
+          <strong>Multidisciplinary</strong> means a subject that draws knowledge from many different disciplines or
+          fields of study. Environmental Studies is multidisciplinary because environmental problems are complex and
+          cannot be solved by a single field alone.
+        </div>
+        <img src="images/Unit_1_CHE110/Unit_1_CHE110_img13.jpg" alt="Modern agriculture" class="note-img fade-in" />
+        <p class="img-caption">Modern intensive agriculture — A major pressure on land and water resources 🚜</p>
+
+        <div class="fun-fact fade-in">
+          India has only <strong>2.4%</strong> of the world's land area but supports <strong>~18%</strong> of the
+          world's population. This puts enormous pressure on our natural resources — water, soil, and forests. Per
+          capita availability of land in India has decreased from 0.89 hectares (1951) to about 0.27 hectares today!
+        </div>
+        <p>Environmental issues involve physical, chemical, biological, social, economic, and political dimensions — so
+          experts from many fields must work together!</p>
+        <div class="sphere-diagram">
+          <div style="grid-column:1/-1;">
+            <div class="flow" style="gap:8px; flex-wrap:wrap;">
+              <div class="flow-box" style="background:var(--green-light);border-color:var(--green);color:var(--green);">
+                Biology</div>
+              <div class="flow-arrow">+</div>
+              <div class="flow-box" style="background:var(--blue-light);border-color:var(--blue);color:var(--blue);">
+                Chemistry</div>
+              <div class="flow-arrow">+</div>
+              <div class="flow-box" style="background:var(--amber-light);border-color:var(--amber);color:var(--amber);">
+                Physics</div>
+              <div class="flow-arrow">+</div>
+              <div class="flow-box"
+                style="background:var(--purple-light);border-color:var(--purple);color:var(--purple);">Sociology</div>
+              <div class="flow-arrow">+</div>
+              <div class="flow-box" style="background:var(--teal-light);border-color:var(--teal);color:var(--teal);">
+                Economics</div>
+              <div class="flow-arrow">=</div>
+              <div class="flow-box"
+                style="background:var(--ink);border-color:var(--ink);color:var(--paper);font-weight:700;">Environmental
+                Studies</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">📚</span> Contributing Disciplines</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Discipline</th>
+                <th>Contribution to Environmental Studies</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Biology/Ecology</strong></td>
+                <td>Understanding ecosystems, food chains, biodiversity, species interactions</td>
+              </tr>
+              <tr>
+                <td><strong>Chemistry</strong></td>
+                <td>Chemical reactions in pollution, soil chemistry, water quality analysis</td>
+              </tr>
+              <tr>
+                <td><strong>Physics</strong></td>
+                <td>Energy flow, climate science, radiation, thermodynamics</td>
+              </tr>
+              <tr>
+                <td><strong>Geology</strong></td>
+                <td>Earth's structure, natural disasters, mineral resources, soil formation</td>
+              </tr>
+              <tr>
+                <td><strong>Geography</strong></td>
+                <td>Landforms, climate patterns, spatial distribution of resources</td>
+              </tr>
+              <tr>
+                <td><strong>Economics</strong></td>
+                <td>Resource allocation, environmental cost-benefit analysis, green economics</td>
+              </tr>
+              <tr>
+                <td><strong>Sociology</strong></td>
+                <td>Human behaviour, cultural practices, social impacts of environmental change</td>
+              </tr>
+              <tr>
+                <td><strong>Political Science</strong></td>
+                <td>Environmental laws, policies, international agreements, governance</td>
+              </tr>
+              <tr>
+                <td><strong>Engineering</strong></td>
+                <td>Pollution control technologies, waste management systems, renewable energy</td>
+              </tr>
+              <tr>
+                <td><strong>Ethics/Philosophy</strong></td>
+                <td>Environmental ethics, rights of nature, moral responsibilities</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="highlight highlight-amber">
+          <strong>💡 Key Insight:</strong> No single discipline can solve environmental problems alone. A deforestation
+          problem needs biologists (ecosystem impact), economists (cost-benefit), engineers (sustainable alternatives),
+          sociologists (community impact), and policymakers (laws). That's the power of multidisciplinary thinking!
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SCOPE AND IMPORTANCE ===== -->
+    <section id="scope">
+      <div class="section-label">Topic 5</div>
+      <h2 class="section-title">Scope & Importance of Environmental Studies</h2>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">🎯</span> Scope of Environmental Studies</h3>
+        <p>Environmental Studies covers a very wide range of topics:</p>
+        <ul class="note-list check">
+          <li><strong>Natural Resources</strong> — Study of land, water, forest, mineral, energy resources</li>
+          <li><strong>Ecosystems</strong> — Structure, function, food chains, energy flow, ecological succession</li>
+          <li><strong>Biodiversity</strong> — Genetic, species, ecosystem diversity; conservation strategies</li>
+          <li><strong>Environmental Pollution</strong> — Air, water, soil, noise pollution; control measures</li>
+          <li><strong>Climate Change</strong> — Global warming, ozone depletion, acid rain</li>
+          <li><strong>Solid Waste Management</strong> — Urban and industrial waste handling</li>
+          <li><strong>Disaster Management</strong> — Natural and man-made disasters, preparedness</li>
+          <li><strong>Social Issues</strong> — Population growth, environmental movements, ethics</li>
+          <li><strong>Policy & Law</strong> — Environmental legislation, international agreements</li>
+          <li><strong>Sustainable Development</strong> — Balancing development with environmental protection</li>
+        </ul>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">⭐</span> Importance of Environmental Studies</h3>
+        <p>Why should engineering students study Environmental Studies? Here's why it matters:</p>
+        <div class="revision-grid">
+          <div class="revision-card">
+            <h4>🌍 Awareness</h4>
+            <ul>
+              <li>Creates awareness about environmental issues</li>
+              <li>Helps understand the consequences of human actions</li>
+              <li>Informs about endangered species and habitats</li>
+            </ul>
+          </div>
+          <div class="revision-card">
+            <h4>🔬 Scientific Understanding</h4>
+            <ul>
+              <li>Provides scientific basis for environmental problems</li>
+              <li>Helps understand natural processes</li>
+              <li>Enables measurement of pollution levels</li>
+            </ul>
+          </div>
+          <div class="revision-card">
+            <h4>⚖️ Policy & Action</h4>
+            <ul>
+              <li>Basis for environmental laws and regulations</li>
+              <li>Guides environmental impact assessments</li>
+              <li>Supports green engineering decisions</li>
+            </ul>
+          </div>
+          <div class="revision-card">
+            <h4>🤝 Social Responsibility</h4>
+            <ul>
+              <li>Develops sense of responsibility toward nature</li>
+              <li>Promotes sustainable lifestyles</li>
+              <li>Encourages community action</li>
+            </ul>
+          </div>
+          <div class="revision-card">
+            <h4>💼 Professional Value</h4>
+            <ul>
+              <li>Required for Environmental Impact Assessment</li>
+              <li>Green technology and sustainable design</li>
+              <li>Corporate environmental management</li>
+            </ul>
+          </div>
+          <div class="revision-card">
+            <h4>🌱 Future Generations</h4>
+            <ul>
+              <li>Ensures resources for future generations</li>
+              <li>Promotes sustainable development</li>
+              <li>Protects biodiversity for the future</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SUSTAINABILITY ===== -->
+    <section id="sustainability">
+      <div class="section-label">Topic 6 & 7</div>
+      <h2 class="section-title">Concept of Sustainability & Sustainable Development</h2>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">♻️</span> What is Sustainability?</h3>
+        <div class="def-box">
+          <strong>Sustainability</strong> is the ability to meet current needs without compromising the ability of
+          future generations to meet their own needs. It means living within the means of our planet — using resources
+          wisely so they don't run out.
+        </div>
+        <p>Think of it this way: You have a bank account (Earth's resources). If you spend more than you earn, the
+          account will eventually go empty. <strong>Sustainability means spending only what the Earth can
+            replenish.</strong></p>
+
+        <div class="callout">
+          "The greatest threat to our planet is the belief that someone else will save it."
+          <span class="quote-source">— Robert Swan, Polar Explorer</span>
+        </div>
+
+        <h4>The Three Pillars of Sustainability</h4>
+        <p>Sustainability rests on three interconnected pillars — also called the <strong>"Triple Bottom Line"</strong>:
+        </p>
+        <div class="pillars-container">
+          <div class="pillar pillar-eco">
+            <div class="pillar-icon">💰</div>
+            <h4>Economic</h4>
+            <p>Economic growth that is profitable, creates jobs, and is maintained long-term without depleting resources
+            </p>
+          </div>
+          <div class="pillar pillar-soc">
+            <div class="pillar-icon">👥</div>
+            <h4>Social</h4>
+            <p>Social equity, quality of life, health, education, and well-being for all people, now and in the future
+            </p>
+          </div>
+          <div class="pillar pillar-env">
+            <div class="pillar-icon">🌿</div>
+            <h4>Environmental</h4>
+            <p>Protection of natural resources, biodiversity, and ecological processes that support all life on Earth
+            </p>
+          </div>
+        </div>
+        <div class="highlight highlight-purple">
+          <strong>🔑 The Intersection:</strong> True sustainability exists where all three pillars overlap. Economic
+          growth without environmental protection is not sustainable. Social welfare without economic viability is not
+          sustainable. Environmental protection that ignores human needs is also not sustainable. <strong>All three must
+            be balanced!</strong>
+        </div>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">🌱</span> Sustainable Development</h3>
+        <div class="def-box">
+          <strong>Sustainable Development</strong> is "development that meets the needs of the present without
+          compromising the ability of future generations to meet their own needs." — Brundtland Report (Our Common
+          Future, 1987), WCED
+        </div>
+        <p>Sustainable Development is the <strong>practical application</strong> of sustainability — it means designing
+          economic and social development in a way that protects the environment.</p>
+
+        <h4>From Unsustainable → Sustainable Model</h4>
+        <p>Current unsustainable practices that need to change:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Unsustainable Practice</th>
+                <th>Sustainable Alternative</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Burning coal and fossil fuels</td>
+                <td>Solar, wind, and other renewable energy</td>
+              </tr>
+              <tr>
+                <td>Linear economy (take → make → waste)</td>
+                <td>Circular economy (reduce → reuse → recycle)</td>
+              </tr>
+              <tr>
+                <td>Deforestation</td>
+                <td>Afforestation + sustainable forest management</td>
+              </tr>
+              <tr>
+                <td>Chemical-intensive agriculture</td>
+                <td>Organic, precision, and sustainable agriculture</td>
+              </tr>
+              <tr>
+                <td>Single-use plastic</td>
+                <td>Biodegradable / reusable alternatives</td>
+              </tr>
+              <tr>
+                <td>Urban sprawl and car dependence</td>
+                <td>Compact cities, public transport, walkability</td>
+              </tr>
+              <tr>
+                <td>Overexploitation of fish stocks</td>
+                <td>Sustainable fisheries management</td>
+              </tr>
+              <tr>
+                <td>Landfill waste disposal</td>
+                <td>Composting, recycling, waste-to-energy</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">📊</span> Carrying Capacity</h3>
+        <div class="def-box">
+          <strong>Carrying Capacity</strong> is the maximum population size (of humans, animals, or any species) that an
+          environment can support sustainably — without degrading the natural resources that the population depends on.
+        </div>
+        <p>Formula concept: When a population exceeds the environment's carrying capacity, resources get depleted, waste
+          accumulates, and eventually the population crashes. This is the <strong>overshoot and collapse</strong> model.
+        </p>
+
+        <div class="highlight highlight-amber">
+          <strong>🎭 Was Thanos Right?</strong> The Marvel villain Thanos wanted to wipe out half of all life to prevent
+          overpopulation from depleting resources. While his method was genocidal and wrong, the underlying concern
+          about carrying capacity is a real scientific concept. Earth does have limits. The solution, however, is
+          <strong>sustainable development</strong> — not destruction, but smarter use of resources!
+        </div>
+
+        <h4>Key Points About Carrying Capacity:</h4>
+        <ul class="note-list">
+          <li>Carrying capacity is <strong>not fixed</strong> — it can increase with technology (e.g., Green Revolution
+            increased food carrying capacity)</li>
+          <li>It can also <strong>decrease</strong> — when resources are destroyed (e.g., deforestation reduces land's
+            carrying capacity)</li>
+          <li>Factors affecting carrying capacity: food, water, shelter, space, disease, predation</li>
+          <li><strong>Human carrying capacity</strong> is estimated between 8–16 billion (Earth currently has ~8.1
+            billion people)</li>
+          <li>The Earth's carrying capacity is impacted by our consumption patterns — a planet of vegetarians can
+            support more people than a planet of meat-eaters</li>
+        </ul>
+
+        <h4>Measures for Sustainable Development</h4>
+        <ul class="note-list check">
+          <li><strong>Education & Awareness</strong> — Public education on environmental issues</li>
+          <li><strong>Clean Technology</strong> — Renewable energy, electric vehicles, green buildings</li>
+          <li><strong>Reduce Consumption</strong> — Lower resource use per person</li>
+          <li><strong>Better Governance</strong> — Stronger environmental laws and enforcement</li>
+          <li><strong>International Cooperation</strong> — Paris Agreement, Kyoto Protocol</li>
+          <li><strong>Circular Economy</strong> — Minimise waste, maximise resource reuse</li>
+          <li><strong>Population Stabilisation</strong> — Education, women's empowerment, family planning</li>
+          <li><strong>Biodiversity Conservation</strong> — Protect ecosystems that provide services</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== SDGs ===== -->
+    <section id="sdg">
+      <div class="section-label">Topic 8</div>
+      <h2 class="section-title">Sustainable Development Goals (SDGs)</h2>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">🎯</span> What are the SDGs?</h3>
+        <div class="def-box">
+          The <strong>Sustainable Development Goals (SDGs)</strong> are 17 global goals adopted by all United Nations
+          member states in September 2015, as part of the <strong>2030 Agenda for Sustainable Development</strong>. They
+          are a universal call to action to end poverty, protect the planet, and ensure peace and prosperity by 2030.
+        </div>
+        <div class="highlight highlight-blue">
+          <strong>📌 Key Facts:</strong> 193 countries adopted the SDGs • 17 Goals • 169 Targets • 232 Indicators •
+          Deadline: 2030 • They replaced the Millennium Development Goals (MDGs) which ran from 2000–2015
+        </div>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">🌈</span> All 17 SDGs</h3>
+        <div class="sdg-grid">
+          <div class="sdg-item sdg-1"><span class="num">1</span>No Poverty</div>
+          <div class="sdg-item sdg-2"><span class="num">2</span>Zero Hunger</div>
+          <div class="sdg-item sdg-3"><span class="num">3</span>Good Health & Well-being</div>
+          <div class="sdg-item sdg-4"><span class="num">4</span>Quality Education</div>
+          <div class="sdg-item sdg-5"><span class="num">5</span>Gender Equality</div>
+          <div class="sdg-item sdg-6"><span class="num">6</span>Clean Water & Sanitation</div>
+          <div class="sdg-item sdg-7"><span class="num">7</span>Affordable & Clean Energy</div>
+          <div class="sdg-item sdg-8"><span class="num">8</span>Decent Work & Economic Growth</div>
+          <div class="sdg-item sdg-9"><span class="num">9</span>Industry, Innovation & Infrastructure</div>
+          <div class="sdg-item sdg-10"><span class="num">10</span>Reduced Inequalities</div>
+          <div class="sdg-item sdg-11"><span class="num">11</span>Sustainable Cities & Communities</div>
+          <div class="sdg-item sdg-12"><span class="num">12</span>Responsible Consumption & Production</div>
+          <div class="sdg-item sdg-13"><span class="num">13</span>Climate Action</div>
+          <div class="sdg-item sdg-14"><span class="num">14</span>Life Below Water</div>
+          <div class="sdg-item sdg-15"><span class="num">15</span>Life on Land</div>
+          <div class="sdg-item sdg-16"><span class="num">16</span>Peace, Justice & Strong Institutions</div>
+          <div class="sdg-item sdg-17"><span class="num">17</span>Partnerships for the Goals</div>
+        </div>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">📋</span> SDG Details — Important Goals for Exam</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>SDG</th>
+                <th>Goal</th>
+                <th>Key Target</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>SDG 1</strong></td>
+                <td>No Poverty</td>
+                <td>End poverty in all forms everywhere</td>
+              </tr>
+              <tr>
+                <td><strong>SDG 2</strong></td>
+                <td>Zero Hunger</td>
+                <td>End hunger, achieve food security, improve nutrition</td>
+              </tr>
+              <tr>
+                <td><strong>SDG 6</strong></td>
+                <td>Clean Water & Sanitation</td>
+                <td>Universal access to safe water and sanitation by 2030</td>
+              </tr>
+              <tr>
+                <td><strong>SDG 7</strong></td>
+                <td>Clean Energy</td>
+                <td>Ensure affordable, reliable, sustainable modern energy</td>
+              </tr>
+              <tr>
+                <td><strong>SDG 11</strong></td>
+                <td>Sustainable Cities</td>
+                <td>Make cities inclusive, safe, resilient, sustainable</td>
+              </tr>
+              <tr>
+                <td><strong>SDG 12</strong></td>
+                <td>Responsible Consumption</td>
+                <td>Sustainable consumption and production patterns</td>
+              </tr>
+              <tr>
+                <td><strong>SDG 13</strong></td>
+                <td>Climate Action</td>
+                <td>Urgent action to combat climate change and its impacts</td>
+              </tr>
+              <tr>
+                <td><strong>SDG 14</strong></td>
+                <td>Life Below Water</td>
+                <td>Conserve and sustainably use oceans, seas, marine resources</td>
+              </tr>
+              <tr>
+                <td><strong>SDG 15</strong></td>
+                <td>Life on Land</td>
+                <td>Protect, restore and promote sustainable use of ecosystems</td>
+              </tr>
+              <tr>
+                <td><strong>SDG 17</strong></td>
+                <td>Partnerships</td>
+                <td>Global partnership for sustainable development</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">📊</span> SDG Indicators & Country Performance</h3>
+        <p><strong>SDG Indicators</strong> are measurable ways to track progress toward the SDGs. For each of the 17
+          goals, there are specific numerical indicators.</p>
+        <h4>Examples of SDG Indicators:</h4>
+        <ul class="note-list dot">
+          <li>SDG 1 — Proportion of population below international poverty line ($2.15/day)</li>
+          <li>SDG 3 — Under-5 mortality rate per 1,000 live births</li>
+          <li>SDG 6 — Proportion of population using safely managed drinking water</li>
+          <li>SDG 7 — Renewable energy share in total final energy consumption</li>
+          <li>SDG 13 — CO₂ emissions per capita</li>
+        </ul>
+        <div class="highlight highlight-teal">
+          <strong>📈 Country Rankings:</strong> The <strong>SDG Index</strong> (at dashboards.sdgindex.org) ranks
+          countries on SDG performance. Nordic countries (Finland, Sweden, Denmark) consistently top the rankings. India
+          ranks in the middle (around 112–120 out of 166 countries). Countries can track their progress on individual
+          indicators on the official UN SDG dashboard.
+        </div>
+        <h4>India's SDG Progress:</h4>
+        <ul class="note-list">
+          <li>India scores well on SDG 7 (clean energy) with rapid solar expansion</li>
+          <li>Challenges remain in SDG 2 (nutrition), SDG 3 (health), SDG 5 (gender equality)</li>
+          <li>India launched the <strong>National Indicator Framework (NIF)</strong> with 286 indicators</li>
+          <li>NITI Aayog publishes annual <strong>SDG India Index</strong> to rank all states</li>
+        </ul>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">⚠️</span> Problems of Sustainable Development</h3>
+        <p>Despite the SDGs and sustainability initiatives, several major challenges remain:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Problem</th>
+                <th>Explanation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Poverty & Inequality</strong></td>
+                <td>Over 700 million people live in extreme poverty; inequality between rich and poor countries is vast
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Population Growth</strong></td>
+                <td>Rapid population growth (especially in developing countries) puts enormous pressure on resources
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Overconsumption</strong></td>
+                <td>High consumption in developed countries; a small fraction of world population uses most of the
+                  resources</td>
+              </tr>
+              <tr>
+                <td><strong>Climate Change</strong></td>
+                <td>Impacts most vulnerable communities; temperature rise, sea level rise, extreme weather events</td>
+              </tr>
+              <tr>
+                <td><strong>Loss of Biodiversity</strong></td>
+                <td>Species extinction rate 1000x above natural background rate; ecosystems being destroyed</td>
+              </tr>
+              <tr>
+                <td><strong>Water Scarcity</strong></td>
+                <td>2 billion people lack access to safe water; groundwater depletion is widespread</td>
+              </tr>
+              <tr>
+                <td><strong>Political Will</strong></td>
+                <td>Short-term political cycles don't align with long-term sustainability goals</td>
+              </tr>
+              <tr>
+                <td><strong>Financing Gap</strong></td>
+                <td>Estimated $5–7 trillion/year needed for SDGs; current investment far less</td>
+              </tr>
+              <tr>
+                <td><strong>Technology Divide</strong></td>
+                <td>Developing nations lack access to clean technologies</td>
+              </tr>
+              <tr>
+                <td><strong>Conflict & Instability</strong></td>
+                <td>Wars and political instability reverse development progress in affected regions</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== IMPORTANT CONCEPTS ===== -->
+    <section id="concepts">
+      <div class="section-label">Key Points</div>
+      <h2 class="section-title">Important Concepts at a Glance</h2>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">💡</span> Must-Know Definitions</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Term</th>
+                <th>Definition</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Environment</strong></td>
+                <td>All external conditions (biotic + abiotic) surrounding and influencing an organism</td>
+              </tr>
+              <tr>
+                <td><strong>Ecology</strong></td>
+                <td>The scientific study of relationships between organisms and their environment</td>
+              </tr>
+              <tr>
+                <td><strong>Biosphere</strong></td>
+                <td>The zone of Earth where life exists (air, water, land interfaces)</td>
+              </tr>
+              <tr>
+                <td><strong>Sustainability</strong></td>
+                <td>Meeting present needs without compromising future generations' ability to meet theirs</td>
+              </tr>
+              <tr>
+                <td><strong>Sustainable Development</strong></td>
+                <td>Development that balances economic growth, social equity, and environmental protection</td>
+              </tr>
+              <tr>
+                <td><strong>Carrying Capacity</strong></td>
+                <td>Maximum population an environment can sustainably support</td>
+              </tr>
+              <tr>
+                <td><strong>SDGs</strong></td>
+                <td>17 Sustainable Development Goals adopted by UN in 2015, target year 2030</td>
+              </tr>
+              <tr>
+                <td><strong>Brundtland Report</strong></td>
+                <td>"Our Common Future" (1987) — first defined sustainable development</td>
+              </tr>
+              <tr>
+                <td><strong>Ecosystem Services</strong></td>
+                <td>Benefits that humans receive from ecosystems (clean air, water, pollination, etc.)</td>
+              </tr>
+              <tr>
+                <td><strong>2030 Agenda</strong></td>
+                <td>UN's universal plan of action for people, planet, and prosperity through SDGs</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="note-card fade-in">
+        <h3><span class="icon">📅</span> Important Dates & Events</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Event</th>
+                <th>Significance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1972</strong></td>
+                <td>Stockholm Conference (UNCHE)</td>
+                <td>First international environmental conference</td>
+              </tr>
+              <tr>
+                <td><strong>1987</strong></td>
+                <td>Brundtland Report published</td>
+                <td>First defined "Sustainable Development"</td>
+              </tr>
+              <tr>
+                <td><strong>1992</strong></td>
+                <td>Earth Summit (Rio de Janeiro)</td>
+                <td>Agenda 21 adopted; Framework conventions on climate & biodiversity</td>
+              </tr>
+              <tr>
+                <td><strong>1997</strong></td>
+                <td>Kyoto Protocol</td>
+                <td>First binding agreement on greenhouse gas reduction</td>
+              </tr>
+              <tr>
+                <td><strong>2000</strong></td>
+                <td>Millennium Development Goals (MDGs)</td>
+                <td>8 goals to reduce poverty and improve health by 2015</td>
+              </tr>
+              <tr>
+                <td><strong>2012</strong></td>
+                <td>Rio+20 Summit</td>
+                <td>Renewed commitment; started SDG process</td>
+              </tr>
+              <tr>
+                <td><strong>2015</strong></td>
+                <td>SDGs Adopted + Paris Agreement</td>
+                <td>17 SDGs for 2030; climate action agreement</td>
+              </tr>
+              <tr>
+                <td><strong>2023</strong></td>
+                <td>SDG Summit</td>
+                <td>Midpoint review of SDG progress (on track: poor)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== QUICK REVISION ===== -->
+    <section id="revision">
+      <div class="section-label">Quick Recap</div>
+      <h2 class="section-title">Quick Revision Sheet</h2>
+
+      <div class="revision-grid">
+        <div class="revision-card">
+          <h4>🌍 Types of Environment</h4>
+          <ul>
+            <li>Natural Environment</li>
+            <li>Man-made (Built) Environment</li>
+            <li>Physical (abiotic)</li>
+            <li>Biological (biotic)</li>
+            <li>Social environment</li>
+          </ul>
+        </div>
+        <div class="revision-card">
+          <h4>🌐 4 Spheres of Earth</h4>
+          <ul>
+            <li>Lithosphere (rocks/soil)</li>
+            <li>Hydrosphere (water)</li>
+            <li>Atmosphere (air)</li>
+            <li>Biosphere (life)</li>
+          </ul>
+        </div>
+        <div class="revision-card">
+          <h4>💨 Atmosphere Layers</h4>
+          <ul>
+            <li>Troposphere (weather)</li>
+            <li>Stratosphere (ozone)</li>
+            <li>Mesosphere (meteors)</li>
+            <li>Thermosphere (auroras)</li>
+            <li>Exosphere (space)</li>
+          </ul>
+        </div>
+        <div class="revision-card">
+          <h4>♻️ 3 Pillars of Sustainability</h4>
+          <ul>
+            <li>Economic</li>
+            <li>Social</li>
+            <li>Environmental</li>
+            <li>Intersection = True Sustainability</li>
+          </ul>
+        </div>
+        <div class="revision-card">
+          <h4>📗 Key Reports/Conferences</h4>
+          <ul>
+            <li>Stockholm 1972</li>
+            <li>Brundtland Report 1987</li>
+            <li>Earth Summit Rio 1992</li>
+            <li>SDGs 2015</li>
+            <li>Paris Agreement 2015</li>
+          </ul>
+        </div>
+        <div class="revision-card">
+          <h4>🎯 SDG Numbers to Know</h4>
+          <ul>
+            <li>SDG 1 = No Poverty</li>
+            <li>SDG 7 = Clean Energy</li>
+            <li>SDG 13 = Climate Action</li>
+            <li>SDG 15 = Life on Land</li>
+            <li>SDG 17 = Partnerships</li>
+          </ul>
+        </div>
+        <div class="revision-card">
+          <h4>📊 Carrying Capacity Facts</h4>
+          <ul>
+            <li>Max population environment can support</li>
+            <li>Not fixed — varies with technology</li>
+            <li>Exceeding it = overshoot & collapse</li>
+            <li>Earth: ~8.1 billion people now</li>
+          </ul>
+        </div>
+        <div class="revision-card">
+          <h4>⚠️ Problems of Sustain. Dev.</h4>
+          <ul>
+            <li>Poverty & inequality</li>
+            <li>Overpopulation</li>
+            <li>Climate change</li>
+            <li>Financing gap</li>
+            <li>Political will deficit</li>
+          </ul>
+        </div>
+        <div class="revision-card">
+          <h4>🔬 Multidisciplinary Subjects</h4>
+          <ul>
+            <li>Biology, Chemistry, Physics</li>
+            <li>Geology, Geography</li>
+            <li>Economics, Sociology</li>
+            <li>Political Science, Engineering</li>
+            <li>Ethics & Philosophy</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note-card fade-in" style="background:var(--ink); color:var(--paper);">
+        <h3 style="color:var(--amber-mid);">🔥 Unit 1 — One-liner Summary</h3>
+        <p style="font-family:var(--font-notes); color:var(--paper);">Environment = everything around us. Earth has 4
+          spheres (Litho, Hydro, Atmo, Bio). Environmental Studies is multidisciplinary. Sustainability = 3 pillars
+          (Economic + Social + Environmental). Sustainable Development defined by Brundtland (1987) as meeting present
+          needs without compromising future generations. Carrying Capacity = max sustainable population. 17 SDGs adopted
+          by UN in 2015, target 2030. Problems include poverty, climate change, overconsumption, and lack of political
+          will.</p>
+      </div>
+    </section>
+
+    <!-- ===== UNIT SUMMARY ===== -->
+    <section id="summary">
+      <div class="section-label">Unit Summary</div>
+      <h2 class="section-title">Unit 1 — Complete Summary</h2>
+      <div class="note-card fade-in">
+        <h3><span class="icon">📌</span> Summary of All Topics</h3>
+        <ul class="note-list">
+          <li><strong>Environment</strong> encompasses all living and non-living elements surrounding organisms. It can
+            be natural or man-made, and is divided into physical, biological, and social sub-types.</li>
+          <li><strong>Spheres of Earth</strong>: The four spheres — Lithosphere (solid), Hydrosphere (water), Atmosphere
+            (gas), and Biosphere (life) — interact to sustain life. The atmosphere has five layers with the ozone layer
+            in the stratosphere.</li>
+          <li><strong>Multidisciplinary Nature</strong>: Environmental Studies draws from biology, chemistry, physics,
+            geology, geography, economics, sociology, political science, engineering, and ethics. No single field can
+            address all environmental issues alone.</li>
+          <li><strong>Scope & Importance</strong>: Environmental Studies covers natural resources, ecosystems,
+            biodiversity, pollution, climate change, disaster management, and policy. It is important for awareness,
+            scientific understanding, professional practice, and social responsibility.</li>
+          <li><strong>Sustainability</strong> means living within Earth's limits. The three pillars — economic, social,
+            and environmental — must all be in balance. Sustainability is not just about the environment; it integrates
+            human well-being and economic viability.</li>
+          <li><strong>Sustainable Development</strong> (Brundtland definition, 1987): Meeting present needs without
+            compromising future generations. It involves shifting from linear to circular economies, adopting clean
+            technology, and changing consumption patterns.</li>
+          <li><strong>Carrying Capacity</strong>: The maximum population an environment can support without degradation.
+            It is dynamic and affected by technology, resource management, and consumption patterns.</li>
+          <li><strong>SDGs</strong>: 17 goals adopted by 193 UN member nations in 2015 as part of the 2030 Agenda. They
+            address poverty, health, education, gender equality, clean energy, climate action, biodiversity, and global
+            partnerships, monitored through 232 indicators.</li>
+          <li><strong>Problems of Sustainable Development</strong>: Major challenges include poverty, inequality,
+            climate change, biodiversity loss, water scarcity, overconsumption, political barriers, and financing gaps.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== MCQs ===== -->
+    <section id="mcqs">
+      <div class="section-label">Practice Test</div>
+      <h2 class="section-title">Unit 1 — Practice MCQs</h2>
+      <p style="font-family:var(--font-notes); color:var(--ink-light); margin-bottom:20px;">60 Multiple Choice Questions
+        covering all topics. Click an option to check your answer, or use "Show Answer".</p>
+
+      <div id="score-display">🎉 Your Score: <span id="score-val">0</span> / <span id="score-total">0</span> answered
+      </div>
+
+      <div class="mcq-header">
+        <div class="mcq-filter">
+          <button class="filter-btn active" data-filter="all">All (60)</button>
+          <button class="filter-btn" data-filter="easy">Easy (20)</button>
+          <button class="filter-btn" data-filter="medium">Medium (25)</button>
+          <button class="filter-btn" data-filter="hard">Hard (15)</button>
+        </div>
+        <div class="mcq-stats" id="mcq-stats">Showing 60 questions</div>
+      </div>
+
+      <div class="mcq-actions">
+        <button class="btn-primary" id="btn-reveal-all">Reveal All Answers</button>
+        <button class="btn-secondary" id="btn-reset">Reset Quiz</button>
+        <button class="btn-secondary" id="btn-show-score">Show Score</button>
+      </div>
+
+      <div id="mcq-container"></div>
+    </section>
+
+  </div><!-- /container -->
+
+  <button id="back-top" title="Back to top">↑</button>
+
+  <footer>
+    <p>📗 CHE 110 Environmental Studies • Unit 1 Study Notes</p>
+    <p style="margin-top:6px; font-size:0.85rem;">B.Tech CSE • Lovely Professional University • Session 2025-26</p>
+  </footer>
+
+  <script>
+    // ===================== MCQ DATA =====================
+    const mcqs = [
+      // EASY (1-20)
+      { q: "The word 'Environment' is derived from which language?", opts: ["Latin", "French", "Greek", "German"], ans: 1, diff: "easy" },
+      { q: "Which of the following is an example of a natural environment?", opts: ["A factory", "A river", "A highway", "A dam"], ans: 1, diff: "easy" },
+      { q: "What percentage of Earth's surface is covered by water (Hydrosphere)?", opts: ["50%", "60%", "71%", "80%"], ans: 2, diff: "easy" },
+      { q: "Which layer of the atmosphere contains the ozone layer?", opts: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], ans: 1, diff: "easy" },
+      { q: "Which sphere of Earth includes all living organisms?", opts: ["Lithosphere", "Hydrosphere", "Atmosphere", "Biosphere"], ans: 3, diff: "easy" },
+      { q: "The Brundtland Report that defined Sustainable Development was published in which year?", opts: ["1972", "1982", "1987", "1992"], ans: 2, diff: "easy" },
+      { q: "How many Sustainable Development Goals (SDGs) are there?", opts: ["12", "15", "17", "20"], ans: 2, diff: "easy" },
+      { q: "What is the target year for achieving the SDGs?", opts: ["2025", "2030", "2035", "2050"], ans: 1, diff: "easy" },
+      { q: "Which of the following is NOT one of the three pillars of sustainability?", opts: ["Economic", "Social", "Environmental", "Political"], ans: 3, diff: "easy" },
+      { q: "The solid outer layer of Earth is called the:", opts: ["Biosphere", "Hydrosphere", "Lithosphere", "Atmosphere"], ans: 2, diff: "easy" },
+      { q: "Approximately what percentage of Earth's water is freshwater?", opts: ["3%", "10%", "25%", "50%"], ans: 0, diff: "easy" },
+      { q: "Which SDG addresses 'No Poverty'?", opts: ["SDG 2", "SDG 1", "SDG 3", "SDG 5"], ans: 1, diff: "easy" },
+      { q: "What layer of the atmosphere is closest to Earth's surface?", opts: ["Stratosphere", "Mesosphere", "Troposphere", "Exosphere"], ans: 2, diff: "easy" },
+      { q: "Environmental Studies is described as 'multidisciplinary' because it:", opts: ["Focuses only on biology", "Draws knowledge from many fields", "Studies only the atmosphere", "Deals only with pollution"], ans: 1, diff: "easy" },
+      { q: "Which SDG specifically addresses Climate Action?", opts: ["SDG 11", "SDG 12", "SDG 13", "SDG 14"], ans: 2, diff: "easy" },
+      { q: "The first international environmental conference was held in:", opts: ["Rio de Janeiro (1992)", "Stockholm (1972)", "Kyoto (1997)", "Paris (2015)"], ans: 1, diff: "easy" },
+      { q: "What does 'sustainability' mean in simple terms?", opts: ["Using all available resources quickly", "Protecting only animals", "Meeting present needs without harming future generations' ability to meet theirs", "Reducing economic growth"], ans: 2, diff: "easy" },
+      { q: "Which layer of the atmosphere is where weather occurs?", opts: ["Stratosphere", "Mesosphere", "Thermosphere", "Troposphere"], ans: 3, diff: "easy" },
+      { q: "SDG 7 focuses on:", opts: ["Zero Hunger", "Clean Water", "Affordable and Clean Energy", "Climate Action"], ans: 2, diff: "easy" },
+      { q: "The composition of N₂ in the atmosphere is approximately:", opts: ["21%", "78%", "50%", "0.9%"], ans: 1, diff: "easy" },
+
+      // MEDIUM (21-45)
+      { q: "Which document first formally defined 'Sustainable Development' as development that meets the needs of the present without compromising the ability of future generations to meet their own needs?", opts: ["Agenda 21", "Brundtland Report (Our Common Future)", "Rio Declaration", "Stockholm Declaration"], ans: 1, diff: "medium" },
+      { q: "Carrying capacity refers to:", opts: ["The weight a vehicle can carry", "The maximum population an environment can support sustainably", "The speed of population growth", "The minimum food required per person"], ans: 1, diff: "medium" },
+      { q: "Which of the following is a correct interaction between Earth's spheres?", opts: ["Lithosphere provides oxygen for biosphere", "Hydrosphere and atmosphere interact to form the water cycle", "Biosphere creates rocks in the lithosphere", "Atmosphere stores all freshwater"], ans: 1, diff: "medium" },
+      { q: "The SDGs were adopted as part of the:", opts: ["Millennium Development Goals", "2030 Agenda for Sustainable Development", "Kyoto Protocol", "Paris Agreement"], ans: 1, diff: "medium" },
+      { q: "Which of the following is NOT a problem of sustainable development?", opts: ["Poverty and inequality", "Biodiversity loss", "Technological innovation", "Water scarcity"], ans: 2, diff: "medium" },
+      { q: "The concept of 'circular economy' in sustainable development means:", opts: ["Economy that grows in circles", "Reduce, reuse, recycle to minimise waste", "Economy that is circular in shape", "Trading between nations in a circle"], ans: 1, diff: "medium" },
+      { q: "Which layer of the atmosphere is known for burning up meteors?", opts: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], ans: 2, diff: "medium" },
+      { q: "Environmental Studies draws from which of the following disciplines?", opts: ["Only Biology and Chemistry", "Only Physics and Geology", "Biology, Chemistry, Physics, Sociology, Economics and more", "Only Engineering"], ans: 2, diff: "medium" },
+      { q: "The 'overshoot and collapse' model in ecology refers to:", opts: ["Economic recession", "Population exceeding carrying capacity leading to resource depletion and crash", "Sudden extinction of a single species", "Climate change feedback loops"], ans: 1, diff: "medium" },
+      { q: "The SDG Index ranks countries based on:", opts: ["GDP per capita only", "Military strength", "Performance across all 17 SDGs", "Population size"], ans: 2, diff: "medium" },
+      { q: "Which organisation publishes the annual SDG India Index?", opts: ["Ministry of Environment", "NITI Aayog", "Planning Commission", "Central Pollution Control Board"], ans: 1, diff: "medium" },
+      { q: "What is the main composition of O₂ in Earth's atmosphere?", opts: ["78%", "0.9%", "21%", "0.04%"], ans: 2, diff: "medium" },
+      { q: "The Biosphere extends approximately:", opts: ["Only to sea level", "100 km above Earth's surface", "From 10 km below sea level to 10 km above sea level", "Only in tropical regions"], ans: 2, diff: "medium" },
+      { q: "Which of the following best describes 'Environmental Ethics'?", opts: ["Rules of conduct in a laboratory", "Moral obligations of humans toward the natural environment", "Economic valuation of environment", "Laws related to pollution"], ans: 1, diff: "medium" },
+      { q: "What type of economy does sustainable development promote to replace the linear 'take-make-waste' model?", opts: ["Market economy", "Mixed economy", "Circular economy", "Command economy"], ans: 2, diff: "medium" },
+      { q: "Which of the following is a correct statement about carrying capacity?", opts: ["It is always fixed and unchangeable", "Technology can increase carrying capacity", "Carrying capacity only applies to animal populations", "Exceeding carrying capacity has no consequences"], ans: 1, diff: "medium" },
+      { q: "The Kyoto Protocol (1997) was the first binding agreement on:", opts: ["Biodiversity conservation", "Ozone layer protection", "Greenhouse gas emission reduction", "Ocean plastic pollution"], ans: 2, diff: "medium" },
+      { q: "Which SDG specifically targets 'Life on Land'?", opts: ["SDG 13", "SDG 14", "SDG 15", "SDG 16"], ans: 2, diff: "medium" },
+      { q: "'Triple Bottom Line' in sustainability refers to:", opts: ["Three types of pollution", "Three layers of atmosphere", "Economic, Social, and Environmental pillars", "Three types of ecosystems"], ans: 2, diff: "medium" },
+      { q: "The Aurora phenomenon occurs in which atmospheric layer?", opts: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], ans: 3, diff: "medium" },
+      { q: "Agenda 21 was adopted at which international conference?", opts: ["Stockholm 1972", "Rio Earth Summit 1992", "Johannesburg 2002", "Copenhagen 2009"], ans: 1, diff: "medium" },
+      { q: "Which of the following is NOT a component of the Biosphere?", opts: ["Terrestrial ecosystems", "Aquatic ecosystems", "The core of Earth", "Atmospheric boundary zones"], ans: 2, diff: "medium" },
+      { q: "The term 'anthropogenic' in environmental science refers to:", opts: ["Caused by animals", "Caused by natural processes", "Caused by human activities", "Related to ancient civilizations"], ans: 2, diff: "medium" },
+      { q: "How many targets are there under the 17 SDGs?", opts: ["100", "169", "200", "232"], ans: 1, diff: "medium" },
+      { q: "Which of the following represents a sustainable agriculture practice?", opts: ["Excessive use of chemical pesticides", "Monoculture farming", "Organic farming and crop rotation", "Burning crop residues"], ans: 2, diff: "medium" },
+
+      // HARD (46-60)
+      { q: "The SDG Index 2023 showed that achieving the SDGs by 2030 is:", opts: ["On track globally", "Ahead of schedule in all countries", "Severely off track — only 15% of targets are on track", "Completed in developed nations"], ans: 2, diff: "hard" },
+      { q: "If a population's Ecological Footprint exceeds the Earth's Biocapacity, this creates a condition called:", opts: ["Ecological surplus", "Ecological overshoot", "Biosphere collapse", "Carrying capacity increase"], ans: 1, diff: "hard" },
+      { q: "The concept of 'Planetary Boundaries' defines:", opts: ["Geographic borders between countries", "The boundaries of national parks", "Nine Earth-system processes that define a safe operating space for humanity", "The limit of the atmosphere"], ans: 2, diff: "hard" },
+      { q: "The 'Millennium Ecosystem Assessment' (2005) identified which major categories of ecosystem services?", opts: ["Provisioning, Regulating, Cultural, Supporting", "Biotic, Abiotic, Cultural, Economic", "Physical, Chemical, Biological, Social", "Natural, Man-made, Hybrid, Digital"], ans: 0, diff: "hard" },
+      { q: "India's National Indicator Framework (NIF) for SDGs has how many indicators?", opts: ["169", "232", "286", "300"], ans: 2, diff: "hard" },
+      { q: "The term 'Decoupling' in sustainable development economics refers to:", opts: ["Separating developed from developing nations", "Achieving economic growth while reducing environmental impacts", "Disconnecting from international trade", "Removing subsidies from fossil fuels"], ans: 1, diff: "hard" },
+      { q: "Which of the following statements about the Lithosphere is INCORRECT?", opts: ["It is divided into tectonic plates", "It contains the asthenosphere as its deepest part", "It includes both oceanic and continental crust", "It provides nutrients for terrestrial ecosystems"], ans: 1, diff: "hard" },
+      { q: "The 'Great Acceleration' in environmental science refers to:", opts: ["Speed of light in the atmosphere", "Rapid simultaneous increase in human activities and Earth system changes after 1950", "Acceleration of tectonic plate movement", "Increase in biodiversity after climate change"], ans: 1, diff: "hard" },
+      { q: "SDG 17 (Partnerships for the Goals) emphasizes which financial mechanism for developing countries?", opts: ["Foreign direct investment only", "Official Development Assistance (ODA) and technology transfer", "Carbon trading", "Debt cancellation alone"], ans: 1, diff: "hard" },
+      { q: "Which framework best describes the relationship between Human Well-being and Ecosystem Services?", opts: ["Linear Dependency Model", "Millennium Ecosystem Assessment Framework", "DPSIR (Drivers-Pressures-State-Impact-Response) Framework", "None of the above"], ans: 2, diff: "hard" },
+      { q: "The Biosphere Reserve concept, developed by UNESCO's MAB (Man and Biosphere) Programme, has how many zones?", opts: ["Two (core and buffer)", "Three (core, buffer, transition)", "Four (core, buffer, transition, rehabilitation)", "Five zones"], ans: 1, diff: "hard" },
+      { q: "At current rates of consumption, humanity would need approximately how many Earths to sustain its lifestyle?", opts: ["1.0 Earths", "1.75 Earths", "2.5 Earths", "3 Earths"], ans: 1, diff: "hard" },
+      { q: "The Montreal Protocol (1987) addressed which specific environmental issue?", opts: ["Global Warming", "Acid Rain", "Ozone Layer Depletion", "Marine Pollution"], ans: 2, diff: "hard" },
+      { q: "The 'Kuznets Curve Hypothesis' in environmental economics suggests that environmental degradation:", opts: ["Increases linearly with economic growth", "First increases then decreases as income rises beyond a threshold", "Decreases with any increase in GDP", "Has no relationship with economic growth"], ans: 1, diff: "hard" },
+      { q: "The concept of 'Net Zero' emissions by 2050 means:", opts: ["Zero industrial production by 2050", "Balancing greenhouse gas emissions with their removal from the atmosphere", "Eliminating all fossil fuel use by 2050", "Achieving negative economic growth"], ans: 1, diff: "hard" },
+    ];
+
+    // ===================== RENDER MCQs =====================
+    const container = document.getElementById('mcq-container');
+    let answered = 0, correct = 0;
+
+    function renderMCQs(filter = 'all') {
+      container.innerHTML = '';
+      const filtered = filter === 'all' ? mcqs : mcqs.filter(m => m.diff === filter);
+      document.getElementById('mcq-stats').textContent = `Showing ${filtered.length} questions`;
+
+      filtered.forEach((mcq, i) => {
+        const globalIdx = mcqs.indexOf(mcq);
+        const div = document.createElement('div');
+        div.className = 'mcq-item';
+        div.dataset.difficulty = mcq.diff;
+        div.dataset.idx = globalIdx;
+        div.dataset.answered = 'false';
+
+        const diffLabel = `<span class="mcq-difficulty diff-${mcq.diff}">${mcq.diff}</span>`;
+        const optionsHtml = mcq.opts.map((opt, oi) =>
+          `<button class="mcq-option" data-oi="${oi}" onclick="selectOption(this, ${globalIdx}, ${oi})">
+        <span class="option-letter">${String.fromCharCode(65 + oi)}</span>${opt}
+      </button>`
+        ).join('');
+
+        div.innerHTML = `
+      <div class="mcq-q">${diffLabel}<span class="q-num">Q${i + 1}</span> ${mcq.q}</div>
+      <div class="mcq-options">${optionsHtml}</div>
+      <button class="btn-show-answer" onclick="showAns(this, ${globalIdx})">Show Answer</button>
+      <div class="mcq-answer" id="ans-${globalIdx}">✅ Correct Answer: <strong>${String.fromCharCode(65 + mcq.ans)}) ${mcq.opts[mcq.ans]}</strong></div>
+    `;
+        container.appendChild(div);
+      });
+    }
+
+    function selectOption(btn, idx, oi) {
+      const item = btn.closest('.mcq-item');
+      if (item.dataset.answered === 'true') return;
+      item.dataset.answered = 'true';
+
+      const isCorrect = oi === mcqs[idx].ans;
+      const opts = item.querySelectorAll('.mcq-option');
+      opts.forEach(o => o.disabled = true);
+      btn.classList.add(isCorrect ? 'correct' : 'wrong');
+      opts[mcqs[idx].ans].classList.add('revealed');
+      document.getElementById(`ans-${idx}`).classList.add('show');
+
+      answered++;
+      if (isCorrect) correct++;
+      updateScore();
+    }
+
+    function showAns(btn, idx) {
+      const item = btn.closest('.mcq-item');
+      document.getElementById(`ans-${idx}`).classList.add('show');
+      const opts = item.querySelectorAll('.mcq-option');
+      opts[mcqs[idx].ans].classList.add('revealed');
+      opts.forEach(o => o.disabled = true);
+      if (item.dataset.answered === 'false') {
+        item.dataset.answered = 'true';
+        answered++;
+        updateScore();
+      }
+    }
+
+    function updateScore() {
+      document.getElementById('score-display').style.display = 'block';
+      document.getElementById('score-val').textContent = correct;
+      document.getElementById('score-total').textContent = answered;
+    }
+
+    document.getElementById('btn-reveal-all').addEventListener('click', () => {
+      document.querySelectorAll('.mcq-answer').forEach(a => a.classList.add('show'));
+      document.querySelectorAll('.mcq-option').forEach(o => o.disabled = true);
+      mcqs.forEach((mcq, idx) => {
+        const el = document.querySelector(`[data-idx="${idx}"]`);
+        if (el) el.querySelectorAll('.mcq-option')[mcq.ans].classList.add('revealed');
+      });
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      answered = 0; correct = 0;
+      document.getElementById('score-display').style.display = 'none';
+      renderMCQs(document.querySelector('.filter-btn.active').dataset.filter);
+    });
+
+    document.getElementById('btn-show-score').addEventListener('click', () => {
+      updateScore();
+      document.getElementById('score-display').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderMCQs(btn.dataset.filter);
+      });
+    });
+
+    renderMCQs();
+
+    // ===================== DARK MODE =====================
+    const themeBtn = document.getElementById('theme-btn');
+    const root = document.body;
+    themeBtn.addEventListener('click', () => {
+      const isDark = root.dataset.theme === 'dark';
+      root.dataset.theme = isDark ? 'light' : 'dark';
+      themeBtn.textContent = isDark ? '🌙' : '☀️';
+      // Update nav background
+      document.querySelector('nav').style.background = isDark
+        ? 'rgba(250,248,242,0.92)' : 'rgba(26,22,18,0.92)';
+    });
+
+    // ===================== PROGRESS BAR =====================
+    const progressBar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.body.scrollHeight - window.innerHeight;
+      progressBar.style.width = (scrolled / total * 100) + '%';
+
+      // Back to top
+      document.getElementById('back-top').classList.toggle('visible', scrolled > 400);
+    });
+
+    document.getElementById('back-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ===================== PRINT =====================
+    document.getElementById('print-btn').addEventListener('click', () => {
+      document.querySelectorAll('.mcq-answer').forEach(a => a.classList.add('show'));
+      window.print();
+    });
+
+    // ===================== SEARCH =====================
+    const searchBox = document.getElementById('search-box');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    document.getElementById('search-btn').addEventListener('click', () => {
+      searchBox.classList.add('open');
+      searchInput.focus();
+    });
+
+    searchBox.addEventListener('click', e => { if (e.target === searchBox) searchBox.classList.remove('open'); });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') searchBox.classList.remove('open');
+      if ((e.ctrlKey || e.metaKey) && e.key === 'f') { e.preventDefault(); searchBox.classList.add('open'); searchInput.focus(); }
+    });
+
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      searchResults.innerHTML = '';
+      if (!q) return;
+
+      const allText = document.querySelectorAll('.note-card p, .note-card li, .note-card h3, .note-card h4');
+      const matches = [];
+      allText.forEach(el => {
+        if (el.textContent.toLowerCase().includes(q)) {
+          const section = el.closest('section');
+          const title = section ? section.querySelector('.section-title')?.textContent || 'Section' : 'Section';
+          matches.push({ text: el.textContent.substring(0, 100), title, el });
+        }
+      });
+
+      const unique = matches.slice(0, 8);
+      if (unique.length === 0) {
+        searchResults.innerHTML = '<p style="font-family:var(--font-notes);color:var(--ink-light);padding:10px;">No results found.</p>';
+        return;
+      }
+
+      unique.forEach(m => {
+        const item = document.createElement('div');
+        item.className = 'search-result-item';
+        const highlighted = m.text.replace(new RegExp(q, 'gi'), s => `<span class="match-text">${s}</span>`);
+        item.innerHTML = `<div style="font-size:0.8rem;color:var(--ink-light);">${m.title}</div><div>${highlighted}...</div>`;
+        item.addEventListener('click', () => {
+          searchBox.classList.remove('open');
+          m.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+        searchResults.appendChild(item);
+      });
+    });
+
+    // ===================== FADE-IN ON SCROLL =====================
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ================= INJECTED UI SCRIPT ================= -->
+<script>
+(function() {
+  if(!document.querySelector('link[href*="Kalam"]')) {
+    document.head.insertAdjacentHTML('beforeend', '<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>');
+  }
+  
+  const style = document.createElement('style');
+  style.textContent = `
+    :root, body[data-theme="light"] {
+      --white: #FFFFFF !important;
+      --beige: #F8F5EE !important;
+      --paper: #FFFDF7 !important;
+      --sky: #87CEEB !important;
+      --sky-light: #E8F4FD !important;
+      --yellow: #FFF3B0 !important;
+      --yellow-dark: #F7C948 !important;
+      --pink: #FFE4E8 !important;
+      --pink-dark: #F78FA7 !important;
+      --lavender: #EDE7F6 !important;
+      --lavender-dark: #9C6FE4 !important;
+      --mint: #E8F5E9 !important;
+      --mint-dark: #4CAF82 !important;
+      --ink: #2C2C2C !important;
+      --ink-light: #555 !important;
+      --blue-accent: #4A90D9 !important;
+      --red-accent: #E74C3C !important;
+      --orange-accent: #F39C12 !important;
+      --green-accent: #27AE60 !important;
+      --purple-accent: #8E44AD !important;
+      --shadow: rgba(0, 0, 0, 0.08) !important;
+    }
+    [data-theme="dark"], body.dark {
+      --white: #1a1a2e !important;
+      --beige: #16213e !important;
+      --paper: #0f3460 !important;
+      --ink: #e0e0e0 !important;
+      --ink-light: #bbb !important;
+      --sky-light: #1a2a3a !important;
+      --yellow: #2a2a00 !important;
+      --pink: #2a0a10 !important;
+      --lavender: #1a1030 !important;
+      --mint: #0a2a15 !important;
+    }
+    
+    html {
+      font-size: 125% !important; /* Scale entire UI slightly larger */
+    }
+    
+    body {
+      background-color: var(--beige) !important;
+      font-family: 'Nunito', sans-serif !important;
+      color: var(--ink) !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, #e8e0d0 27px, #e8e0d0 28px), repeating-linear-gradient(90deg, transparent, transparent 27px, transparent 27px) !important;
+      background-size: 100% 28px !important;
+      font-size: 1.05rem !important; /* Extra boost for base font if ems aren't used */
+    }
+    body[data-theme="dark"], body.dark {
+      background-color: #16213e !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(255, 255, 255, 0.05) 27px, rgba(255, 255, 255, 0.05) 28px) !important;
+    }
+
+    h1, h2, h3, h4, .section-title, p {
+      font-family: 'Nunito', sans-serif !important;
+    }
+    
+    .nav-brand {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      color: var(--blue-accent) !important;
+      font-size: 1.5rem !important;
+    }
+    
+    nav, .nav-sticky, #navbar {
+      background: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(12px) !important;
+      border-bottom: 2px dashed #e0d5c5 !important;
+      box-shadow: 0 2px 20px var(--shadow) !important;
+    }
+    body.dark nav, body[data-theme="dark"] nav, body.dark .nav-sticky, body.dark #navbar {
+      background: rgba(22, 33, 62, 0.9) !important;
+      border-bottom-color: #333 !important;
+    }
+    
+    header.hero, section#hero, .hero {
+      background: var(--paper) !important;
+      border: 3px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      margin: 30px auto !important;
+      max-width: 960px !important;
+      box-shadow: 4px 4px 0 #e0d5c5, 8px 8px 0 #d8ccb8 !important;
+    }
+    header.hero::before, section#hero::before, .hero::before {
+      display: none !important;
+    }
+    
+    .hero-title {
+      font-family: 'Kalam', cursive !important;
+      color: var(--blue-accent) !important;
+      border-bottom: 3px dashed var(--blue-accent) !important;
+      display: inline-block !important;
+      padding-bottom: 4px !important;
+    }
+    
+    .hero-subtitle, .hero-unit-badge, .hero-unit {
+      font-family: 'Caveat', cursive !important;
+      color: #999 !important;
+      letter-spacing: 2px !important;
+      background: transparent !important;
+      border: none !important;
+    }
+
+    h2.section-heading, .section-header {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      border-bottom: 2px dashed #e8dfc8 !important;
+      padding-bottom: 8px !important;
+    }
+    
+    .note-card, .resource-card, .def-box {
+      background: var(--paper) !important;
+      border-radius: 12px !important;
+      border-left: 5px solid var(--blue-accent) !important;
+      box-shadow: 2px 2px 8px var(--shadow) !important;
+      font-family: 'Kalam', cursive !important;
+    }
+    
+    .note-card.green, .def-box.green { border-left-color: var(--mint-dark) !important; }
+    .note-card.red, .def-box.red { border-left-color: var(--pink-dark) !important; }
+    .note-card.yellow, .def-box.yellow { border-left-color: var(--yellow-dark) !important; }
+    
+    /* Make index.html cards look PEL125 style */
+    .unit-card {
+      background: var(--paper) !important;
+      border: 2px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      box-shadow: 3px 3px 0 #e0d5c5 !important;
+      transition: transform 0.2s !important;
+    }
+    .unit-card:hover {
+      transform: translateY(-5px) !important;
+      box-shadow: 5px 5px 0 #d8ccb8 !important;
+    }
+    .unit-badge {
+      background: var(--sky-light) !important;
+      color: var(--blue-accent) !important;
+      font-family: 'Caveat', cursive !important;
+    }
+  `;
+  document.head.appendChild(style);
+
+})();
+</script>
+
+</body>
+
+</html>

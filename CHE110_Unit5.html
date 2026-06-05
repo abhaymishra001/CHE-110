@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHE110 – Unit 5: Disaster Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #faf8f2;
+  --paper-dark: #f0ece0;
+  --ink: #1a1209;
+  --ink-light: #3d3120;
+  --blue: #2a6496;
+  --blue-light: #d6e8f5;
+  --blue-mid: #5b9ec9;
+  --beige: #c9a96e;
+  --beige-light: #f5ead6;
+  --brown: #7b5e3a;
+  --brown-light: #ede0c8;
+  --grey: #8a8070;
+  --grey-light: #ececec;
+  --red: #c0392b;
+  --red-light: #fce8e6;
+  --green: #27643a;
+  --green-light: #dff0e3;
+  --yellow: #f0c040;
+  --yellow-light: #fffbe6;
+  --shadow: rgba(100,80,40,0.13);
+  --shadow-md: rgba(100,80,40,0.22);
+  --border: #d9cdb6;
+  --transition: 0.25s cubic-bezier(.4,0,.2,1);
+}
+[data-dark="true"] {
+  --paper: #1c1a14;
+  --paper-dark: #141210;
+  --ink: #f0ead8;
+  --ink-light: #c9bfa0;
+  --blue: #5b9ec9;
+  --blue-light: #1a2c3a;
+  --beige: #c9a96e;
+  --beige-light: #2a2015;
+  --brown: #c9a96e;
+  --brown-light: #2a2015;
+  --grey: #6a6060;
+  --grey-light: #2a2820;
+  --red-light: #2a100e;
+  --green-light: #0e200e;
+  --yellow-light: #1e1a06;
+  --border: #3a3020;
+  --shadow: rgba(0,0,0,0.4);
+  --shadow-md: rgba(0,0,0,0.6);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--paper-dark);
+  color: var(--ink);
+  font-family: 'Crimson Pro', Georgia, serif;
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* PAPER TEXTURE */
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(180,160,120,0.08) 28px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+}
+
+/* PROGRESS BAR */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
+  background: linear-gradient(90deg, var(--beige), var(--blue-mid), var(--beige));
+  width: 0%; transition: width 0.1s linear;
+}
+
+/* NAVIGATION */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,248,242,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--border);
+  padding: 0.6rem 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+  box-shadow: 0 2px 12px var(--shadow);
+  transition: background var(--transition);
+}
+[data-dark="true"] nav { background: rgba(28,26,20,0.92); }
+
+.nav-brand {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem; color: var(--brown); white-space: nowrap;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex; gap: 0.4rem; flex-wrap: wrap; flex: 1;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'Kalam', cursive; font-size: 0.82rem;
+  color: var(--ink-light); text-decoration: none;
+  padding: 0.2rem 0.55rem; border-radius: 20px;
+  transition: background var(--transition), color var(--transition);
+  white-space: nowrap;
+}
+.nav-links a:hover { background: var(--beige-light); color: var(--brown); }
+
+.nav-controls { display: flex; gap: 0.5rem; align-items: center; }
+.btn-icon {
+  background: none; border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 0.3rem 0.55rem;
+  cursor: pointer; font-size: 1rem; color: var(--ink);
+  transition: all var(--transition);
+}
+.btn-icon:hover { background: var(--beige-light); border-color: var(--beige); }
+
+/* SEARCH BAR */
+#search-wrap {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); z-index: 200;
+  display: none; align-items: flex-start; justify-content: center;
+  padding-top: 15vh;
+}
+#search-wrap.active { display: flex; }
+#search-box {
+  background: var(--paper); border: 2px solid var(--beige);
+  border-radius: 16px; padding: 1rem 1.5rem;
+  width: min(560px, 90vw);
+  font-family: 'Kalam', cursive; font-size: 1.2rem;
+  color: var(--ink); outline: none;
+  box-shadow: 0 8px 32px var(--shadow-md);
+}
+#search-results {
+  position: absolute; top: calc(15vh + 60px); left: 50%;
+  transform: translateX(-50%);
+  background: var(--paper); border-radius: 12px;
+  width: min(560px, 90vw); max-height: 60vh;
+  overflow-y: auto; box-shadow: 0 8px 32px var(--shadow-md);
+  border: 1px solid var(--border);
+}
+.search-result-item {
+  padding: 0.75rem 1.2rem; border-bottom: 1px solid var(--border);
+  cursor: pointer; font-family: 'Crimson Pro', serif; font-size: 1rem;
+}
+.search-result-item:hover { background: var(--beige-light); }
+.search-result-item strong { color: var(--brown); }
+
+/* HERO */
+.hero {
+  position: relative; z-index: 1;
+  text-align: center; padding: 4rem 2rem 3rem;
+  background: linear-gradient(135deg, var(--paper) 0%, var(--beige-light) 60%, var(--blue-light) 100%);
+  border-bottom: 3px solid var(--border);
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 70% 30%, rgba(201,169,110,0.12) 0%, transparent 60%);
+}
+.hero-label {
+  font-family: 'Kalam', cursive; font-size: 1rem;
+  color: var(--grey); letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.hero-title {
+  font-family: 'Caveat', cursive; font-size: clamp(2.2rem, 6vw, 4rem);
+  color: var(--ink); font-weight: 700; line-height: 1.15;
+  margin-bottom: 0.3rem;
+}
+.hero-unit {
+  font-family: 'DM Serif Display', serif; font-size: clamp(1.4rem, 4vw, 2.2rem);
+  color: var(--brown); font-style: italic; margin-bottom: 1rem;
+}
+.hero-desc {
+  font-family: 'Crimson Pro', serif; font-size: 1.15rem;
+  color: var(--ink-light); max-width: 600px; margin: 0 auto 1.5rem;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.tag {
+  font-family: 'Kalam', cursive; font-size: 0.85rem;
+  background: var(--paper); border: 1.5px solid var(--border);
+  border-radius: 20px; padding: 0.2rem 0.8rem;
+  color: var(--ink-light);
+}
+
+/* MAIN */
+main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; position: relative; z-index: 1; }
+
+/* SECTION CARD */
+.section-card {
+  background: var(--paper);
+  border-radius: 18px;
+  border: 1.5px solid var(--border);
+  box-shadow: 0 4px 24px var(--shadow);
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+  transition: box-shadow var(--transition);
+}
+.section-card:hover { box-shadow: 0 8px 36px var(--shadow-md); }
+
+.section-header {
+  padding: 1.3rem 2rem;
+  border-bottom: 1.5px solid var(--border);
+  display: flex; align-items: center; gap: 0.8rem;
+  background: linear-gradient(90deg, var(--paper-dark) 0%, var(--paper) 100%);
+}
+.section-icon { font-size: 1.6rem; }
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.55rem; color: var(--brown);
+}
+
+.section-body { padding: 1.5rem 2rem; }
+
+/* TOPIC CARD */
+.topic-card {
+  background: var(--paper);
+  border-left: 4px solid var(--beige);
+  border-radius: 0 12px 12px 0;
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 10px var(--shadow);
+}
+.topic-card.blue { border-left-color: var(--blue-mid); }
+.topic-card.green { border-left-color: #3aab5c; }
+.topic-card.red { border-left-color: var(--red); }
+.topic-card.brown { border-left-color: var(--brown); }
+.topic-card.purple { border-left-color: #8a4eb8; }
+
+.topic-title {
+  font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700;
+  color: var(--brown); margin-bottom: 0.6rem;
+  border-bottom: 2px dashed var(--border); padding-bottom: 0.4rem;
+}
+.topic-title.blue { color: var(--blue); }
+.topic-title.red { color: var(--red); }
+.topic-title.green { color: var(--green); }
+.topic-title.purple { color: #8a4eb8; }
+
+.sub-title {
+  font-family: 'Caveat', cursive; font-size: 1.25rem; font-weight: 600;
+  color: var(--brown); margin: 1rem 0 0.4rem;
+}
+
+p {
+  font-family: 'Crimson Pro', serif; font-size: 1.08rem;
+  line-height: 1.75; color: var(--ink); margin-bottom: 0.6rem;
+}
+
+/* HANDWRITTEN LISTS */
+ul.hw-list {
+  list-style: none; margin: 0.5rem 0 0.5rem 0.5rem; padding: 0;
+}
+ul.hw-list li {
+  font-family: 'Kalam', cursive; font-size: 1.05rem;
+  color: var(--ink); line-height: 1.7; margin-bottom: 0.2rem;
+  padding-left: 1.4rem; position: relative;
+}
+ul.hw-list li::before {
+  content: '✦'; position: absolute; left: 0;
+  color: var(--beige); font-size: 0.8rem; top: 0.15rem;
+}
+ul.hw-list.blue li::before { color: var(--blue-mid); }
+ul.hw-list.red li::before { color: var(--red); }
+ul.hw-list.green li::before { color: var(--green); }
+
+/* CALLOUT BOXES */
+.callout {
+  border-radius: 12px; padding: 1rem 1.3rem;
+  margin: 1rem 0; display: flex; gap: 0.8rem; align-items: flex-start;
+}
+.callout.info { background: var(--blue-light); border: 1px solid var(--blue-mid); }
+.callout.warn { background: var(--yellow-light); border: 1px solid var(--yellow); }
+.callout.danger { background: var(--red-light); border: 1px solid var(--red); }
+.callout.success { background: var(--green-light); border: 1px solid var(--green); }
+.callout.note { background: var(--beige-light); border: 1px solid var(--beige); }
+.callout-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+.callout-text { font-family: 'Kalam', cursive; font-size: 1rem; line-height: 1.6; color: var(--ink); }
+.callout-text strong { font-weight: 700; }
+
+/* TABLES */
+.tbl-wrap { overflow-x: auto; margin: 1rem 0; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-family: 'Crimson Pro', serif; font-size: 1rem;
+}
+th {
+  background: var(--brown); color: #fff;
+  font-family: 'Kalam', cursive; font-size: 1rem;
+  padding: 0.7rem 1rem; text-align: left;
+}
+th.blue { background: var(--blue); }
+th.green { background: var(--green); }
+td { padding: 0.55rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:nth-child(even) td { background: var(--beige-light); }
+tr:hover td { background: var(--blue-light); transition: background 0.15s; }
+
+/* DIAGRAM / FLOWCHART */
+.diagram {
+  background: var(--paper-dark);
+  border: 1.5px dashed var(--border);
+  border-radius: 14px; padding: 1.5rem; margin: 1.2rem 0;
+  font-family: 'Kalam', cursive;
+}
+.flow-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 0.5rem 0; }
+.flow-box {
+  background: var(--paper); border: 2px solid var(--beige);
+  border-radius: 10px; padding: 0.5rem 1rem;
+  font-size: 0.95rem; text-align: center; min-width: 90px;
+  box-shadow: 0 2px 6px var(--shadow);
+}
+.flow-box.blue { border-color: var(--blue-mid); background: var(--blue-light); }
+.flow-box.red { border-color: var(--red); background: var(--red-light); }
+.flow-box.green { border-color: var(--green); background: var(--green-light); }
+.flow-arrow { font-size: 1.3rem; color: var(--grey); }
+
+/* HIGHLIGHT */
+.hl { background: var(--yellow); padding: 0 3px; border-radius: 3px; font-weight: 600; }
+.hl-blue { background: var(--blue-light); padding: 0 4px; border-radius: 3px; color: var(--blue); font-weight: 600; }
+.hl-red { background: var(--red-light); padding: 0 4px; border-radius: 3px; color: var(--red); font-weight: 600; }
+.hl-green { background: var(--green-light); padding: 0 4px; border-radius: 3px; color: var(--green); font-weight: 600; }
+
+/* MCQ SECTION */
+.mcq-header {
+  background: linear-gradient(135deg, var(--brown) 0%, var(--beige) 100%);
+  color: #fff; padding: 1.5rem 2rem; border-radius: 14px 14px 0 0;
+  text-align: center;
+}
+.mcq-header h2 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; }
+.mcq-header p { font-family: 'Kalam', cursive; opacity: 0.85; margin-top: 0.3rem; }
+.mcq-stats {
+  display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+  padding: 1rem 2rem; background: var(--paper-dark); border-bottom: 1.5px solid var(--border);
+}
+.mcq-stat {
+  text-align: center; font-family: 'Kalam', cursive;
+}
+.mcq-stat .num { font-size: 1.6rem; font-weight: 700; color: var(--brown); }
+.mcq-stat .lbl { font-size: 0.85rem; color: var(--grey); }
+
+.mcq-list { padding: 1.5rem 2rem; }
+.mcq-item {
+  background: var(--paper); border: 1.5px solid var(--border);
+  border-radius: 12px; margin-bottom: 1.2rem;
+  overflow: hidden; transition: box-shadow var(--transition);
+}
+.mcq-item:hover { box-shadow: 0 4px 16px var(--shadow-md); }
+
+.mcq-q {
+  padding: 1rem 1.3rem; font-family: 'Crimson Pro', serif;
+  font-size: 1.05rem; font-weight: 600; color: var(--ink);
+  border-bottom: 1px dashed var(--border);
+  background: linear-gradient(90deg, var(--beige-light), var(--paper));
+}
+.mcq-q .qnum {
+  font-family: 'Kalam', cursive; font-size: 0.85rem;
+  color: var(--grey); margin-right: 0.5rem;
+}
+.difficulty-badge {
+  float: right; font-family: 'Kalam', cursive; font-size: 0.75rem;
+  padding: 0.1rem 0.6rem; border-radius: 10px;
+}
+.easy { background: var(--green-light); color: var(--green); }
+.medium { background: var(--yellow-light); color: #7a6000; }
+.hard { background: var(--red-light); color: var(--red); }
+
+.mcq-options { padding: 0.8rem 1.3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; }
+.mcq-opt {
+  font-family: 'Kalam', cursive; font-size: 0.97rem; color: var(--ink);
+  padding: 0.25rem 0.5rem; border-radius: 6px;
+  background: var(--paper-dark); border: 1px solid var(--border);
+}
+.mcq-opt.correct { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 700; }
+
+.mcq-answer {
+  padding: 0.5rem 1.3rem 0.8rem;
+  font-family: 'Kalam', cursive; font-size: 0.92rem;
+  color: var(--green); display: flex; align-items: center; gap: 0.4rem;
+}
+
+/* REVISION */
+.revision-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
+.revision-card {
+  background: var(--paper-dark); border: 1.5px solid var(--border);
+  border-radius: 12px; padding: 1rem 1.2rem;
+}
+.revision-card h4 { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--brown); margin-bottom: 0.4rem; }
+.revision-card ul { list-style: disc; padding-left: 1.2rem; font-family: 'Kalam', cursive; font-size: 0.92rem; line-height: 1.6; }
+
+/* BACK TO TOP */
+#back-top {
+  position: fixed; bottom: 2rem; right: 1.5rem; z-index: 100;
+  background: var(--brown); color: #fff;
+  border: none; border-radius: 50%; width: 44px; height: 44px;
+  font-size: 1.3rem; cursor: pointer;
+  box-shadow: 0 4px 16px var(--shadow-md);
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--transition); opacity: 0; pointer-events: none;
+}
+#back-top.visible { opacity: 1; pointer-events: auto; }
+#back-top:hover { background: var(--beige); transform: translateY(-3px); }
+
+/* PRINT */
+@media print {
+  nav, #back-top, #search-wrap, #progress-bar { display: none !important; }
+  body { background: #fff; }
+  .section-card { box-shadow: none; border: 1px solid #ccc; }
+  .mcq-options { grid-template-columns: 1fr 1fr; }
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .section-body { padding: 1rem; }
+  .mcq-options { grid-template-columns: 1fr; }
+  .mcq-list { padding: 1rem; }
+}
+
+/* SUMMARY BANNER */
+.summary-banner {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--brown) 100%);
+  border-radius: 14px; padding: 1.5rem 2rem; color: #fff; margin: 1rem 0;
+}
+.summary-banner h3 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-bottom: 0.5rem; }
+.summary-banner ul { list-style: disc; padding-left: 1.5rem; font-family: 'Kalam', cursive; font-size: 1rem; line-height: 1.8; }
+
+/* DIVIDER */
+.divider { border: none; border-top: 2px dashed var(--border); margin: 1.5rem 0; }
+
+/* CONCEPT BOX */
+.concept-box {
+  border: 2px solid var(--beige); border-radius: 12px;
+  padding: 1rem 1.3rem; margin: 0.8rem 0;
+  background: var(--beige-light);
+}
+.concept-box h4 { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--brown); margin-bottom: 0.3rem; }
+.concept-box p { font-size: 1rem; margin: 0; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- SEARCH OVERLAY -->
+<div id="search-wrap" onclick="closeSearch(event)">
+  <input id="search-box" type="text" placeholder="🔍  Search notes…" oninput="doSearch(this.value)" onkeydown="if(event.key==='Escape')closeSearch()">
+  <div id="search-results"></div>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a class="nav-brand" href="#hero">📚 CHE110</a>
+  <ul class="nav-links">
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#water">Water</a></li>
+    <li><a href="#air">Air</a></li>
+    <li><a href="#earth">Earth</a></li>
+    <li><a href="#manmade">Man-made</a></li>
+    <li><a href="#framework">Framework</a></li>
+    <li><a href="#agencies">Agencies</a></li>
+    <li><a href="#revision">Revision</a></li>
+    <li><a href="#mcqs">MCQs</a></li>
+  </ul>
+  <div class="nav-controls">
+    <button class="btn-icon" title="Search" onclick="openSearch()">🔍</button>
+    <button class="btn-icon" title="Dark Mode" onclick="toggleDark()">🌙</button>
+    <button class="btn-icon" title="Print" onclick="window.print()">🖨️</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-label">B.Tech CSE · 1st Year · Session 2025-26</div>
+  <div class="hero-title">CHE 110 Environmental Studies</div>
+  <div class="hero-unit">Unit V — Disaster Management</div>
+  <p class="hero-desc">Complete handwritten-style notes covering natural disasters, man-made disasters, national frameworks, roles of agencies, NGOs, CBOs & media.</p>
+  <div class="hero-tags">
+    <span class="tag">📖 Detailed Notes</span>
+    <span class="tag">📊 Tables & Diagrams</span>
+    <span class="tag">✅ 60 MCQs</span>
+    <span class="tag">🗂 Quick Revision</span>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main>
+
+<!-- INTRODUCTION -->
+<div class="section-card" id="intro">
+  <div class="section-header">
+    <span class="section-icon">🌍</span>
+    <h2 class="section-title">1. Introduction to Disaster Management</h2>
+  </div>
+  <div class="section-body">
+    <div class="topic-card">
+      <div class="topic-title">What is a Disaster?</div>
+      <p>A <span class="hl">disaster</span> is a sudden event or calamity that causes <strong>large-scale damage and destruction</strong> of human life and property. It overwhelms the capacity of the affected community to cope using its own resources.</p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-text"><strong>Key Idea:</strong> A hazard becomes a disaster when it interacts with a vulnerable community that lacks capacity to withstand or recover from its impact.</div>
+      </div>
+
+      <div class="sub-title">Types of Disasters at a Glance</div>
+      <div class="diagram">
+        <div class="flow-row">
+          <div class="flow-box blue">🌊 Water-Related<br><small>Floods, Drought</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="border-color:#8a4eb8;background:#f0e8fa;">🌀 Air-Related<br><small>Cyclone, Storms</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box green">🏔 Earth-Related<br><small>EQ, Landslide, Avalanche, Volcano</small></div>
+        </div>
+        <div class="flow-row" style="margin-top:0.8rem;">
+          <div class="flow-box red">☢ Man-Made<br><small>Nuclear, Chemical, Bio, Transport</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WATER RELATED DISASTERS -->
+<div class="section-card" id="water">
+  <div class="section-header">
+    <span class="section-icon">💧</span>
+    <h2 class="section-title">2. Water-Related Disasters</h2>
+  </div>
+  <div class="section-body">
+
+    <!-- FLOODS -->
+    <div class="topic-card blue">
+      <div class="topic-title blue">A. Floods</div>
+      <p>Flood is the <span class="hl-blue">accumulation of a large quantity of water</span> at a place, or the presence of more water than can be handled by the drainage system of an area.</p>
+
+      <div class="sub-title">Types of Floods</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th class="blue">Type</th><th class="blue">Description</th><th class="blue">Trigger</th></tr>
+          <tr><td>⚡ Flash Flood</td><td>Sudden flood within a short time after heavy rainfall</td><td>Cloudbursts, dam failure, hilly terrain</td></tr>
+          <tr><td>🌊 River Flood</td><td>Water overflows river banks due to excessive rainfall or snowmelt</td><td>Prolonged rain in catchment area</td></tr>
+          <tr><td>🌊 Coastal Flood</td><td>Seawater inundates low-lying coastal areas</td><td>Storm surges, high tides, tsunamis</td></tr>
+        </table>
+      </div>
+
+      <div class="sub-title">Flash Floods – Details</div>
+      <ul class="hw-list blue">
+        <li>Occur in hilly or urban areas with <strong>poor drainage</strong></li>
+        <li>Triggered by cloudbursts, overflowing rivers, or dam failures</li>
+        <li>Cause severe damage to life, property, and infrastructure</li>
+        <li>Lead to soil erosion and water contamination</li>
+      </ul>
+
+      <div class="sub-title">River Floods – Details</div>
+      <ul class="hw-list blue">
+        <li>Happens after prolonged heavy rains in the river's catchment area</li>
+        <li>Floodwater spreads over nearby land, damaging crops and homes</li>
+        <li>Silt and nutrients deposited by floods can <span class="hl-green">improve soil fertility</span></li>
+        <li>Proper embankments and flood forecasting help reduce impact</li>
+      </ul>
+
+      <div class="sub-title">Coastal Floods – Details</div>
+      <ul class="hw-list blue">
+        <li>Caused by storm surges, high tides, or tsunamis</li>
+        <li>Strong winds during cyclones push seawater onto the shore</li>
+        <li>Saltwater intrusion affects soil and freshwater quality</li>
+        <li>Building sea walls and <strong>mangrove plantations</strong> can reduce impact</li>
+      </ul>
+
+      <hr class="divider">
+      <div class="sub-title">Causes of Floods</div>
+      <ul class="hw-list blue">
+        <li>Heavy rainfall over a short period causes rivers and drains to overflow</li>
+        <li>Melting of snow or glaciers increases water levels in rivers</li>
+        <li>Poor drainage systems and urbanization block natural water flow</li>
+        <li>Deforestation reduces soil absorption, leading to surface runoff</li>
+        <li>Dam failures or sudden release of water cause flash floods</li>
+        <li>Cyclones and storm surges contribute to severe coastal flooding</li>
+      </ul>
+
+      <div class="sub-title">Effects of Floods</div>
+      <ul class="hw-list red">
+        <li>Loss of human life, livestock, and property</li>
+        <li>Destruction of crops, roads, and buildings, disrupting daily life</li>
+        <li>Waterborne diseases like cholera and typhoid often spread after floods</li>
+        <li>Flooding leads to soil erosion and loss of fertile land</li>
+        <li>Transport and communication systems are badly affected</li>
+        <li>✅ <span class="hl-green">Benefit:</span> Floods can deposit fertile silt that benefits agriculture</li>
+      </ul>
+
+      <div class="sub-title">Control / Management of Floods</div>
+      <ul class="hw-list green">
+        <li>Construction of dams and reservoirs to store excess rainwater</li>
+        <li>Embankments and levees prevent rivers from overflowing</li>
+        <li>Afforestation in catchment areas reduces surface runoff</li>
+        <li>Proper drainage systems allow quick water flow during heavy rains</li>
+        <li>Flood forecasting and early warning systems save lives and property</li>
+        <li>Planned land use and restricting construction in flood-prone areas</li>
+      </ul>
+    </div>
+
+    <!-- DROUGHT -->
+    <div class="topic-card">
+      <div class="topic-title">B. Drought</div>
+      <p>Drought is a <span class="hl">prolonged period of unusually low rainfall</span>, leading to a shortage of water. It causes rivers, lakes, and groundwater levels to drop, and crops fail due to lack of moisture in the soil.</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-text"><strong>Note:</strong> Droughts are often worsened by <strong>climate change</strong> and <strong>deforestation</strong>. They can lead to famine, migration, and serious economic losses.</div>
+      </div>
+
+      <div class="sub-title">Causes of Drought</div>
+      <ul class="hw-list">
+        <li>Low or irregular rainfall over a long period</li>
+        <li>High temperatures increasing evaporation rates</li>
+        <li>Deforestation reducing soil moisture and rainfall</li>
+        <li>Overuse of water for irrigation and industries</li>
+        <li>Climate change altering weather patterns</li>
+        <li>Poor water management and loss of natural vegetation</li>
+      </ul>
+
+      <div class="sub-title">Effects of Drought</div>
+      <ul class="hw-list red">
+        <li>Crop failure and loss of agricultural productivity</li>
+        <li>Shortage of drinking water for humans and animals</li>
+        <li>Death of livestock and wildlife</li>
+        <li>Increased risk of famine and malnutrition</li>
+        <li>Economic losses and unemployment in farming areas</li>
+        <li>Land degradation and desertification over time</li>
+      </ul>
+
+      <div class="sub-title">Control / Management of Drought</div>
+      <ul class="hw-list green">
+        <li>Plant more trees to increase rainfall and conserve moisture</li>
+        <li>Build dams and reservoirs to store rainwater</li>
+        <li>Promote rainwater harvesting in rural and urban areas</li>
+        <li>Use drip irrigation and other water-saving techniques</li>
+        <li>Practice watershed management and soil conservation</li>
+        <li>Create awareness and plan efficient water use during dry periods</li>
+      </ul>
+
+      <div class="tbl-wrap" style="margin-top:1rem;">
+        <table>
+          <tr><th>Feature</th><th>Flood</th><th>Drought</th></tr>
+          <tr><td>Cause</td><td>Excess water</td><td>Insufficient rainfall</td></tr>
+          <tr><td>Duration</td><td>Short to medium</td><td>Long-term</td></tr>
+          <tr><td>Main Impact</td><td>Waterlogging, disease</td><td>Crop failure, famine</td></tr>
+          <tr><td>Key Control</td><td>Dams, embankments</td><td>Irrigation, rainwater harvesting</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AIR RELATED DISASTERS -->
+<div class="section-card" id="air">
+  <div class="section-header">
+    <span class="section-icon">🌀</span>
+    <h2 class="section-title">3. Air-Related Disasters</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="topic-card" style="border-left-color:#8a4eb8;">
+      <div class="topic-title purple">A. Cyclones</div>
+      <p>A cyclone is a <span class="hl">violent rotating storm</span> with strong winds and heavy rain. It forms over <strong>warm ocean waters</strong> near the equator. Air rises rapidly, creating low pressure and drawing in more moist air.</p>
+
+      <div class="callout note">
+        <span class="callout-icon">📌</span>
+        <div class="callout-text"><strong>Same Storm, Different Names:</strong><br>
+        🌀 <strong>Cyclone</strong> – Indian Ocean, South Pacific<br>
+        🌀 <strong>Hurricane</strong> – Atlantic, NE Pacific<br>
+        🌀 <strong>Typhoon</strong> – NW Pacific
+        </div>
+      </div>
+
+      <div class="sub-title">Types of Cyclones</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Type</th><th>Description</th><th>Location</th></tr>
+          <tr><td>🌀 Tropical Cyclone</td><td>Forms over warm tropical oceans, very intense, has an eye</td><td>Bay of Bengal, Arabian Sea</td></tr>
+          <tr><td>🌩 Mesocyclone</td><td>Rotating updraft in a thunderstorm, precursor to tornadoes</td><td>Continental areas</td></tr>
+          <tr><td>❄️ Extratropical Cyclone</td><td>Forms outside tropics, derives energy from temperature contrast</td><td>Mid-latitudes</td></tr>
+          <tr><td>🧊 Arctic Hurricane</td><td>Small but intense cyclone-like storms in polar regions</td><td>Arctic/Antarctic</td></tr>
+        </table>
+      </div>
+
+      <div class="sub-title">Causes of Cyclone</div>
+      <ul class="hw-list" style="--li-bullet:'🌊'">
+        <li>Formation over warm ocean waters (above <span class="hl">26°C</span>)</li>
+        <li>Evaporation of seawater adding moisture to the air</li>
+        <li>Rapid rising of warm, moist air creating low pressure</li>
+        <li>Earth's rotation (<strong>Coriolis effect</strong>) causing air to spin</li>
+        <li>Continuous inflow of moist air fueling the storm</li>
+        <li>Atmospheric instability and favorable wind patterns</li>
+      </ul>
+
+      <div class="sub-title">Effects of Cyclone</div>
+      <ul class="hw-list red">
+        <li>Heavy rainfall causing floods and waterlogging</li>
+        <li>Strong winds uprooting trees and damaging buildings</li>
+        <li>Storm surges flooding coastal areas</li>
+        <li>Disruption of transport, communication, and power supply</li>
+        <li>Loss of lives, crops, and livestock</li>
+        <li>Spread of waterborne diseases after the disaster</li>
+      </ul>
+
+      <div class="sub-title">Control of Cyclone</div>
+      <ul class="hw-list green">
+        <li>Monitor weather conditions using satellites and radar systems</li>
+        <li>Issue early warnings to coastal populations</li>
+        <li>Build strong cyclone shelters and evacuation centers</li>
+        <li>Strengthen houses and infrastructure in coastal areas</li>
+        <li>Plant mangroves and trees to reduce wind and wave impact</li>
+        <li>Educate people about cyclone preparedness and safety measures</li>
+      </ul>
+    </div>
+
+    <div class="topic-card" style="border-left-color:#607d8b;">
+      <div class="topic-title" style="color:#37474f;">B. Storms</div>
+      <p>A storm is a <span class="hl">violent disturbance in the atmosphere</span> with strong winds and rain, thunder, or snow. It forms due to rapid changes in air pressure and temperature.</p>
+      <p>Storms include: <span class="hl-blue">thunderstorms</span>, <span class="hl-blue">hailstorms</span>, and <span class="hl-blue">blizzards</span>.</p>
+
+      <div class="sub-title">Causes of Storms</div>
+      <ul class="hw-list">
+        <li>Sudden changes in air pressure and temperature</li>
+        <li>Warm, moist air rising rapidly into cooler regions</li>
+        <li>Collision of cold and warm air masses</li>
+        <li>High humidity leading to cloud formation and thunder</li>
+        <li>Strong winds caused by pressure differences</li>
+        <li>Disturbances in weather systems like cyclones or fronts</li>
+      </ul>
+
+      <div class="sub-title">Effects & Control</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Effects</th><th>Control Measures</th></tr>
+          <tr><td>Damage to buildings, trees, power lines</td><td>Use weather satellites & radar</td></tr>
+          <tr><td>Heavy rainfall causing floods</td><td>Issue timely public warnings</td></tr>
+          <tr><td>Disruption of transport & communication</td><td>Build strong structures</td></tr>
+          <tr><td>Loss of crops and livestock</td><td>Maintain proper drainage</td></tr>
+          <tr><td>Injuries and loss of human lives</td><td>Educate people on storm safety</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EARTH RELATED DISASTERS -->
+<div class="section-card" id="earth">
+  <div class="section-header">
+    <span class="section-icon">🏔️</span>
+    <h2 class="section-title">4. Earth-Related Disasters</h2>
+  </div>
+  <div class="section-body">
+
+    <!-- EARTHQUAKE -->
+    <div class="topic-card red">
+      <div class="topic-title red">A. Earthquakes</div>
+      <p>An earthquake is any <span class="hl-red">seismic event</span>, caused naturally or as a consequence of human activities, that leads to the generation of <strong>devastating seismic waves</strong>.</p>
+
+      <div class="diagram">
+        <div style="font-family:'Kalam',cursive;text-align:center;font-size:1rem;margin-bottom:0.8rem;color:var(--brown);">Structure of an Earthquake</div>
+        <div class="flow-row">
+          <div class="flow-box red">Focus<br><small>(Hypocenter)</small></div>
+          <div class="flow-arrow">⬆ Seismic Waves</div>
+          <div class="flow-box" style="border-color:#e67e22;background:#fef0e0;">Epicenter<br><small>(Surface point above focus)</small></div>
+          <div class="flow-arrow">→ spreads as</div>
+          <div class="flow-box blue">Wavefronts</div>
+        </div>
+      </div>
+
+      <div class="sub-title">Causes of Earthquakes</div>
+      <ul class="hw-list red">
+        <li>Sudden movement of rocks along <strong>faults</strong> in the Earth's crust</li>
+        <li>Buildup and release of stress between tectonic plates</li>
+        <li>Most earthquakes occur at <span class="hl">plate boundaries</span> (collision, sliding, or diverging)</li>
+        <li>Volcanic activity can also trigger earthquakes near active volcanoes</li>
+        <li>Human activities like <strong>mining</strong>, reservoir filling, or explosions can induce tremors</li>
+      </ul>
+
+      <div class="sub-title">Effects of Earthquakes</div>
+      <ul class="hw-list red">
+        <li>Ground shaking that destroys buildings, roads, and bridges</li>
+        <li>Loss of life and injuries</li>
+        <li>Landslides and tsunamis may occur in affected areas</li>
+        <li>Water, gas, and electricity supplies disrupted</li>
+        <li>Economic losses from property damage and recovery costs</li>
+        <li>Psychological trauma and displacement of survivors</li>
+      </ul>
+
+      <div class="callout danger">
+        <span class="callout-icon">❗</span>
+        <div class="callout-text"><strong>Important:</strong> Earthquakes <span class="hl-red">CANNOT be prevented</span>, but their impact can be significantly reduced through preparedness and earthquake-resistant construction.</div>
+      </div>
+
+      <div class="sub-title">Control / Mitigation of Earthquakes</div>
+      <ul class="hw-list green">
+        <li>Construct <strong>earthquake-resistant buildings</strong> using flexible materials and strong foundations</li>
+        <li>Avoid construction near fault lines and unstable slopes</li>
+        <li>Implement early warning systems to alert people before strong tremors</li>
+        <li>Educate the public about safety measures during and after earthquakes</li>
+        <li>Conduct regular seismic monitoring and land-use planning</li>
+      </ul>
+    </div>
+
+    <!-- LANDSLIDES -->
+    <div class="topic-card brown">
+      <div class="topic-title" style="color:var(--brown);">B. Landslides</div>
+      <p>Landslides are the <span class="hl">sudden downward movement of rock, soil, or debris on a slope</span>. They occur due to gravity acting on weakened slope materials.</p>
+
+      <div class="sub-title">Causes of Landslides</div>
+      <ul class="hw-list">
+        <li>Heavy rainfall or rapid snowmelt increases water pressure in soil, causing slope failure</li>
+        <li>Earthquakes and volcanic eruptions shake and loosen rocks</li>
+        <li>Deforestation removes vegetation that stabilizes slopes</li>
+        <li>Construction, mining, and road cutting weaken natural slopes</li>
+        <li>Weathering and erosion gradually reduce slope strength</li>
+        <li>Poor drainage or water leakage adds weight and instability</li>
+      </ul>
+
+      <div class="sub-title">Effects of Landslides</div>
+      <ul class="hw-list red">
+        <li>Destroy houses, roads, bridges, and other infrastructure</li>
+        <li>Loss of life and injuries to people and animals</li>
+        <li>Agricultural land buried or damaged, reducing crop yield</li>
+        <li>Rivers may get blocked, leading to floods</li>
+        <li>Transport and communication networks disrupted</li>
+        <li>Long-term environmental damage and soil loss</li>
+      </ul>
+
+      <div class="sub-title">Management of Landslides</div>
+      <ul class="hw-list green">
+        <li>Planting trees and vegetation helps bind the soil and stabilize slopes</li>
+        <li>Building retaining walls and proper drainage systems</li>
+        <li>Avoiding construction and mining in landslide-prone areas</li>
+        <li>Monitoring slopes with sensors and early warning systems</li>
+        <li>Controlling water flow through proper drainage</li>
+        <li>Public awareness and disaster preparedness programs</li>
+      </ul>
+    </div>
+
+    <!-- AVALANCHES -->
+    <div class="topic-card blue">
+      <div class="topic-title blue">C. Avalanches</div>
+      <p>An avalanche is a <span class="hl-blue">rapid flow of snow, ice, and rocks down a mountainside</span>. It occurs when layers of snow become unstable and slide due to gravity.</p>
+
+      <div class="sub-title">Causes</div>
+      <ul class="hw-list blue">
+        <li>Heavy snowfall adding weight to existing snow layers</li>
+        <li>Sudden rise in temperature causing snow to melt and loosen</li>
+        <li>Strong winds depositing uneven layers of snow</li>
+        <li>Vibrations from earthquakes, vehicles, or explosions</li>
+        <li>Weak snow layers beneath heavy ones leading to instability</li>
+        <li>Human activities like skiing or hiking on steep slopes</li>
+      </ul>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th class="blue">Effects</th><th class="blue">Control Measures</th></tr>
+          <tr><td>Loss of human lives, mountaineers</td><td>Plant trees to stabilize mountain slopes</td></tr>
+          <tr><td>Destruction of houses and roads</td><td>Build snow fences, barriers, retaining walls</td></tr>
+          <tr><td>Loss of forests and wildlife habitats</td><td>Use controlled explosions to trigger small safe avalanches</td></tr>
+          <tr><td>River blockage causing floods</td><td>Monitor snow and weather conditions regularly</td></tr>
+          <tr><td>Economic losses in tourism & transport</td><td>Restrict human activities in high-risk zones</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- VOLCANIC ERUPTIONS -->
+    <div class="topic-card" style="border-left-color:#e74c3c;">
+      <div class="topic-title red">D. Volcanic Eruptions</div>
+      <p>A volcanic eruption occurs when <span class="hl-red">magma, gas, and ash escape from beneath the Earth's crust</span> due to pressure buildup inside magma chambers. Eruptions can be explosive or gentle lava flows.</p>
+
+      <div class="callout note">
+        <span class="callout-icon">🌋</span>
+        <div class="callout-text"><strong>Interesting Fact:</strong> Volcanic eruptions can also <span class="hl-green">form new landforms</span> like mountains and islands, and create fertile soils over time!</div>
+      </div>
+
+      <div class="sub-title">Causes of Volcanic Eruptions</div>
+      <ul class="hw-list red">
+        <li>Movement of tectonic plates creating cracks in the Earth's crust</li>
+        <li>Accumulation of magma in underground chambers</li>
+        <li>High pressure of gases within the magma</li>
+        <li>Subduction of one plate beneath another at plate boundaries</li>
+        <li>Weak zones or faults in the crust allowing magma to rise</li>
+        <li>Volcanic hotspots where magma pushes up from deep within the mantle</li>
+      </ul>
+
+      <div class="sub-title">Effects & Control</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Effects</th><th>Control Measures</th></tr>
+          <tr><td>Loss of life and property destruction</td><td>Monitor activity using seismographs & satellites</td></tr>
+          <tr><td>Release of ash and gases polluting air</td><td>Issue early warnings to nearby populations</td></tr>
+          <tr><td>Lava flows destroying forests and crops</td><td>Create hazard maps & restrict construction</td></tr>
+          <tr><td>Disruption of air travel (ash clouds)</td><td>Plan safe evacuation routes</td></tr>
+          <tr><td>Temporary climate changes (sunlight blocked)</td><td>Conduct continuous research for prediction</td></tr>
+          <tr><td>✅ Formation of new landforms & fertile soils</td><td>Educate people about volcanic risks</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MANMADE DISASTERS -->
+<div class="section-card" id="manmade">
+  <div class="section-header">
+    <span class="section-icon">☣️</span>
+    <h2 class="section-title">5. Man-Made Disasters</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="topic-card" style="border-left-color:#9b59b6;">
+      <div class="topic-title purple">A. Nuclear Disasters</div>
+      <p>A nuclear disaster occurs when there is an <span class="hl">accidental release of radioactive materials</span>. It usually happens due to reactor failure, human error, or natural calamities.</p>
+      <ul class="hw-list">
+        <li>Cause long-term radiation hazards affecting humans, animals, plants, and the environment</li>
+        <li><strong>Examples:</strong> <span class="hl-red">Chernobyl (1986)</span> – Ukraine; <span class="hl-red">Fukushima (2011)</span> – Japan</li>
+        <li>Strict safety measures and continuous monitoring can help prevent them</li>
+      </ul>
+    </div>
+
+    <div class="topic-card red">
+      <div class="topic-title red">B. Chemical Disasters</div>
+      <p>A chemical disaster occurs when <span class="hl-red">hazardous chemicals are accidentally released</span> into the environment due to industrial accidents, leaks, explosions, or transport mishaps.</p>
+      <ul class="hw-list red">
+        <li>Toxic gases, liquids, or solids cause serious health and environmental damage</li>
+        <li>People may suffer burns, poisoning, or respiratory problems</li>
+        <li><strong>Example:</strong> <span class="hl-red">Bhopal Gas Tragedy (1984)</span> – world's worst industrial disaster (MIC gas leak)</li>
+        <li>Proper storage, handling, and safety protocols can prevent such disasters</li>
+      </ul>
+    </div>
+
+    <div class="topic-card green">
+      <div class="topic-title green">C. Biological Disasters</div>
+      <p>Biological disasters occur due to the <span class="hl-green">spread of harmful organisms</span> like bacteria, viruses, or toxins. They can be natural (pandemics) or man-made (bioterrorism).</p>
+      <ul class="hw-list">
+        <li><strong>Examples:</strong> COVID-19, plague, anthrax attacks</li>
+        <li>Causes include poor sanitation, global travel, and misuse of biological agents</li>
+        <li>Effects: mass illness, death, economic disruption</li>
+        <li>Control: vaccination, quarantine, hygiene, and quick medical response</li>
+      </ul>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-title">D. Transport Accidents</div>
+      <p>Transport accidents occur during travel by <span class="hl">road, rail, air, or water</span>.</p>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Type</th><th>Common Causes</th><th>Examples</th></tr>
+          <tr><td>🚗 Road</td><td>Human error, bad roads, reckless driving</td><td>Car crashes, bus accidents</td></tr>
+          <tr><td>🚂 Rail</td><td>Mechanical failure, signal error</td><td>Train derailments</td></tr>
+          <tr><td>✈️ Air</td><td>Technical failure, bad weather</td><td>Plane crashes</td></tr>
+          <tr><td>🚢 Water</td><td>Storms, overloading, navigation error</td><td>Shipwrecks</td></tr>
+        </table>
+      </div>
+      <p style="margin-top:0.5rem;"><strong>Control:</strong> Strict safety laws, proper maintenance, driver training, and public awareness.</p>
+    </div>
+
+    <div class="callout info" style="margin-top:1rem;">
+      <span class="callout-icon">📋</span>
+      <div class="callout-text"><strong>Quick Comparison – Man-Made Disasters:</strong><br>
+      Nuclear → radiation, long-term contamination | Chemical → toxic exposure, burns | Biological → disease spread | Transport → immediate injury/death</div>
+    </div>
+  </div>
+</div>
+
+<!-- NATIONAL DISASTER MANAGEMENT FRAMEWORK -->
+<div class="section-card" id="framework">
+  <div class="section-header">
+    <span class="section-icon">🏛️</span>
+    <h2 class="section-title">6. National Disaster Management Framework</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="topic-card">
+      <div class="topic-title">Overview</div>
+      <p>India's National Disaster Management Framework provides a <span class="hl">structured approach</span> to handle disasters. The <strong>Disaster Management Act, 2005</strong> established the <span class="hl-blue">NDMA (National Disaster Management Authority)</span>.</p>
+
+      <div class="callout info">
+        <span class="callout-icon">⚖️</span>
+        <div class="callout-text"><strong>Legal Basis:</strong> The Disaster Management Act, 2005 is the primary legislation. It defines roles for central, state, and local governments in disaster management across India.</div>
+      </div>
+
+      <div class="sub-title">Objectives of the Framework</div>
+      <ul class="hw-list blue">
+        <li>Build a <strong>disaster-resilient India</strong> by reducing vulnerability and risks</li>
+        <li>Ensure quick, coordinated, and effective response during disasters</li>
+        <li>Integrate disaster management into development planning</li>
+        <li>Promote community participation and capacity building at all levels</li>
+      </ul>
+
+      <div class="sub-title">Key Components (5 Phases)</div>
+      <div class="diagram">
+        <div class="flow-row">
+          <div class="flow-box red">🛡️ Prevention<br><small>Identify & avoid risks</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="border-color:#e67e22;background:#fef0e0;">⚒️ Mitigation<br><small>Reduce damage</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box blue">📋 Preparedness<br><small>Training & drills</small></div>
+        </div>
+        <div class="flow-row" style="margin-top:0.6rem;">
+          <div class="flow-box green">🚨 Response<br><small>Rescue & relief</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="border-color:#8a4eb8;background:#f0e8fa;">🏗️ Recovery<br><small>Rebuild & rehabilitate</small></div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap" style="margin-top:1rem;">
+        <table>
+          <tr><th>Component</th><th>Description</th><th>Examples</th></tr>
+          <tr><td>Prevention</td><td>Identify potential risks, avoid/reduce disaster impact</td><td>Land-use zoning, building codes</td></tr>
+          <tr><td>Mitigation</td><td>Structural & non-structural measures to minimize damage</td><td>Earthquake-resistant buildings</td></tr>
+          <tr><td>Preparedness</td><td>Training, awareness, mock drills, emergency planning</td><td>NDRF exercises, school drills</td></tr>
+          <tr><td>Response</td><td>Rapid rescue, relief, and medical support after disaster</td><td>NDRF deployment</td></tr>
+          <tr><td>Recovery</td><td>Rebuilding infrastructure and restoring livelihoods</td><td>Housing schemes, livelihood programs</td></tr>
+        </table>
+      </div>
+
+      <div class="sub-title">Community Participation & Awareness</div>
+      <p>The framework emphasizes that disaster management is <strong>not only a government function but a community responsibility</strong>. It promotes:</p>
+      <ul class="hw-list green">
+        <li>Local self-help groups and NGOs</li>
+        <li>Public education through media and awareness drives</li>
+        <li>Mock drills in schools, industries, and communities</li>
+      </ul>
+
+      <div class="sub-title">Recent Initiatives under NDMA</div>
+      <ul class="hw-list blue">
+        <li>National Cyclone Risk Mitigation Project (NCRMP)</li>
+        <li>National Earthquake Risk Mitigation Project</li>
+        <li>Flood forecasting and warning systems</li>
+        <li>COVID-19 pandemic response coordination under NDMA guidelines</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ROLE OF AGENCIES -->
+<div class="section-card" id="agencies">
+  <div class="section-header">
+    <span class="section-icon">🤝</span>
+    <h2 class="section-title">7. Role of Governmental Agencies, NGOs, CBOs & Media</h2>
+  </div>
+  <div class="section-body">
+
+    <!-- NATIONAL AGENCIES -->
+    <div class="topic-card blue">
+      <div class="topic-title blue">A. National Level Agencies</div>
+
+      <div class="concept-box">
+        <h4>1. NDMA – National Disaster Management Authority</h4>
+        <ul class="hw-list blue">
+          <li>Established under Disaster Management Act, 2005; <strong>chaired by the Prime Minister of India</strong></li>
+          <li>Formulates national policies, plans, and guidelines for disaster management</li>
+          <li>Coordinates with ministries, state governments, and international organizations</li>
+          <li>Oversees preparedness and mitigation programs across the country</li>
+          <li>Promotes research, capacity building, and awareness</li>
+        </ul>
+      </div>
+
+      <div class="concept-box">
+        <h4>2. NDRF – National Disaster Response Force</h4>
+        <ul class="hw-list blue">
+          <li>Specialized, professional force trained for disaster response</li>
+          <li>Conducts rescue, relief, and evacuation operations during natural and man-made disasters</li>
+          <li>Engages in mock drills and community training to enhance preparedness</li>
+        </ul>
+      </div>
+
+      <div class="concept-box">
+        <h4>3. NIDM – National Institute of Disaster Management</h4>
+        <ul class="hw-list blue">
+          <li>Training and research institute under the Ministry of Home Affairs</li>
+          <li>Provides education, capacity building, and professional training in disaster management</li>
+          <li>Conducts workshops, policy research, and awareness programs</li>
+        </ul>
+      </div>
+
+      <div class="concept-box">
+        <h4>4. Ministry of Home Affairs (MHA)</h4>
+        <ul class="hw-list blue">
+          <li>The <strong>nodal ministry</strong> for disaster management in India</li>
+          <li>Coordinates disaster response and relief between central and state governments</li>
+          <li>Allocates financial assistance from NDRF and NDRMF (Mitigation Fund)</li>
+        </ul>
+      </div>
+
+      <div class="concept-box">
+        <h4>5. Other Supporting Central Agencies</h4>
+        <div class="tbl-wrap">
+          <table>
+            <tr><th class="blue">Agency</th><th class="blue">Role</th></tr>
+            <tr><td>IMD (Indian Meteorological Dept.)</td><td>Issues weather forecasts and cyclone/flood warnings</td></tr>
+            <tr><td>CWC (Central Water Commission)</td><td>Monitors river levels and flood forecasting</td></tr>
+            <tr><td>ISRO</td><td>Provides satellite imagery for damage assessment and early warning</td></tr>
+            <tr><td>Ministry of Health & Family Welfare</td><td>Manages health emergencies and disease outbreaks</td></tr>
+            <tr><td>Ministry of Defence</td><td>Provides logistical and rescue support during major disasters</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATE & DISTRICT -->
+    <div class="topic-card">
+      <div class="topic-title">B. State & District Level Agencies</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Agency</th><th>Head</th><th>Key Role</th></tr>
+          <tr><td>SDMA (State Disaster Management Authority)</td><td>Chief Minister</td><td>State-level disaster plans, coordinate with districts</td></tr>
+          <tr><td>SEC (State Executive Committee)</td><td>Chief Secretary</td><td>Implements SDMA policies, inter-departmental coordination</td></tr>
+          <tr><td>DDMA (District Disaster Management Authority)</td><td>District Collector / Deputy Commissioner</td><td>Primary unit for local implementation, mock drills, district DM plans</td></tr>
+        </table>
+      </div>
+
+      <div class="callout note">
+        <span class="callout-icon">📌</span>
+        <div class="callout-text"><strong>Local Bodies:</strong> Panchayati Raj Institutions and Urban Local Bodies mobilize community volunteers, maintain shelters, ensure essential supplies, and implement building safety norms.</div>
+      </div>
+    </div>
+
+    <!-- NGOs -->
+    <div class="topic-card green">
+      <div class="topic-title green">C. Role of NGOs</div>
+      <p>NGOs act as <span class="hl-green">vital partners of the government</span>. Their flexibility, local presence, and social trust allow them to reach affected populations quickly.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th class="green">Phase</th><th class="green">NGO Role</th></tr>
+          <tr><td>Preparedness & Awareness</td><td>Conduct awareness campaigns, training, mock drills; disseminate early warning info</td></tr>
+          <tr><td>Emergency Response</td><td>Provide food, clothing, shelter, medical aid; mobilize volunteers; set up shelters</td></tr>
+          <tr><td>Rehabilitation & Reconstruction</td><td>Rebuild houses, schools, health centers; provide psychosocial counseling</td></tr>
+          <tr><td>Coordination & Advocacy</td><td>Collaborate with agencies; advocate for inclusive policies (gender, disability)</td></tr>
+        </table>
+      </div>
+
+      <div class="callout success">
+        <span class="callout-icon">✅</span>
+        <div class="callout-text"><strong>Key NGOs in India:</strong> Indian Red Cross Society, CARE India, SEEDS, Oxfam, UNICEF, Save the Children</div>
+      </div>
+    </div>
+
+    <!-- CBOs -->
+    <div class="topic-card">
+      <div class="topic-title">D. Role of Community-Based Organizations (CBOs)</div>
+      <p>CBOs are <span class="hl">local groups</span> formed within communities — self-help groups, youth clubs, resident welfare associations. They operate at the <strong>grassroots level</strong>.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Phase</th><th>CBO Role</th></tr>
+          <tr><td>Local Preparedness</td><td>Identify vulnerable areas/families; participate in community DM plans; maintain shelters & emergency supplies</td></tr>
+          <tr><td>Immediate Response</td><td>Act as <strong>first responders</strong> before external help arrives; assist in evacuation, first aid, search-and-rescue</td></tr>
+          <tr><td>Long-term Recovery</td><td>Support rebuilding community infrastructure; promote social unity and collective decision-making</td></tr>
+        </table>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🌱</span>
+        <div class="callout-text"><strong>Significance:</strong> CBOs ensure disaster management is <strong>bottom-up, participatory, and sustainable</strong> — they work directly at the grassroots level where impact is first felt.</div>
+      </div>
+    </div>
+
+    <!-- MEDIA -->
+    <div class="topic-card" style="border-left-color:#e67e22;">
+      <div class="topic-title" style="color:#d35400;">E. Role of Media in Disaster Response</div>
+      <p>Media plays a critical role at <strong>all three phases</strong> of disaster management.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Phase</th><th>Media's Role</th></tr>
+          <tr><td>📢 Pre-Disaster</td><td>Spread awareness about hazards & safety; broadcast early warnings; promote preparedness culture</td></tr>
+          <tr><td>🚨 During Disaster</td><td>Provide real-time updates; help coordinate rescue by communicating needs; reduce panic with verified info</td></tr>
+          <tr><td>🏗️ Post-Disaster</td><td>Highlight needs of affected people; monitor relief effectiveness; educate about rehabilitation & prevention</td></tr>
+        </table>
+      </div>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-text"><strong>Challenge:</strong> Risk of <span class="hl-red">misinformation</span> through unverified media reports can cause panic and hamper relief operations. Media must ensure accuracy.</div>
+      </div>
+
+      <div class="callout note">
+        <span class="callout-icon">📺</span>
+        <div class="callout-text"><strong>Key Media Examples:</strong> DD News, NDTV, BBC, All India Radio, and regional newspapers have played key roles in disseminating warnings during floods, cyclones, and pandemics.</div>
+      </div>
+    </div>
+
+    <!-- CHALLENGES -->
+    <div class="topic-card red">
+      <div class="topic-title red">F. Challenges in Disaster Management</div>
+      <ul class="hw-list red">
+        <li>Lack of coordination among different organizations</li>
+        <li>Duplication of efforts or uneven aid distribution</li>
+        <li>Inadequate training and resource limitations at the local level</li>
+        <li>Risk of misinformation through unverified media reports</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK REVISION -->
+<div class="section-card" id="revision">
+  <div class="section-header">
+    <span class="section-icon">⚡</span>
+    <h2 class="section-title">8. Quick Revision Sheet</h2>
+  </div>
+  <div class="section-body">
+    <div class="summary-banner">
+      <h3>🎯 Unit 5 at a Glance</h3>
+      <ul>
+        <li>Disaster = sudden calamity causing large-scale damage to life & property</li>
+        <li>Natural: Water (flood, drought), Air (cyclone, storms), Earth (EQ, landslide, avalanche, volcano)</li>
+        <li>Man-made: Nuclear, Chemical, Biological, Transport accidents</li>
+        <li>DM Act 2005 → NDMA (chaired by PM), NDRF (responders), NIDM (training)</li>
+        <li>5 phases: Prevention → Mitigation → Preparedness → Response → Recovery</li>
+        <li>NGOs, CBOs, and Media are critical partners in all disaster phases</li>
+      </ul>
+    </div>
+
+    <div class="revision-grid">
+      <div class="revision-card">
+        <h4>💧 Floods</h4>
+        <ul>
+          <li>Flash, River, Coastal</li>
+          <li>Cause: heavy rain, deforestation, dam failure</li>
+          <li>Control: dams, embankments, early warning</li>
+        </ul>
+      </div>
+      <div class="revision-card">
+        <h4>🏜 Drought</h4>
+        <ul>
+          <li>Prolonged low rainfall</li>
+          <li>Cause: low rain, deforestation, climate change</li>
+          <li>Control: rainwater harvesting, drip irrigation</li>
+        </ul>
+      </div>
+      <div class="revision-card">
+        <h4>🌀 Cyclone</h4>
+        <ul>
+          <li>Tropical, Mesocyclone, Extratropical, Arctic</li>
+          <li>Forms over warm ocean (>26°C)</li>
+          <li>Control: satellite monitoring, cyclone shelters</li>
+        </ul>
+      </div>
+      <div class="revision-card">
+        <h4>⛈ Storms</h4>
+        <ul>
+          <li>Thunderstorm, Hailstorm, Blizzard</li>
+          <li>Cause: pressure diff, warm & cold air collision</li>
+          <li>Control: radar, early warning, drainage</li>
+        </ul>
+      </div>
+      <div class="revision-card">
+        <h4>🏚 Earthquake</h4>
+        <ul>
+          <li>Seismic waves from tectonic movement</li>
+          <li>Focus = origin; Epicenter = surface point above</li>
+          <li>Control: quake-resistant buildings, monitoring</li>
+        </ul>
+      </div>
+      <div class="revision-card">
+        <h4>⛰ Landslide</h4>
+        <ul>
+          <li>Downward movement of rock/soil on slopes</li>
+          <li>Cause: rain, EQ, deforestation, mining</li>
+          <li>Control: afforestation, retaining walls</li>
+        </ul>
+      </div>
+      <div class="revision-card">
+        <h4>❄️ Avalanche</h4>
+        <ul>
+          <li>Rapid flow of snow/ice down mountains</li>
+          <li>Cause: heavy snowfall, vibrations, temp rise</li>
+          <li>Control: snow fences, controlled explosions</li>
+        </ul>
+      </div>
+      <div class="revision-card">
+        <h4>🌋 Volcano</h4>
+        <ul>
+          <li>Magma, gas, ash escape from crust</li>
+          <li>Cause: tectonic movement, magma pressure</li>
+          <li>Control: seismograph monitoring, evacuation</li>
+        </ul>
+      </div>
+      <div class="revision-card">
+        <h4>☢ Nuclear</h4>
+        <ul>
+          <li>Examples: Chernobyl 1986, Fukushima 2011</li>
+          <li>Long-term radiation hazard</li>
+          <li>Control: safety measures, monitoring</li>
+        </ul>
+      </div>
+      <div class="revision-card">
+        <h4>⚗ Chemical</h4>
+        <ul>
+          <li>Example: Bhopal Gas Tragedy 1984</li>
+          <li>MIC gas leak – worst industrial disaster</li>
+          <li>Control: proper storage, handling protocols</li>
+        </ul>
+      </div>
+      <div class="revision-card">
+        <h4>🦠 Biological</h4>
+        <ul>
+          <li>Examples: COVID-19, plague, anthrax</li>
+          <li>Natural (pandemic) or man-made (bioterrorism)</li>
+          <li>Control: vaccination, quarantine</li>
+        </ul>
+      </div>
+      <div class="revision-card">
+        <h4>🏛 Agencies</h4>
+        <ul>
+          <li>NDMA (PM) → SDMA (CM) → DDMA (Collector)</li>
+          <li>NDRF – response force</li>
+          <li>NGOs → Red Cross, SEEDS, Oxfam</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MCQ SECTION -->
+<div class="section-card" id="mcqs">
+  <div class="mcq-header">
+    <h2>📝 Unit 5 Practice MCQs</h2>
+    <p>60 Questions • Multiple Choice Only • Covers All Topics</p>
+  </div>
+  <div class="mcq-stats">
+    <div class="mcq-stat"><div class="num" style="color:var(--green);">20</div><div class="lbl">Easy</div></div>
+    <div class="mcq-stat"><div class="num" style="color:#7a6000;">25</div><div class="lbl">Medium</div></div>
+    <div class="mcq-stat"><div class="num" style="color:var(--red);">15</div><div class="lbl">Difficult</div></div>
+    <div class="mcq-stat"><div class="num">60</div><div class="lbl">Total</div></div>
+  </div>
+  <div class="mcq-list" id="mcq-list">
+    <!-- MCQs inserted by JS -->
+  </div>
+</div>
+
+</main>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ======================== MCQ DATA ========================
+const mcqs = [
+// EASY (1-20)
+{q:"A disaster is defined as a sudden event that causes large-scale damage to:", opts:["A) Only property","B) Only human life","C) Human life and property","D) Only animals"], ans:2, diff:"easy"},
+{q:"Which of the following is a water-related disaster?", opts:["A) Earthquake","B) Cyclone","C) Drought","D) Avalanche"], ans:2, diff:"easy"},
+{q:"Flash floods are most likely to occur in:", opts:["A) Desert areas","B) Hilly or urban areas with poor drainage","C) Flat coastal plains","D) Polar regions"], ans:1, diff:"easy"},
+{q:"Which flood type occurs when seawater inundates low-lying coastal areas?", opts:["A) River flood","B) Flash flood","C) Coastal flood","D) Urban flood"], ans:2, diff:"easy"},
+{q:"Drought is defined as a prolonged period of:", opts:["A) Excess rainfall","B) Unusually low rainfall","C) High humidity","D) Strong winds"], ans:1, diff:"easy"},
+{q:"Cyclones are known as 'Typhoons' in which region?", opts:["A) Indian Ocean","B) Atlantic Ocean","C) Northwest Pacific Ocean","D) Arctic Ocean"], ans:2, diff:"easy"},
+{q:"The Disaster Management Act was passed in India in:", opts:["A) 1986","B) 1999","C) 2005","D) 2011"], ans:2, diff:"easy"},
+{q:"NDMA stands for:", opts:["A) National Development Management Authority","B) National Disaster Management Authority","C) National Disaster Mitigation Agency","D) National Defence Management Authority"], ans:1, diff:"easy"},
+{q:"Who chairs the NDMA (National Disaster Management Authority)?", opts:["A) Home Minister","B) Defence Minister","C) President of India","D) Prime Minister of India"], ans:3, diff:"easy"},
+{q:"Which of the following is a man-made disaster?", opts:["A) Earthquake","B) Drought","C) Bhopal Gas Tragedy","D) Avalanche"], ans:2, diff:"easy"},
+{q:"The Chernobyl nuclear disaster occurred in which year?", opts:["A) 1976","B) 1984","C) 1986","D) 2001"], ans:2, diff:"easy"},
+{q:"NDRF stands for:", opts:["A) National Disaster Relief Fund","B) National Disaster Response Force","C) National Development Response Framework","D) National Disaster Rescue Force"], ans:1, diff:"easy"},
+{q:"An earthquake's point of origin inside the Earth's crust is called:", opts:["A) Epicenter","B) Focus (Hypocenter)","C) Fault","D) Seismic zone"], ans:1, diff:"easy"},
+{q:"Landslides occur due to:", opts:["A) Sudden downward movement of rock/soil on a slope","B) Flooding of rivers","C) Excessive evaporation","D) Ocean tidal waves"], ans:0, diff:"easy"},
+{q:"Which gas was responsible for the Bhopal Gas Tragedy?", opts:["A) Carbon monoxide","B) Methyl isocyanate (MIC)","C) Chlorine gas","D) Sulfur dioxide"], ans:1, diff:"easy"},
+{q:"What is the main function of NGOs during a disaster?", opts:["A) Create new laws","B) Manufacture weapons","C) Provide relief, support, and rehabilitation","D) Conduct military operations"], ans:2, diff:"easy"},
+{q:"Which instrument is used to monitor volcanic activity and earthquake tremors?", opts:["A) Barometer","B) Seismograph","C) Thermometer","D) Anemometer"], ans:1, diff:"easy"},
+{q:"Mangrove plantation is a measure to reduce impact of:", opts:["A) Droughts","B) Avalanches","C) Coastal floods and cyclones","D) Volcanic eruptions"], ans:2, diff:"easy"},
+{q:"Biological disasters can be caused by:", opts:["A) Chemical spills only","B) Bacteria, viruses, or toxins","C) Dam failures","D) Tectonic plate movement"], ans:1, diff:"easy"},
+{q:"Which agency in India issues cyclone and flood warnings?", opts:["A) NIDM","B) IMD (Indian Meteorological Department)","C) ISRO","D) NDRF"], ans:1, diff:"easy"},
+
+// MEDIUM (21-45)
+{q:"River floods can have which positive effect?", opts:["A) Loss of fertile land","B) Spread of waterborne diseases","C) Deposition of fertile silt improving soil","D) Disruption of communication lines"], ans:2, diff:"medium"},
+{q:"Which measure is NOT effective for flood control?", opts:["A) Construction of dams and reservoirs","B) Afforestation in catchment areas","C) Deforestation near river banks","D) Proper drainage systems"], ans:2, diff:"medium"},
+{q:"The Coriolis effect in cyclone formation is due to:", opts:["A) Ocean temperature","B) Earth's rotation causing air to spin","C) Solar radiation","D) Atmospheric pressure at sea level"], ans:1, diff:"medium"},
+{q:"Cyclones form over oceans where water temperature is above:", opts:["A) 10°C","B) 18°C","C) 26°C","D) 35°C"], ans:2, diff:"medium"},
+{q:"Which type of cyclone derives energy from temperature contrast between air masses?", opts:["A) Tropical cyclone","B) Mesocyclone","C) Extratropical cyclone","D) Arctic hurricane"], ans:2, diff:"medium"},
+{q:"The primary difference between a cyclone and a storm is:", opts:["A) Cyclones have no wind; storms do","B) Cyclones are rotating systems over warm oceans; storms are general atmospheric disturbances","C) Storms are more dangerous than cyclones","D) Cyclones occur only on land"], ans:1, diff:"medium"},
+{q:"Land-use planning to minimize earthquake risks involves:", opts:["A) Constructing buildings on fault lines","B) Avoiding construction near fault lines and unstable slopes","C) Building taller structures","D) Filling reservoirs near fault zones"], ans:1, diff:"medium"},
+{q:"Which human activity can induce artificial earthquakes?", opts:["A) Agriculture","B) Fishing","C) Mining and reservoir filling","D) Afforestation"], ans:2, diff:"medium"},
+{q:"The key effect of deforestation on slopes is:", opts:["A) Increases soil absorption","B) Reduces surface runoff","C) Removes vegetation that stabilizes slopes, causing landslides","D) Improves drainage"], ans:2, diff:"medium"},
+{q:"Controlled explosions are used to manage which disaster?", opts:["A) Floods","B) Drought","C) Avalanches","D) Cyclones"], ans:2, diff:"medium"},
+{q:"Volcanic eruptions can affect global climate by:", opts:["A) Increasing rainfall","B) Blocking sunlight with dust and gases, causing temporary cooling","C) Raising ocean temperatures permanently","D) Creating more hurricanes"], ans:1, diff:"medium"},
+{q:"Which of the following is a structural measure to mitigate disasters?", opts:["A) Community awareness programs","B) Mock drills","C) Construction of earthquake-resistant buildings","D) Training volunteers"], ans:2, diff:"medium"},
+{q:"COVID-19 is classified as a:", opts:["A) Chemical disaster","B) Natural seismic disaster","C) Biological disaster","D) Transport accident"], ans:2, diff:"medium"},
+{q:"The Fukushima nuclear disaster (2011) was triggered by:", opts:["A) Human error only","B) An earthquake and tsunami","C) A chemical explosion","D) A forest fire"], ans:1, diff:"medium"},
+{q:"State Disaster Management Authority (SDMA) is headed by:", opts:["A) Prime Minister","B) District Collector","C) Chief Minister of the state","D) Chief Secretary"], ans:2, diff:"medium"},
+{q:"DDMA (District Disaster Management Authority) is headed by:", opts:["A) Chief Minister","B) District Collector or Deputy Commissioner","C) Prime Minister","D) Chief Secretary"], ans:1, diff:"medium"},
+{q:"Community-Based Organizations (CBOs) are significant because they:", opts:["A) Operate at national level only","B) Focus on international aid","C) Ensure bottom-up, participatory, and sustainable disaster management","D) Replace the role of government agencies"], ans:2, diff:"medium"},
+{q:"Media's role DURING a disaster includes:", opts:["A) Creating awareness about potential hazards","B) Providing real-time updates and reducing panic with verified information","C) Rebuilding damaged infrastructure","D) Providing financial aid to victims"], ans:1, diff:"medium"},
+{q:"Which phase of the National Disaster Management Framework involves training and mock drills?", opts:["A) Response","B) Recovery","C) Mitigation","D) Preparedness"], ans:3, diff:"medium"},
+{q:"Saltwater intrusion due to coastal floods primarily affects:", opts:["A) Air quality","B) Soil and freshwater quality","C) Tectonic plate movement","D) Forest cover"], ans:1, diff:"medium"},
+{q:"Drip irrigation is recommended as a control measure for:", opts:["A) Floods","B) Cyclones","C) Drought","D) Avalanches"], ans:2, diff:"medium"},
+{q:"The Indian Red Cross Society operates as:", opts:["A) A government ministry","B) An NGO active in disaster management","C) A media organization","D) A defense agency"], ans:1, diff:"medium"},
+{q:"NIDM (National Institute of Disaster Management) functions under which ministry?", opts:["A) Ministry of Finance","B) Ministry of Home Affairs","C) Ministry of Earth Sciences","D) Ministry of Environment"], ans:1, diff:"medium"},
+{q:"Planting mangroves along coastlines primarily helps in controlling:", opts:["A) Earthquakes","B) Droughts","C) Coastal flooding and cyclone impact","D) Landslides on inland hills"], ans:2, diff:"medium"},
+{q:"Watershed management is a control measure for which disaster?", opts:["A) Earthquake","B) Drought and landslides","C) Nuclear disaster","D) Transport accident"], ans:1, diff:"medium"},
+
+// DIFFICULT (46-60)
+{q:"The phenomenon where one tectonic plate slides beneath another, often triggering volcanoes, is called:", opts:["A) Divergence","B) Transform faulting","C) Subduction","D) Isostasy"], ans:2, diff:"hard"},
+{q:"A 'mesocyclone' is specifically associated with which meteorological phenomenon?", opts:["A) Tropical depression","B) Rotating updraft in a supercell thunderstorm, precursor to tornadoes","C) Extratropical cyclone","D) Arctic hurricane"], ans:1, diff:"hard"},
+{q:"Which of the following best describes the 'mitigation' phase of the National Disaster Management Framework?", opts:["A) Training people through mock drills","B) Rapid rescue and relief operations post-disaster","C) Structural and non-structural measures to minimize disaster damage","D) Rebuilding infrastructure after disaster"], ans:2, diff:"hard"},
+{q:"The Central Water Commission (CWC) contributes to disaster management by:", opts:["A) Providing satellite imagery for damage assessment","B) Monitoring river water levels and flood forecasting","C) Issuing weather forecasts and cyclone warnings","D) Managing health emergencies"], ans:1, diff:"hard"},
+{q:"In the context of disaster management, 'bioterrorism' falls under:", opts:["A) Natural biological disaster","B) Man-made biological disaster","C) Chemical disaster","D) Nuclear disaster"], ans:1, diff:"hard"},
+{q:"Which of the following is a NON-STRUCTURAL measure for earthquake risk reduction?", opts:["A) Using flexible building materials","B) Constructing earthquake-resistant foundations","C) Public education about safety during earthquakes","D) Building retaining walls"], ans:2, diff:"hard"},
+{q:"Storm surge, a major cause of coastal flooding, is primarily driven by:", opts:["A) Rainfall intensity","B) Tectonic plate movement","C) Strong winds during cyclones pushing seawater onto the shore","D) Snowmelt in mountainous regions"], ans:2, diff:"hard"},
+{q:"The National Cyclone Risk Mitigation Project (NCRMP) is an initiative under:", opts:["A) NIDM","B) CWC","C) NDMA","D) Ministry of Finance"], ans:2, diff:"hard"},
+{q:"Which principle underlies the role of Panchayati Raj Institutions in disaster management?", opts:["A) Centralized top-down governance","B) Decentralized local governance and community mobilization","C) International aid coordination","D) Military-led response"], ans:1, diff:"hard"},
+{q:"The Disaster Management Act 2005 established a three-tier structure. The correct hierarchy from top to bottom is:", opts:["A) DDMA → SDMA → NDMA","B) NDMA → NDRF → NIDM","C) NDMA → SDMA → DDMA","D) SDMA → NDMA → DDMA"], ans:2, diff:"hard"},
+{q:"Psychosocial counseling provided by NGOs post-disaster primarily addresses:", opts:["A) Physical injuries","B) Infrastructure rebuilding","C) Psychological trauma and mental health of survivors","D) Legal issues of affected communities"], ans:2, diff:"hard"},
+{q:"Which characteristic distinguishes a tropical cyclone from an extratropical cyclone?", opts:["A) Tropical cyclones have lower wind speeds","B) Tropical cyclones derive energy from warm ocean evaporation; extratropical from temperature contrast between air masses","C) Extratropical cyclones only occur in summer","D) Tropical cyclones never have an eye"], ans:1, diff:"hard"},
+{q:"'Advocacy for gender and disability inclusion in disaster management' is a function of which sector?", opts:["A) NDRF","B) MHA","C) NGOs","D) IMD"], ans:2, diff:"hard"},
+{q:"Which statement about volcanic eruptions is CORRECT?", opts:["A) Volcanic eruptions cannot affect climate","B) Lava flows always move too slowly to cause casualties","C) Ash clouds from eruptions can disrupt air travel globally","D) Volcanoes only occur at divergent plate boundaries"], ans:2, diff:"hard"},
+{q:"The 5-stage disaster management cycle in correct sequential order is:", opts:["A) Response → Preparedness → Mitigation → Prevention → Recovery","B) Prevention → Mitigation → Preparedness → Response → Recovery","C) Preparedness → Prevention → Response → Mitigation → Recovery","D) Recovery → Response → Preparedness → Mitigation → Prevention"], ans:1, diff:"hard"},
+];
+
+function buildMCQs() {
+  const container = document.getElementById('mcq-list');
+  mcqs.forEach((m, i) => {
+    const div = document.createElement('div');
+    div.className = 'mcq-item';
+    const badge = `<span class="difficulty-badge ${m.diff}">${m.diff.charAt(0).toUpperCase()+m.diff.slice(1)}</span>`;
+    let opts = m.opts.map((o, j) => {
+      const isAns = j === m.ans;
+      return `<div class="mcq-opt${isAns?' correct':''}">${o}</div>`;
+    }).join('');
+    div.innerHTML = `
+      <div class="mcq-q"><span class="qnum">Q${i+1}.</span>${badge}${m.q}</div>
+      <div class="mcq-options">${opts}</div>
+      <div class="mcq-answer">✅ Answer: ${m.opts[m.ans].charAt(0)})</div>
+    `;
+    container.appendChild(div);
+  });
+}
+buildMCQs();
+
+// ======================== DARK MODE ========================
+function toggleDark() {
+  const isDark = document.body.getAttribute('data-dark') === 'true';
+  document.body.setAttribute('data-dark', !isDark);
+  document.querySelector('[title="Dark Mode"]').textContent = !isDark ? '☀️' : '🌙';
+}
+
+// ======================== PROGRESS BAR ========================
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  const btn = document.getElementById('back-top');
+  btn.classList.toggle('visible', scrollTop > 400);
+});
+
+// ======================== SEARCH ========================
+function openSearch() {
+  document.getElementById('search-wrap').classList.add('active');
+  document.getElementById('search-box').focus();
+}
+function closeSearch(e) {
+  if (!e || e.target === document.getElementById('search-wrap')) {
+    document.getElementById('search-wrap').classList.remove('active');
+    document.getElementById('search-box').value = '';
+    document.getElementById('search-results').innerHTML = '';
+  }
+}
+function doSearch(val) {
+  const res = document.getElementById('search-results');
+  if (!val.trim()) { res.innerHTML = ''; return; }
+  const sections = document.querySelectorAll('.topic-card, .concept-box');
+  const matches = [];
+  sections.forEach(s => {
+    if (s.textContent.toLowerCase().includes(val.toLowerCase())) {
+      const title = s.querySelector('.topic-title, h4');
+      if (title) matches.push({ text: title.textContent.trim(), el: s });
+    }
+  });
+  res.innerHTML = matches.length
+    ? matches.map(m => `<div class="search-result-item" onclick="scrollToEl(this,'${m.el.closest('.section-card')?.id||''}')"><strong>${m.text}</strong></div>`).join('')
+    : `<div class="search-result-item">No results found for "<strong>${val}</strong>"</div>`;
+  // Store refs
+  res.querySelectorAll('.search-result-item').forEach((item, i) => {
+    if (matches[i]) item._el = matches[i].el;
+    item.addEventListener('click', () => {
+      if (item._el) { item._el.scrollIntoView({behavior:'smooth', block:'center'}); closeSearch(); }
+    });
+  });
+}
+
+// ======================== ANIMATIONS ========================
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.07 });
+
+document.querySelectorAll('.section-card').forEach(card => {
+  card.style.opacity = '0';
+  card.style.transform = 'translateY(30px)';
+  card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(card);
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ================= INJECTED UI SCRIPT ================= -->
+<script>
+(function() {
+  if(!document.querySelector('link[href*="Kalam"]')) {
+    document.head.insertAdjacentHTML('beforeend', '<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>');
+  }
+  
+  const style = document.createElement('style');
+  style.textContent = `
+    :root, body[data-theme="light"] {
+      --white: #FFFFFF !important;
+      --beige: #F8F5EE !important;
+      --paper: #FFFDF7 !important;
+      --sky: #87CEEB !important;
+      --sky-light: #E8F4FD !important;
+      --yellow: #FFF3B0 !important;
+      --yellow-dark: #F7C948 !important;
+      --pink: #FFE4E8 !important;
+      --pink-dark: #F78FA7 !important;
+      --lavender: #EDE7F6 !important;
+      --lavender-dark: #9C6FE4 !important;
+      --mint: #E8F5E9 !important;
+      --mint-dark: #4CAF82 !important;
+      --ink: #2C2C2C !important;
+      --ink-light: #555 !important;
+      --blue-accent: #4A90D9 !important;
+      --red-accent: #E74C3C !important;
+      --orange-accent: #F39C12 !important;
+      --green-accent: #27AE60 !important;
+      --purple-accent: #8E44AD !important;
+      --shadow: rgba(0, 0, 0, 0.08) !important;
+    }
+    [data-theme="dark"], body.dark {
+      --white: #1a1a2e !important;
+      --beige: #16213e !important;
+      --paper: #0f3460 !important;
+      --ink: #e0e0e0 !important;
+      --ink-light: #bbb !important;
+      --sky-light: #1a2a3a !important;
+      --yellow: #2a2a00 !important;
+      --pink: #2a0a10 !important;
+      --lavender: #1a1030 !important;
+      --mint: #0a2a15 !important;
+    }
+    
+    html {
+      font-size: 125% !important; /* Scale entire UI slightly larger */
+    }
+    
+    body {
+      background-color: var(--beige) !important;
+      font-family: 'Nunito', sans-serif !important;
+      color: var(--ink) !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, #e8e0d0 27px, #e8e0d0 28px), repeating-linear-gradient(90deg, transparent, transparent 27px, transparent 27px) !important;
+      background-size: 100% 28px !important;
+      font-size: 1.05rem !important; /* Extra boost for base font if ems aren't used */
+    }
+    body[data-theme="dark"], body.dark {
+      background-color: #16213e !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(255, 255, 255, 0.05) 27px, rgba(255, 255, 255, 0.05) 28px) !important;
+    }
+
+    h1, h2, h3, h4, .section-title, p {
+      font-family: 'Nunito', sans-serif !important;
+    }
+    
+    .nav-brand {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      color: var(--blue-accent) !important;
+      font-size: 1.5rem !important;
+    }
+    
+    nav, .nav-sticky, #navbar {
+      background: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(12px) !important;
+      border-bottom: 2px dashed #e0d5c5 !important;
+      box-shadow: 0 2px 20px var(--shadow) !important;
+    }
+    body.dark nav, body[data-theme="dark"] nav, body.dark .nav-sticky, body.dark #navbar {
+      background: rgba(22, 33, 62, 0.9) !important;
+      border-bottom-color: #333 !important;
+    }
+    
+    header.hero, section#hero, .hero {
+      background: var(--paper) !important;
+      border: 3px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      margin: 30px auto !important;
+      max-width: 960px !important;
+      box-shadow: 4px 4px 0 #e0d5c5, 8px 8px 0 #d8ccb8 !important;
+    }
+    header.hero::before, section#hero::before, .hero::before {
+      display: none !important;
+    }
+    
+    .hero-title {
+      font-family: 'Kalam', cursive !important;
+      color: var(--blue-accent) !important;
+      border-bottom: 3px dashed var(--blue-accent) !important;
+      display: inline-block !important;
+      padding-bottom: 4px !important;
+    }
+    
+    .hero-subtitle, .hero-unit-badge, .hero-unit {
+      font-family: 'Caveat', cursive !important;
+      color: #999 !important;
+      letter-spacing: 2px !important;
+      background: transparent !important;
+      border: none !important;
+    }
+
+    h2.section-heading, .section-header {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      border-bottom: 2px dashed #e8dfc8 !important;
+      padding-bottom: 8px !important;
+    }
+    
+    .note-card, .resource-card, .def-box {
+      background: var(--paper) !important;
+      border-radius: 12px !important;
+      border-left: 5px solid var(--blue-accent) !important;
+      box-shadow: 2px 2px 8px var(--shadow) !important;
+      font-family: 'Kalam', cursive !important;
+    }
+    
+    .note-card.green, .def-box.green { border-left-color: var(--mint-dark) !important; }
+    .note-card.red, .def-box.red { border-left-color: var(--pink-dark) !important; }
+    .note-card.yellow, .def-box.yellow { border-left-color: var(--yellow-dark) !important; }
+    
+    /* Make index.html cards look PEL125 style */
+    .unit-card {
+      background: var(--paper) !important;
+      border: 2px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      box-shadow: 3px 3px 0 #e0d5c5 !important;
+      transition: transform 0.2s !important;
+    }
+    .unit-card:hover {
+      transform: translateY(-5px) !important;
+      box-shadow: 5px 5px 0 #d8ccb8 !important;
+    }
+    .unit-badge {
+      background: var(--sky-light) !important;
+      color: var(--blue-accent) !important;
+      font-family: 'Caveat', cursive !important;
+    }
+  `;
+  document.head.appendChild(style);
+
+})();
+</script>
+
+</body>
+</html>

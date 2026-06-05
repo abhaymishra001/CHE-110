@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHE 110 – Environmental Studies | Homepage</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Kalam:wght@300;400;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ===================== CSS VARIABLES ===================== */
+    :root {
+      --paper: #faf8f2;
+      --paper-2: #f5f1e8;
+      --paper-3: #ede8db;
+      --ink: #1a1209;
+      --ink-2: #3d2e14;
+      --ink-light: #6b5a3e;
+      --blue: #2563a8;
+      --blue-light: #dbeafe;
+      --blue-mid: #93c5fd;
+      --green: #2d6a4f;
+      --green-light: #d1fae5;
+      --green-mid: #6ee7b7;
+      --amber: #92400e;
+      --amber-light: #fef3c7;
+      --amber-mid: #fcd34d;
+      --red: #991b1b;
+      --red-light: #fee2e2;
+      --purple: #6b21a8;
+      --purple-light: #f3e8ff;
+      --teal: #0f766e;
+      --teal-light: #ccfbf1;
+      --beige: #c9a96e;
+      --beige-light: #fdf6e3;
+      --brown: #78350f;
+      --shadow-sm: 0 2px 8px rgba(120, 80, 30, 0.10);
+      --shadow-md: 0 4px 20px rgba(120, 80, 30, 0.14);
+      --shadow-lg: 0 8px 40px rgba(120, 80, 30, 0.18);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --font-hand: 'Kalam', cursive;
+      --font-notes: 'Caveat', cursive;
+      --font-heading: 'DM Serif Display', serif;
+      --font-body: 'Crimson Pro', serif;
+    }
+
+    /* DARK MODE */
+    [data-theme="dark"] {
+      --paper: #1a1612;
+      --paper-2: #221e18;
+      --paper-3: #2a2520;
+      --ink: #f0ead8;
+      --ink-2: #d4c5a0;
+      --ink-light: #b0a080;
+      --blue: #60a5fa;
+      --blue-light: #1e3a5f;
+      --blue-mid: #1d4ed8;
+      --green: #34d399;
+      --green-light: #064e3b;
+      --amber: #fbbf24;
+      --amber-light: #451a03;
+      --amber-mid: #92400e;
+      --beige: #d4a760;
+      --beige-light: #2d2318;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ===================== RESET & BASE ===================== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      line-height: 1.7;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Paper texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(120, 80, 30, 0.06) 28px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(120, 80, 30, 0.02) 61px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===================== NAVBAR ===================== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 248, 242, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--paper-3);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+      transition: background 0.3s;
+    }
+
+    [data-theme="dark"] nav {
+      background: rgba(26, 22, 18, 0.92);
+      border-bottom-color: var(--paper-3);
+    }
+
+    .nav-brand {
+      font-family: var(--font-notes);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-icon {
+      background: var(--paper-2);
+      border: 1.5px solid var(--paper-3);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+      color: var(--ink);
+    }
+
+    .btn-icon:hover {
+      background: var(--blue-light);
+      border-color: var(--blue);
+      color: var(--blue);
+      transform: scale(1.1);
+    }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 80px 24px 60px;
+      background: linear-gradient(175deg, var(--beige-light) 0%, var(--paper) 60%);
+      border-bottom: 3px solid var(--paper-3);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(37, 99, 168, 0.08) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(45, 106, 79, 0.07) 0%, transparent 70%);
+      bottom: -80px;
+      left: -80px;
+      border-radius: 50%;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-notes);
+      font-size: 1.1rem;
+      color: var(--beige);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      animation: fadeInUp 0.7s 0.1s ease both;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-desc {
+      font-family: var(--font-notes);
+      font-size: 1.15rem;
+      color: var(--ink-light);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      animation: fadeInUp 0.7s 0.3s ease both;
+    }
+
+    /* ===================== MAIN LAYOUT ===================== */
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===================== GRID ===================== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .unit-card {
+      background: var(--paper-2);
+      border: 1.5px solid var(--paper-3);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: box-shadow 0.25s, transform 0.25s;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .unit-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+      border-color: var(--blue-mid);
+    }
+
+    .unit-card::before {
+      content: '• • •';
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 0.7rem;
+      color: var(--paper-3);
+      letter-spacing: 4px;
+    }
+
+    .unit-badge {
+      display: inline-block;
+      font-family: var(--font-hand);
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 4px 16px;
+      border-radius: 40px;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+      box-shadow: 3px 3px 0 var(--beige);
+    }
+
+    .unit-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: var(--ink);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .unit-card p {
+      font-family: var(--font-notes);
+      font-size: 1.05rem;
+      color: var(--ink-2);
+    }
+
+    /* ===================== ANIMATIONS ===================== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-family: var(--font-notes);
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      background: var(--paper-3);
+      border-top: 2px solid var(--paper-3);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body data-theme="light">
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-brand">📗 CHE 110</div>
+    <div class="nav-actions">
+      <button class="btn-icon" id="theme-btn" title="Toggle Dark Mode">🌙</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-subtitle">B.Tech CSE • LPU • CHE 110</div>
+    <h1 class="hero-title"><em>Environmental</em> Studies</h1>
+    <p class="hero-desc">Complete Study Notes with 60 Practice MCQs for each unit. <br>Select a unit below to start
+      studying.</p>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <div class="grid">
+      <a href="CHE110_Unit1.html" class="unit-card" style="animation: fadeInUp 0.5s ease both;">
+        <div class="unit-badge">UNIT 1</div>
+        <h3>Introduction & Sustainable Development</h3>
+        <p>Environment, spheres of earth, sustainability, and SDGs.</p>
+      </a>
+      <a href="CHE110_Unit2.html" class="unit-card" style="animation: fadeInUp 0.5s 0.1s ease both;">
+        <div class="unit-badge">UNIT 2</div>
+        <h3>Natural Resources & Ecosystem</h3>
+        <p>Renewable/non-renewable resources, ecosystem structure, food chains, energy flow.</p>
+      </a>
+      <a href="CHE110_Unit3.html" class="unit-card" style="animation: fadeInUp 0.5s 0.2s ease both;">
+        <div class="unit-badge">UNIT 3</div>
+        <h3>Biodiversity & Conservation</h3>
+        <p>Levels of biodiversity, threats, conservation methods, hot spots.</p>
+      </a>
+      <a href="CHE110_Unit4.html" class="unit-card" style="animation: fadeInUp 0.5s 0.3s ease both;">
+        <div class="unit-badge">UNIT 4</div>
+        <h3>Environmental Pollution</h3>
+        <p>Air, water, soil, noise pollution, global warming, waste management.</p>
+      </a>
+      <a href="CHE110_Unit5.html" class="unit-card" style="animation: fadeInUp 0.5s 0.4s ease both;">
+        <div class="unit-badge">UNIT 5</div>
+        <h3>Disaster Management</h3>
+        <p>Natural and manmade disasters, disaster management framework.</p>
+      </a>
+      <a href="CHE110_Unit6.html" class="unit-card" style="animation: fadeInUp 0.5s 0.5s ease both;">
+        <div class="unit-badge">UNIT 6</div>
+        <h3>Human Communities & Environment</h3>
+        <p>Population growth, environmental ethics, environmental laws and movements.</p>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <p>CHE 110 Environmental Studies | Detailed Handwritten Style Notes</p>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    const themeBtn = document.getElementById('theme-btn');
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', newTheme);
+      themeBtn.textContent = newTheme === 'light' ? '🌙' : '☀️';
+    });
+  </script>
+
+
+
+
+
+<!-- ================= INJECTED UI SCRIPT ================= -->
+<script>
+(function() {
+  if(!document.querySelector('link[href*="Kalam"]')) {
+    document.head.insertAdjacentHTML('beforeend', '<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>');
+  }
+  
+  const style = document.createElement('style');
+  style.textContent = `
+    :root, body[data-theme="light"] {
+      --white: #FFFFFF !important;
+      --beige: #F8F5EE !important;
+      --paper: #FFFDF7 !important;
+      --sky: #87CEEB !important;
+      --sky-light: #E8F4FD !important;
+      --yellow: #FFF3B0 !important;
+      --yellow-dark: #F7C948 !important;
+      --pink: #FFE4E8 !important;
+      --pink-dark: #F78FA7 !important;
+      --lavender: #EDE7F6 !important;
+      --lavender-dark: #9C6FE4 !important;
+      --mint: #E8F5E9 !important;
+      --mint-dark: #4CAF82 !important;
+      --ink: #2C2C2C !important;
+      --ink-light: #555 !important;
+      --blue-accent: #4A90D9 !important;
+      --red-accent: #E74C3C !important;
+      --orange-accent: #F39C12 !important;
+      --green-accent: #27AE60 !important;
+      --purple-accent: #8E44AD !important;
+      --shadow: rgba(0, 0, 0, 0.08) !important;
+    }
+    [data-theme="dark"], body.dark {
+      --white: #1a1a2e !important;
+      --beige: #16213e !important;
+      --paper: #0f3460 !important;
+      --ink: #e0e0e0 !important;
+      --ink-light: #bbb !important;
+      --sky-light: #1a2a3a !important;
+      --yellow: #2a2a00 !important;
+      --pink: #2a0a10 !important;
+      --lavender: #1a1030 !important;
+      --mint: #0a2a15 !important;
+    }
+    
+    html {
+      font-size: 125% !important; /* Scale entire UI slightly larger */
+    }
+    
+    body {
+      background-color: var(--beige) !important;
+      font-family: 'Nunito', sans-serif !important;
+      color: var(--ink) !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, #e8e0d0 27px, #e8e0d0 28px), repeating-linear-gradient(90deg, transparent, transparent 27px, transparent 27px) !important;
+      background-size: 100% 28px !important;
+      font-size: 1.05rem !important; /* Extra boost for base font if ems aren't used */
+    }
+    body[data-theme="dark"], body.dark {
+      background-color: #16213e !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(255, 255, 255, 0.05) 27px, rgba(255, 255, 255, 0.05) 28px) !important;
+    }
+
+    h1, h2, h3, h4, .section-title, p {
+      font-family: 'Nunito', sans-serif !important;
+    }
+    
+    .nav-brand {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      color: var(--blue-accent) !important;
+      font-size: 1.5rem !important;
+    }
+    
+    nav, .nav-sticky, #navbar {
+      background: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(12px) !important;
+      border-bottom: 2px dashed #e0d5c5 !important;
+      box-shadow: 0 2px 20px var(--shadow) !important;
+    }
+    body.dark nav, body[data-theme="dark"] nav, body.dark .nav-sticky, body.dark #navbar {
+      background: rgba(22, 33, 62, 0.9) !important;
+      border-bottom-color: #333 !important;
+    }
+    
+    header.hero, section#hero, .hero {
+      background: var(--paper) !important;
+      border: 3px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      margin: 30px auto !important;
+      max-width: 960px !important;
+      box-shadow: 4px 4px 0 #e0d5c5, 8px 8px 0 #d8ccb8 !important;
+    }
+    header.hero::before, section#hero::before, .hero::before {
+      display: none !important;
+    }
+    
+    .hero-title {
+      font-family: 'Kalam', cursive !important;
+      color: var(--blue-accent) !important;
+      border-bottom: 3px dashed var(--blue-accent) !important;
+      display: inline-block !important;
+      padding-bottom: 4px !important;
+    }
+    
+    .hero-subtitle, .hero-unit-badge, .hero-unit {
+      font-family: 'Caveat', cursive !important;
+      color: #999 !important;
+      letter-spacing: 2px !important;
+      background: transparent !important;
+      border: none !important;
+    }
+
+    h2.section-heading, .section-header {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      border-bottom: 2px dashed #e8dfc8 !important;
+      padding-bottom: 8px !important;
+    }
+    
+    .note-card, .resource-card, .def-box {
+      background: var(--paper) !important;
+      border-radius: 12px !important;
+      border-left: 5px solid var(--blue-accent) !important;
+      box-shadow: 2px 2px 8px var(--shadow) !important;
+      font-family: 'Kalam', cursive !important;
+    }
+    
+    .note-card.green, .def-box.green { border-left-color: var(--mint-dark) !important; }
+    .note-card.red, .def-box.red { border-left-color: var(--pink-dark) !important; }
+    .note-card.yellow, .def-box.yellow { border-left-color: var(--yellow-dark) !important; }
+    
+    /* Make index.html cards look PEL125 style */
+    .unit-card {
+      background: var(--paper) !important;
+      border: 2px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      box-shadow: 3px 3px 0 #e0d5c5 !important;
+      transition: transform 0.2s !important;
+    }
+    .unit-card:hover {
+      transform: translateY(-5px) !important;
+      box-shadow: 5px 5px 0 #d8ccb8 !important;
+    }
+    .unit-badge {
+      background: var(--sky-light) !important;
+      color: var(--blue-accent) !important;
+      font-family: 'Caveat', cursive !important;
+    }
+  `;
+  document.head.appendChild(style);
+
+})();
+</script>
+
+</body>
+
+</html>

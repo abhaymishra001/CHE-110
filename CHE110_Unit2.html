@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CHE 110 – Unit 2 | Natural Resources & Ecosystem</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --paper:#faf8f2;--paper-2:#f5f1e8;--paper-3:#ede8db;
+  --ink:#1a1209;--ink-2:#3d2e14;--ink-light:#6b5a3e;
+  --blue:#2563a8;--blue-light:#dbeafe;--blue-mid:#93c5fd;
+  --green:#2d6a4f;--green-light:#d1fae5;--green-mid:#6ee7b7;
+  --amber:#92400e;--amber-light:#fef3c7;--amber-mid:#fcd34d;
+  --red:#991b1b;--red-light:#fee2e2;
+  --purple:#6b21a8;--purple-light:#f3e8ff;
+  --teal:#0f766e;--teal-light:#ccfbf1;
+  --beige:#c9a96e;--beige-light:#fdf6e3;
+  --brown:#78350f;
+  --shadow-sm:0 2px 8px rgba(120,80,30,.10);
+  --shadow-md:0 4px 20px rgba(120,80,30,.14);
+  --shadow-lg:0 8px 40px rgba(120,80,30,.18);
+  --radius:12px;--radius-lg:20px;
+  --font-hand:'Kalam',cursive;--font-notes:'Caveat',cursive;
+  --font-heading:'DM Serif Display',serif;--font-body:'Crimson Pro',serif;
+}
+[data-theme="dark"]{
+  --paper:#1a1612;--paper-2:#221e18;--paper-3:#2a2520;
+  --ink:#f0ead8;--ink-2:#d4c5a0;--ink-light:#b0a080;
+  --blue:#60a5fa;--blue-light:#1e3a5f;--blue-mid:#1d4ed8;
+  --green:#34d399;--green-light:#064e3b;
+  --amber:#fbbf24;--amber-light:#451a03;--amber-mid:#92400e;
+  --beige:#d4a760;--beige-light:#2d2318;
+  --shadow-sm:0 2px 8px rgba(0,0,0,.4);--shadow-md:0 4px 20px rgba(0,0,0,.5);--shadow-lg:0 8px 40px rgba(0,0,0,.6);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:1.1rem;line-height:1.7;transition:background .3s,color .3s;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(120,80,30,.06) 28px),repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(120,80,30,.02) 61px);pointer-events:none;z-index:0}
+
+/* PROGRESS */
+#progress-bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--green),var(--blue),var(--amber));width:0%;z-index:9999;border-radius:0 2px 2px 0;transition:width .1s}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(250,248,242,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:2px solid var(--paper-3);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--shadow-sm);transition:background .3s}
+[data-theme="dark"] nav{background:rgba(26,22,18,.92)}
+.nav-brand{font-family:var(--font-notes);font-size:1.3rem;font-weight:700;color:var(--green);white-space:nowrap}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+.nav-links a{font-family:var(--font-notes);font-size:.88rem;color:var(--ink-light);text-decoration:none;padding:4px 9px;border-radius:20px;transition:all .2s}
+.nav-links a:hover{background:var(--green-light);color:var(--green)}
+.nav-actions{display:flex;gap:8px;align-items:center}
+.btn-icon{background:var(--paper-2);border:1.5px solid var(--paper-3);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:all .2s;color:var(--ink)}
+.btn-icon:hover{background:var(--green-light);border-color:var(--green);color:var(--green);transform:scale(1.1)}
+
+/* SEARCH */
+#search-box{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-start;justify-content:center;padding-top:80px}
+#search-box.open{display:flex}
+#search-inner{background:var(--paper);border-radius:var(--radius-lg);padding:24px;width:min(600px,90vw);box-shadow:var(--shadow-lg)}
+#search-input{width:100%;font-family:var(--font-notes);font-size:1.3rem;border:2px solid var(--paper-3);border-radius:var(--radius);padding:10px 16px;background:var(--paper-2);color:var(--ink);outline:none}
+#search-input:focus{border-color:var(--green)}
+#search-results{margin-top:14px;max-height:300px;overflow-y:auto}
+.search-result-item{padding:10px 14px;border-radius:var(--radius);cursor:pointer;transition:background .15s;font-family:var(--font-notes)}
+.search-result-item:hover{background:var(--green-light)}
+.search-result-item .match-text{color:var(--green);font-weight:600}
+
+/* HERO */
+.hero{position:relative;text-align:center;padding:80px 24px 60px;background:linear-gradient(175deg,#f0fdf4 0%,var(--paper) 60%);border-bottom:3px solid var(--paper-3);overflow:hidden}
+.hero::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(45,106,79,.08) 0%,transparent 70%);top:-100px;right:-100px;border-radius:50%}
+.hero::after{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(37,99,168,.07) 0%,transparent 70%);bottom:-80px;left:-80px;border-radius:50%}
+.hero-subtitle{font-family:var(--font-notes);font-size:1.1rem;color:var(--beige);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;animation:fadeInUp .6s ease both}
+.hero-title{font-family:var(--font-heading);font-size:clamp(2.2rem,6vw,3.8rem);color:var(--ink);line-height:1.15;margin-bottom:12px;animation:fadeInUp .7s .1s ease both}
+.hero-title em{font-style:italic;color:var(--green)}
+.hero-unit-badge{display:inline-block;font-family:var(--font-hand);font-size:1.5rem;font-weight:700;background:var(--ink);color:var(--paper);padding:6px 28px;border-radius:40px;margin:16px 0 24px;letter-spacing:2px;animation:fadeInUp .7s .2s ease both;box-shadow:4px 4px 0 var(--beige)}
+.hero-desc{font-family:var(--font-notes);font-size:1.15rem;color:var(--ink-light);max-width:620px;margin:0 auto 32px;animation:fadeInUp .7s .3s ease both}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;animation:fadeInUp .7s .4s ease both}
+.chip{font-family:var(--font-notes);font-size:.9rem;padding:4px 14px;border-radius:20px;border:1.5px solid}
+.chip-blue{background:var(--blue-light);color:var(--blue);border-color:var(--blue-mid)}
+.chip-green{background:var(--green-light);color:var(--green);border-color:var(--green-mid)}
+.chip-amber{background:var(--amber-light);color:var(--amber);border-color:var(--amber-mid)}
+
+/* LAYOUT */
+.container{max-width:920px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+section{padding:56px 0 32px;border-bottom:1.5px dashed var(--paper-3)}
+section:last-child{border-bottom:none}
+.section-label{font-family:var(--font-notes);font-size:.85rem;letter-spacing:3px;text-transform:uppercase;color:var(--beige);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.section-label::before{content:'';display:inline-block;width:24px;height:2px;background:var(--beige);border-radius:2px}
+.section-title{font-family:var(--font-heading);font-size:clamp(1.7rem,4vw,2.5rem);color:var(--ink);line-height:1.2;margin-bottom:28px;padding-bottom:12px;border-bottom:3px solid var(--paper-3);position:relative}
+.section-title::after{content:'';position:absolute;bottom:-3px;left:0;width:60px;height:3px;background:var(--green);border-radius:2px}
+
+/* CARDS */
+.note-card{background:var(--paper-2);border:1.5px solid var(--paper-3);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow-sm);position:relative;transition:box-shadow .25s,transform .25s}
+.note-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.note-card::before{content:'• • •';position:absolute;top:12px;right:18px;font-size:.7rem;color:var(--paper-3);letter-spacing:4px}
+.note-card h3{font-family:var(--font-hand);font-size:1.5rem;font-weight:700;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.note-card h3 .icon{font-size:1.3rem}
+.note-card h4{font-family:var(--font-hand);font-size:1.2rem;font-weight:600;color:var(--ink-2);margin:18px 0 8px;padding-left:12px;border-left:3px solid var(--amber)}
+.note-card p{font-family:var(--font-notes);font-size:1.08rem;color:var(--ink-2);line-height:1.75;margin-bottom:10px}
+
+/* HIGHLIGHTS */
+.highlight{border-radius:var(--radius);padding:14px 18px;margin:14px 0;font-family:var(--font-notes);font-size:1.05rem;border-left:4px solid;position:relative}
+.highlight-blue{background:var(--blue-light);border-color:var(--blue);color:var(--ink)}
+.highlight-green{background:var(--green-light);border-color:var(--green);color:var(--ink)}
+.highlight-amber{background:var(--amber-light);border-color:var(--amber);color:var(--ink)}
+.highlight-red{background:var(--red-light);border-color:var(--red);color:var(--ink)}
+.highlight-purple{background:var(--purple-light);border-color:var(--purple);color:var(--ink)}
+.highlight-teal{background:var(--teal-light);border-color:var(--teal);color:var(--ink)}
+.highlight strong{font-weight:700;display:block;margin-bottom:4px}
+
+/* LISTS */
+.note-list{list-style:none;padding:0;margin:10px 0 14px}
+.note-list li{font-family:var(--font-notes);font-size:1.05rem;color:var(--ink-2);padding:5px 0 5px 24px;position:relative;line-height:1.6}
+.note-list li::before{content:'→';position:absolute;left:0;color:var(--green);font-weight:700}
+.note-list.check li::before{content:'✓';color:var(--green)}
+.note-list.star li::before{content:'★';color:var(--amber);font-size:.8rem;top:8px}
+.note-list.dot li::before{content:'●';color:var(--beige);font-size:.6rem;top:9px}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;margin:18px 0;border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+table{width:100%;border-collapse:collapse;font-family:var(--font-notes);font-size:1rem}
+thead th{background:var(--ink);color:var(--paper);padding:12px 16px;text-align:left;font-family:var(--font-hand);font-weight:700;font-size:1.05rem}
+thead th:first-child{border-radius:var(--radius) 0 0 0}
+thead th:last-child{border-radius:0 var(--radius) 0 0}
+tbody tr{transition:background .15s}
+tbody tr:nth-child(even){background:var(--paper-3)}
+tbody tr:hover{background:var(--green-light)}
+tbody td{padding:10px 16px;border-bottom:1px solid var(--paper-3);color:var(--ink-2)}
+
+/* DEF BOX */
+.def-box{background:var(--beige-light);border:2px dashed var(--beige);border-radius:var(--radius);padding:16px 20px;margin:14px 0;font-family:var(--font-notes);font-size:1.05rem;position:relative}
+.def-box::before{content:'Definition';font-family:var(--font-hand);font-weight:700;font-size:.8rem;color:var(--beige);letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:6px}
+
+/* RESOURCE GRID */
+.resource-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.resource-card{border-radius:var(--radius);padding:20px;border:2px solid;transition:transform .25s}
+.resource-card:hover{transform:scale(1.03)}
+.resource-card h4{font-family:var(--font-hand);font-size:1.2rem;font-weight:700;margin-bottom:8px;border:none;padding:0}
+.resource-card p{font-family:var(--font-notes);font-size:.9rem;margin:0}
+.rc-renewable{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#22c55e}
+.rc-renewable h4{color:#15803d}
+.rc-nonrenewable{background:linear-gradient(135deg,#fff7ed,#fed7aa);border-color:#f97316}
+.rc-nonrenewable h4{color:#9a3412}
+
+/* ENERGY GRID */
+.energy-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:18px 0}
+.energy-card{border-radius:var(--radius);padding:18px;text-align:center;border:2px solid;transition:transform .25s,box-shadow .25s}
+.energy-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.energy-card .e-icon{font-size:2rem;margin-bottom:8px}
+.energy-card h4{font-family:var(--font-hand);font-size:1.1rem;font-weight:700;margin-bottom:6px;border:none;padding:0}
+.energy-card p{font-family:var(--font-notes);font-size:.85rem;margin:0;line-height:1.4}
+.ec-solar{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:#f59e0b}
+.ec-solar h4{color:#92400e}
+.ec-wind{background:linear-gradient(135deg,#eff6ff,#dbeafe);border-color:#3b82f6}
+.ec-wind h4{color:#1d4ed8}
+.ec-hydro{background:linear-gradient(135deg,#ecfeff,#cffafe);border-color:#06b6d4}
+.ec-hydro h4{color:#0e7490}
+.ec-bio{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#22c55e}
+.ec-bio h4{color:#15803d}
+.ec-geo{background:linear-gradient(135deg,#fff7ed,#fed7aa);border-color:#f97316}
+.ec-geo h4{color:#9a3412}
+.ec-tidal{background:linear-gradient(135deg,#f0f9ff,#bae6fd);border-color:#0ea5e9}
+.ec-tidal h4{color:#075985}
+.ec-nuclear{background:linear-gradient(135deg,#fdf4ff,#e9d5ff);border-color:#a855f7}
+.ec-nuclear h4{color:#7e22ce}
+.ec-coal{background:linear-gradient(135deg,#f9fafb,#e5e7eb);border-color:#6b7280}
+.ec-coal h4{color:#374151}
+
+/* ECOSYSTEM PYRAMID */
+.pyramid-container{margin:20px 0;text-align:center}
+.pyramid-level{margin:0 auto 2px;border-radius:4px;padding:10px 16px;font-family:var(--font-hand);font-weight:700;color:white;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .2s}
+.pyramid-level:hover{transform:scaleX(1.03)}
+.pl-1{width:90%;background:#1b4332}
+.pl-2{width:72%;background:#2d6a4f}
+.pl-3{width:54%;background:#52b788}
+.pl-4{width:36%;background:#b7e4c7;color:#1b4332}
+.pl-5{width:20%;background:#d8f3dc;color:#1b4332}
+
+/* FOOD CHAIN */
+.food-chain{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:18px 0;justify-content:center}
+.fc-box{background:var(--green-light);border:2px solid var(--green);border-radius:var(--radius);padding:10px 14px;font-family:var(--font-hand);font-size:1rem;font-weight:600;color:var(--green);text-align:center;min-width:90px}
+.fc-arrow{font-size:1.4rem;color:var(--beige);padding:0 4px}
+
+/* ECO TYPES GRID */
+.eco-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:18px 0}
+.eco-card{border-radius:var(--radius);padding:16px;text-align:center;border:2px solid;transition:transform .2s}
+.eco-card:hover{transform:translateY(-3px)}
+.eco-card .eco-icon{font-size:1.8rem;margin-bottom:6px}
+.eco-card h4{font-family:var(--font-hand);font-size:1rem;font-weight:700;margin-bottom:4px;border:none;padding:0}
+.eco-card p{font-family:var(--font-notes);font-size:.82rem;margin:0}
+.eco-forest{background:#f0fdf4;border-color:#22c55e}
+.eco-forest h4{color:#15803d}
+.eco-grassland{background:#fefce8;border-color:#ca8a04}
+.eco-grassland h4{color:#92400e}
+.eco-desert{background:#fff7ed;border-color:#f97316}
+.eco-desert h4{color:#9a3412}
+.eco-pond{background:#eff6ff;border-color:#3b82f6}
+.eco-pond h4{color:#1d4ed8}
+.eco-lake{background:#ecfeff;border-color:#06b6d4}
+.eco-lake h4{color:#0e7490}
+.eco-ocean{background:#f0f9ff;border-color:#0ea5e9}
+.eco-ocean h4{color:#075985}
+
+/* CALLOUT */
+.callout{background:var(--ink);color:var(--paper);border-radius:var(--radius-lg);padding:22px 26px;margin:22px 0;font-family:var(--font-hand);font-size:1.15rem;position:relative;overflow:hidden}
+.callout::before{content:'"';position:absolute;top:-10px;left:10px;font-size:6rem;color:rgba(255,255,255,.06);font-family:Georgia,serif;line-height:1}
+.callout .quote-source{font-family:var(--font-notes);font-size:.9rem;opacity:.7;margin-top:8px;display:block}
+
+/* REVISION */
+.revision-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin:18px 0}
+.revision-card{background:var(--paper-2);border:1.5px solid var(--paper-3);border-radius:var(--radius);padding:18px;transition:transform .2s}
+.revision-card:hover{transform:translateY(-3px)}
+.revision-card h4{font-family:var(--font-hand);font-size:1.1rem;font-weight:700;color:var(--green);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--paper-3)}
+.revision-card ul{list-style:none;padding:0}
+.revision-card ul li{font-family:var(--font-notes);font-size:.95rem;color:var(--ink-2);padding:3px 0 3px 16px;position:relative}
+.revision-card ul li::before{content:'·';position:absolute;left:4px;color:var(--beige);font-size:1.2rem;top:0}
+
+/* MCQ */
+#mcqs{background:var(--paper-2);border-radius:var(--radius-lg);padding:40px 32px;margin-bottom:40px}
+.mcq-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.mcq-filter{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{font-family:var(--font-notes);font-size:.9rem;padding:5px 14px;border-radius:20px;border:1.5px solid var(--paper-3);background:var(--paper);cursor:pointer;transition:all .2s;color:var(--ink)}
+.filter-btn.active,.filter-btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.mcq-stats{font-family:var(--font-notes);font-size:.95rem;color:var(--ink-light)}
+#score-display{font-family:var(--font-hand);font-size:1.3rem;font-weight:700;color:var(--green);text-align:center;padding:14px;background:var(--green-light);border-radius:var(--radius);margin-bottom:20px;display:none}
+.mcq-item{background:var(--paper);border:1.5px solid var(--paper-3);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px;transition:box-shadow .2s}
+.mcq-item:hover{box-shadow:var(--shadow-sm)}
+.mcq-item[data-difficulty="easy"]{border-left:4px solid var(--green)}
+.mcq-item[data-difficulty="medium"]{border-left:4px solid var(--amber)}
+.mcq-item[data-difficulty="hard"]{border-left:4px solid var(--red)}
+.mcq-q{font-family:var(--font-hand);font-size:1.1rem;font-weight:600;color:var(--ink);margin-bottom:14px;line-height:1.5}
+.mcq-q .q-num{font-size:.85rem;background:var(--ink);color:var(--paper);padding:2px 8px;border-radius:4px;margin-right:8px}
+.mcq-difficulty{font-family:var(--font-notes);font-size:.75rem;padding:2px 8px;border-radius:10px;float:right;letter-spacing:1px;text-transform:uppercase}
+.diff-easy{background:var(--green-light);color:var(--green)}
+.diff-medium{background:var(--amber-light);color:var(--amber)}
+.diff-hard{background:var(--red-light);color:var(--red)}
+.mcq-options{display:grid;gap:8px}
+.mcq-option{font-family:var(--font-notes);font-size:1rem;padding:9px 14px;border-radius:var(--radius);border:1.5px solid var(--paper-3);background:var(--paper-2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:10px;text-align:left;color:var(--ink)}
+.mcq-option:hover{background:var(--green-light);border-color:var(--green)}
+.mcq-option.correct{background:var(--green-light);border-color:var(--green);font-weight:600}
+.mcq-option.wrong{background:var(--red-light);border-color:var(--red)}
+.mcq-option.revealed{background:var(--green-light);border-color:var(--green)}
+.option-letter{font-family:var(--font-hand);font-weight:700;font-size:1rem;min-width:24px;height:24px;background:var(--paper-3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.mcq-answer{margin-top:10px;padding:8px 12px;background:var(--green-light);border-radius:var(--radius);font-family:var(--font-notes);font-size:.95rem;color:var(--green);display:none}
+.mcq-answer.show{display:block}
+.btn-show-answer{font-family:var(--font-notes);font-size:.88rem;padding:5px 12px;border-radius:20px;border:1.5px solid var(--paper-3);background:var(--paper);cursor:pointer;margin-top:10px;transition:all .2s;color:var(--ink)}
+.btn-show-answer:hover{background:var(--amber-light);border-color:var(--amber)}
+.mcq-actions{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.btn-primary{font-family:var(--font-hand);font-size:1rem;font-weight:700;padding:10px 22px;border-radius:28px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;transition:all .2s}
+.btn-primary:hover{background:var(--green);border-color:var(--green);transform:translateY(-2px)}
+.btn-secondary{font-family:var(--font-hand);font-size:1rem;padding:10px 22px;border-radius:28px;border:2px solid var(--paper-3);background:var(--paper);color:var(--ink);cursor:pointer;transition:all .2s}
+.btn-secondary:hover{border-color:var(--ink)}
+
+/* BACK TOP */
+#back-top{position:fixed;bottom:28px;right:28px;width:44px;height:44px;background:var(--ink);color:var(--paper);border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s;z-index:50;box-shadow:var(--shadow-md)}
+#back-top.visible{opacity:1;transform:translateY(0)}
+#back-top:hover{background:var(--green)}
+
+/* ANIMATIONS */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* PRINT */
+@media print{nav,#back-top,.btn-icon,.mcq-filter,.mcq-actions,.btn-show-answer{display:none!important}body{background:white;color:black;font-size:11pt}.note-card{break-inside:avoid}.mcq-item{break-inside:avoid}.mcq-answer{display:block!important}}
+
+/* RESPONSIVE */
+@media(max-width:768px){.nav-links{display:none}.resource-grid{grid-template-columns:1fr}#mcqs{padding:24px 16px}.note-card{padding:20px 18px}.hero{padding:50px 18px 40px}.eco-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.revision-grid{grid-template-columns:1fr}.energy-grid{grid-template-columns:repeat(2,1fr)}}
+
+footer{text-align:center;padding:32px 24px;font-family:var(--font-notes);font-size:.95rem;color:var(--ink-light);background:var(--paper-3);border-top:2px solid var(--paper-3)}
+</style>
+</head>
+<body data-theme="light">
+<div id="progress-bar"></div>
+
+<nav>
+  <div class="nav-brand">🌿 CHE 110 · U2</div>
+  <div class="nav-links">
+    <a href="#resources">Resources</a>
+    <a href="#land">Land</a>
+    <a href="#water">Water</a>
+    <a href="#forest">Forest</a>
+    <a href="#energy">Energy</a>
+    <a href="#ecosystem">Ecosystem</a>
+    <a href="#foodchain">Food Chain</a>
+    <a href="#pyramids">Pyramids</a>
+    <a href="#succession">Succession</a>
+    <a href="#ecosystems-types">Eco Types</a>
+    <a href="#mcqs">MCQs</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-icon" id="search-btn" title="Search">🔍</button>
+    <button class="btn-icon" id="theme-btn" title="Dark Mode">🌙</button>
+    <button class="btn-icon" id="print-btn" title="Print">🖨️</button>
+  </div>
+</nav>
+
+<div id="search-box">
+  <div id="search-inner">
+    <input type="text" id="search-input" placeholder="Search notes… (e.g. food chain, soil erosion, trophic level)"/>
+    <div id="search-results"></div>
+    <p style="font-family:var(--font-notes);font-size:.85rem;color:var(--ink-light);margin-top:10px;">Press <strong>Esc</strong> to close</p>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-subtitle">B.Tech CSE · LPU · CHE 110</div>
+  <h1 class="hero-title"><em>Natural Resources</em> & Ecosystem</h1>
+  <div class="hero-unit-badge">UNIT 2</div>
+  <p class="hero-desc">Land, Water, Forest & Energy Resources · Ecosystem Structure · Food Chains · Ecological Pyramids · Succession — with 60 Practice MCQs</p>
+  <div class="hero-chips">
+    <span class="chip chip-green">🌱 Natural Resources</span>
+    <span class="chip chip-blue">💧 Water</span>
+    <span class="chip chip-amber">🌳 Forest</span>
+    <span class="chip chip-green">⚡ Energy</span>
+    <span class="chip chip-blue">🔬 Ecosystems</span>
+    <span class="chip chip-amber">60 MCQs</span>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- SECTION 1: NATURAL RESOURCES -->
+<section id="resources">
+  <div class="section-label">Topic 1</div>
+  <h2 class="section-title">Introduction to Natural Resources</h2>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🌍</span> What are Resources?</h3>
+    <div class="def-box">A <strong>resource</strong> is a source or supply from which a benefit is produced and that has some utility. Examples: Land, Minerals, Soil, Water, Energy, Food. Resources may be <em>Natural</em> (from nature), <em>Man-made</em> (created by humans), or <em>Human</em> (human skills, knowledge, labour).</div>
+    <p>Natural resources are materials given to us by nature which can be transformed to become more valuable and useful. They are the backbone of all economies and ecosystems.</p>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">♻️</span> Renewable vs Non-Renewable Resources</h3>
+    <div class="resource-grid">
+      <div class="resource-card rc-renewable">
+        <h4>🌱 Renewable Resources</h4>
+        <p>Resources which are renewed or replenished fast, or have an unlimited source. They can be regenerated by natural processes within a human timescale.</p>
+        <ul class="note-list dot" style="margin-top:10px">
+          <li>Solar energy</li><li>Wind energy</li><li>Water (via water cycle)</li>
+          <li>Biomass / forests (if managed sustainably)</li>
+          <li>Air, tidal, geothermal energy</li>
+        </ul>
+      </div>
+      <div class="resource-card rc-nonrenewable">
+        <h4>⛽ Non-Renewable Resources</h4>
+        <p>Resources which cannot be renewed or replenished within a human timescale. Once used, they are gone forever or take millions of years to form.</p>
+        <ul class="note-list dot" style="margin-top:10px">
+          <li>Fossil fuels (coal, oil, natural gas)</li>
+          <li>Nuclear fuels (Uranium, Thorium)</li>
+          <li>Minerals and ores</li>
+          <li>Gemstones</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight highlight-amber">
+      <strong>📌 Key Distinction:</strong> Renewable ≠ unlimited. Forests are renewable but can be destroyed permanently if over-exploited. Water is renewable via the water cycle but can become locally scarce. Sustainable management is essential for all renewable resources.
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">⭐</span> Importance of Natural Resources</h3>
+    <ul class="note-list check">
+      <li>Provide raw materials for food, shelter, clothing, and industry</li>
+      <li>Support all ecosystems and biodiversity</li>
+      <li>Regulate climate and maintain environmental balance</li>
+      <li>Source of energy for all human activities</li>
+      <li>Basis of all national economies</li>
+      <li>Support cultural, recreational, and aesthetic needs</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 2: LAND RESOURCE -->
+<section id="land">
+  <div class="section-label">Topic 2</div>
+  <h2 class="section-title">Land Resources</h2>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🗻</span> What is Land Resource?</h3>
+    <div class="def-box">Land resource = "The solid portion of Earth's surface." The science dealing with land is called <strong>Pedology</strong>. Land is a <em>renewable but limited</em> resource — it can be restored but its total area is fixed.</div>
+    <h4>Why is land valuable?</h4>
+    <ul class="note-list check">
+      <li><strong>Agricultural Base</strong> — Soil provides nutrients for food production</li>
+      <li><strong>Natural Resources</strong> — Land holds minerals, fossil fuels, groundwater</li>
+      <li><strong>Urban Development</strong> — Infrastructure, housing, industries</li>
+      <li><strong>Ecosystem Services</strong> — Habitats, carbon storage, water filtration</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🌱</span> Soil Formation</h3>
+    <p>Soil is formed by <strong>weathering</strong> of rocks over thousands of years. Three types of weathering break down parent rock:</p>
+    <ul class="note-list">
+      <li><strong>Physical weathering</strong> — Temperature changes, wind, water pressure crack rocks</li>
+      <li><strong>Chemical weathering</strong> — Acids, oxidation, hydration dissolve minerals</li>
+      <li><strong>Biological weathering</strong> — Roots, microorganisms break rock chemically and mechanically</li>
+    </ul>
+    <h4>Factors affecting soil formation:</h4>
+    <ul class="note-list dot">
+      <li><strong>Parent material</strong> — The original rock type determines mineral content</li>
+      <li><strong>Living organisms</strong> — Add organic matter, mix soil layers</li>
+      <li><strong>Climate</strong> — Temperature and rainfall drive weathering rates</li>
+      <li><strong>Topography</strong> — Slope affects erosion and water retention</li>
+      <li><strong>Time</strong> — Soil formation takes hundreds to thousands of years</li>
+    </ul>
+    <h4>Functions of Soil:</h4>
+    <ul class="note-list check">
+      <li>Facilitates nutrient cycles (N, P, K cycles)</li>
+      <li>Food and biomass production</li>
+      <li>Stores and regulates water supply</li>
+      <li>Regulates emission of trace gases (CH₄, N₂O)</li>
+      <li>Filters and purifies groundwater</li>
+      <li>Provides biological habitat for microorganisms</li>
+      <li>Platform for buildings and infrastructure</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">💨</span> Land Degradation</h3>
+    <div class="def-box">The process by which the fertility and quality of land is reduced due to natural or human activities. Also called "creeping death of land."</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Cause</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td>Heavy rains, storms, floods</td><td>Natural</td></tr>
+          <tr><td>Earthquakes, prolonged drought</td><td>Natural</td></tr>
+          <tr><td>Overgrazing by livestock</td><td>Human</td></tr>
+          <tr><td>Deforestation (removal of trees)</td><td>Human</td></tr>
+          <tr><td>Mining activities</td><td>Human</td></tr>
+          <tr><td>Urbanisation and construction</td><td>Human</td></tr>
+          <tr><td>Excess use of fertilizers and pesticides</td><td>Human</td></tr>
+          <tr><td>Industrial discharges</td><td>Human</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🌊</span> Soil Erosion</h3>
+    <div class="def-box">Soil erosion is the removal of the top layer of soil from its resting place by physical agencies like wind and water. Also defined as "the detachment and transport of the fertile layer of soil by water or air." It is known as the <strong>creeping death of land</strong>.</div>
+    <h4>Causes of Soil Erosion:</h4>
+    <ul class="note-list star">
+      <li>Large-scale deforestation</li>
+      <li>Floods (high-velocity water runoff)</li>
+      <li>Overgrazing (leaves soil bare and exposed)</li>
+      <li>Large violent winds</li>
+      <li>Improper agricultural techniques (no contour farming)</li>
+    </ul>
+    <h4>Methods to Control Soil Erosion:</h4>
+    <ul class="note-list check">
+      <li><strong>Conservation tillage / No-till farming</strong> — Minimal soil disturbance; keeps crop residue on soil</li>
+      <li><strong>Contour farming</strong> — Plowing along land contours to reduce runoff</li>
+      <li><strong>Terracing</strong> — Creating flat steps on hillsides to reduce slope angle</li>
+      <li><strong>Strip cropping</strong> — Alternating strips of crops with grass to trap runoff</li>
+      <li><strong>Alley cropping (Agroforestry)</strong> — Rows of trees between crop rows; diversifies income + protects soil</li>
+      <li><strong>Windbreaks / Shelterbelts</strong> — Rows of trees/shrubs planted to reduce wind velocity</li>
+      <li><strong>Stubble mulching</strong> — Leaving crop residue on soil surface as natural mulch (used in dryland and semi-arid areas)</li>
+      <li><strong>Afforestation</strong> — Planting trees in deforested or barren areas; roots prevent erosion</li>
+      <li><strong>Control overgrazing</strong> — Rotational grazing, setting grazing limits based on carrying capacity</li>
+      <li><strong>Check dams</strong> — Temporary structures across streams to slow water flow and reduce soil wash</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🏜️</span> Desertification</h3>
+    <div class="def-box">Desertification is the process by which the biological productivity of drylands is reduced due to natural or man-made activities. OR: The process by which fertile land becomes desert, typically due to drought, deforestation, or inappropriate agriculture.</div>
+    <h4>Causes:</h4>
+    <div class="resource-grid">
+      <div style="background:var(--amber-light);border:2px solid var(--amber);border-radius:var(--radius);padding:14px">
+        <h4 style="font-family:var(--font-hand);color:var(--amber);border:none;padding:0;margin-bottom:8px">🌡️ Natural Factors</h4>
+        <ul class="note-list dot"><li>Low rainfall</li><li>Excessive evaporation</li><li>High temperature</li><li>Soil salinity</li></ul>
+      </div>
+      <div style="background:var(--red-light);border:2px solid var(--red);border-radius:var(--radius);padding:14px">
+        <h4 style="font-family:var(--font-hand);color:var(--red);border:none;padding:0;margin-bottom:8px">🏭 Human Factors</h4>
+        <ul class="note-list dot"><li>Deforestation</li><li>Overgrazing</li><li>Agricultural expansion</li><li>Climate change</li><li>Soil erosion</li><li>Water mismanagement</li><li>Mining activities</li></ul>
+      </div>
+    </div>
+    <h4>Control Measures:</h4>
+    <ul class="note-list check">
+      <li>Large-scale plantation programs</li>
+      <li>Sustainable agricultural practices</li>
+      <li>Development of pasture land; control overgrazing</li>
+      <li>Rainwater harvesting and water catchment development</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">⛏️</span> Mining & Its Effects</h3>
+    <div class="def-box">Mining is the extraction of valuable minerals or other geological materials from the Earth. Two main types: <strong>Opencast (surface) mining</strong> and <strong>Underground mining</strong>.</div>
+    <h4>Effects of Mining on Land:</h4>
+    <ul class="note-list star">
+      <li>Destruction of vegetation and topsoil</li>
+      <li>Land subsidence and instability</li>
+      <li>Soil and water contamination from mine drainage</li>
+      <li>Habitat destruction and biodiversity loss</li>
+      <li>Air pollution from dust and blasting</li>
+      <li>Displacement of local communities</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🛠️</span> Problems & Remedial Measures for Land Resources</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Problem</th><th>Remedial Measure</th></tr></thead>
+        <tbody>
+          <tr><td>Land Degradation</td><td>Sustainable land management, afforestation, soil conservation</td></tr>
+          <tr><td>Soil Erosion</td><td>Terracing, contour farming, windbreaks, check dams</td></tr>
+          <tr><td>Land Pollution</td><td>Waste management, bioremediation, banning toxic chemicals</td></tr>
+          <tr><td>Urbanization pressure</td><td>Smart growth policies, green belts, vertical farming</td></tr>
+          <tr><td>Desertification</td><td>Plantation drives, water harvesting, overgrazing control</td></tr>
+          <tr><td>Mining damage</td><td>Mine reclamation, progressive restoration, controlled blasting</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight highlight-blue">
+      <strong>💡 Tech Solutions:</strong> Remote Sensing & GIS for land monitoring · Vermiremediation (earthworms for soil improvement) · Renewable energy systems to reduce land pressure · Precision agriculture to maximize yield per unit area.
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: WATER RESOURCE -->
+<section id="water">
+  <div class="section-label">Topic 3</div>
+  <h2 class="section-title">Water Resources</h2>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">💧</span> Importance of Water</h3>
+    <div class="def-box">Water is the most essential substance for life. It covers ~71% of Earth's surface, but only ~3% is freshwater, and less than 1% is easily accessible as surface water.</div>
+    <h4>Special Properties of Water:</h4>
+    <ul class="note-list dot">
+      <li><strong>Universal solvent</strong> — Dissolves more substances than any other liquid; essential for biochemical reactions</li>
+      <li><strong>High boiling/melting points</strong> — Unusual for a molecule its size; critical for climate regulation</li>
+      <li><strong>Expands when frozen</strong> — Ice floats on water (anomalous expansion); prevents lakes from freezing solid</li>
+      <li><strong>Essential for life</strong> — Every living cell requires water for metabolic processes</li>
+    </ul>
+    <h4>Uses of Water:</h4>
+    <ul class="note-list check">
+      <li>Basic component of every living cell</li>
+      <li>Agriculture (irrigation) — uses ~70% of all freshwater</li>
+      <li>Industrial cooling, heating, processing — ~20%</li>
+      <li>Domestic use (drinking, cooking, sanitation) — ~10%</li>
+      <li>Hydroelectric power generation</li>
+      <li>Inland waterways transport</li>
+      <li>Source of common salt; habitat for aquatic life</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🔄</span> Water Cycle & Freshwater Sources</h3>
+    <p>The <strong>water cycle (hydrological cycle)</strong> continuously moves water through evaporation, condensation, precipitation, and runoff, maintaining Earth's water balance.</p>
+    <h4>Sources of Freshwater:</h4>
+    <ul class="note-list">
+      <li><strong>Surface water</strong> — Rainfall, snow, rivers, lakes, ponds</li>
+      <li><strong>Groundwater</strong> — Water stored underground in aquifers (confined and unconfined)</li>
+    </ul>
+    <div class="highlight highlight-blue">
+      <strong>📘 Aquifer:</strong> An aquifer is a body of porous rock or sediment saturated with groundwater. Groundwater enters an aquifer as precipitation seeps through soil. It resurfaces through springs and wells. <br><em>Confined aquifer</em> = trapped between impermeable rock layers (artesian). <em>Unconfined aquifer</em> = water table aquifer open to atmosphere above.
+    </div>
+    <div class="highlight highlight-amber">
+      <strong>📊 Global Freshwater Distribution:</strong> Top countries by renewable freshwater: Brazil, Russia, Canada, Indonesia, China, USA, India. <br>Top consumers (total volume): India > China > USA > Indonesia > Pakistan. <br>Top per-capita consumers: Turkmenistan, Chile, Guyana.
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">⚠️</span> Problems Associated with Water Resources</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Problem</th><th>Key Details</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Unsustainable usage</strong></td><td>Agriculture=70%, Industry=20%, Municipal=10%. Avg need: 20–40 L/person/day (doubled in 50 years)</td></tr>
+          <tr><td>2</td><td><strong>Pollution & contamination</strong></td><td>Industrial discharge, agricultural runoff (pesticides/fertilizers), sewage, chemical pollutants</td></tr>
+          <tr><td>3</td><td><strong>Overexploitation of groundwater</strong></td><td>Subsidence, falling water table, reduced surface flow, increased energy consumption, waterlogging</td></tr>
+          <tr><td>4</td><td><strong>Climate change impacts</strong></td><td>Irregular rainfall, more floods/droughts, melting glaciers, sea level rise causing saltwater intrusion</td></tr>
+          <tr><td>5</td><td><strong>Infrastructure issues</strong></td><td>Inadequate supply systems, leakage, poor storage, lack of sewage treatment plants</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>Major Water Conflicts (Important for Exam):</h4>
+    <ul class="note-list star">
+      <li>Tigris–Euphrates conflict (Turkey – Syria – Iraq)</li>
+      <li>Nile conflict (Egypt – Ethiopia – Sudan)</li>
+      <li>Aral Sea conflict (Central Asia)</li>
+      <li>Indus Water Treaty (India–Pakistan): Jhelum, Chenab → Pakistan; Sutlej, Ravi, Beas → India</li>
+      <li><strong>Kaveri dispute</strong> (Karnataka vs Tamil Nadu) — origins in Brahmagiri hills; first agreement 1892; tribunal formed 1991</li>
+      <li>Sutlej–Yamuna Link (SYL) canal dispute (Punjab–Haryana)</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🛠️</span> Remedial Measures for Water Resources</h3>
+    <h4>Water Conservation:</h4>
+    <ul class="note-list check">
+      <li>Decreasing run-off losses</li>
+      <li>Reducing evaporation losses (mulching, cover crops)</li>
+      <li>Storing water in soil (infiltration enhancement)</li>
+      <li>Reducing irrigation losses (drip, sprinkler systems)</li>
+      <li>Re-use and recycling of water (greywater systems)</li>
+      <li>Block pricing to discourage wastage</li>
+    </ul>
+    <h4>Rainwater Harvesting:</h4>
+    <div class="highlight highlight-teal">
+      <strong>🌧️ Rainwater Harvesting</strong> collects and stores rainwater for later use. Objectives: Meet domestic/industrial/agricultural demand · Recharge groundwater · Minimize pollution · Reduce flooding and runoff.
+      Two methods: (1) <strong>Surface runoff harvesting</strong> — structures like check dams, tanks, percolation pits; (2) <strong>Rooftop rainwater harvesting</strong> — direct collection from rooftops.
+    </div>
+    <h4>Watershed Management:</h4>
+    <p>A <strong>watershed</strong> is an area of land that drains to a common location (small stream to ocean). Watershed management integrates land and water conservation for maximum productivity.</p>
+    <ul class="note-list dot">
+      <li>Ensures ecological balance</li>
+      <li>Minimizes drought, landslide, and flood risks</li>
+      <li>Proper use of marginal/waste lands</li>
+      <li>Enables domestic water supply, irrigation, hydropower generation</li>
+    </ul>
+    <h4>Dams — Benefits & Problems:</h4>
+    <div class="resource-grid">
+      <div style="background:var(--green-light);border:2px solid var(--green);border-radius:var(--radius);padding:14px">
+        <h4 style="font-family:var(--font-hand);color:var(--green);border:none;padding:0;margin-bottom:8px">✅ Benefits</h4>
+        <ul class="note-list dot"><li>Electricity generation</li><li>Employment</li><li>Irrigation water supply</li><li>Drinking water supply</li><li>Flood control</li><li>Reduce famine</li></ul>
+      </div>
+      <div style="background:var(--red-light);border:2px solid var(--red);border-radius:var(--radius);padding:14px">
+        <h4 style="font-family:var(--font-hand);color:var(--red);border:none;padding:0;margin-bottom:8px">❌ Problems</h4>
+        <ul class="note-list dot"><li>Displacement of tribal people</li><li>Loss of forest</li><li>Waterlogging near reservoir</li><li>Microclimatic changes</li><li>Flash floods</li><li>Malaria outbreak (vector breeding)</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: FOREST RESOURCE -->
+<section id="forest">
+  <div class="section-label">Topic 4</div>
+  <h2 class="section-title">Forest Resources</h2>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🌳</span> What are Forest Resources?</h3>
+    <div class="def-box">A forest is a biotic community with predominance of trees — an important <strong>renewable natural resource</strong>. The word "forest" comes from Latin <em>"Fores"</em> meaning "outside." Forests are complex, changing environments made of living (trees, shrubs, wildlife) and non-living components (water, nutrients, rocks, sunlight, air).</div>
+    <div class="highlight highlight-green">
+      <strong>📊 Forest Facts:</strong> Forests cover ~30% of Earth's total land area (~9.4% of surface). They account for 75% of gross primary productivity of Earth's biosphere and contain 80% of Earth's plant biomass. India's forest + tree cover = 807,276 km² = 24.56% of geographical area (2019 ISFR).
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🌿</span> Benefits / Functions of Forests</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Function</th><th>Description</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Protective</strong></td><td>Protection against natural hazards and pollution</td><td>Prevents soil erosion, droughts, floods, noise, radiation</td></tr>
+          <tr><td><strong>Productive</strong></td><td>Provides various useful products</td><td>Timber, fuel wood, gum, resins, medicines, honey, bamboo, pulp, fruits</td></tr>
+          <tr><td><strong>Regulative</strong></td><td>Regulates atmospheric conditions</td><td>O₂/CO₂ balance, temperature regulation, carbon sequestration</td></tr>
+          <tr><td><strong>Accessory</strong></td><td>Aesthetic, habitat, and recreational value</td><td>Wildlife habitat, tourism, biodiversity conservation</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>Commercial Importance:</h4>
+    <ul class="note-list check">
+      <li><strong>Timber</strong> — Furniture, boats, bridges, construction</li>
+      <li><strong>Fuel wood</strong> — Cooking and heating energy for rural populations</li>
+      <li><strong>Raw materials for industries</strong> — Paper/pulp, sports goods, furniture, matchboxes</li>
+      <li><strong>Oxygen production</strong> — Forest regulates O₂/CO₂ levels; mitigates climate change</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🪓</span> Deforestation — Causes, Effects & Control</h3>
+    <div class="def-box"><strong>Deforestation</strong> = The permanent destruction of forests. Forests have been exploited since early human history to meet human demands.</div>
+    <div class="resource-grid">
+      <div style="background:var(--red-light);border:2px solid var(--red);border-radius:var(--radius);padding:14px">
+        <h4 style="font-family:var(--font-hand);color:var(--red);border:none;padding:0;margin-bottom:8px">🔥 Causes</h4>
+        <ul class="note-list dot">
+          <li>Fuel requirement (firewood)</li>
+          <li>Raw material for industries</li>
+          <li>Development projects (dams, highways)</li>
+          <li>Expansion of cities</li>
+          <li>Growing food needs (agriculture expansion)</li>
+          <li>Overgrazing</li>
+          <li>Shifting cultivation (Jhum farming)</li>
+          <li>Forest fires</li>
+          <li>Mining activities</li>
+          <li>River valley projects</li>
+        </ul>
+      </div>
+      <div style="background:var(--amber-light);border:2px solid var(--amber);border-radius:var(--radius);padding:14px">
+        <h4 style="font-family:var(--font-hand);color:var(--amber);border:none;padding:0;margin-bottom:8px">💥 Effects</h4>
+        <ul class="note-list dot">
+          <li>Threatens wildlife existence</li>
+          <li>Biodiversity and genetic diversity loss</li>
+          <li>Disrupts hydrological cycle</li>
+          <li>Soil erosion and landslides</li>
+          <li>Air pollution and global warming</li>
+          <li>Loss of carbon sinks</li>
+          <li>Reduced rainfall</li>
+          <li>Desertification</li>
+        </ul>
+      </div>
+    </div>
+    <h4>Control/Conservation Measures:</h4>
+    <ul class="note-list check">
+      <li>Afforestation and reforestation programs (e.g. Green India Mission)</li>
+      <li>Sustainable forest management and certified timber</li>
+      <li>Community forest management / Joint Forest Management (JFM)</li>
+      <li>Strict enforcement of forest protection laws</li>
+      <li>Promoting alternative fuel sources to reduce firewood dependence</li>
+      <li>Eco-tourism to generate income from standing forests</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 5: ENERGY RESOURCES -->
+<section id="energy">
+  <div class="section-label">Topic 5</div>
+  <h2 class="section-title">Energy Resources</h2>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">⚡</span> What is Energy?</h3>
+    <div class="def-box"><strong>Energy</strong> = "Capacity to do work." SI Unit = <strong>Joule (J)</strong>. Energy can be converted from one form to another but cannot be created or destroyed (1st Law of Thermodynamics). The ultimate source of most energy on Earth is the <strong>Sun</strong>.</div>
+    <div class="highlight highlight-amber">
+      <strong>📊 Global Energy Inequality:</strong> Developed countries like USA and Canada constitute ~5% of world population but consume one-fourth of global energy (~300 GJ per person/year = 60 barrels of oil). In contrast, people in poor countries consume less than 1 GJ/year.
+    </div>
+    <h4>Energy Crisis:</h4>
+    <p>A situation where demand for energy exceeds supply, or when there are significant disruptions in energy production or distribution.</p>
+    <ul class="note-list star">
+      <li>Over-reliance on non-renewable energy resources</li>
+      <li>Overpopulation (increasing demand)</li>
+      <li>Poor infrastructure/distribution systems</li>
+      <li>Wastage and lack of energy efficiency</li>
+      <li>Major accidents and natural calamities</li>
+      <li>Wars and attacks (e.g. Europe's energy crisis after Russia-Ukraine war)</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🌞</span> Renewable Energy Sources</h3>
+    <div class="energy-grid">
+      <div class="energy-card ec-solar">
+        <div class="e-icon">☀️</div>
+        <h4>Solar Energy</h4>
+        <p>1 hour of solar energy = Earth's 1 year consumption. Uses: heating, solar cooker, solar desalination, PV cells. India target: 100 GW by 2022.</p>
+      </div>
+      <div class="energy-card ec-wind">
+        <div class="e-icon">🌬️</div>
+        <h4>Wind Energy</h4>
+        <p>India = 4th largest wind energy producer (after China, US, Germany). Installed capacity ~32 GW. Wind potential: 302 GW at 100m height.</p>
+      </div>
+      <div class="energy-card ec-hydro">
+        <div class="e-icon">💦</div>
+        <h4>Hydroelectric</h4>
+        <p>Converts potential energy of stored water into electricity via turbines. Low cost, non-polluting, reliable. Disadvantages: high setup cost, affects fish population.</p>
+      </div>
+      <div class="energy-card ec-bio">
+        <div class="e-icon">🌿</div>
+        <h4>Biomass Energy</h4>
+        <p>Wood is largest biomass source. Biofuels: biodiesel, biogas, bio-ethanol. India potential: ~18 GW. 32% of India's primary energy = biomass. States: Maharashtra, UP, Karnataka.</p>
+      </div>
+      <div class="energy-card ec-tidal">
+        <div class="e-icon">🌊</div>
+        <h4>Tidal Energy</h4>
+        <p>Converts tidal force into electricity. More predictable than wind/solar. Disadvantages: EM emissions affect aquatic life; high construction cost.</p>
+      </div>
+      <div class="energy-card ec-geo">
+        <div class="e-icon">🌋</div>
+        <h4>Geothermal Energy</h4>
+        <p>Energy from hot rocks inside Earth. Can use natural geysers or drilled holes. Reliable, low operating cost. Possible H₂S/CO₂ emissions during extraction.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">⚛️</span> Non-Renewable Energy Sources</h3>
+    <div class="energy-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+      <div class="energy-card ec-nuclear">
+        <div class="e-icon">⚛️</div>
+        <h4>Nuclear Energy</h4>
+        <p>Fission: splitting large nucleus (U-235). Fusion: joining small nuclei. Elements: Uranium, Thorium, Plutonium. Nuclear fuel cost = only 20% of energy generated. Continuous production (90% annual time). Risk: accidents, nuclear waste management.</p>
+      </div>
+      <div class="energy-card ec-coal">
+        <div class="e-icon">⛽</div>
+        <h4>Fossil Fuels</h4>
+        <p>Coal, oil, natural gas. Current backbone of global energy. Formed over millions of years. Cause air pollution and climate change. Being phased out under Paris Agreement.</p>
+      </div>
+    </div>
+    <div class="highlight highlight-purple">
+      <strong>⚠️ Limitations of Alternative Energy Sources:</strong>
+      <br>• High installation cost and maintenance requirements
+      <br>• Raw materials for manufacturing devices not easily available (e.g. Silicon for PV cells)
+      <br>• Weather dependency (solar/wind not always available)
+      <br>• Geographical limitations (tidal/geothermal not everywhere viable)
+    </div>
+    <div class="highlight highlight-teal">
+      <strong>🇮🇳 India's Energy Policy:</strong> IEPR target: At least 10% of installed capacity from renewable sources by end of 11th Plan. Solar installed capacity reached 33.73 GW (Dec 2019). India ranked 4th in wind power capacity with ~32 GW installed.
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🌿</span> Role of Individual in Conservation of Natural Resources</h3>
+    <ul class="note-list check">
+      <li>Reduce, Reuse, Recycle (3R principle)</li>
+      <li>Use energy-efficient appliances (LED bulbs, BEE-rated devices)</li>
+      <li>Switch off lights/fans when not in use; unplug chargers</li>
+      <li>Use public transport, carpool, or cycle</li>
+      <li>Conserve water — fix leaks, rainwater harvesting at home</li>
+      <li>Plant trees and support green initiatives</li>
+      <li>Avoid single-use plastics; use cloth bags</li>
+      <li>Support renewable energy (solar panels at home)</li>
+      <li>Buy local products to reduce transportation energy</li>
+      <li>Spread awareness and educate others</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 6: ECOSYSTEM -->
+<section id="ecosystem">
+  <div class="section-label">Topic 6</div>
+  <h2 class="section-title">Ecosystem — Structure & Function</h2>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🔬</span> What is an Ecosystem?</h3>
+    <div class="def-box"><strong>Ecosystem</strong> = A self-regulating group of biotic communities of species interacting with one another and with their non-living environment, exchanging energy and matter. The term was first used in <strong>1935</strong> by British ecologist <strong>Arthur Tansley</strong>.</div>
+    <div class="highlight highlight-blue">
+      <strong>📘 Ecology:</strong> The study of organisms in their natural habitat interacting with their surroundings. Term coined by German biologist <strong>Ernst Haeckel in 1866</strong>. From Greek: <em>Oikos</em> (home) + <em>Logos</em> (study).
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🏗️</span> Structure of an Ecosystem</h3>
+    <p>Every ecosystem has two main components:</p>
+    <div class="resource-grid">
+      <div style="background:var(--blue-light);border:2px solid var(--blue);border-radius:var(--radius);padding:14px">
+        <h4 style="font-family:var(--font-hand);color:var(--blue);border:none;padding:0;margin-bottom:8px">🌡️ Abiotic Components (Non-living)</h4>
+        <ul class="note-list dot">
+          <li>Inorganic substances (C, H, O, N, P, S)</li>
+          <li>Organic compounds (proteins, lipids, carbohydrates)</li>
+          <li>Physical factors: temperature, humidity, rainfall, light</li>
+          <li>Soil, water, air</li>
+        </ul>
+      </div>
+      <div style="background:var(--green-light);border:2px solid var(--green);border-radius:var(--radius);padding:14px">
+        <h4 style="font-family:var(--font-hand);color:var(--green);border:none;padding:0;margin-bottom:8px">🌿 Biotic Components (Living)</h4>
+        <ul class="note-list dot">
+          <li><strong>Producers (Autotrophs)</strong> — Green plants, algae, some bacteria (photosynthesise)</li>
+          <li><strong>Primary consumers</strong> — Herbivores (rabbits, insects, deer)</li>
+          <li><strong>Secondary consumers</strong> — Carnivores eating herbivores (frog, small fish)</li>
+          <li><strong>Tertiary consumers</strong> — Top carnivores (snake, tiger, eagle)</li>
+          <li><strong>Decomposers</strong> — Bacteria and fungi breaking down dead organic matter</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🗂️</span> Classification of Ecosystems</h3>
+    <div class="eco-grid">
+      <div class="eco-card eco-forest"><div class="eco-icon">🌲</div><h4>Forest Ecosystem</h4><p>Tropical, temperate, boreal forests</p></div>
+      <div class="eco-card eco-grassland"><div class="eco-icon">🌾</div><h4>Grassland Ecosystem</h4><p>Tropical, temperate, polar grasslands</p></div>
+      <div class="eco-card eco-desert"><div class="eco-icon">🏜️</div><h4>Desert Ecosystem</h4><p>Tropical, temperate, cold deserts</p></div>
+      <div class="eco-card eco-pond"><div class="eco-icon">🐸</div><h4>Pond / Wetland</h4><p>Freshwater standing water (lentic)</p></div>
+      <div class="eco-card eco-lake"><div class="eco-icon">🏞️</div><h4>Lake Ecosystem</h4><p>Oligotrophic, eutrophic, dystrophic</p></div>
+      <div class="eco-card" style="background:#f0f9ff;border:2px solid #0ea5e9"><div class="eco-icon">🌊</div><h4 style="font-family:var(--font-hand);color:#075985;border:none;padding:0;margin-bottom:4px">Ocean / Marine</h4><p style="font-family:var(--font-notes);font-size:.82rem;margin:0">Coastal, open sea; richest in diversity</p></div>
+      <div class="eco-card" style="background:#fdf4ff;border:2px solid #a855f7"><div class="eco-icon">🏡</div><h4 style="font-family:var(--font-hand);color:#7e22ce;border:none;padding:0;margin-bottom:4px">Man-made</h4><p style="font-family:var(--font-notes);font-size:.82rem;margin:0">Aquaria, gardens, dams, croplands</p></div>
+      <div class="eco-card" style="background:#ecfdf5;border:2px solid #10b981"><div class="eco-icon">🌊</div><h4 style="font-family:var(--font-hand);color:#065f46;border:none;padding:0;margin-bottom:4px">Stream / River</h4><p style="font-family:var(--font-notes);font-size:.82rem;margin:0">Flowing water (lotic) ecosystems</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: FOOD CHAIN & WEB -->
+<section id="foodchain">
+  <div class="section-label">Topic 7</div>
+  <h2 class="section-title">Food Chain, Food Web & Trophic Levels</h2>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🔗</span> Food Chain</h3>
+    <div class="def-box">The transfer of food energy from the source (plants) through a series of organisms by repeated eating and being eaten. Each organism is eaten by the next, forming a "chain."</div>
+    <h4>Example — Grazing Food Chain:</h4>
+    <div class="food-chain">
+      <div class="fc-box">🌿 Grass<br><small>(Producer)</small></div>
+      <div class="fc-arrow">→</div>
+      <div class="fc-box">🐇 Rabbit<br><small>(1° Consumer)</small></div>
+      <div class="fc-arrow">→</div>
+      <div class="fc-box">🐍 Snake<br><small>(2° Consumer)</small></div>
+      <div class="fc-arrow">→</div>
+      <div class="fc-box">🦅 Eagle<br><small>(3° Consumer)</small></div>
+    </div>
+    <h4>Types of Food Chains:</h4>
+    <ul class="note-list">
+      <li><strong>Grazing food chain</strong> — Common chain starting with plant or plant products (grass → grasshopper → frog → snake → eagle)</li>
+      <li><strong>Detritus food chain</strong> — Starts with dead organic matter (dead leaves → earthworm → robin → hawk). Derived from organic wastes and dead matter from grazing chains.</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🕸️</span> Food Web</h3>
+    <div class="def-box">The interlocking pattern formed by several food chains that are linked together is called a <strong>food web</strong>. A food web represents real feeding relationships more accurately than a single food chain because most organisms eat multiple species.</div>
+    <div class="highlight highlight-green">
+      <strong>🌐 Why food webs matter:</strong> Food webs show the complexity of energy flow in an ecosystem. If one species is removed, the web helps predict cascading effects on other species. This is called a <em>trophic cascade</em>.
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">📊</span> Trophic Levels</h3>
+    <p>Each step in a food chain represents a <strong>trophic level</strong>. Energy passes from one trophic level to the next:</p>
+    <div class="pyramid-container">
+      <div class="pyramid-level pl-5" style="font-size:.9rem">🦁 Tertiary Consumers — Top Carnivores (T4)</div>
+      <div class="pyramid-level pl-4" style="font-size:.95rem">🐍 Secondary Consumers — Carnivores (T3)</div>
+      <div class="pyramid-level pl-3">🐸 Primary Consumers — Herbivores (T2)</div>
+      <div class="pyramid-level pl-2">🌿 Producers — Green Plants (T1)</div>
+      <div style="text-align:center;font-family:var(--font-notes);font-size:.85rem;color:var(--ink-light);margin-top:8px">Base of pyramid = most organisms &amp; energy | Apex = least organisms &amp; energy</div>
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">⚡</span> Energy Flow in Ecosystems</h3>
+    <div class="highlight highlight-blue">
+      <strong>1st Law of Thermodynamics:</strong> Energy cannot be created or destroyed, only converted from one form to another.
+    </div>
+    <div class="highlight highlight-amber">
+      <strong>2nd Law of Thermodynamics:</strong> No energy transformation is 100% efficient. Energy is always lost as heat at each step.
+    </div>
+    <div class="highlight highlight-green">
+      <strong>10% Rule (Lindemann's Law):</strong> Only 10% of energy is transferred from one trophic level to the next. 90% is lost as heat, movement, respiration. So: If producers have 10,000 kcal → herbivores get 1,000 kcal → carnivores get 100 kcal → top carnivores get 10 kcal.
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: ECOLOGICAL PYRAMIDS -->
+<section id="pyramids">
+  <div class="section-label">Topic 8</div>
+  <h2 class="section-title">Ecological Pyramids</h2>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">📐</span> What are Ecological Pyramids?</h3>
+    <div class="def-box">An <strong>ecological pyramid</strong> is a graphical representation where producers occupy the base and top consumers occupy the apex. They illustrate the feeding relationships and energy/biomass/numbers at each trophic level.</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>What it shows</th><th>Shape</th><th>Key Point</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Pyramid of Number</strong></td><td>Number of individuals at each trophic level</td><td>Usually upright (grassland/pond); inverted (tree ecosystem)</td><td>Simplest pyramid; can be misleading (one tree supports many insects)</td></tr>
+          <tr><td><strong>Pyramid of Biomass</strong></td><td>Total dry organic matter at each trophic level (g/m²)</td><td>Usually upright; inverted in aquatic (phytoplankton)</td><td>More accurate than number pyramid. Typical values: Producers 2000 g/m² → Primary consumers 675 g/m² → Secondary 150 → Tertiary 75 g/m²</td></tr>
+          <tr><td><strong>Pyramid of Energy</strong></td><td>Amount of energy at each trophic level (kcal/m²/yr)</td><td>Always upright — NEVER inverted</td><td>Most accurate representation. Always upright because energy always lost at each level (10% rule)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight highlight-amber">
+      <strong>🔑 Key Exam Point:</strong> Pyramid of <em>energy</em> is always upright (never inverted) because energy is always lost as it moves up trophic levels. Pyramids of number and biomass can be inverted in certain ecosystems.
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: ECOLOGICAL SUCCESSION -->
+<section id="succession">
+  <div class="section-label">Topic 9</div>
+  <h2 class="section-title">Ecological Succession</h2>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🔄</span> What is Ecological Succession?</h3>
+    <div class="def-box"><strong>Ecological succession</strong> is the gradual and predictable process by which ecosystems change and develop over time. It is a series of temporary communities (seral stages) leading up to a stable final <strong>climax community</strong>. All habitats are in a constant state of ecological succession.</div>
+    <h4>Key Terms:</h4>
+    <ul class="note-list">
+      <li><strong>Seral stage / Successional stage</strong> — Each temporary community during succession</li>
+      <li><strong>Pioneer community</strong> — The first organisms to colonize bare substrate (e.g. lichens on rocks)</li>
+      <li><strong>Climax community</strong> — The final stable community that succession leads to (e.g. oak forest)</li>
+      <li><strong>Sere</strong> — The entire sequence from pioneer to climax</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🌱</span> Types of Succession</h3>
+    <div class="resource-grid">
+      <div style="background:var(--green-light);border:2px solid var(--green);border-radius:var(--radius);padding:16px">
+        <h4 style="font-family:var(--font-hand);font-size:1.2rem;color:var(--green);border:none;padding:0;margin-bottom:8px">🪨 Primary Succession</h4>
+        <p style="font-family:var(--font-notes)">Occurs on an <strong>entirely new habitat</strong> that has never been colonized before. Starts from scratch — no soil, no organic matter.</p>
+        <ul class="note-list dot">
+          <li>Newly formed volcanic island</li>
+          <li>Freshly quarried rock face</li>
+          <li>Sand dunes</li>
+          <li>Retreating glacier area</li>
+        </ul>
+        <p style="font-family:var(--font-notes);font-size:.9rem;color:var(--ink-light)">Very slow — takes hundreds to thousands of years</p>
+      </div>
+      <div style="background:var(--blue-light);border:2px solid var(--blue);border-radius:var(--radius);padding:16px">
+        <h4 style="font-family:var(--font-hand);font-size:1.2rem;color:var(--blue);border:none;padding:0;margin-bottom:8px">🌿 Secondary Succession</h4>
+        <p style="font-family:var(--font-notes)">Occurs on a <strong>previously colonized but disturbed or damaged</strong> habitat. Soil and some organisms are still present.</p>
+        <ul class="note-list dot">
+          <li>Land after felling trees in a forest</li>
+          <li>Land after forest fire</li>
+          <li>Abandoned agricultural fields</li>
+          <li>Area after flood damage</li>
+        </ul>
+        <p style="font-family:var(--font-notes);font-size:.9rem;color:var(--ink-light)">Faster than primary — soil is already present</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🌊</span> Types of Succession by Starting Habitat</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>Starting Habitat</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Hydrarch / Hydrosere</strong></td><td>Pond, swamp, or bog</td><td>Pond → marsh → swamp → forest</td></tr>
+          <tr><td><strong>Mesarch / Mesosere</strong></td><td>Area with adequate moisture</td><td>Moist grassland succession</td></tr>
+          <tr><td><strong>Xerarch / Xerosere</strong></td><td>Very dry habitats</td><td>Three sub-types below</td></tr>
+          <tr><td>— Lithosere</td><td>On bare rock</td><td>Lichen → moss → ferns → shrubs → trees</td></tr>
+          <tr><td>— Psammosere</td><td>On sand</td><td>Sand dune succession</td></tr>
+          <tr><td>— Halosere</td><td>On saline (salty) soil</td><td>Mangrove succession</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">📋</span> Process of Ecological Succession</h3>
+    <div class="food-chain" style="flex-direction:column;align-items:flex-start;gap:4px">
+      <div style="display:flex;align-items:center;gap:12px;width:100%">
+        <div class="fc-box" style="min-width:140px;background:var(--blue-light);border-color:var(--blue);color:var(--blue)">1. Nudation</div>
+        <span style="font-family:var(--font-notes);font-size:.95rem;color:var(--ink-2)">Creation of bare or disturbed area</span>
+      </div>
+      <div class="fc-arrow" style="margin-left:60px">↓</div>
+      <div style="display:flex;align-items:center;gap:12px;width:100%">
+        <div class="fc-box" style="min-width:140px;background:var(--green-light);border-color:var(--green);color:var(--green)">2. Invasion</div>
+        <span style="font-family:var(--font-notes);font-size:.95rem;color:var(--ink-2)">Migration + Ecesis (establishment) + Aggregation</span>
+      </div>
+      <div class="fc-arrow" style="margin-left:60px">↓</div>
+      <div style="display:flex;align-items:center;gap:12px;width:100%">
+        <div class="fc-box" style="min-width:140px;background:var(--amber-light);border-color:var(--amber);color:var(--amber)">3. Competition</div>
+        <span style="font-family:var(--font-notes);font-size:.95rem;color:var(--ink-2)">Organisms compete for space, light, nutrients</span>
+      </div>
+      <div class="fc-arrow" style="margin-left:60px">↓</div>
+      <div style="display:flex;align-items:center;gap:12px;width:100%">
+        <div class="fc-box" style="min-width:140px;background:var(--purple-light);border-color:var(--purple);color:var(--purple)">4. Reaction</div>
+        <span style="font-family:var(--font-notes);font-size:.95rem;color:var(--ink-2)">Organisms modify environment, enabling next seral stage</span>
+      </div>
+      <div class="fc-arrow" style="margin-left:60px">↓</div>
+      <div style="display:flex;align-items:center;gap:12px;width:100%">
+        <div class="fc-box" style="min-width:140px;background:var(--teal-light);border-color:var(--teal);color:var(--teal)">5. Stabilization</div>
+        <span style="font-family:var(--font-notes);font-size:.95rem;color:var(--ink-2)">Climax community reached — self-sustaining, stable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: TYPES OF ECOSYSTEMS -->
+<section id="ecosystems-types">
+  <div class="section-label">Topic 10</div>
+  <h2 class="section-title">Types of Ecosystems</h2>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🌲</span> Forest Ecosystems</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Forest Type</th><th>Location</th><th>Key Features</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tropical Rainforest</strong></td><td>Near equator (Amazon, Congo)</td><td>Highest biodiversity; high annual rainfall; distinct canopy layers (emergent, canopy, understory, forest floor)</td></tr>
+          <tr><td><strong>Sub-tropical Forest</strong></td><td>Between tropics and temperate regions</td><td>Mix of evergreen and deciduous trees</td></tr>
+          <tr><td><strong>Temperate Rainforest</strong></td><td>Temperate regions, high rainfall</td><td>Mild temperatures; high biodiversity; Tasmania, Pacific Northwest</td></tr>
+          <tr><td><strong>Temperate Deciduous Forest</strong></td><td>Temperate zones, 4 seasons</td><td>Moderate climate; leaves fall in autumn; oak, maple, beech</td></tr>
+          <tr><td><strong>Evergreen Coniferous / Boreal Forest (Taiga)</strong></td><td>Northern hemisphere</td><td>Cold climate; pine, spruce, fir; world's largest terrestrial biome</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>Forest Ecosystem — Biotic Components:</h4>
+    <ul class="note-list dot">
+      <li>Producers: Large trees, herbs, lianas (climbers), orchids</li>
+      <li>Primary consumers: Deer, elephant, moles</li>
+      <li>Secondary consumers: Snakes, lizards</li>
+      <li>Tertiary consumers: Tiger, lion</li>
+      <li>Decomposers: Bacteria, fungi</li>
+    </ul>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🌾</span> Grassland Ecosystems</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>Features</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tropical Grassland (Savanna)</strong></td><td>Near equator, seasonal heavy rain, drought-resistant trees; giraffes, zebras, lions</td><td>African Savanna, Australian Outback</td></tr>
+          <tr><td><strong>Temperate Grassland</strong></td><td>No trees/shrubs; cold winters (-40°C), hot summers (38°C); gentle slope; rodents, bisons</td><td>Prairies (S. America), Pampas (Africa), Steppes (Asia), Velds (C. Europe)</td></tr>
+          <tr><td><strong>Polar Grassland (Tundra)</strong></td><td>Severe cold, strong wind; permafrost; arctic wolf, arctic fox, reindeer</td><td>Arctic Tundra</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight highlight-blue">
+      <strong>🧊 Permafrost:</strong> Soil, rock or sediment that is frozen for more than two consecutive years. Found in Arctic Tundra below the active soil layer. Critical carbon store — melting due to climate change releases huge amounts of CH₄.
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">🏜️</span> Desert Ecosystems</h3>
+    <p>About 1/3rd of the world's land area is covered with deserts. Three major types:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>Features</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tropical Desert</strong></td><td>Hottest and driest; sporadic rainfall; may have no measurable precipitation for years</td><td>Sahara, Kalahari, Thar, Australian</td></tr>
+          <tr><td><strong>Temperate Desert</strong></td><td>Colder than tropical deserts; rocky floor</td><td>Mojave, Sonoran</td></tr>
+          <tr><td><strong>Cold Desert</strong></td><td>High latitude; hot summers, extremely cold winters</td><td>Gobi, Atacama, Great Basin, Namib</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="note-card fade-in">
+    <h3><span class="icon">💧</span> Aquatic Ecosystems</h3>
+    <h4>Pond Ecosystem:</h4>
+    <p>A small freshwater ecosystem with stagnant water. Can be seasonal. Notable features: Small size, stagnant water, highly exposed to human activities.</p>
+    <h4>Lake Ecosystem — Zonation (Stratification):</h4>
+    <ul class="note-list">
+      <li><strong>Epilimnion</strong> — Warm, lighter, circulating surface layer (sunlight available)</li>
+      <li><strong>Hypolimnion</strong> — Cold, viscous, non-circulating bottom layer (dark, deoxygenated)</li>
+    </ul>
+    <h4>Types of Lakes:</h4>
+    <ul class="note-list dot">
+      <li><strong>Oligotrophic</strong> — Low nutrient content, clear water, deep, high O₂</li>
+      <li><strong>Eutrophic</strong> — High nutrient content, algal blooms, low O₂ at bottom</li>
+      <li><strong>Dystrophic</strong> — Low pH, brown-coloured water, peat-rich</li>
+      <li>Endemic lakes, Desert salt lakes, Volcanic lakes, Meromictic (permanently stratified), Artificial lakes</li>
+    </ul>
+    <h4>Stream Stages:</h4>
+    <ul class="note-list dot">
+      <li><strong>Mountain highland (Young River)</strong> — Fast-flowing, turbulent, cold, high O₂</li>
+      <li><strong>Middle-aged River</strong> — Slower, wider, more nutrients</li>
+      <li><strong>Old River</strong> — Slow, wide, meandering, warm, nutrient-rich</li>
+    </ul>
+    <h4>Ocean Zones (from photic to aphotic):</h4>
+    <ul class="note-list">
+      <li><strong>Coastal zone</strong> — Shallow, most productive, rich in nutrients</li>
+      <li><strong>Euphotic zone</strong> — Abundant sunlight, high photosynthetic activity (~200 m depth)</li>
+      <li><strong>Bathyal zone</strong> — Dim light, few photosynthesisers (200–4,000 m)</li>
+      <li><strong>Abyssal zone</strong> — Complete darkness, extreme pressure, chemosynthetic organisms (&gt;4,000 m)</li>
+    </ul>
+    <h4>Aquatic Organisms by Mode of Life:</h4>
+    <ul class="note-list dot">
+      <li><strong>Planktons</strong> — Drift with water; algae, rotifers (phytoplankton + zooplankton)</li>
+      <li><strong>Nektons</strong> — Active swimmers; fishes</li>
+      <li><strong>Neustons</strong> — Live on water surface; water fleas</li>
+      <li><strong>Benthos</strong> — Bottom-dwelling; snails, crabs</li>
+      <li><strong>Periphytons</strong> — Attached to submerged surfaces; crustaceans</li>
+    </ul>
+  </div>
+</section>
+
+<!-- QUICK REVISION -->
+<section id="revision">
+  <div class="section-label">Quick Recap</div>
+  <h2 class="section-title">Quick Revision Sheet</h2>
+  <div class="revision-grid">
+    <div class="revision-card">
+      <h4>♻️ Resources</h4>
+      <ul>
+        <li>Renewable = replenished naturally</li>
+        <li>Non-renewable = cannot be replenished</li>
+        <li>Fossil fuels = non-renewable</li>
+        <li>Solar, wind, water = renewable</li>
+        <li>Pedology = science of land/soil</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>🌱 Soil Erosion Control</h4>
+      <ul>
+        <li>Contour farming, terracing</li>
+        <li>Strip cropping, agroforestry</li>
+        <li>Windbreaks, check dams</li>
+        <li>Stubble mulching</li>
+        <li>Afforestation</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>💧 Water Key Facts</h4>
+      <ul>
+        <li>71% Earth covered by water</li>
+        <li>Only 3% freshwater</li>
+        <li>Agriculture = 70% of water use</li>
+        <li>Kaveri dispute: Karnataka vs TN</li>
+        <li>Aquifer = underground water</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>🌳 Forest Facts</h4>
+      <ul>
+        <li>30% of Earth's land = forest</li>
+        <li>Forest from Latin "Fores" = outside</li>
+        <li>India = 24.56% forest cover</li>
+        <li>4 functions: Protective, Productive, Regulative, Accessory</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>⚡ Energy Quick Facts</h4>
+      <ul>
+        <li>SI unit = Joule</li>
+        <li>India = 4th largest wind producer</li>
+        <li>Nuclear = fission (split) / fusion (join)</li>
+        <li>Biomass = 32% India's primary energy</li>
+        <li>Solar PV: Silicon → cells → panels</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>🔬 Ecosystem Terms</h4>
+      <ul>
+        <li>Ecosystem: Tansley, 1935</li>
+        <li>Ecology: Ernst Haeckel, 1866</li>
+        <li>Producers = autotrophs</li>
+        <li>Decomposers = bacteria + fungi</li>
+        <li>Abiotic + Biotic = ecosystem</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>⚡ 10% Energy Rule</h4>
+      <ul>
+        <li>Only 10% passes to next level</li>
+        <li>90% lost as heat</li>
+        <li>Pyramid of energy always upright</li>
+        <li>Lindemann's Rule</li>
+        <li>1000 kcal plants → 100 kcal herbivore</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>🔄 Succession Types</h4>
+      <ul>
+        <li>Primary = bare new habitat</li>
+        <li>Secondary = disturbed existing habitat</li>
+        <li>Hydrosere = starts in pond</li>
+        <li>Lithosere = starts on bare rock</li>
+        <li>Ends at Climax community</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>🔺 Ecological Pyramids</h4>
+      <ul>
+        <li>Number: can be inverted</li>
+        <li>Biomass: can be inverted (aquatic)</li>
+        <li>Energy: ALWAYS upright</li>
+        <li>Producers at base; apex = top consumers</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note-card fade-in" style="background:var(--ink);color:var(--paper)">
+    <h3 style="color:var(--amber-mid)">🔥 Unit 2 — One-liner Summary</h3>
+    <p style="font-family:var(--font-notes);color:var(--paper)">Natural resources (renewable & non-renewable) support all life. Land resources face degradation through soil erosion, desertification, and mining — controlled by afforestation, terracing, check dams. Water resources are critical but threatened by unsustainable use, pollution, and over-extraction — managed via rainwater harvesting, watershed management. Forest resources provide protective, productive, regulative, and accessory functions — threatened by deforestation. Energy resources span renewable (solar, wind, hydro, biomass, tidal, geothermal) and non-renewable (fossil fuels, nuclear) sources. Ecosystem = biotic + abiotic components; food chains → food webs → ecological pyramids (energy always upright); ecological succession progresses from pioneer community to climax community.</p>
+  </div>
+</section>
+
+<!-- MCQs -->
+<section id="mcqs">
+  <div class="section-label">Practice Test</div>
+  <h2 class="section-title">Unit 2 — Practice MCQs (60 Questions)</h2>
+  <p style="font-family:var(--font-notes);color:var(--ink-light);margin-bottom:20px">60 MCQs covering all Unit 2 topics — 20 Easy · 25 Medium · 15 Hard. Click an option to check instantly.</p>
+  <div id="score-display">🎉 Score: <span id="score-val">0</span> correct out of <span id="score-total">0</span> answered</div>
+  <div class="mcq-header">
+    <div class="mcq-filter">
+      <button class="filter-btn active" data-filter="all">All (60)</button>
+      <button class="filter-btn" data-filter="easy">Easy (20)</button>
+      <button class="filter-btn" data-filter="medium">Medium (25)</button>
+      <button class="filter-btn" data-filter="hard">Hard (15)</button>
+    </div>
+    <div class="mcq-stats" id="mcq-stats">Showing 60 questions</div>
+  </div>
+  <div class="mcq-actions">
+    <button class="btn-primary" id="btn-reveal-all">Reveal All Answers</button>
+    <button class="btn-secondary" id="btn-reset">Reset Quiz</button>
+    <button class="btn-secondary" id="btn-show-score">Show Score</button>
+  </div>
+  <div id="mcq-container"></div>
+</section>
+
+</div><!-- /container -->
+<button id="back-top" title="Back to top">↑</button>
+<footer>
+  <p>📗 CHE 110 Environmental Studies • Unit 2 Study Notes</p>
+  <p style="margin-top:6px;font-size:.85rem">B.Tech CSE • Lovely Professional University • Session 2025-26</p>
+</footer>
+
+<script>
+const mcqs = [
+  // EASY (1-20)
+  {q:"What is a resource defined as?",opts:["A tool made by humans","A source or supply from which a benefit is produced","Any mineral found underground","Only water and energy"],ans:1,diff:"easy"},
+  {q:"Which of the following is a renewable resource?",opts:["Coal","Uranium","Solar energy","Natural gas"],ans:2,diff:"easy"},
+  {q:"Which of the following is a NON-renewable resource?",opts:["Wind energy","Tidal energy","Fossil fuels","Biomass"],ans:2,diff:"easy"},
+  {q:"The science dealing with land is known as:",opts:["Pedology","Geology","Hydrology","Ecology"],ans:0,diff:"easy"},
+  {q:"Soil erosion is also known as:",opts:["Land degradation","The creeping death of land","Desertification","Mining effect"],ans:1,diff:"easy"},
+  {q:"Which is the primary (ultimate) source of most energy on Earth?",opts:["Wind","Ocean","The Sun","Earth's core"],ans:2,diff:"easy"},
+  {q:"The SI unit of energy is:",opts:["Watt","Newton","Joule","Pascal"],ans:2,diff:"easy"},
+  {q:"The term 'ecosystem' was first used by:",opts:["Ernst Haeckel","Charles Darwin","Arthur Tansley","Lynn Margulis"],ans:2,diff:"easy"},
+  {q:"In which year was the term 'ecosystem' first used?",opts:["1900","1920","1935","1950"],ans:2,diff:"easy"},
+  {q:"Green plants in an ecosystem are called:",opts:["Consumers","Decomposers","Producers","Heterotrophs"],ans:2,diff:"easy"},
+  {q:"What percentage of energy is transferred from one trophic level to the next?",opts:["50%","25%","10%","5%"],ans:2,diff:"easy"},
+  {q:"Primary consumers in a food chain are:",opts:["Carnivores","Herbivores","Decomposers","Omnivores"],ans:1,diff:"easy"},
+  {q:"Ecological succession that starts on bare rock is called:",opts:["Hydrosere","Halosere","Lithosere","Xerosere"],ans:2,diff:"easy"},
+  {q:"The final stable community in ecological succession is called:",opts:["Pioneer community","Seral stage","Climax community","Nudation stage"],ans:2,diff:"easy"},
+  {q:"Deforestation means:",opts:["Planting new trees","Permanent destruction of forests","Controlled logging","Pruning trees"],ans:1,diff:"easy"},
+  {q:"India is the _____ largest producer of wind energy in the world:",opts:["1st","2nd","3rd","4th"],ans:3,diff:"easy"},
+  {q:"Aquifer is:",opts:["A type of tree","Underground porous rock saturated with water","A dam structure","A type of freshwater fish"],ans:1,diff:"easy"},
+  {q:"Bacteria and fungi in an ecosystem are called:",opts:["Producers","Primary consumers","Decomposers","Autotrophs"],ans:2,diff:"easy"},
+  {q:"Which farming technique leaves crop residue on the soil surface to act as natural mulch?",opts:["Contour farming","Stubble mulching","Terracing","Strip cropping"],ans:1,diff:"easy"},
+  {q:"What percentage of Earth's surface is covered by water?",opts:["50%","60%","71%","85%"],ans:2,diff:"easy"},
+
+  // MEDIUM (21-45)
+  {q:"Contour farming helps control soil erosion by:",opts:["Increasing slope angle","Plowing along land contours to reduce runoff","Adding chemical fertilizers","Burning crop residue"],ans:1,diff:"medium"},
+  {q:"Which of the following correctly describes 'Alley cropping'?",opts:["Growing crops in rows between watercourses","Growing rows of trees between crop rows (agroforestry)","Planting crops along contour lines","Growing only tree crops"],ans:1,diff:"medium"},
+  {q:"A check dam is primarily used to:",opts:["Generate electricity","Slow water flow and prevent soil erosion","Provide drinking water to cities","Store large volumes of irrigation water"],ans:1,diff:"medium"},
+  {q:"Desertification is best described as:",opts:["A natural process of desert expansion only","Reduction in biological productivity of drylands due to natural or human activities","The process of converting desert land to farmland","Seasonal drying of riverbeds"],ans:1,diff:"medium"},
+  {q:"Which sectors account for 70%, 20%, and 10% of global freshwater use respectively?",opts:["Industry, Agriculture, Domestic","Agriculture, Industry, Municipal","Municipal, Industry, Agriculture","Agriculture, Municipal, Industry"],ans:1,diff:"medium"},
+  {q:"The Kaveri water dispute is between which two states?",opts:["Maharashtra and Goa","Punjab and Haryana","Karnataka and Tamil Nadu","Andhra Pradesh and Telangana"],ans:2,diff:"medium"},
+  {q:"Watershed management primarily aims to:",opts:["Increase industrial production","Manage land and water resources for maximum productivity and ecological balance","Control forest fires","Reduce urban pollution"],ans:1,diff:"medium"},
+  {q:"The word 'forest' is derived from the Latin word 'Fores' meaning:",opts:["Trees","Inside","Outside","Green"],ans:2,diff:"medium"},
+  {q:"Forests cover approximately what percentage of Earth's total land area?",opts:["10%","20%","30%","50%"],ans:2,diff:"medium"},
+  {q:"The Pyramid of Energy in an ecosystem is:",opts:["Always inverted","Sometimes upright, sometimes inverted","Always upright","Depends on the ecosystem type"],ans:2,diff:"medium"},
+  {q:"Which type of lake has low nutrient content and high oxygen levels?",opts:["Eutrophic","Dystrophic","Oligotrophic","Meromictic"],ans:2,diff:"medium"},
+  {q:"Primary succession differs from secondary succession in that:",opts:["Primary is faster","Primary starts on bare habitat never colonized before; secondary starts on disturbed habitat","Secondary takes thousands of years","Primary requires soil to be present"],ans:1,diff:"medium"},
+  {q:"Nuclear energy through fission uses which elements?",opts:["Carbon, Hydrogen, Oxygen","Iron, Copper, Lead","Uranium, Thorium, Plutonium","Silicon, Germanium, Boron"],ans:2,diff:"medium"},
+  {q:"In a food chain, a frog eating insects represents which trophic level?",opts:["1st trophic level (Producer)","2nd trophic level (Primary consumer)","3rd trophic level (Secondary consumer)","4th trophic level (Tertiary consumer)"],ans:2,diff:"medium"},
+  {q:"Which renewable energy source is India's largest primary energy source (32% of total)?",opts:["Solar energy","Wind energy","Biomass energy","Hydroelectric energy"],ans:2,diff:"medium"},
+  {q:"The term 'ecology' was coined by Ernst Haeckel in:",opts:["1835","1856","1866","1876"],ans:2,diff:"medium"},
+  {q:"Eutrophication of lakes is caused by:",opts:["Reduced temperatures","Decreased nutrient input","Excessive nutrient input causing algal blooms","Increased water clarity"],ans:2,diff:"medium"},
+  {q:"What is the correct sequence of processes in ecological succession?",opts:["Invasion → Nudation → Competition → Reaction → Stabilization","Nudation → Invasion → Competition → Reaction → Stabilization","Competition → Nudation → Invasion → Reaction → Stabilization","Reaction → Nudation → Invasion → Competition → Stabilization"],ans:1,diff:"medium"},
+  {q:"Which ocean zone has abundant sunlight and high photosynthetic activity?",opts:["Abyssal zone","Bathyal zone","Euphotic zone","Benthic zone"],ans:2,diff:"medium"},
+  {q:"The Indus Water Treaty allocates Jhelum and Chenab rivers to:",opts:["India","Pakistan","Bangladesh","Nepal"],ans:1,diff:"medium"},
+  {q:"Which of the following is NOT a biotic component of an ecosystem?",opts:["Producers","Consumers","Decomposers","Soil minerals"],ans:3,diff:"medium"},
+  {q:"Detritus food chain starts from:",opts:["Green plants","Dead organic matter","Herbivores","Carnivores"],ans:1,diff:"medium"},
+  {q:"A Savanna is an example of which ecosystem type?",opts:["Temperate grassland","Polar grassland","Tropical grassland","Temperate forest"],ans:2,diff:"medium"},
+  {q:"Which gas causes global warming and is released when permafrost melts?",opts:["Nitrogen","Oxygen","Methane (CH₄)","Argon"],ans:2,diff:"medium"},
+  {q:"Afforestation is the process of:",opts:["Cutting trees for timber","Planting trees in areas without previous tree cover","Studying forest animals","Harvesting forest products"],ans:1,diff:"medium"},
+
+  // HARD (46-60)
+  {q:"In a lake ecosystem, the 'Hypolimnion' is characterized by:",opts:["Warm temperature, high light, active circulation","Cold temperature, high viscosity, non-circulating, bottom layer","Moderate temperature, mixed circulation","Only found in artificial lakes"],ans:1,diff:"hard"},
+  {q:"According to Lindemann's 10% Rule, if producers fix 100,000 kcal of energy, how much energy is available at the tertiary consumer level?",opts:["10,000 kcal","1,000 kcal","100 kcal","10 kcal"],ans:2,diff:"hard"},
+  {q:"Which type of ecological succession starts in a saline soil habitat?",opts:["Lithosere","Psammosere","Halosere","Hydrosere"],ans:2,diff:"hard"},
+  {q:"The difference between 'Nektons' and 'Neustons' in aquatic ecosystems is:",opts:["Nektons live on bottom; Neustons are free-floating","Nektons are active swimmers (e.g. fish); Neustons live on water surface (e.g. water fleas)","Nektons are microscopic; Neustons are macroscopic","Both terms refer to the same group of organisms"],ans:1,diff:"hard"},
+  {q:"Joint Forest Management (JFM) in India is a model that involves:",opts:["Only government agencies managing forests","Partnership between local communities and forest department for sustainable management","Only tribal communities managing forests without government involvement","Industrial management of state forests"],ans:1,diff:"hard"},
+  {q:"The pyramid of biomass is inverted in aquatic ecosystems because:",opts:["Aquatic producers are very large","The standing crop of phytoplankton (producers) is lower than that of zooplankton (consumers) at any given time","Decomposers dominate aquatic ecosystems","Energy flow is more efficient in water"],ans:1,diff:"hard"},
+  {q:"In the context of rainwater harvesting, what is the purpose of a 'percolation pit'?",opts:["To generate hydroelectric power","To allow collected rainwater to seep into the ground and recharge groundwater","To store rainwater for immediate use","To measure rainfall quantity"],ans:1,diff:"hard"},
+  {q:"Which of the following statements about the 10% rule is INCORRECT?",opts:["It was proposed by Lindemann","It states that 10% of energy passes from each trophic level to the next","It applies to all types of ecosystems uniformly","The remaining 90% is lost as heat, movement, and respiration"],ans:2,diff:"hard"},
+  {q:"The Sutlej-Yamuna Link (SYL) canal dispute is between which states?",opts:["Haryana and Uttar Pradesh","Punjab and Haryana","Punjab and Rajasthan","Haryana and Himachal Pradesh"],ans:1,diff:"hard"},
+  {q:"In a forest ecosystem, which canopy layer receives the most sunlight and contains the tallest trees?",opts:["Understory","Canopy layer","Emergent layer","Forest floor"],ans:2,diff:"hard"},
+  {q:"What is 'bioaccumulation' in the context of food chains?",opts:["Natural decomposition of organic matter","Increase in concentration of a toxic substance at higher trophic levels","Accumulation of biomass at producer level","The process by which biomass increases in ecosystems"],ans:1,diff:"hard"},
+  {q:"The Aral Sea conflict involves water management disputes between:",opts:["India and Pakistan","Egypt and Ethiopia","Kazakhstan, Uzbekistan, Tajikistan, Turkmenistan","Israel, Lebanon, Jordan, Palestine"],ans:2,diff:"hard"},
+  {q:"Which of the following ecosystems has the HIGHEST gross primary productivity?",opts:["Desert","Temperate grassland","Tropical rainforest","Arctic tundra"],ans:2,diff:"hard"},
+  {q:"'Shifting cultivation' (Jhum farming) contributes to deforestation because:",opts:["It plants too many trees","It involves burning and clearing forest patches for temporary cultivation, then moving on","It uses too much water","It increases soil fertility permanently"],ans:1,diff:"hard"},
+  {q:"In the context of soil formation, 'parent material' refers to:",opts:["The organic matter in soil","The organisms living in soil","The original rock from which soil forms and which determines its mineral content","The climate affecting soil formation"],ans:2,diff:"hard"},
+];
+
+const container = document.getElementById('mcq-container');
+let answered=0,correct=0;
+
+function renderMCQs(filter='all'){
+  container.innerHTML='';
+  const filtered=filter==='all'?mcqs:mcqs.filter(m=>m.diff===filter);
+  document.getElementById('mcq-stats').textContent=`Showing ${filtered.length} questions`;
+  filtered.forEach((mcq,i)=>{
+    const gi=mcqs.indexOf(mcq);
+    const div=document.createElement('div');
+    div.className='mcq-item';div.dataset.difficulty=mcq.diff;div.dataset.idx=gi;div.dataset.answered='false';
+    const opts=mcq.opts.map((o,oi)=>`<button class="mcq-option" data-oi="${oi}" onclick="selectOption(this,${gi},${oi})"><span class="option-letter">${String.fromCharCode(65+oi)}</span>${o}</button>`).join('');
+    div.innerHTML=`<div class="mcq-q"><span class="mcq-difficulty diff-${mcq.diff}">${mcq.diff}</span><span class="q-num">Q${i+1}</span> ${mcq.q}</div><div class="mcq-options">${opts}</div><button class="btn-show-answer" onclick="showAns(this,${gi})">Show Answer</button><div class="mcq-answer" id="ans-${gi}">✅ Correct: <strong>${String.fromCharCode(65+mcq.ans)}) ${mcq.opts[mcq.ans]}</strong></div>`;
+    container.appendChild(div);
+  });
+}
+
+function selectOption(btn,idx,oi){
+  const item=btn.closest('.mcq-item');
+  if(item.dataset.answered==='true')return;
+  item.dataset.answered='true';
+  const isCorrect=oi===mcqs[idx].ans;
+  item.querySelectorAll('.mcq-option').forEach(o=>o.disabled=true);
+  btn.classList.add(isCorrect?'correct':'wrong');
+  item.querySelectorAll('.mcq-option')[mcqs[idx].ans].classList.add('revealed');
+  document.getElementById(`ans-${idx}`).classList.add('show');
+  answered++;if(isCorrect)correct++;updateScore();
+}
+
+function showAns(btn,idx){
+  const item=btn.closest('.mcq-item');
+  document.getElementById(`ans-${idx}`).classList.add('show');
+  item.querySelectorAll('.mcq-option').forEach(o=>o.disabled=true);
+  item.querySelectorAll('.mcq-option')[mcqs[idx].ans].classList.add('revealed');
+  if(item.dataset.answered==='false'){item.dataset.answered='true';answered++;updateScore();}
+}
+
+function updateScore(){
+  document.getElementById('score-display').style.display='block';
+  document.getElementById('score-val').textContent=correct;
+  document.getElementById('score-total').textContent=answered;
+}
+
+document.getElementById('btn-reveal-all').addEventListener('click',()=>{
+  document.querySelectorAll('.mcq-answer').forEach(a=>a.classList.add('show'));
+  document.querySelectorAll('.mcq-option').forEach(o=>o.disabled=true);
+  mcqs.forEach((m,idx)=>{const el=document.querySelector(`[data-idx="${idx}"]`);if(el)el.querySelectorAll('.mcq-option')[m.ans].classList.add('revealed');});
+});
+document.getElementById('btn-reset').addEventListener('click',()=>{answered=0;correct=0;document.getElementById('score-display').style.display='none';renderMCQs(document.querySelector('.filter-btn.active').dataset.filter);});
+document.getElementById('btn-show-score').addEventListener('click',()=>{updateScore();document.getElementById('score-display').scrollIntoView({behavior:'smooth'});});
+document.querySelectorAll('.filter-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderMCQs(btn.dataset.filter);});});
+
+renderMCQs();
+
+// DARK MODE
+document.getElementById('theme-btn').addEventListener('click',()=>{
+  const dark=document.body.dataset.theme==='dark';
+  document.body.dataset.theme=dark?'light':'dark';
+  document.getElementById('theme-btn').textContent=dark?'🌙':'☀️';
+});
+
+// PROGRESS
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('progress-bar').style.width=(s/t*100)+'%';
+  document.getElementById('back-top').classList.toggle('visible',s>400);
+});
+document.getElementById('back-top').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// PRINT
+document.getElementById('print-btn').addEventListener('click',()=>{document.querySelectorAll('.mcq-answer').forEach(a=>a.classList.add('show'));window.print();});
+
+// SEARCH
+const searchBox=document.getElementById('search-box'),searchInput=document.getElementById('search-input'),searchResults=document.getElementById('search-results');
+document.getElementById('search-btn').addEventListener('click',()=>{searchBox.classList.add('open');searchInput.focus();});
+searchBox.addEventListener('click',e=>{if(e.target===searchBox)searchBox.classList.remove('open');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')searchBox.classList.remove('open');if((e.ctrlKey||e.metaKey)&&e.key==='f'){e.preventDefault();searchBox.classList.add('open');searchInput.focus();}});
+searchInput.addEventListener('input',()=>{
+  const q=searchInput.value.trim().toLowerCase();searchResults.innerHTML='';
+  if(!q)return;
+  const all=document.querySelectorAll('.note-card p,.note-card li,.note-card h3,.note-card h4');
+  const matches=[];
+  all.forEach(el=>{if(el.textContent.toLowerCase().includes(q)){const sec=el.closest('section');const t=sec?sec.querySelector('.section-title')?.textContent||'Section':'Section';matches.push({text:el.textContent.substring(0,100),title:t,el});}});
+  const unique=matches.slice(0,8);
+  if(!unique.length){searchResults.innerHTML='<p style="font-family:var(--font-notes);color:var(--ink-light);padding:10px">No results found.</p>';return;}
+  unique.forEach(m=>{const item=document.createElement('div');item.className='search-result-item';const hl=m.text.replace(new RegExp(q,'gi'),s=>`<span class="match-text">${s}</span>`);item.innerHTML=`<div style="font-size:.8rem;color:var(--ink-light)">${m.title}</div><div>${hl}...</div>`;item.addEventListener('click',()=>{searchBox.classList.remove('open');m.el.scrollIntoView({behavior:'smooth',block:'center'});});searchResults.appendChild(item);});
+});
+
+// FADE IN
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ================= INJECTED UI SCRIPT ================= -->
+<script>
+(function() {
+  if(!document.querySelector('link[href*="Kalam"]')) {
+    document.head.insertAdjacentHTML('beforeend', '<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>');
+  }
+  
+  const style = document.createElement('style');
+  style.textContent = `
+    :root, body[data-theme="light"] {
+      --white: #FFFFFF !important;
+      --beige: #F8F5EE !important;
+      --paper: #FFFDF7 !important;
+      --sky: #87CEEB !important;
+      --sky-light: #E8F4FD !important;
+      --yellow: #FFF3B0 !important;
+      --yellow-dark: #F7C948 !important;
+      --pink: #FFE4E8 !important;
+      --pink-dark: #F78FA7 !important;
+      --lavender: #EDE7F6 !important;
+      --lavender-dark: #9C6FE4 !important;
+      --mint: #E8F5E9 !important;
+      --mint-dark: #4CAF82 !important;
+      --ink: #2C2C2C !important;
+      --ink-light: #555 !important;
+      --blue-accent: #4A90D9 !important;
+      --red-accent: #E74C3C !important;
+      --orange-accent: #F39C12 !important;
+      --green-accent: #27AE60 !important;
+      --purple-accent: #8E44AD !important;
+      --shadow: rgba(0, 0, 0, 0.08) !important;
+    }
+    [data-theme="dark"], body.dark {
+      --white: #1a1a2e !important;
+      --beige: #16213e !important;
+      --paper: #0f3460 !important;
+      --ink: #e0e0e0 !important;
+      --ink-light: #bbb !important;
+      --sky-light: #1a2a3a !important;
+      --yellow: #2a2a00 !important;
+      --pink: #2a0a10 !important;
+      --lavender: #1a1030 !important;
+      --mint: #0a2a15 !important;
+    }
+    
+    html {
+      font-size: 125% !important; /* Scale entire UI slightly larger */
+    }
+    
+    body {
+      background-color: var(--beige) !important;
+      font-family: 'Nunito', sans-serif !important;
+      color: var(--ink) !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, #e8e0d0 27px, #e8e0d0 28px), repeating-linear-gradient(90deg, transparent, transparent 27px, transparent 27px) !important;
+      background-size: 100% 28px !important;
+      font-size: 1.05rem !important; /* Extra boost for base font if ems aren't used */
+    }
+    body[data-theme="dark"], body.dark {
+      background-color: #16213e !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(255, 255, 255, 0.05) 27px, rgba(255, 255, 255, 0.05) 28px) !important;
+    }
+
+    h1, h2, h3, h4, .section-title, p {
+      font-family: 'Nunito', sans-serif !important;
+    }
+    
+    .nav-brand {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      color: var(--blue-accent) !important;
+      font-size: 1.5rem !important;
+    }
+    
+    nav, .nav-sticky, #navbar {
+      background: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(12px) !important;
+      border-bottom: 2px dashed #e0d5c5 !important;
+      box-shadow: 0 2px 20px var(--shadow) !important;
+    }
+    body.dark nav, body[data-theme="dark"] nav, body.dark .nav-sticky, body.dark #navbar {
+      background: rgba(22, 33, 62, 0.9) !important;
+      border-bottom-color: #333 !important;
+    }
+    
+    header.hero, section#hero, .hero {
+      background: var(--paper) !important;
+      border: 3px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      margin: 30px auto !important;
+      max-width: 960px !important;
+      box-shadow: 4px 4px 0 #e0d5c5, 8px 8px 0 #d8ccb8 !important;
+    }
+    header.hero::before, section#hero::before, .hero::before {
+      display: none !important;
+    }
+    
+    .hero-title {
+      font-family: 'Kalam', cursive !important;
+      color: var(--blue-accent) !important;
+      border-bottom: 3px dashed var(--blue-accent) !important;
+      display: inline-block !important;
+      padding-bottom: 4px !important;
+    }
+    
+    .hero-subtitle, .hero-unit-badge, .hero-unit {
+      font-family: 'Caveat', cursive !important;
+      color: #999 !important;
+      letter-spacing: 2px !important;
+      background: transparent !important;
+      border: none !important;
+    }
+
+    h2.section-heading, .section-header {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      border-bottom: 2px dashed #e8dfc8 !important;
+      padding-bottom: 8px !important;
+    }
+    
+    .note-card, .resource-card, .def-box {
+      background: var(--paper) !important;
+      border-radius: 12px !important;
+      border-left: 5px solid var(--blue-accent) !important;
+      box-shadow: 2px 2px 8px var(--shadow) !important;
+      font-family: 'Kalam', cursive !important;
+    }
+    
+    .note-card.green, .def-box.green { border-left-color: var(--mint-dark) !important; }
+    .note-card.red, .def-box.red { border-left-color: var(--pink-dark) !important; }
+    .note-card.yellow, .def-box.yellow { border-left-color: var(--yellow-dark) !important; }
+    
+    /* Make index.html cards look PEL125 style */
+    .unit-card {
+      background: var(--paper) !important;
+      border: 2px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      box-shadow: 3px 3px 0 #e0d5c5 !important;
+      transition: transform 0.2s !important;
+    }
+    .unit-card:hover {
+      transform: translateY(-5px) !important;
+      box-shadow: 5px 5px 0 #d8ccb8 !important;
+    }
+    .unit-badge {
+      background: var(--sky-light) !important;
+      color: var(--blue-accent) !important;
+      font-family: 'Caveat', cursive !important;
+    }
+  `;
+  document.head.appendChild(style);
+
+})();
+</script>
+
+</body>
+</html>

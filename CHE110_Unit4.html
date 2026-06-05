@@ -1,0 +1,3230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHE110 – Unit 4: Environmental Pollution</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ===== CSS VARIABLES ===== */
+  :root {
+    --paper: #faf8f2;
+    --paper-dark: #f2ede0;
+    --paper-line: #e8e0cc;
+    --ink: #1a1a1a;
+    --ink-soft: #3a3530;
+    --blue-ink: #1a4a8a;
+    --blue-soft: #4a7ab5;
+    --blue-light: #ddeeff;
+    --red-ink: #b5200a;
+    --green-ink: #1a6b3a;
+    --green-light: #d4f0de;
+    --brown: #7a5c3a;
+    --brown-light: #f0e6d6;
+    --yellow-highlight: #fff3a3;
+    --orange-highlight: #ffe0b2;
+    --margin-line: #e0d4c4;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 32px rgba(0,0,0,0.14);
+    --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+
+    /* Dark mode */
+    --dm-bg: #1a1a1a;
+    --dm-surface: #242424;
+    --dm-surface2: #2e2e2e;
+    --dm-text: #e8e0cc;
+    --dm-text-soft: #b8aa90;
+    --dm-blue: #6aa3e8;
+    --dm-border: #3a3530;
+  }
+
+  /* ===== DARK MODE ===== */
+  body.dark {
+    background: var(--dm-bg);
+    color: var(--dm-text);
+  }
+  body.dark .page-wrapper { background: var(--dm-bg); }
+  body.dark .note-card { background: var(--dm-surface); border-color: var(--dm-border); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+  body.dark .section-heading { color: var(--dm-blue); border-bottom-color: var(--dm-border); }
+  body.dark .sub-heading { color: #b8aa90; }
+  body.dark .definition-box { background: #1e2a1e; border-color: #3a6b4a; }
+  body.dark .callout { background: #1a2035; border-color: #3a5080; }
+  body.dark .callout.warning { background: #2a1a10; border-color: #804020; }
+  body.dark .callout.success { background: #102a15; border-color: #305a30; }
+  body.dark .highlight-box { background: #2a2510; border-color: #6a5a20; }
+  body.dark table { color: var(--dm-text); }
+  body.dark th { background: #1e3050 !important; color: #aaccff !important; border-color: #2a4070 !important; }
+  body.dark td { border-color: var(--dm-border) !important; }
+  body.dark tr:nth-child(even) td { background: #262626 !important; }
+  body.dark .mcq-item { background: var(--dm-surface); border-color: var(--dm-border); }
+  body.dark .answer-reveal { background: #102a15; border-color: #305030; color: #80c080; }
+  body.dark .nav-sticky { background: rgba(26,26,26,0.96); border-bottom-color: var(--dm-border); }
+  body.dark .progress-bar-container { background: #2e2e2e; }
+  body.dark .hero { background: linear-gradient(160deg, #0a1a0a 0%, #0d2010 50%, #0a1a15 100%); }
+  body.dark .revision-card { background: var(--dm-surface); border-color: var(--dm-border); }
+  body.dark .summary-grid .sum-card { background: var(--dm-surface2); border-color: var(--dm-border); }
+  body.dark .pill { background: #1e3050; color: #aaccff; }
+  body.dark .mcq-option { color: var(--dm-text-soft); }
+  body.dark .search-box { background: var(--dm-surface); border-color: var(--dm-border); color: var(--dm-text); }
+  body.dark .difficulty-badge { filter: brightness(0.8); }
+  body.dark .topic-nav a { color: #aabbdd; }
+  body.dark .topic-nav a:hover { background: rgba(255,255,255,0.05); }
+  body.dark .formula-box { background: #1a1a2e; border-color: #304070; color: #aaccff; }
+
+  /* ===== BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Crimson Pro', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 17px;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .page-wrapper {
+    background: var(--paper);
+    min-height: 100vh;
+    transition: background 0.3s;
+  }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-bar-container {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--paper-line);
+    z-index: 1000;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-ink), var(--green-ink));
+    width: 0%;
+    transition: width 0.1s;
+  }
+
+  /* ===== STICKY NAV ===== */
+  .nav-sticky {
+    position: sticky;
+    top: 0;
+    background: rgba(250,248,242,0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 900;
+    border-bottom: 2px solid var(--paper-line);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .nav-brand {
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--blue-ink);
+    text-decoration: none;
+  }
+
+  .nav-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1.5px solid var(--paper-line);
+    background: white;
+    font-size: 0.9rem;
+    font-family: 'Crimson Pro', serif;
+    outline: none;
+    width: 200px;
+    transition: var(--transition);
+  }
+  .search-box:focus { border-color: var(--blue-soft); box-shadow: 0 0 0 3px rgba(74,122,181,0.15); }
+
+  .btn-nav {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1.5px solid var(--paper-line);
+    background: transparent;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: 'Crimson Pro', serif;
+    color: var(--ink-soft);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .btn-nav:hover { background: var(--blue-light); border-color: var(--blue-soft); color: var(--blue-ink); }
+  body.dark .btn-nav { color: var(--dm-text-soft); border-color: var(--dm-border); }
+  body.dark .btn-nav:hover { background: #1e3050; color: #aaccff; border-color: #3a6090; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(160deg, #0a2a0a 0%, #1a4a1a 40%, #0d3020 100%);
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 80%, rgba(50,150,80,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(30,100,160,0.2) 0%, transparent 60%);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; margin: auto; }
+  .hero-subtitle {
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .hero-unit {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(8px);
+    padding: 10px 32px;
+    border-radius: 40px;
+    font-family: 'Lora', serif;
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.9);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-tag {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
+    font-family: 'Crimson Pro', serif;
+  }
+
+  /* ===== TOPIC NAV ===== */
+  .topic-nav {
+    background: var(--brown-light);
+    border-bottom: 1px solid var(--margin-line);
+    padding: 12px 24px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  .topic-nav a {
+    white-space: nowrap;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    text-decoration: none;
+    color: var(--brown);
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 1.5px solid transparent;
+    transition: var(--transition);
+  }
+  .topic-nav a:hover, .topic-nav a.active {
+    background: white;
+    border-color: var(--brown);
+    color: var(--ink);
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .main-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ===== SECTION HEADING ===== */
+  .section-heading {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: var(--blue-ink);
+    border-bottom: 3px solid var(--paper-line);
+    padding-bottom: 12px;
+    margin: 48px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-heading .sec-num {
+    background: var(--blue-ink);
+    color: white;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-family: 'Caveat', cursive;
+    flex-shrink: 0;
+  }
+  .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+
+  .sub-heading {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--red-ink);
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sub-heading::before { content: '✦'; font-size: 1rem; opacity: 0.7; }
+
+  .sub-sub-heading {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--green-ink);
+    margin: 20px 0 8px;
+    padding-left: 16px;
+    border-left: 3px solid var(--green-ink);
+  }
+
+  /* ===== NOTE CARD ===== */
+  .note-card {
+    background: white;
+    border: 1px solid var(--paper-line);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 20px 0;
+    box-shadow: var(--shadow);
+    position: relative;
+    transition: var(--transition);
+  }
+  .note-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: linear-gradient(180deg, var(--blue-ink), var(--green-ink));
+    border-radius: 16px 0 0 16px;
+  }
+  .note-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+
+  .note-card.blue::before { background: linear-gradient(180deg, #1a4a8a, #4a7ab5); }
+  .note-card.green::before { background: linear-gradient(180deg, #1a6b3a, #3a9a5a); }
+  .note-card.red::before { background: linear-gradient(180deg, #b5200a, #e04030); }
+  .note-card.brown::before { background: linear-gradient(180deg, #7a5c3a, #b08050); }
+  .note-card.purple::before { background: linear-gradient(180deg, #5a2a8a, #9a60c0); }
+
+  /* ===== SPECIAL BOXES ===== */
+  .definition-box {
+    background: var(--green-light);
+    border: 1.5px solid #3a9a5a;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 16px 0;
+    position: relative;
+  }
+  .definition-box::before {
+    content: '📝 Definition';
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--green-ink);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .callout {
+    border-left: 4px solid var(--blue-soft);
+    background: var(--blue-light);
+    padding: 14px 18px;
+    border-radius: 0 12px 12px 0;
+    margin: 16px 0;
+    font-style: italic;
+  }
+  .callout.warning {
+    border-color: #e07030;
+    background: #fff4e8;
+  }
+  .callout.success {
+    border-color: var(--green-ink);
+    background: var(--green-light);
+  }
+  .callout.remember {
+    border-color: #b5200a;
+    background: #fff0ee;
+  }
+
+  .highlight-box {
+    background: var(--yellow-highlight);
+    border: 1.5px solid #cca800;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+  }
+
+  .formula-box {
+    background: #f0f4ff;
+    border: 2px solid var(--blue-soft);
+    border-radius: 10px;
+    padding: 14px 20px;
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--blue-ink);
+    margin: 14px 0;
+    letter-spacing: 0.03em;
+  }
+
+  /* ===== LISTS ===== */
+  .note-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+  .note-list li {
+    padding: 6px 0 6px 28px;
+    position: relative;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .note-list li::before {
+    content: '→';
+    position: absolute;
+    left: 4px;
+    color: var(--blue-soft);
+    font-weight: 700;
+  }
+  .note-list.checks li::before { content: '✓'; color: var(--green-ink); }
+  .note-list.stars li::before { content: '★'; color: #cc8800; font-size: 0.9rem; }
+  .note-list.bullets li::before { content: '•'; color: var(--red-ink); font-size: 1.2rem; }
+
+  /* ===== PILLS ===== */
+  .pill {
+    display: inline-block;
+    background: var(--blue-light);
+    color: var(--blue-ink);
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    margin: 2px;
+    border: 1px solid rgba(74,122,181,0.3);
+  }
+  .pill.red { background: #ffe0de; color: var(--red-ink); border-color: rgba(181,32,10,0.3); }
+  .pill.green { background: var(--green-light); color: var(--green-ink); border-color: rgba(26,107,58,0.3); }
+  .pill.orange { background: var(--orange-highlight); color: #8a3a00; border-color: rgba(138,58,0,0.3); }
+
+  /* ===== TABLE ===== */
+  .table-wrapper { overflow-x: auto; margin: 20px 0; border-radius: 12px; box-shadow: var(--shadow); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  th {
+    background: var(--blue-ink) !important;
+    color: white !important;
+    padding: 12px 16px;
+    text-align: left;
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+  }
+  td {
+    padding: 10px 16px;
+    border: 1px solid var(--paper-line) !important;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  tr:nth-child(even) td { background: var(--paper-dark) !important; }
+  tr:hover td { background: var(--blue-light) !important; }
+
+  /* ===== DIAGRAM-STYLE BOXES ===== */
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+    padding: 16px;
+    background: var(--paper-dark);
+    border-radius: 12px;
+    border: 1px dashed var(--paper-line);
+  }
+  .flow-step {
+    background: white;
+    border: 1.5px solid var(--blue-soft);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.05rem;
+    color: var(--blue-ink);
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .flow-arrow { font-size: 1.3rem; color: var(--blue-soft); font-weight: 700; }
+
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .concept-card {
+    background: var(--paper-dark);
+    border: 1.5px solid var(--paper-line);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    transition: var(--transition);
+  }
+  .concept-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+  .concept-card .cc-icon { font-size: 2rem; margin-bottom: 8px; display: block; }
+  .concept-card .cc-title { font-family: 'Caveat', cursive; font-size: 1.1rem; font-weight: 700; color: var(--blue-ink); }
+  .concept-card .cc-desc { font-size: 0.88rem; color: var(--ink-soft); margin-top: 6px; }
+  body.dark .concept-card { background: var(--dm-surface); border-color: var(--dm-border); }
+  body.dark .concept-card .cc-title { color: var(--dm-blue); }
+  body.dark .concept-card .cc-desc { color: var(--dm-text-soft); }
+
+  /* ===== QUICK REVISION ===== */
+  .revision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .revision-card {
+    background: white;
+    border: 1.5px solid var(--paper-line);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: var(--transition);
+  }
+  .revision-card:hover { box-shadow: var(--shadow-hover); }
+  .revision-card h4 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--blue-ink);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px dashed var(--paper-line);
+  }
+  .revision-card p, .revision-card li { font-size: 0.9rem; color: var(--ink-soft); }
+
+  /* ===== MCQ SECTION ===== */
+  .mcq-section { margin-top: 60px; }
+  .mcq-header {
+    text-align: center;
+    padding: 32px 24px;
+    background: linear-gradient(135deg, #0a2a0a, #1a4a2a);
+    border-radius: 20px;
+    margin-bottom: 32px;
+    color: white;
+  }
+  .mcq-header h2 { font-family: 'Lora', serif; font-size: 2rem; margin-bottom: 8px; }
+  .mcq-header p { font-size: 0.95rem; opacity: 0.85; }
+  .mcq-stats { display: flex; gap: 24px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  .mcq-stat { text-align: center; }
+  .mcq-stat .stat-num { font-family: 'Caveat', cursive; font-size: 2rem; font-weight: 700; }
+  .mcq-stat .stat-label { font-size: 0.8rem; opacity: 0.75; }
+
+  .difficulty-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .diff-tab {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1.5px solid var(--paper-line);
+    background: white;
+    cursor: pointer;
+    font-family: 'Caveat', cursive;
+    font-size: 1.05rem;
+    transition: var(--transition);
+  }
+  .diff-tab.active { background: var(--blue-ink); color: white; border-color: var(--blue-ink); }
+  body.dark .diff-tab { background: var(--dm-surface); border-color: var(--dm-border); color: var(--dm-text); }
+  body.dark .diff-tab.active { background: #1e4080; color: white; border-color: #2a60c0; }
+
+  .difficulty-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'Lora', serif;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .difficulty-badge.easy { background: #d4f0de; color: var(--green-ink); }
+  .difficulty-badge.medium { background: var(--orange-highlight); color: #7a3a00; }
+  .difficulty-badge.hard { background: #ffe0de; color: var(--red-ink); }
+
+  .mcq-item {
+    background: white;
+    border: 1px solid var(--paper-line);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin: 16px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: var(--transition);
+  }
+  .mcq-item:hover { box-shadow: var(--shadow-hover); }
+  .mcq-item.hidden { display: none; }
+
+  .mcq-q-num {
+    font-family: 'Caveat', cursive;
+    font-size: 0.95rem;
+    color: var(--blue-soft);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mcq-question {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.55;
+  }
+  body.dark .mcq-question { color: var(--dm-text); }
+
+  .mcq-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  @media (max-width: 560px) { .mcq-options { grid-template-columns: 1fr; } }
+
+  .mcq-option {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: var(--paper-dark);
+    font-size: 0.93rem;
+    color: var(--ink-soft);
+    border: 1px solid var(--paper-line);
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: left;
+    font-family: 'Crimson Pro', serif;
+  }
+  .mcq-option:hover { background: var(--blue-light); border-color: var(--blue-soft); }
+  .mcq-option.correct { background: var(--green-light); border-color: var(--green-ink); color: var(--green-ink); font-weight: 600; }
+  .mcq-option.wrong { background: #ffe0de; border-color: var(--red-ink); color: var(--red-ink); }
+  body.dark .mcq-option { background: var(--dm-surface2); border-color: var(--dm-border); color: var(--dm-text-soft); }
+  body.dark .mcq-option:hover { background: #1e2a3e; border-color: #3a6090; color: var(--dm-text); }
+
+  .show-answer-btn {
+    background: none;
+    border: 1.5px solid var(--blue-soft);
+    color: var(--blue-soft);
+    padding: 5px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    transition: var(--transition);
+  }
+  .show-answer-btn:hover { background: var(--blue-light); }
+
+  .answer-reveal {
+    margin-top: 10px;
+    padding: 10px 16px;
+    background: var(--green-light);
+    border-radius: 8px;
+    border-left: 4px solid var(--green-ink);
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--green-ink);
+    display: none;
+  }
+  .answer-reveal.shown { display: block; animation: fadeIn 0.3s; }
+  .answer-reveal .explanation { font-family: 'Crimson Pro', serif; font-size: 0.9rem; color: var(--ink-soft); font-weight: 400; margin-top: 4px; }
+  body.dark .answer-reveal .explanation { color: var(--dm-text-soft); }
+
+  /* ===== SUMMARY GRID ===== */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .sum-card {
+    background: var(--paper-dark);
+    border: 1.5px solid var(--paper-line);
+    border-radius: 14px;
+    padding: 20px;
+    transition: var(--transition);
+  }
+  .sum-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .sum-card .sum-icon { font-size: 2rem; margin-bottom: 10px; }
+  .sum-card h4 { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--blue-ink); margin-bottom: 8px; }
+  .sum-card p { font-size: 0.88rem; color: var(--ink-soft); }
+  body.dark .sum-card h4 { color: var(--dm-blue); }
+  body.dark .sum-card p { color: var(--dm-text-soft); }
+
+  /* ===== BACK TO TOP ===== */
+  #backToTop {
+    position: fixed;
+    bottom: 32px;
+    right: 24px;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--blue-ink);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 16px rgba(26,74,138,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+    z-index: 800;
+  }
+  #backToTop.visible { opacity: 1; pointer-events: auto; }
+  #backToTop:hover { background: var(--green-ink); transform: translateY(-3px); }
+
+  /* ===== SEARCH HIGHLIGHT ===== */
+  .search-mark { background: var(--yellow-highlight); border-radius: 3px; padding: 0 2px; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+
+  .fade-in { animation: fadeIn 0.5s ease-out both; }
+  .slide-in { animation: slideIn 0.4s ease-out both; }
+
+  section { animation: fadeIn 0.6s ease-out both; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-sticky { padding: 8px 16px; }
+    .main-content { padding: 24px 16px 60px; }
+    .note-card { padding: 20px 18px 20px 24px; }
+    .hero { padding: 60px 16px 40px; }
+    .topic-nav { padding: 10px 16px; }
+    .search-box { width: 150px; }
+    .mcq-options { grid-template-columns: 1fr; }
+    .concept-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .nav-sticky, .topic-nav, #backToTop, .progress-bar-container, .btn-nav, .search-box, .nav-actions, .show-answer-btn, .diff-tab { display: none !important; }
+    .hero { background: #1a4a1a !important; print-color-adjust: exact; }
+    .note-card { box-shadow: none; border: 1px solid #ccc; }
+    .mcq-item { break-inside: avoid; }
+    body { font-size: 14px; }
+    .answer-reveal { display: block !important; }
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--paper-line), transparent);
+    margin: 40px 0;
+  }
+
+  /* ===== TEXTUAL STYLES ===== */
+  strong, b { color: var(--blue-ink); }
+  body.dark strong, body.dark b { color: var(--dm-blue); }
+  em { color: var(--red-ink); font-style: italic; }
+  body.dark em { color: #e08070; }
+
+  p { margin-bottom: 12px; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 16px 0;
+  }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* Mark important */
+  .imp { background: var(--yellow-highlight); padding: 1px 4px; border-radius: 3px; }
+  body.dark .imp { background: #3a3010; }
+
+  /* No highlight in search mode */
+  .no-match { opacity: 0.35; }
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- STICKY NAV -->
+<nav class="nav-sticky" id="mainNav">
+  <a class="nav-brand" href="#hero">✏️ CHE110 – Unit 4</a>
+  <div class="nav-actions">
+    <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search notes..." aria-label="Search notes">
+    <button class="btn-nav" onclick="window.print()">🖨️ Print</button>
+    <button class="btn-nav" id="darkToggle">🌙 Dark</button>
+  </div>
+</nav>
+
+<!-- TOPIC NAV -->
+<div class="topic-nav" id="topicNav">
+  <a href="#intro">Intro</a>
+  <a href="#air">Air Pollution</a>
+  <a href="#water">Water Pollution</a>
+  <a href="#soil">Soil Pollution</a>
+  <a href="#noise">Noise Pollution</a>
+  <a href="#radiation">Radiation</a>
+  <a href="#emerging">Emerging</a>
+  <a href="#fireworks">Fireworks</a>
+  <a href="#globalwarming">Global Warming</a>
+  <a href="#ozone">Ozone</a>
+  <a href="#acidrain">Acid Rain</a>
+  <a href="#casestudies">Case Studies</a>
+  <a href="#solidwaste">Solid Waste</a>
+  <a href="#revision">Revision</a>
+  <a href="#mcq">MCQs</a>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-subtitle">CHE 110 · Environmental Studies · B.Tech CSE 1st Year</div>
+    <h1 class="hero-title">Environmental Pollution</h1>
+    <div class="hero-unit">Unit IV — Complete Study Notes</div>
+    <div class="hero-meta">
+      <span class="hero-tag">📘 Detailed Notes</span>
+      <span class="hero-tag">🧠 60 MCQs</span>
+      <span class="hero-tag">⚡ Quick Revision</span>
+      <span class="hero-tag">📊 Tables & Diagrams</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="main-content" id="mainContent">
+
+<!-- ===================== SECTION 1: INTRODUCTION ===================== -->
+<section id="intro">
+  <h2 class="section-heading"><span class="section-icon">🌍</span> <span class="sec-num">1</span> Introduction to Environmental Pollution</h2>
+
+  <div class="note-card blue">
+    <div class="definition-box">
+      <strong>Pollution</strong> is the introduction of contaminants (harmful substances or energy) into the natural environment that cause adverse changes. Pollution can take the form of chemical substances or energy such as noise, heat, or light.
+    </div>
+    <p>Think of it this way: Imagine your clean drinking water becoming yellowish and smelly because a factory is dumping chemicals into the river upstream — that's water pollution! Similarly, when vehicle smoke makes the air difficult to breathe — that's air pollution.</p>
+    <div class="definition-box">
+      <strong>Pollutant</strong> = the agent or substance that causes pollution. It can be a <em>foreign substance</em> (like DDT, lead) or a <em>naturally occurring substance</em> in excess amounts (like CO₂).
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Types of Pollutants</h3>
+  <div class="two-col">
+    <div class="note-card green">
+      <div class="sub-sub-heading">Based on Origin</div>
+      <ul class="note-list">
+        <li><strong>Primary Pollutants</strong> – Released directly from source into environment (e.g., CO, SO₂, smoke, dust)</li>
+        <li><strong>Secondary Pollutants</strong> – Formed by chemical reactions between primary pollutants (e.g., Ozone O₃, PAN, H₂SO₄)</li>
+      </ul>
+    </div>
+    <div class="note-card red">
+      <div class="sub-sub-heading">Based on Degradability</div>
+      <ul class="note-list">
+        <li><strong>Biodegradable</strong> – Can be broken down by microbes (e.g., vegetable waste, sewage)</li>
+        <li><strong>Non-biodegradable</strong> – Cannot be broken down naturally (e.g., plastics, DDT, mercury)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Types of Environmental Pollution</h3>
+  <div class="concept-grid">
+    <div class="concept-card">
+      <span class="cc-icon">💨</span>
+      <div class="cc-title">Air Pollution</div>
+      <div class="cc-desc">Contamination of atmosphere by harmful gases & particles</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">💧</span>
+      <div class="cc-title">Water Pollution</div>
+      <div class="cc-desc">Contamination of water bodies by industrial & domestic waste</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🌱</span>
+      <div class="cc-title">Soil Pollution</div>
+      <div class="cc-desc">Degradation of land due to chemicals & waste disposal</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🔊</span>
+      <div class="cc-title">Noise Pollution</div>
+      <div class="cc-desc">Unwanted sound above 85 dB causing health hazards</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">☢️</span>
+      <div class="cc-title">Radiation Pollution</div>
+      <div class="cc-desc">Release of radioactive substances into environment</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🌡️</span>
+      <div class="cc-title">Thermal Pollution</div>
+      <div class="cc-desc">Raising temperature of water bodies by hot effluents</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 2: AIR POLLUTION ===================== -->
+<section id="air">
+  <h2 class="section-heading"><span class="section-icon">💨</span> <span class="sec-num">2</span> Air Pollution</h2>
+
+  <div class="note-card blue">
+    <div class="definition-box">
+      <strong>Air Pollution</strong> is the presence of harmful substances (chemicals, particulate matter, biological materials) in the atmosphere at concentrations that endanger health or welfare of organisms, or damage the environment.
+    </div>
+    <p>The <span class="imp">National Ambient Air Quality Standards (NAAQS)</span> are set by the government to define the permissible levels of pollutants in outdoor air. When these limits are exceeded, health risks arise.</p>
+  </div>
+
+  <h3 class="sub-heading">Types of Air Pollutants</h3>
+  <div class="two-col">
+    <div class="note-card green">
+      <div class="sub-sub-heading">Primary Pollutants (Direct Release)</div>
+      <ul class="note-list bullets">
+        <li>Particulate matter: soil, lead, asbestos</li>
+        <li>Carbon oxides: CO, CO₂</li>
+        <li>Sulphur dioxide: SO₂</li>
+        <li>Nitrogen oxides: NO, NO₂</li>
+        <li>Hydrocarbons: Methane (CH₄), Benzene</li>
+        <li>Ammonia (NH₃)</li>
+      </ul>
+    </div>
+    <div class="note-card red">
+      <div class="sub-sub-heading">Secondary Pollutants (Formed in Atmosphere)</div>
+      <ul class="note-list bullets">
+        <li>Ozone (O₃) — Photochemical smog</li>
+        <li>Sulphur trioxide (SO₃)</li>
+        <li>Nitric acid (HNO₃)</li>
+        <li>Sulphuric acid (H₂SO₄)</li>
+        <li>PAN — Peroxy Acetyl Nitrate</li>
+        <li>Hydrogen peroxide (H₂O₂)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Major Air Pollutants & Their Effects</h3>
+  <div class="table-wrapper">
+    <table>
+      <tr><th>Pollutant</th><th>Source</th><th>Effects</th></tr>
+      <tr><td><strong>Carbon Monoxide (CO)</strong></td><td>Incomplete combustion in vehicles, industries</td><td>Reduces O₂-carrying capacity of blood → suffocation, death</td></tr>
+      <tr><td><strong>Carbon Dioxide (CO₂)</strong></td><td>Burning fossil fuels, respiration</td><td>Greenhouse gas → Global warming</td></tr>
+      <tr><td><strong>Sulphur Dioxide (SO₂)</strong></td><td>Burning coal/oil in power plants</td><td>Acid rain, respiratory problems, eye irritation</td></tr>
+      <tr><td><strong>Nitrogen Oxides (NOₓ)</strong></td><td>Vehicle exhaust, industries</td><td>Smog, acid rain, photochemical reactions</td></tr>
+      <tr><td><strong>PM₂.₅ & PM₁₀</strong></td><td>Dust, smoke, vehicles, construction</td><td>Lung & heart diseases, reduced visibility</td></tr>
+      <tr><td><strong>Lead (Pb)</strong></td><td>Leaded petrol, paint, batteries</td><td>Neurological damage (especially in children)</td></tr>
+      <tr><td><strong>Ozone (O₃)</strong></td><td>Photochemical reactions</td><td>Respiratory irritation, plant damage</td></tr>
+      <tr><td><strong>Hydrocarbons</strong></td><td>Incomplete combustion, refineries</td><td>Carcinogenic, smog formation</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub-heading">Suspended Particulate Matter (SPM)</h3>
+  <div class="note-card brown">
+    <p><strong>SPM</strong> refers to tiny solid particles or liquid droplets suspended in air, varying from large dust particles to fine aerosols.</p>
+    <div class="two-col">
+      <div>
+        <strong class="sub-sub-heading">PM₁₀ (Coarse particles)</strong>
+        <ul class="note-list checks">
+          <li>Diameter &lt; 10 micrometers</li>
+          <li>Can enter lungs</li>
+          <li>Sources: dust, pollen, sea spray</li>
+        </ul>
+      </div>
+      <div>
+        <strong class="sub-sub-heading">PM₂.₅ (Fine particles)</strong>
+        <ul class="note-list checks">
+          <li>Diameter &lt; 2.5 micrometers</li>
+          <li>Can enter bloodstream</li>
+          <li>Sources: combustion, smoke, soot</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout warning">⚠️ PM₂.₅ is more dangerous than PM₁₀ because it penetrates deeper into the respiratory system and can pass into the blood!</div>
+  </div>
+
+  <h3 class="sub-heading">Causes of Air Pollution</h3>
+  <div class="two-col">
+    <div class="note-card green">
+      <div class="sub-sub-heading">🌋 Natural Causes</div>
+      <ul class="note-list">
+        <li>Volcanic eruptions → release SO₂, ash</li>
+        <li>Forest fires → CO, smoke particles</li>
+        <li>Cyclones and dust storms</li>
+        <li>Marsh gas (CH₄) from decaying matter</li>
+        <li>Natural emissions from animals</li>
+      </ul>
+    </div>
+    <div class="note-card red">
+      <div class="sub-sub-heading">🏭 Anthropogenic (Man-made) Causes</div>
+      <ul class="note-list">
+        <li>Industrial emissions</li>
+        <li>Automobile exhaust</li>
+        <li>Thermal power stations</li>
+        <li>Nuclear explosions & power plants</li>
+        <li>Agricultural activities (fertilizers)</li>
+        <li>Mining activities</li>
+        <li>Disposal of garbage (open burning)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Effects of Air Pollution</h3>
+  <div class="note-card blue">
+    <ul class="note-list stars">
+      <li><strong>Human Health:</strong> Respiratory diseases (asthma, bronchitis), cardiovascular diseases, cancer (lung), neurological damage</li>
+      <li><strong>Plants:</strong> Chlorosis (yellowing), necrosis (tissue death), reduced photosynthesis, crop damage</li>
+      <li><strong>Soil:</strong> Acidification through acid rain, reduced fertility</li>
+      <li><strong>Buildings:</strong> Corrosion of metals, blackening of marble (like Taj Mahal!)</li>
+      <li><strong>Climate:</strong> Global warming, ozone depletion, climate change</li>
+      <li><strong>Visibility:</strong> Smog reduces visibility → traffic accidents</li>
+    </ul>
+    <div class="callout remember">🔴 <strong>Remember:</strong> Taj Mahal is turning yellow/black due to SO₂ and other air pollutants from the Mathura refinery — this is called "Marble Cancer"!</div>
+  </div>
+
+  <h3 class="sub-heading">Control of Air Pollution</h3>
+  <div class="note-card green">
+    <ul class="note-list checks">
+      <li>Use of <strong>clean fuels</strong> like CNG, LPG, electric vehicles</li>
+      <li><strong>Catalytic converters</strong> in vehicles to reduce exhaust emissions</li>
+      <li><strong>Planting trees</strong> and green belts in urban areas</li>
+      <li><strong>Air pollution control devices</strong> in industries</li>
+      <li>Strict implementation of <strong>Air (Prevention and Control of Pollution) Act, 1981</strong></li>
+      <li>Public awareness and use of public transport</li>
+      <li>Renewable energy (solar, wind) instead of coal</li>
+    </ul>
+    <div class="sub-sub-heading">Air Pollution Control Devices</div>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <span class="cc-icon">🌀</span>
+        <div class="cc-title">Cyclone Separator</div>
+        <div class="cc-desc">Removes large dust particles using centrifugal force</div>
+      </div>
+      <div class="concept-card">
+        <span class="cc-icon">🧺</span>
+        <div class="cc-title">Baghouse Filter</div>
+        <div class="cc-desc">Fabric filters trap fine particulates from industrial exhaust</div>
+      </div>
+      <div class="concept-card">
+        <span class="cc-icon">⚡</span>
+        <div class="cc-title">Electrostatic Precipitator</div>
+        <div class="cc-desc">Uses electric charge to collect particles (12–15 kV)</div>
+      </div>
+      <div class="concept-card">
+        <span class="cc-icon">💦</span>
+        <div class="cc-title">Wet Scrubber</div>
+        <div class="cc-desc">Water spray removes gases and particles from exhaust</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 3: WATER POLLUTION ===================== -->
+<section id="water">
+  <h2 class="section-heading"><span class="section-icon">💧</span> <span class="sec-num">3</span> Water Pollution</h2>
+
+  <div class="note-card blue">
+    <div class="definition-box">
+      <strong>Water Pollution</strong> is the addition of various organic and inorganic substances that change the physical and chemical properties of water, thereby leading to detrimental effects on living organisms and reducing water usability.
+    </div>
+    <p>Globally, about <span class="imp">2.2 billion people</span> lack access to safe drinking water. Water pollution is a major reason for this crisis.</p>
+  </div>
+
+  <h3 class="sub-heading">Sources & Causes of Water Pollution</h3>
+  <div class="two-col">
+    <div class="note-card red">
+      <div class="sub-sub-heading">Point Sources</div>
+      <p>(Identifiable, specific locations)</p>
+      <ul class="note-list bullets">
+        <li>Industrial effluents (chemicals, heavy metals)</li>
+        <li>Sewage treatment plants overflow</li>
+        <li>Oil spills from ships</li>
+        <li>Mining drainage</li>
+      </ul>
+    </div>
+    <div class="note-card brown">
+      <div class="sub-sub-heading">Non-Point Sources</div>
+      <p>(Diffuse, cannot be traced to one place)</p>
+      <ul class="note-list bullets">
+        <li>Agricultural runoff (fertilizers, pesticides)</li>
+        <li>Urban stormwater runoff</li>
+        <li>Acid deposition</li>
+        <li>Atmospheric fallout</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note-card blue">
+    <div class="sub-sub-heading">Major Causes:</div>
+    <ul class="note-list">
+      <li><strong>Industrial Waste:</strong> Chemicals, heavy metals discharged into rivers</li>
+      <li><strong>Sewage & Domestic Waste:</strong> Untreated household waste polluting water bodies</li>
+      <li><strong>Agricultural Runoff:</strong> Fertilizers (nitrates, phosphates) and pesticides contaminating water</li>
+      <li><strong>Oil Spills:</strong> From ships polluting oceans and seas</li>
+      <li><strong>Plastic Waste:</strong> Dumping of garbage into rivers and lakes</li>
+      <li><strong>Thermal & Radioactive Waste:</strong> From power plants raising water temperature</li>
+      <li><strong>Religious Rituals:</strong> Idol immersion, dead body disposal in rivers</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-heading">Types of Water Pollutants</h3>
+  <div class="table-wrapper">
+    <table>
+      <tr><th>Type</th><th>Examples</th><th>Effects</th></tr>
+      <tr><td><strong>Physical</strong></td><td>Suspended solids, turbidity, temperature change</td><td>Blocks sunlight, kills aquatic life</td></tr>
+      <tr><td><strong>Chemical (Inorganic)</strong></td><td>Heavy metals (Pb, Hg, Cd), acids, salts, fluorides</td><td>Toxic to organisms, bioaccumulation</td></tr>
+      <tr><td><strong>Chemical (Organic)</strong></td><td>Pesticides (DDT), detergents, oil, sewage</td><td>Reduces dissolved oxygen, kills fish</td></tr>
+      <tr><td><strong>Biological</strong></td><td>Bacteria, viruses, algae, protozoa</td><td>Cholera, typhoid, dysentery</td></tr>
+      <tr><td><strong>Radioactive</strong></td><td>Uranium, radium, nuclear waste</td><td>Cancer, genetic mutations</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub-heading">Important Water Pollution Concepts</h3>
+
+  <div class="note-card green">
+    <div class="sub-sub-heading">Biological Oxygen Demand (BOD)</div>
+    <p>BOD is the amount of dissolved oxygen needed by microorganisms to break down organic material in a given water sample. <strong>Higher BOD = More polluted water!</strong></p>
+    <div class="formula-box">Clean water BOD: &lt; 2 mg/L | Mildly polluted: 2–8 mg/L | Highly polluted: &gt; 8 mg/L</div>
+  </div>
+
+  <div class="note-card red">
+    <div class="sub-sub-heading">Eutrophication</div>
+    <p>Enrichment of a standing water body (lake/pond) by nutrients (phosphorus, nitrogen) leading to excessive algae growth.</p>
+    <div class="flow-diagram">
+      <div class="flow-step">Nutrients enter water</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Algal bloom</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Algae die</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Decomposition ↓ O₂</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Fish die (Hypoxia)</div>
+    </div>
+    <div class="callout warning">⚠️ Eutrophication = "Algal bloom" → water turns green → oxygen depletion → death of aquatic life. This is how Yamuna and Dal Lake are affected!</div>
+  </div>
+
+  <div class="note-card brown">
+    <div class="sub-sub-heading">Biomagnification (Bioaccumulation)</div>
+    <p>The process by which concentration of toxins (like DDT, mercury) increases as it moves up the food chain.</p>
+    <div class="flow-diagram">
+      <div class="flow-step">Water (0.000003 ppm DDT)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Plankton (0.04 ppm)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Small fish (0.5 ppm)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Large fish (2 ppm)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Birds/Humans (25+ ppm)</div>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Marine Pollution</h3>
+  <div class="note-card blue">
+    <p>Oceans cover 71% of Earth but are increasingly polluted from land-based and sea-based sources.</p>
+    <ul class="note-list">
+      <li><strong>Sources:</strong> Rivers (carrying land pollutants), oil drilling, shipment accidents, coastal runoff</li>
+      <li><strong>Pollutants:</strong> Sewage sludge, industrial effluents, synthetic detergents, agrochemicals, plastics, metals, waste heat</li>
+      <li><strong>Great Pacific Garbage Patch:</strong> Massive accumulation of plastic debris in the Pacific Ocean</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-heading">Wastewater Treatment</h3>
+  <div class="note-card green">
+    <div class="flow-diagram">
+      <div class="flow-step">Raw Sewage</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">🔵 Primary Treatment</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">🟡 Secondary Treatment</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">🟢 Tertiary Treatment</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Clean Water</div>
+    </div>
+    <div class="two-col">
+      <div>
+        <strong>Primary Treatment (Physical)</strong>
+        <ul class="note-list checks">
+          <li>Grit removal (screening)</li>
+          <li>Sedimentation of heavy particles</li>
+          <li>Floatation of light materials</li>
+        </ul>
+      </div>
+      <div>
+        <strong>Secondary Treatment (Biological)</strong>
+        <ul class="note-list checks">
+          <li>Trickling filters</li>
+          <li>Activated sludge process</li>
+          <li>Rotating biological contactor</li>
+        </ul>
+      </div>
+    </div>
+    <strong>Tertiary Treatment (Chemical)</strong>
+    <ul class="note-list checks">
+      <li>Chlorination to kill bacteria</li>
+      <li>Anaerobic treatment: Hydrolysis → Acidogenesis → Acetogenesis → Methanogenesis</li>
+      <li>Reverse osmosis, UV treatment</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-heading">Effects of Water Pollution</h3>
+  <div class="note-card red">
+    <ul class="note-list stars">
+      <li><strong>Human Health:</strong> Cholera, typhoid, dysentery, fluorosis (from fluoride), arsenicosis (from arsenic), Minamata disease (mercury)</li>
+      <li><strong>Aquatic Life:</strong> Fish kills, loss of biodiversity, eutrophication</li>
+      <li><strong>Soil:</strong> Contamination affects crop quality when polluted water is used for irrigation</li>
+      <li><strong>Economy:</strong> Loss of fishing industry, tourism, increased healthcare costs</li>
+    </ul>
+    <div class="highlight-box">💡 Minamata Disease: Caused by methylmercury discharge in Japan (1956) by Chisso Corporation. People ate contaminated fish → neurological damage. One of the worst pollution disasters!</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 4: SOIL POLLUTION ===================== -->
+<section id="soil">
+  <h2 class="section-heading"><span class="section-icon">🌱</span> <span class="sec-num">4</span> Soil Pollution (Land Pollution)</h2>
+
+  <div class="note-card blue">
+    <div class="definition-box">
+      <strong>Soil Pollution</strong> (also called Land Pollution) refers to the degradation of Earth's land surface through misuse of soil, contamination with pesticides, industrial wastes, and other harmful substances, resulting in loss of fertile topsoil and adverse effects on organisms.
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Causes of Soil Pollution</h3>
+  <div class="concept-grid">
+    <div class="concept-card">
+      <span class="cc-icon">🧪</span>
+      <div class="cc-title">Chemical Fertilizers</div>
+      <div class="cc-desc">Excessive use of synthetic fertilizers alters soil chemistry</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🐛</span>
+      <div class="cc-title">Pesticides/Herbicides</div>
+      <div class="cc-desc">DDT, BHC persist in soil and kill beneficial organisms</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🏭</span>
+      <div class="cc-title">Industrial Waste</div>
+      <div class="cc-desc">Heavy metals (Pb, Cd, Cr) make soil toxic and infertile</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🗑️</span>
+      <div class="cc-title">Solid Waste Dumping</div>
+      <div class="cc-desc">Landfills leach pollutants into soil and groundwater</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">☢️</span>
+      <div class="cc-title">Radioactive Waste</div>
+      <div class="cc-desc">Nuclear fallout makes soil sterile for decades</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🏘️</span>
+      <div class="cc-title">Urbanization</div>
+      <div class="cc-desc">Construction and waste disposal degrade natural soil</div>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Effects of Soil Pollution</h3>
+  <div class="note-card red">
+    <ul class="note-list stars">
+      <li><strong>Agricultural Impact:</strong> Reduced crop yield, affects food quality through absorption of heavy metals</li>
+      <li><strong>Groundwater Contamination:</strong> Pollutants leach into underground water tables</li>
+      <li><strong>Soil Microorganisms:</strong> Pesticides kill beneficial bacteria, fungi, earthworms → reduces fertility</li>
+      <li><strong>Human Health:</strong> Skin diseases, cancer from contaminated crops and water</li>
+      <li><strong>Ecological Impact:</strong> Loss of biodiversity, food chain disruption through bioaccumulation</li>
+      <li><strong>Desertification:</strong> Misuse of land causes soil to become barren desert</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-heading">Control of Soil Pollution</h3>
+  <div class="note-card green">
+    <ul class="note-list checks">
+      <li><strong>Use of Organic Manure:</strong> Replace chemical fertilizers with compost and bio-fertilizers (vermicompost)</li>
+      <li><strong>Proper Waste Disposal:</strong> Treat industrial and household waste before dumping</li>
+      <li><strong>Reduce Pesticide Use:</strong> Use eco-friendly and biodegradable pesticides, biological pest control</li>
+      <li><strong>Recycling of Waste:</strong> Recycle plastics, metals, and glass to reduce soil contamination</li>
+      <li><strong>Afforestation:</strong> Plant trees to prevent soil erosion and improve quality</li>
+      <li><strong>Phytoremediation:</strong> Using plants (like sunflower, Indian mustard) to absorb and remove heavy metals</li>
+      <li><strong>Bioremediation:</strong> Using microorganisms to degrade soil pollutants</li>
+      <li><strong>Public Awareness:</strong> Educate people about harmful effects of soil pollution</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 5: NOISE POLLUTION ===================== -->
+<section id="noise">
+  <h2 class="section-heading"><span class="section-icon">🔊</span> <span class="sec-num">5</span> Noise Pollution</h2>
+
+  <div class="note-card blue">
+    <div class="definition-box">
+      <strong>Noise Pollution</strong> is any unwanted, unpleasant, or annoying sound that disrupts the natural balance and causes harm to humans and wildlife. Sound above <em>85 dB</em> for prolonged periods causes hearing damage. Normal conversation = 60 dB; Jet plane = 140 dB.
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Causes of Noise Pollution</h3>
+  <div class="two-col">
+    <div class="note-card red">
+      <div class="sub-sub-heading">🏙️ Urban Sources</div>
+      <ul class="note-list bullets">
+        <li>Traffic noise (cars, bikes, trucks)</li>
+        <li>Construction activities</li>
+        <li>Industrial machinery</li>
+        <li>Railways & airports</li>
+        <li>Loudspeakers at public events</li>
+        <li>Firecrackers & celebrations</li>
+      </ul>
+    </div>
+    <div class="note-card brown">
+      <div class="sub-sub-heading">🏠 Household Sources</div>
+      <ul class="note-list bullets">
+        <li>Music systems & televisions</li>
+        <li>Air conditioners</li>
+        <li>Generators & pumps</li>
+        <li>Household appliances</li>
+        <li>Social gatherings</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Noise Levels Chart</h3>
+  <div class="table-wrapper">
+    <table>
+      <tr><th>Sound Source</th><th>Level (dB)</th><th>Effect</th></tr>
+      <tr><td>Whisper</td><td>30 dB</td><td>Very soft</td></tr>
+      <tr><td>Normal conversation</td><td>60 dB</td><td>Comfortable</td></tr>
+      <tr><td>City traffic</td><td>70–85 dB</td><td>Annoying</td></tr>
+      <tr><td>Factory machinery</td><td>90–100 dB</td><td>Hearing damage with prolonged exposure</td></tr>
+      <tr><td>Rock concert</td><td>110–120 dB</td><td>Pain threshold approached</td></tr>
+      <tr><td>Jet engine / Firecrackers</td><td>130–140 dB</td><td>Immediate hearing damage, pain</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub-heading">Effects of Noise Pollution</h3>
+  <div class="note-card red">
+    <ul class="note-list stars">
+      <li><strong>Auditory (Hearing):</strong> Temporary hearing loss → permanent deafness (NIHL – Noise-Induced Hearing Loss)</li>
+      <li><strong>Psychological:</strong> Stress, anxiety, irritability, depression, sleep disturbance</li>
+      <li><strong>Physiological:</strong> High blood pressure (hypertension), cardiovascular disease, hormonal imbalances</li>
+      <li><strong>Cognitive:</strong> Reduced concentration, poor academic performance (in children near airports/roads)</li>
+      <li><strong>Wildlife:</strong> Disrupts animal communication, navigation (dolphins, whales), migratory patterns</li>
+    </ul>
+    <div class="callout warning">⚠️ NIHL (Noise-Induced Hearing Loss) is the most common occupational health problem worldwide — affects millions of factory workers!</div>
+  </div>
+
+  <h3 class="sub-heading">Control of Noise Pollution</h3>
+  <div class="note-card green">
+    <ul class="note-list checks">
+      <li><strong>Low-Noise Machinery:</strong> Promote modern quieter machines in factories</li>
+      <li><strong>Sound Barriers:</strong> Noise walls along highways, sound insulation in buildings</li>
+      <li><strong>Green Belts:</strong> Planting trees alongside roads reduces noise levels</li>
+      <li><strong>Zoning:</strong> Separate residential, industrial, and commercial zones</li>
+      <li><strong>Control on Loudspeakers:</strong> Limit use especially at night (Noise Pollution Rules, 2000)</li>
+      <li><strong>Personal Protection:</strong> Earplugs or earmuffs in high-noise workplaces</li>
+      <li><strong>Regular Maintenance:</strong> Well-maintained vehicles and machines produce less noise</li>
+      <li><strong>Legislation:</strong> Enforce laws and standards for permissible noise levels</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 6: RADIATION POLLUTION ===================== -->
+<section id="radiation">
+  <h2 class="section-heading"><span class="section-icon">☢️</span> <span class="sec-num">6</span> Radiation Pollution</h2>
+
+  <div class="note-card blue">
+    <div class="definition-box">
+      <strong>Radiation Pollution</strong> refers to the release of radioactive substances or exposure to high levels of ionizing radiation from natural or artificial sources that adversely affect living organisms and the environment.
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Types of Radiation</h3>
+  <div class="concept-grid">
+    <div class="concept-card">
+      <span class="cc-icon">α</span>
+      <div class="cc-title">Alpha (α) Radiation</div>
+      <div class="cc-desc">Helium nuclei; stopped by paper/skin; dangerous if ingested</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">β</span>
+      <div class="cc-title">Beta (β) Radiation</div>
+      <div class="cc-desc">Electrons; stopped by 3mm aluminum; can penetrate skin</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">γ</span>
+      <div class="cc-title">Gamma (γ) Radiation</div>
+      <div class="cc-desc">High-energy photons; needs lead shielding; most penetrating</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🌊</span>
+      <div class="cc-title">X-Rays</div>
+      <div class="cc-desc">Ionizing electromagnetic radiation used in medicine & industry</div>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Sources of Radiation Pollution</h3>
+  <div class="two-col">
+    <div class="note-card green">
+      <div class="sub-sub-heading">Natural Sources</div>
+      <ul class="note-list bullets">
+        <li>Cosmic rays from outer space</li>
+        <li>Radon gas from rocks/soil</li>
+        <li>Radioactive elements in soil (uranium, thorium)</li>
+        <li>Radioactive potassium in the body</li>
+      </ul>
+    </div>
+    <div class="note-card red">
+      <div class="sub-sub-heading">Artificial Sources</div>
+      <ul class="note-list bullets">
+        <li>Nuclear power plants</li>
+        <li>Nuclear weapons testing</li>
+        <li>Medical X-rays & nuclear medicine</li>
+        <li>Industrial uses (gamma radiography)</li>
+        <li>Radioactive waste disposal</li>
+        <li>Nuclear accidents (Chernobyl, Fukushima)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Effects of Radiation Pollution</h3>
+  <div class="note-card red">
+    <ul class="note-list stars">
+      <li><strong>Acute Effects:</strong> Radiation sickness (nausea, vomiting, hair loss), burns, death</li>
+      <li><strong>Chronic Effects:</strong> Cancer (leukemia, thyroid cancer), genetic mutations</li>
+      <li><strong>Reproductive Effects:</strong> Sterility, mutations in offspring, birth defects</li>
+      <li><strong>Immune System:</strong> Weakening of immune system → vulnerability to infections</li>
+      <li><strong>Genetic Effects:</strong> DNA damage passed to future generations (heritable mutations)</li>
+    </ul>
+    <div class="highlight-box">💡 Chernobyl (1986, Ukraine) & Fukushima (2011, Japan) are the two worst nuclear accidents. Hiroshima & Nagasaki atomic bombs (1945) showed radiation's devastating effects on humans!</div>
+  </div>
+
+  <h3 class="sub-heading">Control of Radiation Pollution</h3>
+  <div class="note-card green">
+    <ul class="note-list checks">
+      <li>Proper shielding (lead, concrete) around radioactive materials</li>
+      <li>Safe disposal of radioactive waste in deep geological repositories</li>
+      <li>Regular monitoring of radiation levels</li>
+      <li>International treaties: Nuclear Non-Proliferation Treaty (NPT)</li>
+      <li>Strict regulations on nuclear plant operation</li>
+      <li>Use of protective equipment (lead aprons in hospitals)</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 7: EMERGING POLLUTANTS ===================== -->
+<section id="emerging">
+  <h2 class="section-heading"><span class="section-icon">🆕</span> <span class="sec-num">7</span> Emerging Pollutants</h2>
+
+  <div class="note-card blue">
+    <div class="definition-box">
+      <strong>Emerging Pollutants</strong> (also called Contaminants of Emerging Concern – CECs) are newly identified or previously unrecognized contaminants found in the environment that can pose risks to human health and ecosystems but are <em>not yet regulated or fully studied</em>.
+    </div>
+    <p>As technology advances and we develop new chemicals and materials, new types of pollutants emerge that our existing regulatory frameworks have not yet addressed.</p>
+  </div>
+
+  <h3 class="sub-heading">Types of Emerging Pollutants</h3>
+  <div class="concept-grid">
+    <div class="concept-card">
+      <span class="cc-icon">💊</span>
+      <div class="cc-title">Pharmaceuticals</div>
+      <div class="cc-desc">Medicines excreted by humans entering water bodies (e.g., antibiotics, hormones)</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🧴</span>
+      <div class="cc-title">Personal Care Products</div>
+      <div class="cc-desc">Cosmetics, sunscreens, fragrances released into water through bathing</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">📱</span>
+      <div class="cc-title">E-Waste</div>
+      <div class="cc-desc">Electronic waste releasing heavy metals and toxic chemicals</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🔬</span>
+      <div class="cc-title">Microplastics</div>
+      <div class="cc-desc">Plastic particles &lt; 5mm found in oceans, fish, and even human blood</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🌾</span>
+      <div class="cc-title">Endocrine Disruptors</div>
+      <div class="cc-desc">Chemicals like BPA interfering with hormone systems</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🧪</span>
+      <div class="cc-title">PFAS (Forever Chemicals)</div>
+      <div class="cc-desc">Per- and polyfluoroalkyl substances; extremely persistent in environment</div>
+    </div>
+  </div>
+
+  <div class="note-card red">
+    <div class="sub-sub-heading">Microplastics — A Special Concern</div>
+    <p>Microplastics are plastic particles smaller than 5 mm. They come from:</p>
+    <ul class="note-list">
+      <li>Breakdown of larger plastic waste</li>
+      <li>Microbeads in personal care products</li>
+      <li>Synthetic clothing fibers (polyester, nylon)</li>
+    </ul>
+    <div class="callout warning">⚠️ Scientists have found microplastics in human blood, lungs, placentas, and even in the summit of Mount Everest! They are now virtually everywhere on Earth.</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 8: FIREWORKS ===================== -->
+<section id="fireworks">
+  <h2 class="section-heading"><span class="section-icon">🎆</span> <span class="sec-num">8</span> Fireworks & Their Ill-Effects</h2>
+
+  <div class="note-card blue">
+    <p>Fireworks are a major source of pollution in India, especially during festivals like Diwali and public celebrations. Despite being culturally significant, they have serious environmental and health consequences.</p>
+  </div>
+
+  <h3 class="sub-heading">Chemicals in Fireworks</h3>
+  <div class="table-wrapper">
+    <table>
+      <tr><th>Chemical</th><th>Color Produced</th><th>Health Effect</th></tr>
+      <tr><td>Barium (Ba)</td><td>Green</td><td>Poisonous, affects heart & muscles</td></tr>
+      <tr><td>Strontium (Sr)</td><td>Red</td><td>Radionuclide risk</td></tr>
+      <tr><td>Copper (Cu)</td><td>Blue</td><td>Toxic to aquatic organisms</td></tr>
+      <tr><td>Potassium (K)</td><td>Purple/Violet</td><td>Skin irritant</td></tr>
+      <tr><td>Magnesium (Mg) / Aluminum (Al)</td><td>White/Silver</td><td>Lung damage</td></tr>
+      <tr><td>Sulphur compounds</td><td>—</td><td>SO₂ release → acid rain</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub-heading">Ill-Effects of Fireworks</h3>
+  <div class="note-card red">
+    <ul class="note-list stars">
+      <li><strong>Air Pollution:</strong> Massive increase in PM₂.₅, PM₁₀, SO₂, NO₂ after Diwali — Delhi's AQI reaches "Hazardous" levels</li>
+      <li><strong>Water Pollution:</strong> Heavy metals settle into water bodies — toxic to aquatic life</li>
+      <li><strong>Soil Pollution:</strong> Residues from spent fireworks contain heavy metals</li>
+      <li><strong>Noise Pollution:</strong> Crackers produce 125–145 dB — causes immediate hearing damage</li>
+      <li><strong>Human Health:</strong> Respiratory problems (especially asthma, COPD), eye irritation, burns</li>
+      <li><strong>Wildlife:</strong> Birds and animals severely stressed by sudden loud noises</li>
+      <li><strong>Fire Hazards:</strong> Burns and fire accidents during celebrations</li>
+    </ul>
+    <div class="callout success">✅ <strong>Solutions:</strong> Use eco-friendly/green crackers, celebrate pollution-free festivals, switch to LED-light shows instead of firecrackers</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 9: GLOBAL WARMING ===================== -->
+<section id="globalwarming">
+  <h2 class="section-heading"><span class="section-icon">🌡️</span> <span class="sec-num">9</span> Global Warming & Climate Change</h2>
+
+  <div class="note-card blue">
+    <div class="definition-box">
+      <strong>Global Warming</strong> refers to the gradual increase in Earth's average surface temperature due to the excessive buildup of Greenhouse Gases (GHGs) in the atmosphere, primarily caused by human activities.
+    </div>
+    <div class="definition-box">
+      <strong>Climate Change</strong> is the broader term for long-term shifts in global temperatures and weather patterns. While natural, climate change since the mid-20th century is primarily caused by human activities, especially burning of fossil fuels.
+    </div>
+  </div>
+
+  <h3 class="sub-heading">The Greenhouse Effect</h3>
+  <div class="note-card green">
+    <p>The <strong>Greenhouse Effect</strong> is a natural process: the Sun's radiation passes through the atmosphere, warms Earth's surface, and when Earth radiates this heat back, certain gases (GHGs) trap some of it — keeping Earth warm (about 15°C). Without it, Earth would be -18°C!</p>
+    <p>The <strong>Enhanced Greenhouse Effect</strong> (the problem): Human activities increase GHG concentrations → more heat trapped → Earth warms beyond natural levels.</p>
+    <div class="flow-diagram">
+      <div class="flow-step">☀️ Solar radiation arrives</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Earth surface absorbs heat</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Heat radiated back</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">GHGs trap heat</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">🌡️ Earth warms</div>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Greenhouse Gases (GHGs)</h3>
+  <div class="table-wrapper">
+    <table>
+      <tr><th>GHG</th><th>Main Source</th><th>Global Warming Potential</th><th>% Contribution</th></tr>
+      <tr><td><strong>CO₂</strong> (Carbon Dioxide)</td><td>Fossil fuels, deforestation</td><td>1 (reference)</td><td>~66%</td></tr>
+      <tr><td><strong>CH₄</strong> (Methane)</td><td>Livestock, rice fields, landfills</td><td>28× CO₂</td><td>~16%</td></tr>
+      <tr><td><strong>N₂O</strong> (Nitrous Oxide)</td><td>Fertilizers, combustion</td><td>265× CO₂</td><td>~6%</td></tr>
+      <tr><td><strong>CFCs</strong> (Chlorofluorocarbons)</td><td>Refrigerants, aerosols</td><td>Thousands × CO₂</td><td>~12%</td></tr>
+      <tr><td><strong>H₂O</strong> (Water Vapor)</td><td>Natural (evaporation)</td><td>Variable</td><td>Natural</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub-heading">Effects of Global Warming</h3>
+  <div class="note-card red">
+    <ul class="note-list stars">
+      <li><strong>Melting Ice Caps & Glaciers:</strong> Arctic, Antarctic ice & Himalayan glaciers melting → sea level rise</li>
+      <li><strong>Sea Level Rise:</strong> Threatens coastal cities like Mumbai, Kolkata, Bangladesh</li>
+      <li><strong>Extreme Weather:</strong> More frequent and intense cyclones, droughts, floods, heat waves</li>
+      <li><strong>Biodiversity Loss:</strong> Species unable to adapt to rapid temperature changes go extinct</li>
+      <li><strong>Agricultural Impact:</strong> Changed rainfall patterns → reduced crop yields, food insecurity</li>
+      <li><strong>Ocean Acidification:</strong> CO₂ dissolves in seawater → carbonic acid → coral bleaching</li>
+      <li><strong>Human Health:</strong> Spread of tropical diseases (malaria, dengue) to new areas</li>
+      <li><strong>Economic Impacts:</strong> Damage to infrastructure, reduced productivity, higher costs</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-heading">Control Measures</h3>
+  <div class="note-card green">
+    <div class="two-col">
+      <div>
+        <strong>Mitigation (Reducing GHGs)</strong>
+        <ul class="note-list checks">
+          <li>Renewable energy (solar, wind, hydro)</li>
+          <li>Energy efficiency improvements</li>
+          <li>Reforestation and afforestation</li>
+          <li>Carbon capture technology</li>
+          <li>Electric vehicles</li>
+        </ul>
+      </div>
+      <div>
+        <strong>Adaptation (Dealing with effects)</strong>
+        <ul class="note-list checks">
+          <li>Sea walls & flood defenses</li>
+          <li>Drought-resistant crop varieties</li>
+          <li>Early warning systems</li>
+          <li>Relocating vulnerable communities</li>
+          <li>Water conservation</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout success">✅ <strong>International Agreements:</strong> Paris Agreement (2015) — 196 countries pledged to limit warming to 1.5–2°C above pre-industrial levels. Kyoto Protocol (1997) was the first international treaty on GHG reduction.</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 10: OZONE DEPLETION ===================== -->
+<section id="ozone">
+  <h2 class="section-heading"><span class="section-icon">🌐</span> <span class="sec-num">10</span> Ozone Layer Depletion</h2>
+
+  <div class="note-card blue">
+    <div class="definition-box">
+      The <strong>Ozone Layer</strong> (Ozonosphere) is a region of Earth's stratosphere (15–35 km altitude) containing high concentrations of ozone (O₃) that absorbs 97–99% of the Sun's harmful ultraviolet (UV) radiation.
+    </div>
+    <div class="definition-box">
+      <strong>Ozone Layer Depletion</strong> is the thinning of the ozone layer in the stratosphere, primarily caused by man-made chemicals called <em>Ozone Depleting Substances (ODS)</em>, mainly Chlorofluorocarbons (CFCs).
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Ozone-Depleting Substances (ODS)</h3>
+  <div class="concept-grid">
+    <div class="concept-card">
+      <span class="cc-icon">❄️</span>
+      <div class="cc-title">CFCs</div>
+      <div class="cc-desc">Chlorofluorocarbons — in refrigerators, ACs, aerosol sprays</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🔥</span>
+      <div class="cc-title">Halons</div>
+      <div class="cc-desc">Used in fire extinguishers; very potent ODS</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🌾</span>
+      <div class="cc-title">Methyl Bromide</div>
+      <div class="cc-desc">Used as pesticide in agriculture; attacks ozone</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🧹</span>
+      <div class="cc-title">Carbon Tetrachloride</div>
+      <div class="cc-desc">Industrial solvent and dry cleaning agent</div>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Mechanism of Ozone Depletion</h3>
+  <div class="note-card brown">
+    <p>CFCs are released → rise into stratosphere → UV radiation breaks CFC → releases chlorine atom (Cl) → Cl attacks ozone.</p>
+    <div class="formula-box">
+      Cl + O₃ → ClO + O₂ &nbsp;|&nbsp; ClO + O → Cl + O₂ &nbsp;|&nbsp; Net: O₃ + O → 2O₂
+    </div>
+    <div class="callout warning">⚠️ One Cl atom can destroy 100,000 ozone molecules because Cl is regenerated in the reaction — it acts as a catalyst!</div>
+    <p>The famous <strong>Ozone Hole</strong> over Antarctica was first discovered in 1985. It forms each spring when UV light breaks up CFCs and chlorine destroys ozone in very cold polar stratospheric clouds.</p>
+  </div>
+
+  <h3 class="sub-heading">Effects of Ozone Depletion</h3>
+  <div class="note-card red">
+    <ul class="note-list stars">
+      <li><strong>Human Health:</strong> Increased skin cancer (melanoma), cataracts, immune system suppression</li>
+      <li><strong>Plants:</strong> Reduced photosynthesis, crop damage (soybeans, wheat sensitive to UV)</li>
+      <li><strong>Marine Ecosystem:</strong> Damage to phytoplankton (base of ocean food chain)</li>
+      <li><strong>Climate:</strong> UV-B affects climate patterns; ozone itself is a GHG in stratosphere</li>
+      <li><strong>Materials:</strong> UV degrades paints, rubber, plastics faster</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-heading">Control Measures</h3>
+  <div class="note-card green">
+    <div class="callout success">✅ <strong>Montreal Protocol (1987):</strong> The most successful international environmental agreement! 197 countries agreed to phase out ODS. CFCs have been replaced by HFCs (hydrofluorocarbons) in refrigeration. The ozone hole is slowly healing!</div>
+    <ul class="note-list checks">
+      <li>Phase out production and use of CFCs, halons, and other ODS</li>
+      <li>Switch to CFC-free refrigerants (HFCs, natural refrigerants)</li>
+      <li>Regular monitoring of stratospheric ozone levels</li>
+      <li>Proper disposal of old refrigerators and ACs</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 11: ACID RAIN ===================== -->
+<section id="acidrain">
+  <h2 class="section-heading"><span class="section-icon">🌧️</span> <span class="sec-num">11</span> Acid Rain</h2>
+
+  <div class="note-card blue">
+    <div class="definition-box">
+      <strong>Acid Rain</strong> is any form of precipitation (rain, snow, fog, hail) with a pH lower than 5.6 (normal rain pH = 5.6 due to dissolved CO₂ forming carbonic acid H₂CO₃). It is caused by SO₂ and NOₓ emissions reacting with water in the atmosphere.
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Formation of Acid Rain</h3>
+  <div class="note-card brown">
+    <div class="formula-box">
+      SO₂ + H₂O → H₂SO₃ (Sulphurous acid) | 2SO₂ + O₂ → 2SO₃ | SO₃ + H₂O → H₂SO₄ (Sulphuric acid)
+    </div>
+    <div class="formula-box">
+      2NO₂ + H₂O → HNO₃ (Nitric acid) + HNO₂ (Nitrous acid)
+    </div>
+    <p>These acids dissolve in rainwater, forming acid rain. The pH can drop as low as 2–4 in severely polluted areas!</p>
+  </div>
+
+  <h3 class="sub-heading">Effects of Acid Rain</h3>
+  <div class="note-card red">
+    <div class="two-col">
+      <div>
+        <strong>Effects on Human Communities</strong>
+        <ul class="note-list">
+          <li>Contaminates drinking water sources</li>
+          <li>Leaches toxic metals (Al, Pb) into water</li>
+          <li>Damages buildings, bridges, historical monuments</li>
+          <li>Respiratory problems from acid aerosols</li>
+          <li>Economic losses to fisheries and tourism</li>
+        </ul>
+      </div>
+      <div>
+        <strong>Effects on Agriculture</strong>
+        <ul class="note-list">
+          <li>Soil acidification → leaching of essential nutrients (Ca, Mg)</li>
+          <li>Damage to leaves, wax coating</li>
+          <li>Reduced crop yields</li>
+          <li>Killing of fish & aquatic organisms</li>
+          <li>"Forest die-back" — killing of trees</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box">💡 The Taj Mahal in Agra is a victim of acid rain! SO₂ from Mathura refinery reacts with marble (CaCO₃) → gypsum (CaSO₄) → the white marble turns yellow/black. This is called "Marble Cancer"!</div>
+  </div>
+
+  <h3 class="sub-heading">Control of Acid Rain</h3>
+  <div class="note-card green">
+    <ul class="note-list checks">
+      <li>Reduce SO₂ emissions: use low-sulphur coal, FGD (Flue Gas Desulphurization) systems in power plants</li>
+      <li>Reduce NOₓ emissions: catalytic converters in vehicles, low-NOₓ burners</li>
+      <li>Switch to renewable energy (solar, wind) — no SO₂/NOₓ produced</li>
+      <li>Liming of acidified lakes and soils to neutralize acidity</li>
+      <li>International cooperation (acid rain crosses national boundaries)</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 12: CASE STUDIES ===================== -->
+<section id="casestudies">
+  <h2 class="section-heading"><span class="section-icon">📋</span> <span class="sec-num">12</span> Case Studies on Pollution</h2>
+
+  <div class="note-card blue">
+    <div class="sub-sub-heading">1. 🏙️ Delhi Air Pollution Crisis</div>
+    <p>Delhi consistently ranks among the most polluted cities globally. In winter (Oct–Jan), air quality reaches "Hazardous" levels (AQI &gt; 400).</p>
+    <ul class="note-list">
+      <li><strong>Causes:</strong> Stubble burning in Punjab/Haryana, vehicular emissions, construction dust, industrial pollution, temperature inversion (cold air trapping pollutants)</li>
+      <li><strong>Effects:</strong> ~30,000 premature deaths annually attributed to air pollution in Delhi; schools close, outdoor activities banned</li>
+      <li><strong>Measures:</strong> Odd-even vehicle scheme, GRAP (Graded Response Action Plan), BS-VI fuel standards</li>
+    </ul>
+  </div>
+
+  <div class="note-card red">
+    <div class="sub-sub-heading">2. 🌊 Ganga River Pollution</div>
+    <p>The Ganga — India's most sacred river — is also one of the most polluted rivers in the world.</p>
+    <ul class="note-list">
+      <li><strong>Causes:</strong> Untreated sewage from 29 cities along its banks, industrial effluents (especially from tanneries in Kanpur), religious offerings, dead body disposal</li>
+      <li><strong>Coliform bacteria</strong> levels are thousands of times above safe limits at many points</li>
+      <li><strong>Namami Gange Programme:</strong> ₹20,000 crore government initiative for Ganga cleaning (2015–2024)</li>
+    </ul>
+  </div>
+
+  <div class="note-card brown">
+    <div class="sub-sub-heading">3. ☢️ Bhopal Gas Tragedy (1984)</div>
+    <p>The world's worst industrial disaster occurred on December 3, 1984, at the Union Carbide pesticide plant in Bhopal, Madhya Pradesh.</p>
+    <ul class="note-list">
+      <li><strong>Cause:</strong> Accidental release of 40 tonnes of Methyl Isocyanate (MIC) gas</li>
+      <li><strong>Immediate Deaths:</strong> 2,259 officially; estimates up to 15,000+</li>
+      <li><strong>Long-term Effects:</strong> 500,000+ people exposed; continued health problems, genetic effects in subsequent generations</li>
+      <li><strong>Lesson:</strong> Need for strict industrial safety standards and disaster preparedness</li>
+    </ul>
+  </div>
+
+  <div class="note-card green">
+    <div class="sub-sub-heading">4. 🐟 Minamata Disease, Japan (1956)</div>
+    <p>Chisso Corporation discharged methylmercury into Minamata Bay for decades. Local fishermen and their families who ate contaminated fish developed severe neurological symptoms. Over 1,700 deaths; 10,000+ affected. Led to international awareness about industrial water pollution.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 13: SOLID WASTE MANAGEMENT ===================== -->
+<section id="solidwaste">
+  <h2 class="section-heading"><span class="section-icon">♻️</span> <span class="sec-num">13</span> Solid Waste Management</h2>
+
+  <div class="note-card blue">
+    <div class="definition-box">
+      <strong>Solid Waste</strong> refers to any garbage, refuse, or sludge from a wastewater treatment plant, water supply treatment plant, or air pollution control facility, and other discarded material that is solid, liquid, semi-solid, or contained gaseous material.
+    </div>
+    <p>India generates about <span class="imp">62 million tonnes</span> of solid waste per year. Improper management causes pollution of air, water, and soil, and creates health hazards.</p>
+  </div>
+
+  <h3 class="sub-heading">Types of Solid Waste</h3>
+  <div class="table-wrapper">
+    <table>
+      <tr><th>Type</th><th>Examples</th><th>Properties</th></tr>
+      <tr><td><strong>Municipal Solid Waste (MSW)</strong></td><td>Household garbage, market waste, street sweepings, hospital waste, construction debris</td><td>Mixed biodegradable & non-biodegradable</td></tr>
+      <tr><td><strong>Industrial Solid Waste</strong></td><td>Fly ash, metal scraps, chemicals, plastics, sludge from manufacturing</td><td>Often toxic, hazardous</td></tr>
+      <tr><td><strong>Biomedical/Hospital Waste</strong></td><td>Syringes, bandages, infected materials, body parts, medicines</td><td>Infectious, requires special handling</td></tr>
+      <tr><td><strong>E-Waste</strong></td><td>Computers, mobiles, TVs, batteries</td><td>Contains heavy metals (Pb, Hg, Cd)</td></tr>
+      <tr><td><strong>Radioactive Waste</strong></td><td>Nuclear plant waste, used reactor parts</td><td>Extremely hazardous, long half-life</td></tr>
+      <tr><td><strong>Construction & Demolition Waste</strong></td><td>Concrete, bricks, wood, metal</td><td>Bulky, recyclable</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub-heading">3R Principle</h3>
+  <div class="concept-grid">
+    <div class="concept-card">
+      <span class="cc-icon">⬇️</span>
+      <div class="cc-title">Reduce</div>
+      <div class="cc-desc">Minimizing waste generation at source. Best option!</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">🔄</span>
+      <div class="cc-title">Reuse</div>
+      <div class="cc-desc">Using items again instead of throwing away</div>
+    </div>
+    <div class="concept-card">
+      <span class="cc-icon">♻️</span>
+      <div class="cc-title">Recycle</div>
+      <div class="cc-desc">Converting waste into new useful products</div>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Control Measures for Urban Solid Waste</h3>
+  <div class="note-card green">
+    <ul class="note-list checks">
+      <li><strong>Segregation at Source:</strong> Separate biodegradable (green bin), non-biodegradable (blue bin), and hazardous (red bin) at household/institutional level</li>
+      <li><strong>Collection & Transportation:</strong> Covered bins and vehicles, door-to-door collection to prevent littering</li>
+      <li><strong>Composting:</strong> Biodegradable waste (food scraps, leaves) converted to organic manure via aerobic/anaerobic process → vermicomposting</li>
+      <li><strong>Recycling & Reuse:</strong> Recovery of paper, plastic, glass, metals from waste to reduce landfill burden</li>
+      <li><strong>Incineration:</strong> Burning waste at high temperatures (850°C+) to reduce volume; generates energy (Waste-to-Energy plants)</li>
+      <li><strong>Sanitary Landfill:</strong> Engineered disposal sites with liners to prevent leaching, gas collection systems</li>
+      <li><strong>Bioremediation:</strong> Using microorganisms to degrade organic waste</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-heading">Control Measures for Industrial Waste</h3>
+  <div class="note-card red">
+    <ul class="note-list">
+      <li><strong>Effluent Treatment Plants (ETP):</strong> Treat liquid industrial waste before discharge</li>
+      <li><strong>Waste Minimization:</strong> Cleaner production processes to reduce waste at source</li>
+      <li><strong>Stabilization/Solidification:</strong> Converting hazardous waste into stable, less harmful form</li>
+      <li><strong>Secure Landfill:</strong> Special containment facilities for hazardous industrial waste</li>
+      <li><strong>Deep Well Injection:</strong> Pumping liquid waste into deep underground formations (controversial)</li>
+      <li>Compliance with <strong>Hazardous Waste Management Rules, 2016</strong></li>
+    </ul>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 14: QUICK REVISION ===================== -->
+<section id="revision">
+  <h2 class="section-heading"><span class="section-icon">⚡</span> <span class="sec-num">14</span> Quick Revision Sheet</h2>
+
+  <div class="revision-grid">
+    <div class="revision-card">
+      <h4>💨 Air Pollution Key Facts</h4>
+      <ul class="note-list bullets">
+        <li>CO binds to haemoglobin (200× more than O₂)</li>
+        <li>PM₂.₅ most dangerous particulate</li>
+        <li>AQI scale: 0–50 Good, 301+ Hazardous</li>
+        <li>Air Act 1981 → controls air pollution</li>
+        <li>Photochemical smog = NOₓ + Hydrocarbons + UV</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>💧 Water Pollution Key Facts</h4>
+      <ul class="note-list bullets">
+        <li>BOD measures organic pollution</li>
+        <li>Eutrophication = excess nutrients → algal bloom</li>
+        <li>Minamata disease = mercury poisoning</li>
+        <li>DO (Dissolved Oxygen) should be &gt; 6 mg/L for fish</li>
+        <li>Coliform count measures sewage contamination</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>🌱 Soil Pollution Key Facts</h4>
+      <ul class="note-list bullets">
+        <li>DDT is a persistent organic pollutant (POP)</li>
+        <li>Phytoremediation = plants clean up soil</li>
+        <li>Bioremediation = microbes clean up soil</li>
+        <li>pH &lt; 5 → acidic soil, pH &gt; 8.5 → alkaline soil</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>🔊 Noise Pollution Key Facts</h4>
+      <ul class="note-list bullets">
+        <li>Safe limit = 85 dB for 8 hours/day</li>
+        <li>NIHL = Noise-Induced Hearing Loss</li>
+        <li>Night silence zones: &lt; 40 dB</li>
+        <li>Industrial zones: up to 75 dB day, 70 dB night</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>🌡️ Global Warming Key Facts</h4>
+      <ul class="note-list bullets">
+        <li>Earth warmed ~1.1°C since industrial era</li>
+        <li>CO₂ = most abundant GHG (66%)</li>
+        <li>CH₄ = 28× more potent than CO₂</li>
+        <li>Paris Agreement: limit warming to 1.5°C</li>
+        <li>Sea level rising ~3.6 mm/year currently</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>🌐 Ozone Layer Key Facts</h4>
+      <ul class="note-list bullets">
+        <li>Ozone layer: 15–35 km altitude (stratosphere)</li>
+        <li>Ozone hole discovered 1985 (British Antarctic Survey)</li>
+        <li>1 Cl atom destroys 100,000 O₃ molecules</li>
+        <li>Montreal Protocol (1987) bans CFCs</li>
+        <li>Ozone hole slowly healing since 2000s</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>🌧️ Acid Rain Key Facts</h4>
+      <ul class="note-list bullets">
+        <li>Normal rain pH = 5.6; acid rain pH &lt; 5.6</li>
+        <li>SO₂ → H₂SO₄; NOₓ → HNO₃ in atmosphere</li>
+        <li>Marble Cancer affects Taj Mahal</li>
+        <li>Liming neutralizes acidified lakes</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>♻️ Solid Waste Key Facts</h4>
+      <ul class="note-list bullets">
+        <li>India: 62 million tonnes/year solid waste</li>
+        <li>3Rs: Reduce, Reuse, Recycle</li>
+        <li>Composting converts organic waste to manure</li>
+        <li>SWM Rules 2016: source segregation mandatory</li>
+        <li>Sanitary landfill better than open dump</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note-card blue" style="margin-top:24px;">
+    <h3 style="font-family:'Caveat',cursive;font-size:1.4rem;color:var(--blue-ink);margin-bottom:16px;">📌 Important Acts & Agreements</h3>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Act / Agreement</th><th>Year</th><th>Purpose</th></tr>
+        <tr><td>Air (Prevention & Control) Act</td><td>1981</td><td>Control air pollution in India</td></tr>
+        <tr><td>Water (Prevention & Control) Act</td><td>1974</td><td>Prevent water pollution in India</td></tr>
+        <tr><td>Environment Protection Act</td><td>1986</td><td>After Bhopal tragedy; umbrella act</td></tr>
+        <tr><td>Montreal Protocol</td><td>1987</td><td>Phase out ozone-depleting CFCs</td></tr>
+        <tr><td>Kyoto Protocol</td><td>1997</td><td>Reduce GHG emissions (developed nations)</td></tr>
+        <tr><td>Paris Agreement</td><td>2015</td><td>Limit global warming to 1.5–2°C</td></tr>
+        <tr><td>SWM Rules</td><td>2016</td><td>Solid Waste Management in India</td></tr>
+        <tr><td>Hazardous Waste Management Rules</td><td>2016</td><td>Manage industrial hazardous waste</td></tr>
+        <tr><td>Noise Pollution Rules</td><td>2000</td><td>Regulate noise levels in India</td></tr>
+        <tr><td>E-Waste Management Rules</td><td>2016</td><td>Handle electronic waste safely</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- UNIT SUMMARY -->
+  <h2 class="section-heading" style="margin-top:48px;"><span class="section-icon">📖</span> Unit 4 Summary</h2>
+  <div class="summary-grid">
+    <div class="sum-card">
+      <div class="sum-icon">🔑</div>
+      <h4>Pollution Definition</h4>
+      <p>Introduction of contaminants causing adverse changes. Types: Air, Water, Soil, Noise, Radiation. Primary pollutants released directly; secondary formed by reactions.</p>
+    </div>
+    <div class="sum-card">
+      <div class="sum-icon">💨</div>
+      <h4>Air Pollution</h4>
+      <p>CO, SO₂, NOₓ, PM are key pollutants. Control via clean fuels, ESP, catalytic converters, Air Act 1981. Causes smog, acid rain, GHG effects.</p>
+    </div>
+    <div class="sum-card">
+      <div class="sum-icon">💧</div>
+      <h4>Water Pollution</h4>
+      <p>BOD, eutrophication, biomagnification are key concepts. Three-stage treatment (primary → secondary → tertiary). Key laws: Water Act 1974.</p>
+    </div>
+    <div class="sum-card">
+      <div class="sum-icon">🌱</div>
+      <h4>Soil Pollution</h4>
+      <p>DDT, heavy metals, excess fertilizers cause soil degradation. Solutions: phytoremediation, bioremediation, organic farming, recycling.</p>
+    </div>
+    <div class="sum-card">
+      <div class="sum-icon">🌡️</div>
+      <h4>Global Warming</h4>
+      <p>Enhanced greenhouse effect by CO₂, CH₄, N₂O. Effects: sea level rise, extreme weather, biodiversity loss. Paris Agreement: 1.5°C limit.</p>
+    </div>
+    <div class="sum-card">
+      <div class="sum-icon">🌐</div>
+      <h4>Ozone Depletion</h4>
+      <p>CFCs destroy ozone: 1 Cl atom = 100,000 O₃ molecules destroyed. Ozone hole over Antarctica. Montreal Protocol (1987) = solution.</p>
+    </div>
+    <div class="sum-card">
+      <div class="sum-icon">🌧️</div>
+      <h4>Acid Rain</h4>
+      <p>pH &lt; 5.6. SO₂ + NOₓ + water = H₂SO₄ + HNO₃. Damages marble, kills fish, harms crops. Taj Mahal victim of "Marble Cancer".</p>
+    </div>
+    <div class="sum-card">
+      <div class="sum-icon">♻️</div>
+      <h4>Solid Waste</h4>
+      <p>62 MT/year in India. 3R principle: Reduce, Reuse, Recycle. Methods: composting, incineration, sanitary landfill. SWM Rules 2016.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== MCQ SECTION ===================== -->
+<section id="mcq" class="mcq-section">
+  <div class="mcq-header">
+    <h2>📝 Unit 4 Practice MCQs</h2>
+    <p>Test your understanding with these carefully crafted multiple choice questions!</p>
+    <div class="mcq-stats">
+      <div class="mcq-stat"><div class="stat-num">60</div><div class="stat-label">Total Questions</div></div>
+      <div class="mcq-stat"><div class="stat-num">20</div><div class="stat-label">Easy</div></div>
+      <div class="mcq-stat"><div class="stat-num">25</div><div class="stat-label">Medium</div></div>
+      <div class="mcq-stat"><div class="stat-num">15</div><div class="stat-label">Hard</div></div>
+    </div>
+  </div>
+
+  <div class="difficulty-tabs">
+    <button class="diff-tab active" onclick="filterMCQ('all', this)">All (60)</button>
+    <button class="diff-tab" onclick="filterMCQ('easy', this)">🟢 Easy (20)</button>
+    <button class="diff-tab" onclick="filterMCQ('medium', this)">🟡 Medium (25)</button>
+    <button class="diff-tab" onclick="filterMCQ('hard', this)">🔴 Hard (15)</button>
+  </div>
+
+  <div id="mcqContainer">
+
+    <!-- ===== EASY MCQs (1-20) ===== -->
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q1</div>
+      <div class="mcq-question">Which of the following is the correct definition of pollution?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Natural process of decomposition</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Introduction of contaminants causing adverse environmental changes</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Natural weathering of rocks</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Increase in biodiversity</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Pollution is the introduction of contaminants into the natural environment that cause adverse changes.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q2</div>
+      <div class="mcq-question">Which gas is primarily responsible for the greenhouse effect?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Oxygen (O₂)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Nitrogen (N₂)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) Carbon Dioxide (CO₂)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Argon (Ar)</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">CO₂ is the primary greenhouse gas responsible for enhanced global warming, contributing ~66% of GHG effect.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q3</div>
+      <div class="mcq-question">The ozone layer is present in which layer of the atmosphere?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Troposphere</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Stratosphere</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Mesosphere</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Thermosphere</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">The ozone layer exists in the stratosphere at 15–35 km altitude, protecting Earth from UV radiation.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q4</div>
+      <div class="mcq-question">What does BOD stand for in the context of water pollution?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Biological Oxide Demand</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Biological Oxygen Demand</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Biochemical Oxide Deposit</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Basic Oxygen Demand</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">BOD (Biological Oxygen Demand) measures the amount of dissolved oxygen needed by microbes to break down organic matter in water. Higher BOD = more polluted water.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q5</div>
+      <div class="mcq-question">Which of the following is a primary air pollutant?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Ozone (O₃)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Sulphuric acid (H₂SO₄)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) Sulphur dioxide (SO₂)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) PAN (Peroxy Acetyl Nitrate)</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">SO₂ is directly released from burning coal/oil. O₃, H₂SO₄, and PAN are secondary pollutants formed by reactions in the atmosphere.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q6</div>
+      <div class="mcq-question">What is the normal pH of rainwater?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) 7.0 (neutral)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) 6.0</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) 5.6</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) 4.5</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">Normal rainwater has pH 5.6 because CO₂ in the atmosphere dissolves to form carbonic acid (H₂CO₃). Acid rain has pH below 5.6.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q7</div>
+      <div class="mcq-question">Which chemical is primarily responsible for ozone layer depletion?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, true)">A) Chlorofluorocarbons (CFCs)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Carbon monoxide (CO)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Nitrogen (N₂)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Methane (CH₄)</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: A<div class="explanation">CFCs release chlorine atoms in the stratosphere which catalytically destroy ozone molecules. One Cl atom can destroy 100,000 ozone molecules!</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q8</div>
+      <div class="mcq-question">What is the permissible noise level for residential areas during daytime?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) 45 dB</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) 55 dB</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) 75 dB</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) 65 dB</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">According to India's Noise Pollution Rules 2000, residential areas have a daytime limit of 55 dB and nighttime limit of 45 dB.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q9</div>
+      <div class="mcq-question">Which disease is caused by mercury pollution in water?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Fluorosis</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Minamata disease</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Arsenicosis</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Itai-itai disease</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Minamata disease (neurological disorder) was first identified in Japan in 1956, caused by methylmercury discharged by the Chisso Corporation into Minamata Bay.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q10</div>
+      <div class="mcq-question">The 3R principle of waste management stands for:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, true)">A) Reduce, Reuse, Recycle</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Recover, Restore, Renew</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Remove, Replace, Revive</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Reduce, Restore, Recover</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: A<div class="explanation">The 3R principle of sustainable waste management: Reduce (minimize generation), Reuse (use again), Recycle (convert to new products). Reduce is the most important.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q11</div>
+      <div class="mcq-question">Which act was passed in India specifically to control air pollution?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Environment Protection Act, 1986</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Water Act, 1974</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) Air (Prevention and Control of Pollution) Act, 1981</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Wildlife Protection Act, 1972</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">The Air (Prevention and Control of Pollution) Act, 1981 was enacted to control and prevent air pollution in India through pollution control boards.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q12</div>
+      <div class="mcq-question">Eutrophication is caused by excess of which nutrients in water?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Carbon and Sulphur</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Nitrogen and Phosphorus</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Iron and Manganese</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Calcium and Magnesium</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Eutrophication is the enrichment of water bodies by nitrogen (N) and phosphorus (P) nutrients, typically from agricultural runoff and sewage, leading to algal blooms.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q13</div>
+      <div class="mcq-question">Carbon monoxide (CO) is dangerous because it:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Depletes ozone layer</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Reduces oxygen-carrying capacity of blood</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Causes acid rain</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Increases photosynthesis</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">CO binds to hemoglobin 200 times more strongly than oxygen, forming carboxyhemoglobin. This prevents blood from carrying oxygen, causing suffocation.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q14</div>
+      <div class="mcq-question">Which international agreement aims to phase out CFCs?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Kyoto Protocol</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Paris Agreement</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) Montreal Protocol</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Stockholm Convention</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">The Montreal Protocol (1987) is the international treaty to phase out ozone-depleting substances including CFCs. It has been signed by 197 countries and is considered the most successful environmental treaty.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q15</div>
+      <div class="mcq-question">What is the main gas released during the Bhopal gas tragedy (1984)?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Chlorine gas</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Methyl Isocyanate (MIC)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Carbon dioxide</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Sulphur dioxide</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">The Bhopal gas tragedy occurred when ~40 tonnes of Methyl Isocyanate (MIC) leaked from the Union Carbide plant, killing thousands and injuring hundreds of thousands.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q16</div>
+      <div class="mcq-question">Photochemical smog is produced in the presence of:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Rain and cold temperature</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Sulphur dioxide and water vapour</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) NOₓ, hydrocarbons, and sunlight</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) CO and nitrogen gas</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">Photochemical smog forms when NOₓ and hydrocarbons from vehicle exhaust react in presence of UV sunlight to form ozone and PAN. Common in sunny, traffic-heavy cities like Los Angeles and Delhi.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q17</div>
+      <div class="mcq-question">Which waste management method involves burning waste at high temperatures?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Composting</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Landfilling</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) Incineration</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Bioremediation</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">Incineration is the controlled combustion of waste at high temperatures (850°C+) to reduce volume and generate energy, though it can produce harmful gases if not properly managed.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q18</div>
+      <div class="mcq-question">Acid rain is primarily caused by emissions of:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) CO₂ and methane</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) SO₂ and NOₓ</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) CFCs and HFCs</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) CO and ozone</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">SO₂ (from coal/oil burning) and NOₓ (from vehicle exhaust) react with water in the atmosphere to form sulphuric acid and nitric acid, which fall as acid rain.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q19</div>
+      <div class="mcq-question">What type of radiation has the highest penetrating power?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Alpha radiation</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Beta radiation</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) Gamma radiation</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) UV radiation</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">Gamma (γ) radiation has the highest penetrating power and requires thick lead or concrete shielding. Alpha is stopped by paper, beta by 3mm aluminum, but gamma needs heavy shielding.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="easy">
+      <div class="mcq-q-num"><span class="difficulty-badge easy">Easy</span> Q20</div>
+      <div class="mcq-question">Which of the following is an emerging pollutant of major concern?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) SO₂</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) CO₂</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) Microplastics</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) NOₓ</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">Microplastics (plastic particles &lt; 5mm) are emerging pollutants found everywhere — in oceans, mountains, human blood, and placentas. They are not yet regulated and pose serious health risks.</div></div>
+    </div>
+
+    <!-- ===== MEDIUM MCQs (21-45) ===== -->
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q21</div>
+      <div class="mcq-question">The Electrostatic Precipitator (ESP) in industries operates at what voltage range?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) 1–5 kV</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) 12–15 kV</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) 50–100 kV</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) 220 V</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Electrostatic precipitators operate at 12–15 kV high voltage, charging particles that then get attracted to grounded collecting plates, removing them from the gas stream.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q22</div>
+      <div class="mcq-question">Itai-itai disease is caused by contamination of water/food with:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Lead</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Mercury</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) Cadmium</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Arsenic</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">Itai-itai disease (meaning "ouch-ouch") was caused by cadmium (Cd) poisoning from mining effluents in Japan's Jinzu River. It caused severe bone fragility and kidney damage.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q23</div>
+      <div class="mcq-question">PAN (Peroxy Acetyl Nitrate) is formed during:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Volcanic eruptions</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Photochemical reactions involving NOₓ and hydrocarbons</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Combustion of coal in power plants</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Decomposition of organic matter</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">PAN is a secondary pollutant formed in photochemical smog when NOₓ and hydrocarbons from vehicle exhaust undergo photochemical reactions in sunlight. It causes eye irritation and damages plants.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q24</div>
+      <div class="mcq-question">What is the global warming potential of methane (CH₄) compared to CO₂?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) 10 times</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) 28 times</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) 100 times</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) 265 times</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">CH₄ has a Global Warming Potential of 28 over 100 years, meaning it is 28 times more effective at trapping heat than CO₂. N₂O has GWP of 265.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q25</div>
+      <div class="mcq-question">Biomagnification refers to the process where:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Organisms increase in size along the food chain</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Concentration of toxins increases as it moves up the food chain</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Toxic substances decompose along food chains</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Organisms absorb nutrients from polluted soil</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Biomagnification (bioaccumulation) means the concentration of persistent toxins like DDT, mercury increases at each trophic level. Top predators (including humans) accumulate the highest concentrations.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q26</div>
+      <div class="mcq-question">The chemical formula for Peroxy Acetyl Nitrate (PAN) indicates it contains which elements?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Carbon, Hydrogen, Nitrogen</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Carbon, Hydrogen, Nitrogen, Oxygen</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Carbon, Nitrogen, Sulphur</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Nitrogen, Oxygen, Chlorine</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">PAN (CH₃CO-O₂-NO₂) contains Carbon, Hydrogen, Nitrogen, and Oxygen. It's a secondary pollutant in photochemical smog, causing eye irritation and plant damage.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q27</div>
+      <div class="mcq-question">Which stage of wastewater treatment involves trickling filters and activated sludge process?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Primary treatment</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Secondary treatment</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Tertiary treatment</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Pre-treatment</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Secondary treatment uses biological processes including trickling filters, activated sludge process, and rotating biological contactors to remove dissolved organic matter from wastewater.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q28</div>
+      <div class="mcq-question">Marble Cancer of the Taj Mahal is caused by which acid?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Hydrochloric acid (HCl)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Sulphuric acid (H₂SO₄) from acid rain</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Nitric acid (HNO₃)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Phosphoric acid (H₃PO₄)</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">H₂SO₄ in acid rain reacts with marble (CaCO₃) → CaSO₄ (gypsum) which is soft and discolored. CaCO₃ + H₂SO₄ → CaSO₄ + H₂O + CO₂. This is the chemical reaction behind "Marble Cancer" affecting the Taj Mahal.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q29</div>
+      <div class="mcq-question">Which of the following is NOT an effect of global warming?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Melting of glaciers</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Rise in sea level</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) Healing of ozone layer</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Ocean acidification</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">Healing of the ozone layer is due to the Montreal Protocol (banning CFCs), NOT an effect of global warming. Global warming effects include glacier melting, sea level rise, extreme weather, and ocean acidification.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q30</div>
+      <div class="mcq-question">The Paris Agreement (2015) aims to limit global temperature rise to:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) 0.5°C above pre-industrial levels</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) 1.5–2°C above pre-industrial levels</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) 3°C above pre-industrial levels</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) 4°C above pre-industrial levels</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">The Paris Agreement (2015) committed 196 countries to limit global temperature rise to well below 2°C above pre-industrial levels, with efforts to limit to 1.5°C.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q31</div>
+      <div class="mcq-question">Which pollutant in cigarette smoke causes the MOST harm to cardiovascular system?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, true)">A) Carbon monoxide (CO)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Nicotine only</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Tar alone</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) SO₂</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: A<div class="explanation">CO in cigarette smoke (2-5% concentration) binds to hemoglobin forming carboxyhemoglobin, reducing oxygen delivery to heart and other tissues, directly contributing to cardiovascular disease.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q32</div>
+      <div class="mcq-question">What does the AQI (Air Quality Index) value above 300 indicate?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Good air quality</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Moderate air quality</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Very poor air quality</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">D) Hazardous air quality</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: D<div class="explanation">AQI 0–50 = Good, 51–100 = Satisfactory, 101–200 = Moderate, 201–300 = Poor, 301–400 = Very Poor, 401–500 = Severe/Hazardous. Delhi often crosses 400+ in winter.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q33</div>
+      <div class="mcq-question">In anaerobic wastewater treatment, the FINAL step is:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Hydrolysis</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Acidogenesis</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Acetogenesis</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">D) Methanogenesis</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: D<div class="explanation">Anaerobic digestion sequence: Hydrolysis → Acidogenesis → Acetogenesis → Methanogenesis (production of methane CH₄). The biogas (methane) produced can be used as fuel.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q34</div>
+      <div class="mcq-question">Fluorosis is caused by excess intake of which element in drinking water?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Chlorine</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Fluoride</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Nitrate</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Iron</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Fluorosis is caused by excess fluoride in drinking water (&gt; 1.5 mg/L WHO limit). It causes dental fluorosis (mottled teeth) and skeletal fluorosis (bone deformities). Common in Rajasthan and Andhra Pradesh.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q35</div>
+      <div class="mcq-question">Which of these is a "persistent organic pollutant" (POP)?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, true)">A) DDT (Dichloro-diphenyl-trichloroethane)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) CO₂</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Nitrate</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Phosphate</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: A<div class="explanation">DDT is a classic persistent organic pollutant (POP) that resists biodegradation, bioaccumulates in food chains, and can travel long distances. Stockholm Convention (2001) banned 12 POPs including DDT.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q36</div>
+      <div class="mcq-question">Temperature inversion in atmosphere is related to which type of pollution?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, true)">A) Air pollution (traps pollutants near ground)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Water pollution</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Soil pollution</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Noise pollution</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: A<div class="explanation">Temperature inversion occurs when a layer of warm air sits above cooler air near ground, preventing normal convective mixing. This traps pollutants at ground level, worsening smog. This is why Delhi's pollution is worst in winter mornings.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q37</div>
+      <div class="mcq-question">The process of using plants to clean up heavy metal contaminated soil is called:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Bioremediation</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Phytoremediation</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Mycoremediation</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Electroremediation</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Phytoremediation uses plants like sunflower (Helianthus annuus), Indian mustard (Brassica juncea), and vetiver grass to absorb, contain, and/or degrade heavy metals from contaminated soil.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q38</div>
+      <div class="mcq-question">Which of the following correctly describes "sanitary landfill"?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Open garbage dump in a low-lying area</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Engineered disposal site with liners to prevent leaching and gas collection</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Site where waste is burned openly</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Composting facility</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Sanitary landfill is an engineered disposal method with clay/plastic liners to prevent leachate contaminating groundwater, gas collection pipes for biogas, and daily soil cover on waste layers. Far safer than open dumps.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q39</div>
+      <div class="mcq-question">Endrin, Aldrin, and Dieldrin are examples of:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Greenhouse gases</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Persistent organic pollutants (organochlorine pesticides)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Air pollutants from vehicles</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Industrial solvents</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Endrin, Aldrin, and Dieldrin are among the "Dirty Dozen" persistent organic pollutants (POPs) banned under the Stockholm Convention. They are organochlorine pesticides that persist in the environment and bioaccumulate.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q40</div>
+      <div class="mcq-question">SPM stands for what in the context of air pollution?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Solid Pollutant Matter</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Suspended Particulate Matter</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Secondary Pollution Measurement</td></button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Standard Pollution Monitor</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">SPM (Suspended Particulate Matter) refers to tiny solid particles or liquid droplets suspended in the air. TSPM (Total SPM) includes both PM₁₀ and PM₂.₅ fractions.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q41</div>
+      <div class="mcq-question">PFAS (Per- and Polyfluoroalkyl Substances) are called "forever chemicals" because they:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Are found only in ancient geological formations</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Are extremely resistant to environmental degradation</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Permanently cure diseases</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Last forever in a bottle</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">PFAS are called "forever chemicals" because the strong C-F bond makes them virtually indestructible in natural environments. They persist for thousands of years, accumulate in organisms, and have been found in human blood worldwide.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q42</div>
+      <div class="mcq-question">Which industrial process releases barium compounds that can produce green color in fireworks while being toxic?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, true)">A) Combustion of barium salts in pyrotechnics</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Dissolution of barium in rainwater</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Photosynthesis using barium</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Microbial decomposition of barium</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: A<div class="explanation">Barium salts (like barium chlorate and barium nitrate) are burned in fireworks to produce green color. They are poisonous, affecting heart muscles and the nervous system when inhaled.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q43</div>
+      <div class="mcq-question">The "Dirty Dozen" refers to a group of chemicals banned under which convention?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Basel Convention</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Stockholm Convention</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Rotterdam Convention</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Vienna Convention</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">The Stockholm Convention (2001) banned the "Dirty Dozen" — 12 of the most toxic persistent organic pollutants (POPs) including DDT, PCBs, dioxins, and furans.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q44</div>
+      <div class="mcq-question">Which of these is the CORRECT sequence for solid waste management hierarchy (most preferred to least)?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Landfill → Recycle → Reduce → Reuse</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Reduce → Reuse → Recycle → Incinerate → Landfill</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Recycle → Reuse → Reduce → Landfill</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Incinerate → Reduce → Recycle → Landfill</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">The waste management hierarchy: Reduce (best — prevent generation) → Reuse → Recycle → Energy recovery (incineration) → Disposal (landfill — least preferred). Prevention is always better than cure!</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="medium">
+      <div class="mcq-q-num"><span class="difficulty-badge medium">Medium</span> Q45</div>
+      <div class="mcq-question">Which type of radiation exposure causes DNA damage passed to future generations?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Somatic effects</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Genetic effects (heritable mutations)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Thermal effects</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Acute radiation syndrome</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Genetic effects of radiation affect the reproductive cells (gametes), causing mutations that can be passed to offspring. This is distinct from somatic effects which affect the irradiated individual only.</div></div>
+    </div>
+
+    <!-- ===== HARD MCQs (46-60) ===== -->
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q46</div>
+      <div class="mcq-question">The chemical reaction in an Electrostatic Precipitator (ESP) involves which fundamental principle?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, true)">A) Corona discharge ionizes gas; charged particles migrate to grounded collector plates under Coulomb's law</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Magnetic fields attract metallic particles</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Chemical absorption of gases in liquid media</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Centrifugal force separates particles by density</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: A<div class="explanation">ESPs work by: (1) Corona discharge from high-voltage electrode ionizes surrounding gas, (2) ions attach to dust particles charging them, (3) charged particles migrate to grounded collection plates via electrostatic force (Coulomb's law), (4) collected particles periodically knocked off by rapping.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q47</div>
+      <div class="mcq-question">In the ozone depletion cycle, what role does chlorine (Cl) play in the reaction Cl + O₃ → ClO + O₂, followed by ClO + O → Cl + O₂?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Reactant that is permanently consumed</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Catalyst — it is regenerated and can destroy thousands of ozone molecules</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Product of ozone decomposition</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Inhibitor that slows the reaction</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Cl acts as a catalyst — it's consumed in Step 1 but regenerated in Step 2. The net reaction is: O₃ + O → 2O₂. Since Cl is regenerated, one Cl atom can catalytically destroy over 100,000 ozone molecules before being deactivated.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q48</div>
+      <div class="mcq-question">Methanogenesis in anaerobic digestion is carried out by which microorganisms and what is the primary product?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Aerobic bacteria; produces CO₂ only</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Strictly anaerobic archaea (methanogens); produces CH₄ and CO₂</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Fungi; produces ethanol</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Facultative bacteria; produces N₂</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Methanogenesis is performed by strictly anaerobic archaebacteria (methanogens like Methanobacterium, Methanosaeta). They convert acetate and H₂/CO₂ into methane (CH₄) and CO₂. The biogas produced contains ~60-70% CH₄ and is used as fuel.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q49</div>
+      <div class="mcq-question">Which phenomenon explains why bird eggs became thinner and more fragile in areas exposed to DDT contamination?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) DDT directly ate away the calcium in eggshells</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) DDT metabolites inhibit carbonic anhydrase enzyme, reducing calcium carbonate deposition in eggshells</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) DDT increased calcium absorption making shells too thick to break</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) DDT killed bacteria that help in eggshell formation</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">DDT metabolite (DDE) inhibits carbonic anhydrase enzyme in birds, which is essential for converting CO₂ to carbonate ions (CO₃²⁻) needed for CaCO₃ eggshell formation. This caused eggshell thinning and reproductive failure, nearly driving Bald Eagles and Peregrine Falcons to extinction in the US.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q50</div>
+      <div class="mcq-question">In the context of acid rain, what is "dry deposition" as opposed to "wet deposition"?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Acid rain falling in desert regions</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Deposition of acidic gases (SO₂, NOₓ) and particles directly onto surfaces without precipitation</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Formation of acid in soil without contact with rain</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Ocean acidification from dissolved CO₂</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Wet deposition = acid gases dissolve in rain/snow and fall. Dry deposition = SO₂, NOₓ, and acid particles settle directly onto land, water, and vegetation surfaces without precipitation. Both cause acidification but dry deposition can cause more localized, severe damage near emission sources.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q51</div>
+      <div class="mcq-question">The concept of "ocean acidification" in the context of global warming occurs because:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Ocean temperature rise breaks water into acid</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Oceans absorb CO₂ → forms carbonic acid → lowers pH → dissolves coral skeletons (CaCO₃)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Acid rain falling into oceans</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Volcanic eruptions releasing acid into the ocean</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Oceans absorb ~30% of CO₂ emissions. CO₂ + H₂O → H₂CO₃ (carbonic acid) → H⁺ + HCO₃⁻, lowering ocean pH (currently ~8.1, down from 8.2 pre-industrial). This threatens corals (CaCO₃ dissolves in acid), mollusks, and the entire marine food web.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q52</div>
+      <div class="mcq-question">Which factor distinguishes a "point source" from a "non-point source" of water pollution?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Amount of pollution generated</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Whether the pollution comes from a single identifiable location vs. diffuse, widespread area</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Type of chemicals involved</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Time of day when pollution occurs</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Point source pollution comes from a specific, identifiable source (factory pipe, sewage outlet) — easier to regulate. Non-point source (agricultural runoff, urban stormwater) comes from large, diffuse areas — much harder to control and currently the leading cause of water quality problems globally.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q53</div>
+      <div class="mcq-question">The "Blue Baby Syndrome" (methemoglobinemia) in infants is caused by high levels of which pollutant in drinking water?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Lead</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">B) Arsenic</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">C) Nitrate</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Fluoride</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: C<div class="explanation">High nitrate (NO₃⁻) levels in drinking water (&gt;50 mg/L) cause Blue Baby Syndrome in infants. Gut bacteria convert nitrate to nitrite, which converts hemoglobin to methemoglobin (cannot carry O₂), turning babies blue (cyanosis). Cause: agricultural fertilizer runoff.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q54</div>
+      <div class="mcq-question">Why does the Antarctic ozone hole form specifically in spring (September-November) rather than year-round?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) CFCs are only released in spring</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Polar Stratospheric Clouds (PSCs) form in winter cold; spring sunlight activates chlorine-releasing reactions on PSC surfaces</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) UV radiation is strongest in Antarctic spring</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Wind patterns bring CFCs to Antarctica only in spring</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">In Antarctic winter, polar vortex isolates stratospheric air. Very low temperatures (-78°C) form Polar Stratospheric Clouds (PSCs). Heterogeneous reactions on PSC surfaces convert reservoir chlorine compounds (ClONO₂, HCl) to active Cl₂. When spring sunlight returns, Cl₂ photolyzes → Cl radicals rapidly destroy ozone.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q55</div>
+      <div class="mcq-question">Radiocesium (¹³⁷Cs) released during nuclear accidents is particularly dangerous because:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) It is a gas that spreads rapidly</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) It has a 30-year half-life, bioaccumulates similarly to potassium in muscles, emits beta and gamma radiation internally</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) It reacts with water to produce acid</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) It can only be detected after 100 years</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">¹³⁷Cs (cesium-137) has a 30.17 year half-life, meaning contaminated areas remain radioactive for centuries. It behaves like potassium in the body, distributing into soft tissue and muscles, delivering continuous internal beta and gamma radiation, causing cancer.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q56</div>
+      <div class="mcq-question">What is the mechanism by which barium in fireworks causes toxicity to the cardiovascular system?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Barium blocks sodium channels</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Soluble barium salts block potassium (K⁺) channels in heart muscle cells causing cardiac arrhythmia and hypokalemia</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Barium replaces iron in hemoglobin</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Barium increases calcium absorption causing hypercalcemia</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Soluble barium salts block K⁺ channels in cell membranes (hypokalemia = low blood potassium). This disrupts electrical signaling in heart muscle causing cardiac arrhythmias, ventricular fibrillation, and can be fatal. BaSO₄ (barium sulfate) is non-toxic as it's insoluble — used as X-ray contrast agent.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q57</div>
+      <div class="mcq-question">The "activated sludge process" in secondary wastewater treatment achieves pollutant removal primarily through:</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Physical sedimentation of all waste</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Microbial oxidation of dissolved organic matter in aerated tanks with recycled flocculent sludge</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Chemical precipitation using lime</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Ultraviolet light disinfection</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">In activated sludge, wastewater is aerated in a tank with concentrated microbial communities (the "activated sludge"). Microbes oxidize dissolved organic matter → CO₂ + H₂O + new biomass. The sludge settles in secondary clarifier; some is recycled back to maintain microbial population. Typical BOD removal: 85-95%.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q58</div>
+      <div class="mcq-question">Why are endocrine-disrupting chemicals (EDCs) particularly harmful even at very low concentrations?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) They are more concentrated in water than other pollutants</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Hormones operate at nanogram/picogram levels (ppb/ppt), so EDCs can mimic/block hormone receptors at similarly tiny concentrations causing disproportionate effects</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) They are found only in rivers with high flow rates</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) They affect only industrial workers</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">Natural hormones function at nanomolar to picomolar concentrations (billionths to trillionths of a gram). EDCs (like BPA, phthalates, PCBs, estrogens from pharmaceuticals) can mimic or antagonize these signals at equally tiny concentrations — far below what traditional toxicology considered dangerous. This is why standard "dose-response" models may underestimate EDC risks.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q59</div>
+      <div class="mcq-question">The concept of "cradle-to-grave" management applies specifically to which type of waste under Indian law?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) Municipal solid waste</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) Hazardous waste (Hazardous Waste Management Rules, 2016)</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) Food waste composting</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) Construction debris</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">"Cradle-to-grave" means tracking hazardous waste from its point of generation through transportation, storage, treatment, and final disposal. India's Hazardous Waste Management Rules (2016) require manifest documentation at each stage, ensuring accountability. Generators, transporters, and disposers all have legal responsibilities.</div></div>
+    </div>
+
+    <div class="mcq-item" data-difficulty="hard">
+      <div class="mcq-q-num"><span class="difficulty-badge hard">Hard</span> Q60</div>
+      <div class="mcq-question">In terms of global warming potential (GWP) over 100 years, which correctly orders these gases from HIGHEST to LOWEST?</div>
+      <div class="mcq-options">
+        <button class="mcq-option" onclick="checkAnswer(this, false)">A) CO₂ &gt; CH₄ &gt; N₂O &gt; SF₆</button>
+        <button class="mcq-option" onclick="checkAnswer(this, true)">B) SF₆ &gt; N₂O &gt; CH₄ &gt; CO₂</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">C) CH₄ &gt; SF₆ &gt; N₂O &gt; CO₂</button>
+        <button class="mcq-option" onclick="checkAnswer(this, false)">D) N₂O &gt; SF₆ &gt; CO₂ &gt; CH₄</button>
+      </div>
+      <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+      <div class="answer-reveal">✅ Answer: B<div class="explanation">GWP (100-year): SF₆ (Sulphur hexafluoride) = 23,900 | N₂O = 265 | CH₄ = 28 | CO₂ = 1 (reference). SF₆ used in electrical transformers is the most potent known GHG, though CO₂ has the largest total warming effect due to its sheer abundance in the atmosphere.</div></div>
+    </div>
+
+  </div><!-- end mcqContainer -->
+</section>
+
+</main><!-- end main-content -->
+
+<!-- BACK TO TOP -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+</div><!-- end page-wrapper -->
+
+<script>
+// ===== PROGRESS BAR =====
+window.addEventListener('scroll', function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('progressBar').style.width = progress + '%';
+
+  // Back to top
+  const btn = document.getElementById('backToTop');
+  if (scrollTop > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+
+  // Update active nav
+  updateActiveNav();
+});
+
+// ===== DARK MODE =====
+const darkToggle = document.getElementById('darkToggle');
+darkToggle.addEventListener('click', function() {
+  document.body.classList.toggle('dark');
+  darkToggle.textContent = document.body.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';
+  localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+});
+// Restore preference
+if (localStorage.getItem('darkMode') === 'true') {
+  document.body.classList.add('dark');
+  darkToggle.textContent = '☀️ Light';
+}
+
+// ===== SEARCH =====
+const searchBox = document.getElementById('searchBox');
+let searchTimeout;
+searchBox.addEventListener('input', function() {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => doSearch(this.value.trim().toLowerCase()), 200);
+});
+
+function doSearch(query) {
+  // Clear previous highlights
+  document.querySelectorAll('.search-mark').forEach(el => {
+    const parent = el.parentNode;
+    parent.replaceChild(document.createTextNode(el.textContent), el);
+    parent.normalize();
+  });
+
+  if (!query) {
+    document.querySelectorAll('.note-card, .mcq-item').forEach(el => el.classList.remove('no-match'));
+    return;
+  }
+
+  // Highlight in note cards
+  const cards = document.querySelectorAll('.note-card, .mcq-item');
+  cards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    if (text.includes(query)) {
+      card.classList.remove('no-match');
+    } else {
+      card.classList.add('no-match');
+    }
+  });
+}
+
+// ===== MCQ FILTER =====
+function filterMCQ(difficulty, btn) {
+  document.querySelectorAll('.diff-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+
+  const items = document.querySelectorAll('.mcq-item');
+  items.forEach(item => {
+    if (difficulty === 'all' || item.dataset.difficulty === difficulty) {
+      item.classList.remove('hidden');
+    } else {
+      item.classList.add('hidden');
+    }
+  });
+}
+
+// ===== MCQ ANSWER CHECK =====
+function checkAnswer(btn, isCorrect) {
+  const optionsDiv = btn.closest('.mcq-options');
+  if (optionsDiv.dataset.answered) return; // Already answered
+  optionsDiv.dataset.answered = 'true';
+
+  const allOptions = optionsDiv.querySelectorAll('.mcq-option');
+  allOptions.forEach(opt => {
+    opt.disabled = true;
+    opt.style.cursor = 'not-allowed';
+  });
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('wrong');
+    // Find and highlight correct answer
+    allOptions.forEach(opt => {
+      if (opt.onclick && opt.onclick.toString().includes('true')) {
+        opt.classList.add('correct');
+      }
+    });
+  }
+
+  // Auto show answer
+  const mcqItem = btn.closest('.mcq-item');
+  const answerReveal = mcqItem.querySelector('.answer-reveal');
+  if (answerReveal) {
+    answerReveal.classList.add('shown');
+  }
+}
+
+// ===== SHOW ANSWER BUTTON =====
+function showAnswer(btn) {
+  const mcqItem = btn.closest('.mcq-item');
+  const answerReveal = mcqItem.querySelector('.answer-reveal');
+  if (answerReveal) {
+    answerReveal.classList.toggle('shown');
+    btn.textContent = answerReveal.classList.contains('shown') ? 'Hide Answer' : 'Show Answer';
+  }
+}
+
+// ===== ACTIVE NAV HIGHLIGHT =====
+function updateActiveNav() {
+  const sections = ['intro','air','water','soil','noise','radiation','emerging','fireworks','globalwarming','ozone','acidrain','casestudies','solidwaste','revision','mcq'];
+  const navLinks = document.querySelectorAll('.topic-nav a');
+
+  let currentSection = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 120) {
+      currentSection = id;
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + currentSection) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+    }
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll('section').forEach(section => {
+  section.style.animationPlayState = 'paused';
+  observer.observe(section);
+});
+
+// ===== SMOOTH SCROLL FOR NAV LINKS =====
+document.querySelectorAll('.topic-nav a, .nav-brand').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        const offset = 120; // sticky nav height
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+  });
+});
+
+// Print cleanup
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.answer-reveal').forEach(el => el.classList.add('shown'));
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ================= INJECTED UI SCRIPT ================= -->
+<script>
+(function() {
+  if(!document.querySelector('link[href*="Kalam"]')) {
+    document.head.insertAdjacentHTML('beforeend', '<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>');
+  }
+  
+  const style = document.createElement('style');
+  style.textContent = `
+    :root, body[data-theme="light"] {
+      --white: #FFFFFF !important;
+      --beige: #F8F5EE !important;
+      --paper: #FFFDF7 !important;
+      --sky: #87CEEB !important;
+      --sky-light: #E8F4FD !important;
+      --yellow: #FFF3B0 !important;
+      --yellow-dark: #F7C948 !important;
+      --pink: #FFE4E8 !important;
+      --pink-dark: #F78FA7 !important;
+      --lavender: #EDE7F6 !important;
+      --lavender-dark: #9C6FE4 !important;
+      --mint: #E8F5E9 !important;
+      --mint-dark: #4CAF82 !important;
+      --ink: #2C2C2C !important;
+      --ink-light: #555 !important;
+      --blue-accent: #4A90D9 !important;
+      --red-accent: #E74C3C !important;
+      --orange-accent: #F39C12 !important;
+      --green-accent: #27AE60 !important;
+      --purple-accent: #8E44AD !important;
+      --shadow: rgba(0, 0, 0, 0.08) !important;
+    }
+    [data-theme="dark"], body.dark {
+      --white: #1a1a2e !important;
+      --beige: #16213e !important;
+      --paper: #0f3460 !important;
+      --ink: #e0e0e0 !important;
+      --ink-light: #bbb !important;
+      --sky-light: #1a2a3a !important;
+      --yellow: #2a2a00 !important;
+      --pink: #2a0a10 !important;
+      --lavender: #1a1030 !important;
+      --mint: #0a2a15 !important;
+    }
+    
+    html {
+      font-size: 125% !important; /* Scale entire UI slightly larger */
+    }
+    
+    body {
+      background-color: var(--beige) !important;
+      font-family: 'Nunito', sans-serif !important;
+      color: var(--ink) !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, #e8e0d0 27px, #e8e0d0 28px), repeating-linear-gradient(90deg, transparent, transparent 27px, transparent 27px) !important;
+      background-size: 100% 28px !important;
+      font-size: 1.05rem !important; /* Extra boost for base font if ems aren't used */
+    }
+    body[data-theme="dark"], body.dark {
+      background-color: #16213e !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(255, 255, 255, 0.05) 27px, rgba(255, 255, 255, 0.05) 28px) !important;
+    }
+
+    h1, h2, h3, h4, .section-title, p {
+      font-family: 'Nunito', sans-serif !important;
+    }
+    
+    .nav-brand {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      color: var(--blue-accent) !important;
+      font-size: 1.5rem !important;
+    }
+    
+    nav, .nav-sticky, #navbar {
+      background: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(12px) !important;
+      border-bottom: 2px dashed #e0d5c5 !important;
+      box-shadow: 0 2px 20px var(--shadow) !important;
+    }
+    body.dark nav, body[data-theme="dark"] nav, body.dark .nav-sticky, body.dark #navbar {
+      background: rgba(22, 33, 62, 0.9) !important;
+      border-bottom-color: #333 !important;
+    }
+    
+    header.hero, section#hero, .hero {
+      background: var(--paper) !important;
+      border: 3px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      margin: 30px auto !important;
+      max-width: 960px !important;
+      box-shadow: 4px 4px 0 #e0d5c5, 8px 8px 0 #d8ccb8 !important;
+    }
+    header.hero::before, section#hero::before, .hero::before {
+      display: none !important;
+    }
+    
+    .hero-title {
+      font-family: 'Kalam', cursive !important;
+      color: var(--blue-accent) !important;
+      border-bottom: 3px dashed var(--blue-accent) !important;
+      display: inline-block !important;
+      padding-bottom: 4px !important;
+    }
+    
+    .hero-subtitle, .hero-unit-badge, .hero-unit {
+      font-family: 'Caveat', cursive !important;
+      color: #999 !important;
+      letter-spacing: 2px !important;
+      background: transparent !important;
+      border: none !important;
+    }
+
+    h2.section-heading, .section-header {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      border-bottom: 2px dashed #e8dfc8 !important;
+      padding-bottom: 8px !important;
+    }
+    
+    .note-card, .resource-card, .def-box {
+      background: var(--paper) !important;
+      border-radius: 12px !important;
+      border-left: 5px solid var(--blue-accent) !important;
+      box-shadow: 2px 2px 8px var(--shadow) !important;
+      font-family: 'Kalam', cursive !important;
+    }
+    
+    .note-card.green, .def-box.green { border-left-color: var(--mint-dark) !important; }
+    .note-card.red, .def-box.red { border-left-color: var(--pink-dark) !important; }
+    .note-card.yellow, .def-box.yellow { border-left-color: var(--yellow-dark) !important; }
+    
+    /* Make index.html cards look PEL125 style */
+    .unit-card {
+      background: var(--paper) !important;
+      border: 2px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      box-shadow: 3px 3px 0 #e0d5c5 !important;
+      transition: transform 0.2s !important;
+    }
+    .unit-card:hover {
+      transform: translateY(-5px) !important;
+      box-shadow: 5px 5px 0 #d8ccb8 !important;
+    }
+    .unit-badge {
+      background: var(--sky-light) !important;
+      color: var(--blue-accent) !important;
+      font-family: 'Caveat', cursive !important;
+    }
+  `;
+  document.head.appendChild(style);
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CHE 110 – Unit III: Biodiversity | Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ── CSS Variables ── */
+:root{
+  --paper:#faf8f2;
+  --paper2:#f4f0e6;
+  --ink:#1a1208;
+  --ink2:#3d3120;
+  --blue:#2d6a9f;
+  --blue-light:#ddeef8;
+  --green:#2d7a4f;
+  --green-light:#d6f0e2;
+  --red:#b03030;
+  --red-light:#fce8e8;
+  --amber:#b07010;
+  --amber-light:#fdf3d6;
+  --brown:#6b4226;
+  --grey:#e8e4da;
+  --shadow:rgba(60,40,10,.13);
+  --radius:14px;
+  --transition:.3s ease;
+  --line-h:repeating-linear-gradient(transparent,transparent 27px,#c8bfa0 28px);
+}
+[data-theme="dark"]{
+  --paper:#1a1810;
+  --paper2:#22201a;
+  --ink:#f0ead8;
+  --ink2:#c8bfa0;
+  --blue:#5baad8;
+  --blue-light:#1a2e40;
+  --green:#4db882;
+  --green-light:#0e2a1a;
+  --red:#e06060;
+  --red-light:#2a1010;
+  --amber:#e0b040;
+  --amber-light:#2a2010;
+  --brown:#c0845a;
+  --grey:#2e2c24;
+  --shadow:rgba(0,0,0,.4);
+  --line-h:repeating-linear-gradient(transparent,transparent 27px,#3a3520 28px);
+}
+
+/* ── Reset & Base ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'DM Sans',sans-serif;
+  line-height:1.7;
+  transition:background var(--transition),color var(--transition);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Crimson Pro',serif;line-height:1.3}
+.hand{font-family:'Caveat',cursive}
+
+/* ── Progress Bar ── */
+#progress-bar{
+  position:fixed;top:0;left:0;height:4px;width:0;
+  background:linear-gradient(90deg,var(--blue),var(--green));
+  z-index:9999;transition:width .1s linear;
+}
+
+/* ── Sticky Nav ── */
+#navbar{
+  position:sticky;top:0;z-index:900;
+  background:var(--paper2);
+  border-bottom:2px solid var(--grey);
+  box-shadow:0 2px 12px var(--shadow);
+  display:flex;align-items:center;gap:12px;
+  padding:10px 20px;flex-wrap:wrap;
+}
+.nav-brand{font-family:'Caveat',cursive;font-size:1.3rem;font-weight:700;color:var(--blue);white-space:nowrap}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+.nav-links a{
+  font-size:.78rem;padding:4px 10px;border-radius:20px;
+  color:var(--ink2);text-decoration:none;
+  border:1px solid var(--grey);
+  transition:background var(--transition),color var(--transition);
+  white-space:nowrap;
+}
+.nav-links a:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.nav-controls{display:flex;gap:8px;margin-left:auto}
+button{cursor:pointer;border:none;outline:none;font-family:inherit}
+.btn-icon{
+  background:var(--grey);border-radius:8px;padding:6px 12px;
+  font-size:.82rem;color:var(--ink);
+  transition:background var(--transition);display:flex;align-items:center;gap:5px;
+}
+.btn-icon:hover{background:var(--blue);color:#fff}
+
+/* ── Search Overlay ── */
+#search-overlay{
+  display:none;position:fixed;inset:0;z-index:9000;
+  background:rgba(0,0,0,.5);backdrop-filter:blur(4px);
+  align-items:flex-start;justify-content:center;padding-top:80px;
+}
+#search-overlay.active{display:flex}
+#search-box{
+  background:var(--paper);width:min(600px,90%);border-radius:16px;
+  padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+#search-input{
+  width:100%;padding:12px 16px;border:2px solid var(--blue);
+  border-radius:10px;font-size:1rem;background:var(--paper2);
+  color:var(--ink);font-family:inherit;
+}
+#search-results{margin-top:12px;max-height:300px;overflow-y:auto}
+.search-result-item{
+  padding:10px;border-radius:8px;cursor:pointer;
+  border-bottom:1px solid var(--grey);
+}
+.search-result-item:hover{background:var(--blue-light)}
+
+/* ── Hero ── */
+#hero{
+  min-height:340px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:60px 20px 40px;
+  background:var(--line-h);
+  border-bottom:3px solid var(--grey);
+  position:relative;overflow:hidden;
+}
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(45,106,159,.08),transparent);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-block;background:var(--amber-light);
+  color:var(--amber);border:1.5px solid var(--amber);
+  border-radius:20px;padding:4px 16px;font-size:.82rem;
+  margin-bottom:16px;font-weight:500;
+}
+.hero-title{
+  font-family:'Caveat',cursive;font-size:clamp(2.4rem,6vw,4rem);
+  color:var(--ink);line-height:1.1;margin-bottom:8px;
+}
+.hero-unit{
+  font-family:'Caveat',cursive;font-size:clamp(1.6rem,4vw,2.6rem);
+  color:var(--blue);margin-bottom:16px;
+}
+.hero-desc{
+  font-family:'Crimson Pro',serif;font-size:1.15rem;font-style:italic;
+  color:var(--ink2);max-width:600px;
+}
+.hero-deco{
+  position:absolute;right:5%;top:20%;opacity:.07;
+  font-size:10rem;font-family:'Caveat',cursive;user-select:none;
+  pointer-events:none;transform:rotate(15deg);
+}
+
+/* ── Main Layout ── */
+main{max-width:900px;margin:0 auto;padding:40px 20px 80px}
+
+/* ── Section Styles ── */
+.section{margin-bottom:60px;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+.section-header{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:24px;border-bottom:2px dashed var(--grey);
+  padding-bottom:10px;
+}
+.section-num{
+  background:var(--blue);color:#fff;
+  width:36px;height:36px;border-radius:50%;
+  display:grid;place-items:center;font-weight:700;font-size:.9rem;flex-shrink:0;
+}
+.section-title{font-size:1.7rem;color:var(--ink)}
+
+/* ── Note Cards ── */
+.note-card{
+  background:var(--paper2);
+  border:1.5px solid var(--grey);
+  border-radius:var(--radius);
+  padding:22px 26px;margin-bottom:20px;
+  box-shadow:3px 3px 0 var(--grey);
+  position:relative;
+  background-image:var(--line-h);
+  transition:box-shadow var(--transition);
+}
+.note-card:hover{box-shadow:5px 5px 0 var(--grey)}
+.note-card h3{
+  font-family:'Caveat',cursive;font-size:1.5rem;
+  color:var(--blue);margin-bottom:10px;
+  border-bottom:1.5px solid var(--blue-light);
+  padding-bottom:6px;
+}
+.note-card h4{
+  font-family:'Caveat',cursive;font-size:1.2rem;
+  color:var(--green);margin:14px 0 6px;
+}
+.note-card p{margin-bottom:10px;line-height:1.85}
+.note-card ul,
+.note-card ol{padding-left:22px;margin-bottom:10px}
+.note-card li{margin-bottom:5px;line-height:1.75}
+
+/* Corner fold */
+.note-card::after{
+  content:'';position:absolute;top:0;right:0;
+  border-style:solid;border-width:0 20px 20px 0;
+  border-color:transparent var(--paper) transparent transparent;
+}
+
+/* ── Highlight Boxes ── */
+.callout{
+  border-radius:10px;padding:14px 18px;margin:14px 0;
+  border-left:4px solid;font-size:.97rem;
+}
+.callout-blue{background:var(--blue-light);border-color:var(--blue)}
+.callout-green{background:var(--green-light);border-color:var(--green)}
+.callout-amber{background:var(--amber-light);border-color:var(--amber)}
+.callout-red{background:var(--red-light);border-color:var(--red)}
+.callout strong{display:block;margin-bottom:4px;font-size:1rem}
+
+/* ── Tables ── */
+.table-wrap{overflow-x:auto;margin:14px 0;border-radius:10px;
+  box-shadow:0 2px 10px var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+thead{background:var(--blue);color:#fff}
+thead th{padding:10px 14px;text-align:left;font-weight:600}
+tbody tr:nth-child(even){background:var(--grey)}
+tbody tr:nth-child(odd){background:var(--paper2)}
+td{padding:9px 14px;border-bottom:1px solid var(--grey)}
+td:first-child{font-weight:600;color:var(--blue)}
+
+/* ── Diagram Cards ── */
+.diagram{
+  background:var(--paper2);border:2px solid var(--grey);
+  border-radius:var(--radius);padding:20px;margin:18px 0;
+  text-align:center;
+}
+.diagram-title{
+  font-family:'Caveat',cursive;font-size:1.2rem;
+  color:var(--blue);margin-bottom:14px;
+}
+
+/* Levels of Biodiversity diagram */
+.bio-levels{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.bio-level{
+  background:var(--paper);border:2px solid var(--blue);
+  border-radius:10px;padding:14px 20px;min-width:140px;
+  text-align:center;flex:1;
+}
+.bio-level .icon{font-size:2rem;margin-bottom:6px}
+.bio-level .label{font-family:'Caveat',cursive;font-size:1.1rem;color:var(--blue)}
+.bio-level .sub{font-size:.82rem;color:var(--ink2);margin-top:4px}
+
+/* Conservation comparison */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.compare-box{
+  border-radius:10px;padding:16px;
+  border:2px solid;
+}
+.compare-box.insitu{border-color:var(--green);background:var(--green-light)}
+.compare-box.exsitu{border-color:var(--blue);background:var(--blue-light)}
+.compare-box h4{font-family:'Caveat',cursive;font-size:1.2rem;margin-bottom:8px}
+.compare-box.insitu h4{color:var(--green)}
+.compare-box.exsitu h4{color:var(--blue)}
+
+/* Hotspot cards */
+.hotspot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:14px 0}
+.hotspot-card{
+  background:var(--green-light);border:2px solid var(--green);
+  border-radius:10px;padding:14px;text-align:center;
+}
+.hotspot-card .hs-num{
+  font-family:'Caveat',cursive;font-size:2rem;color:var(--green);font-weight:700
+}
+.hotspot-card .hs-name{font-weight:600;color:var(--ink);margin-top:4px;font-size:.9rem}
+
+/* Species status pills */
+.species-grid{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.sp-pill{
+  border-radius:8px;padding:10px 16px;
+  font-size:.88rem;font-weight:600;cursor:default;
+  border:2px solid;flex:1;min-width:130px;text-align:center;
+}
+.sp-pill.extinct{background:#f0e0e0;border-color:var(--red);color:var(--red)}
+.sp-pill.endangered{background:#fdecd8;border-color:#c06020;color:#c06020}
+.sp-pill.vulnerable{background:#fdf8d6;border-color:var(--amber);color:var(--amber)}
+.sp-pill.rare{background:#e8f0fe;border-color:var(--blue);color:var(--blue)}
+.sp-pill.edge{background:#eee8fd;border-color:#6040b0;color:#6040b0}
+
+/* Biosphere zones diagram */
+.zone-diagram{
+  display:flex;flex-direction:column;align-items:center;gap:0;
+  margin:16px auto;max-width:320px;
+}
+.zone{
+  width:100%;text-align:center;padding:10px 8px;font-size:.87rem;
+  font-weight:600;color:#fff;border-radius:4px;
+}
+.zone.core{background:#1a5e30;border-radius:8px}
+.zone.buffer{background:#2d7a4f;margin:0 20px}
+.zone.restoration{background:#4a9e70;margin:0 40px}
+.zone.transition{background:#70b890;margin:0 60px}
+.zone-label{
+  font-family:'Caveat',cursive;font-size:.95rem;
+  color:var(--ink2);margin-top:4px;text-align:center;
+}
+
+/* ── Quick Revision ── */
+.revision-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;
+}
+.revision-card{
+  background:var(--paper2);border:1.5px solid var(--grey);
+  border-radius:10px;padding:14px 16px;
+  border-top:4px solid var(--blue);
+}
+.revision-card h4{
+  font-family:'Caveat',cursive;font-size:1.1rem;
+  color:var(--blue);margin-bottom:6px;
+}
+.revision-card ul{padding-left:16px;font-size:.88rem}
+.revision-card li{margin-bottom:3px}
+
+/* ── MCQ Section ── */
+#mcq-section{margin-bottom:80px}
+.mcq-controls{
+  display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center
+}
+.mcq-filter{
+  padding:6px 14px;border-radius:20px;border:1.5px solid var(--grey);
+  background:var(--paper2);color:var(--ink);font-family:inherit;font-size:.85rem;cursor:pointer;
+}
+.mcq-filter.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.mcq-stats{margin-left:auto;font-size:.88rem;color:var(--ink2)}
+
+.mcq-card{
+  background:var(--paper2);border:1.5px solid var(--grey);
+  border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;
+  transition:box-shadow var(--transition);
+}
+.mcq-card:hover{box-shadow:0 4px 20px var(--shadow)}
+.mcq-header{
+  display:flex;gap:10px;align-items:flex-start;margin-bottom:14px
+}
+.mcq-num{
+  background:var(--blue);color:#fff;
+  min-width:32px;height:32px;border-radius:8px;
+  display:grid;place-items:center;font-size:.85rem;font-weight:700;flex-shrink:0;
+}
+.mcq-diff{
+  font-size:.72rem;padding:2px 8px;border-radius:10px;
+  font-weight:600;margin-left:auto;flex-shrink:0;align-self:center;
+}
+.mcq-diff.easy{background:var(--green-light);color:var(--green)}
+.mcq-diff.medium{background:var(--amber-light);color:var(--amber)}
+.mcq-diff.hard{background:var(--red-light);color:var(--red)}
+.mcq-q{font-size:1rem;line-height:1.65;font-weight:500}
+.mcq-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.mcq-opt{
+  padding:8px 12px;border-radius:8px;
+  border:1.5px solid var(--grey);background:var(--paper);
+  font-size:.9rem;cursor:pointer;text-align:left;
+  transition:background var(--transition),border-color var(--transition);
+  font-family:inherit;color:var(--ink);
+}
+.mcq-opt:hover{background:var(--blue-light);border-color:var(--blue)}
+.mcq-opt.correct{background:var(--green-light);border-color:var(--green);color:var(--green)}
+.mcq-opt.wrong{background:var(--red-light);border-color:var(--red);color:var(--red)}
+.mcq-answer{
+  display:none;background:var(--green-light);
+  border:1.5px solid var(--green);border-radius:8px;
+  padding:8px 14px;font-size:.88rem;color:var(--green);margin-top:4px;
+}
+.mcq-answer.visible{display:block}
+.show-ans-btn{
+  background:none;border:1.5px dashed var(--grey);
+  border-radius:8px;padding:6px 14px;color:var(--ink2);
+  font-size:.82rem;cursor:pointer;transition:background var(--transition);
+  font-family:inherit;
+}
+.show-ans-btn:hover{background:var(--grey)}
+
+/* ── Back to Top ── */
+#back-top{
+  position:fixed;bottom:30px;right:24px;
+  background:var(--blue);color:#fff;
+  width:44px;height:44px;border-radius:50%;
+  display:none;place-items:center;font-size:1.2rem;
+  box-shadow:0 4px 14px rgba(45,106,159,.4);
+  cursor:pointer;z-index:800;border:none;
+  transition:background var(--transition);
+}
+#back-top:hover{background:var(--green)}
+#back-top.visible{display:grid}
+
+/* ── Print Styles ── */
+@media print{
+  #navbar,#back-top,#search-overlay,#progress-bar,
+  .nav-controls,.mcq-controls,#search-overlay{display:none!important}
+  .mcq-answer{display:block!important}
+  body{font-size:11pt}
+  .note-card{break-inside:avoid}
+}
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  .compare-grid{grid-template-columns:1fr}
+  .mcq-options{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hero-title{font-size:2.2rem}
+  .hero-unit{font-size:1.6rem}
+}
+</style>
+</head>
+<body data-theme="light">
+
+<div id="progress-bar"></div>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <span class="nav-brand">📗 CHE 110</span>
+  <div class="nav-links">
+    <a href="#intro">Intro</a>
+    <a href="#levels">Levels</a>
+    <a href="#importance">Importance</a>
+    <a href="#hotspots">Hotspots</a>
+    <a href="#threats">Threats</a>
+    <a href="#species">Species</a>
+    <a href="#conservation">Conservation</a>
+    <a href="#biogeography">Biogeography</a>
+    <a href="#revision">Revision</a>
+    <a href="#mcq-section">MCQs</a>
+  </div>
+  <div class="nav-controls">
+    <button class="btn-icon" onclick="toggleSearch()">🔍 Search</button>
+    <button class="btn-icon" onclick="toggleDark()">🌙 Dark</button>
+    <button class="btn-icon" onclick="window.print()">🖨️ Print</button>
+  </div>
+</nav>
+
+<!-- Search Overlay -->
+<div id="search-overlay" onclick="closeSearch(event)">
+  <div id="search-box" onclick="event.stopPropagation()">
+    <input id="search-input" type="text" placeholder="Search notes, terms, concepts…" oninput="doSearch(this.value)" autocomplete="off"/>
+    <div id="search-results"></div>
+  </div>
+</div>
+
+<!-- Hero -->
+<section id="hero">
+  <span class="hero-badge">CHE 110 – Environmental Studies · 2025-26</span>
+  <h1 class="hero-title hand">Environmental Studies</h1>
+  <div class="hero-unit hand">Unit III: Biodiversity &amp; Conservation</div>
+  <p class="hero-desc">Detailed handwritten-style notes covering every topic — genetic, species &amp; ecosystem diversity, hotspots, threats, conservation strategies &amp; India's biogeographic zones.</p>
+  <div class="hero-deco hand">🌿</div>
+</section>
+
+<main>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 1. INTRODUCTION -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="section" id="intro">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2 class="section-title">Introduction to Biodiversity</h2>
+  </div>
+
+  <div class="note-card">
+    <h3>What is Biodiversity?</h3>
+    <p>The word <strong>Biodiversity</strong> = <em>Bio</em> (life) + <em>Diversity</em> (variety). It refers to the variability among living organisms from <strong>all sources</strong> — terrestrial, marine, and other aquatic ecosystems — and the ecological complexes of which they are part.</p>
+    <div class="callout callout-blue">
+      <strong>📖 Official Definition (CBD, 1992)</strong>
+      "Biodiversity is the variability among living organisms from all sources including, inter alia, terrestrial, marine and other aquatic ecosystems and the ecological complexes of which they are part; this includes diversity within species, between species and of ecosystems." — Convention on Biological Diversity, Rio Earth Summit 1992
+    </div>
+    <h4>India's Ranking in Biodiversity</h4>
+    <ul>
+      <li>🥇 <strong>10th</strong> among plant-rich countries of the world</li>
+      <li>🥇 <strong>11th</strong> in terms of endemic species of higher vertebrates</li>
+      <li>🥇 <strong>6th</strong> among centres of diversity and origin of agricultural crops</li>
+      <li>One of <strong>18 mega-diversity nations</strong> identified by Conservation International (1998)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 2. LEVELS OF BIODIVERSITY -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="section" id="levels">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2 class="section-title">Levels of Biological Diversity</h2>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title hand">Three Levels of Biodiversity</div>
+    <div class="bio-levels">
+      <div class="bio-level">
+        <div class="icon">🧬</div>
+        <div class="label">Genetic Diversity</div>
+        <div class="sub">Variation in DNA within a species</div>
+      </div>
+      <div class="bio-level">
+        <div class="icon">🦁</div>
+        <div class="label">Species Diversity</div>
+        <div class="sub">Variety of species in a habitat</div>
+      </div>
+      <div class="bio-level">
+        <div class="icon">🌳</div>
+        <div class="label">Ecosystem Diversity</div>
+        <div class="sub">Variety of ecosystems on Earth</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-card">
+    <h3>1. Genetic Diversity</h3>
+    <p>It is the <strong>variation in DNA sequences</strong> among individuals of the same species. It provides the raw material for evolution and adaptation.</p>
+    <div class="callout callout-green">
+      <strong>🐕 Classic Example</strong>
+      Dogs (Canis lupus familiaris) — over <strong>400 recognised breeds</strong> exist, ranging from tiny Chihuahuas to massive Great Danes. All belong to the same species but show enormous genetic variation in size, shape, behaviour, and physiology.
+    </div>
+    <h4>Why Genetic Diversity Matters</h4>
+    <ul>
+      <li>Helps species <strong>adapt</strong> to changing environments</li>
+      <li>Reduces risk of <strong>genetic diseases</strong> due to inbreeding</li>
+      <li>Forms the basis for <strong>crop improvement</strong> and disease-resistant varieties</li>
+      <li>Enables development of new <strong>medicines and biotechnology</strong></li>
+    </ul>
+    <h4>Examples of Genetic Diversity</h4>
+    <ul>
+      <li><strong>Rice (Oryza sativa)</strong> — thousands of varieties (Basmati, Sona Masoori, etc.)</li>
+      <li><strong>Mango (Mangifera indica)</strong> — Alphonso, Langra, Totapuri, Dasheri, etc.</li>
+      <li><strong>Human blood groups</strong> — A, B, AB, O varieties within one species</li>
+    </ul>
+  </div>
+
+  <div class="note-card">
+    <h3>2. Species Diversity</h3>
+    <p>It is the <strong>diversity of different species within a habitat or ecosystem</strong>. It can be measured as species richness (number of species), species abundance, and evenness.</p>
+    <div class="callout callout-amber">
+      <strong>🌿 Key Examples: Tropical Rainforest</strong>
+      Amazon, Congo, Western Ghats — Mammals: jaguar, sloth, monkeys | Birds: parrots, toucans, hornbills | Reptiles &amp; Amphibians: anacondas, poison dart frogs, chameleons | Insects: millions of beetle and butterfly species
+    </div>
+    <h4>Measuring Species Diversity</h4>
+    <ul>
+      <li><strong>Alpha (α) diversity</strong> — local species richness within a single community</li>
+      <li><strong>Beta (β) diversity</strong> — change in species composition between two communities</li>
+      <li><strong>Gamma (γ) diversity</strong> — total diversity across a large region</li>
+    </ul>
+    <p>The <strong>Shannon-Wiener Index (H')</strong> is commonly used to quantify species diversity: <em>H' = −Σ(pᵢ × ln pᵢ)</em>, where pᵢ is the proportion of each species.</p>
+  </div>
+
+  <div class="note-card">
+    <h3>3. Ecosystem Diversity</h3>
+    <p>It refers to the <strong>diversity of ecosystems</strong> found in a particular place or across the Earth, along with the ecological interactions among organisms and their physical environment.</p>
+    <h4>Types of Ecosystems</h4>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Category</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Forest Ecosystems</td><td>Tropical rainforest, temperate forest, taiga/boreal</td></tr>
+        <tr><td>Aquatic Ecosystems</td><td>Rivers, lakes, oceans, coral reefs, wetlands</td></tr>
+        <tr><td>Grassland Ecosystems</td><td>Savanna, prairies, steppes</td></tr>
+        <tr><td>Desert Ecosystems</td><td>Hot deserts (Thar), cold deserts (Ladakh)</td></tr>
+        <tr><td>Tundra Ecosystems</td><td>Arctic/Antarctic regions</td></tr>
+        <tr><td>Mountain Ecosystems</td><td>Alpine, sub-alpine zones</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout callout-blue">
+      <strong>💡 Remember!</strong>
+      India alone has <strong>10 biogeographic zones</strong>, each with unique ecosystem diversity — from Thar Desert to Himalayan ranges to tropical Western Ghats.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 3. IMPORTANCE OF BIODIVERSITY -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="section" id="importance">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2 class="section-title">Importance of Biodiversity</h2>
+  </div>
+
+  <div class="note-card">
+    <h3>A. Ecosystem Services</h3>
+    <p>Biodiversity supports <strong>ecosystem services</strong> that are vital for human survival and civilisation. These include:</p>
+    <div class="callout callout-green">
+      <strong>Four Categories of Ecosystem Services (Millennium Ecosystem Assessment)</strong>
+      <br>1. <strong>Provisioning</strong> — food, water, raw materials, medicine
+      <br>2. <strong>Regulating</strong> — climate regulation, flood control, pollination
+      <br>3. <strong>Cultural</strong> — recreation, aesthetic, spiritual
+      <br>4. <strong>Supporting</strong> — nutrient cycling, soil formation, oxygen production
+    </div>
+    <ul>
+      <li><strong>Air &amp; Water Purification:</strong> Plants absorb CO₂, wetlands filter water</li>
+      <li><strong>Pollination:</strong> ~75% of flowering plant species depend on animal pollinators; 35% of global food crop production depends on pollinators (bees, butterflies, birds)</li>
+      <li><strong>Climate Regulation:</strong> Forests act as carbon sinks — Amazon stores ~150 billion tonnes of carbon</li>
+      <li><strong>Soil Fertility:</strong> Earthworms, fungi, bacteria decompose organic matter, recycle nutrients</li>
+      <li><strong>Nutrient Cycling:</strong> Nitrogen, phosphorus, carbon cycles maintained by diverse organisms</li>
+    </ul>
+  </div>
+
+  <div class="note-card">
+    <h3>B. Economic Value</h3>
+    <h4>Food Resources</h4>
+    <ul>
+      <li>Biodiversity ensures a diverse range of food sources — crops, livestock, fish, wild foods</li>
+      <li>India has over <strong>50,000 plant species</strong> with known economic uses</li>
+    </ul>
+    <h4>Raw Materials</h4>
+    <ul>
+      <li>Plants, animals, and microorganisms provide materials for fuel, clothing, building materials</li>
+      <li>Timber, bamboo, cotton, silk, rubber — all from biodiversity</li>
+    </ul>
+    <h4>Medicinal Resources</h4>
+    <ul>
+      <li>Over <strong>25% of all modern medicines</strong> are derived from plants</li>
+      <li>Examples: Aspirin (willow bark), Morphine (opium poppy), Taxol (Pacific yew tree)</li>
+      <li>Traditional systems — Ayurveda, Unani, Siddha rely heavily on plant diversity</li>
+    </ul>
+    <h4>Tourism &amp; Recreation (Ecotourism)</h4>
+    <ul>
+      <li>Ecotourism is a significant economic driver in biodiversity-rich regions</li>
+      <li>Contributes billions to national GDPs (e.g., Kaziranga, Corbett generate revenue)</li>
+    </ul>
+    <h4>Fisheries &amp; Aquaculture</h4>
+    <p>Healthy marine and freshwater ecosystems provide food and livelihoods for hundreds of millions worldwide.</p>
+  </div>
+
+  <div class="note-card">
+    <h3>C. Ecological Value</h3>
+    <ul>
+      <li><strong>Ecosystem Functioning:</strong> Biodiversity supports nutrient cycling, soil formation, primary production</li>
+      <li><strong>Stability &amp; Resilience:</strong> More diverse ecosystems are more stable — if one species declines, others can fill the gap</li>
+      <li><strong>Predator-Prey Balance:</strong> Wolves in Yellowstone — their reintroduction reshaped river courses ("trophic cascade")</li>
+      <li><strong>Decomposition:</strong> Fungi and bacteria break down dead matter, releasing nutrients</li>
+    </ul>
+    <div class="callout callout-amber">
+      <strong>🔑 Keystone Species Concept</strong>
+      A species that has a disproportionately large effect on its ecosystem relative to its abundance. Example: Sea otters control sea urchin populations, which protects kelp forests.
+    </div>
+  </div>
+
+  <div class="note-card">
+    <h3>D. Social Value</h3>
+    <ul>
+      <li><strong>Cultural Significance:</strong> Many cultures around the world rely on biodiversity for food, medicine, and spiritual practices. Sacred groves (Devrais) in India protect local biodiversity.</li>
+      <li><strong>Health &amp; Well-being:</strong> Biodiversity contributes to human health by providing medicinal plants. "Nature therapy" or "forest bathing" (Shinrin-yoku) reduces stress and boosts immunity.</li>
+      <li><strong>Indigenous Knowledge:</strong> Tribal communities hold rich traditional ecological knowledge about local biodiversity</li>
+    </ul>
+  </div>
+
+  <div class="note-card">
+    <h3>E. Aesthetic Value</h3>
+    <ul>
+      <li><strong>Natural Beauty:</strong> The diversity of plant and animal species creates stunning landscapes — from tropical rainforests and coral reefs to grasslands and deserts</li>
+      <li><strong>Inspiration for Art:</strong> Nature has inspired art, literature, music, and other forms of cultural expression throughout history</li>
+      <li><strong>Recreation:</strong> Bird watching, wildlife photography, nature trekking — multi-billion dollar industries</li>
+    </ul>
+  </div>
+
+  <div class="note-card">
+    <h3>F. Informational Value</h3>
+    <ul>
+      <li><strong>Scientific Discovery:</strong> Studying biodiversity helps scientists understand ecological processes, species interactions, and evolutionary patterns</li>
+      <li><strong>Genetic &amp; Evolutionary Information:</strong> Biodiversity holds critical genetic information usable in biotechnology — disease-resistant crops, new medicines, vaccines</li>
+      <li><strong>Bioprospecting:</strong> Searching biodiversity for new compounds — e.g., Penicillin (fungus), Cyclosporin (immunosuppressant from soil fungus)</li>
+    </ul>
+    <div class="callout callout-blue">
+      <strong>💡 Did You Know?</strong>
+      The blood of horseshoe crabs (Limulus) contains a compound (LAL) used to test vaccines and IV drugs for bacterial contamination — a multi-billion dollar industry based on one species!
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 4. HOTSPOTS OF BIODIVERSITY -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="section" id="hotspots">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2 class="section-title">Hot Spots of Biodiversity</h2>
+  </div>
+
+  <div class="note-card">
+    <h3>Definition &amp; Criteria</h3>
+    <p>A <strong>biodiversity hotspot</strong> is a biogeographic region with a significant reservoir of biodiversity that is under serious threat from humans.</p>
+    <div class="callout callout-red">
+      <strong>⚠️ Three Criteria to identify a Hotspot (Norman Myers, 1988)</strong>
+      <br>1. Must have at least <strong>1,500 species of endemic vascular plants</strong> (≥ 0.5% of world total)
+      <br>2. Must have lost at least <strong>70% of its original habitat</strong>
+      <br>3. High degree of <strong>threat</strong> from human activities
+    </div>
+    <p>Currently there are <strong>36 biodiversity hotspots</strong> worldwide (Conservation International updated list). They cover only ~2.4% of Earth's land surface but contain over 50% of endemic plant species.</p>
+  </div>
+
+  <div class="note-card">
+    <h3>India's Four Biodiversity Hotspots</h3>
+    <div class="hotspot-grid">
+      <div class="hotspot-card">
+        <div class="hs-num">1</div>
+        <div class="hs-name">Western Ghats (+ Sri Lanka)</div>
+      </div>
+      <div class="hotspot-card">
+        <div class="hs-num">2</div>
+        <div class="hs-name">Eastern Himalayas</div>
+      </div>
+      <div class="hotspot-card">
+        <div class="hs-num">3</div>
+        <div class="hs-name">Indo-Burma Region</div>
+      </div>
+      <div class="hotspot-card">
+        <div class="hs-num">4</div>
+        <div class="hs-name">Sundaland (Nicobar Islands)</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Hotspot</th><th>States/Region</th><th>Notable Species</th></tr></thead>
+      <tbody>
+        <tr><td>Western Ghats</td><td>Kerala, TN, Karnataka, Goa, Maharashtra</td><td>Lion-tailed macaque, Nilgiri tahr, Malabar giant squirrel</td></tr>
+        <tr><td>Eastern Himalayas</td><td>NE states, Sikkim, parts of HP &amp; Uttarakhand</td><td>Red panda, snow leopard, clouded leopard</td></tr>
+        <tr><td>Indo-Burma</td><td>NE India, Myanmar, Indo-China</td><td>Irrawaddy dolphin, Eld's deer, brow-antlered deer</td></tr>
+        <tr><td>Sundaland (Nicobar)</td><td>Andaman &amp; Nicobar Islands</td><td>Nicobar megapode, leatherback sea turtle, saltwater crocodile</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout callout-amber">
+      <strong>📌 Exam Tip</strong>
+      Remember: India has 4 hotspots. Western Ghats is the most famous. It covers 6 states and has over 5,000 plant species, of which 1,700+ are endemic.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 5. THREATS TO BIODIVERSITY -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="section" id="threats">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2 class="section-title">Threats to Biodiversity</h2>
+  </div>
+
+  <div class="note-card">
+    <h3>Major Threats (HIPPO)</h3>
+    <div class="callout callout-red">
+      <strong>🦛 HIPPO Framework — Major Causes of Biodiversity Loss</strong>
+      <br><strong>H</strong> — Habitat loss &amp; destruction
+      <br><strong>I</strong> — Invasive species (biological invasions)
+      <br><strong>P</strong> — Pollution
+      <br><strong>P</strong> — Population (human) growth
+      <br><strong>O</strong> — Overexploitation (poaching)
+    </div>
+
+    <h4>1. Habitat Loss &amp; Fragmentation</h4>
+    <p>The <strong>most significant cause</strong> of biodiversity loss globally. Causes include deforestation, urbanisation, agricultural expansion, mining, dam construction.</p>
+    <ul>
+      <li>~13 million hectares of forest lost annually worldwide</li>
+      <li>Fragmentation isolates populations — reduces gene flow and increases inbreeding</li>
+      <li>India loses forest cover due to mining (especially in Jharkhand, Chhattisgarh)</li>
+    </ul>
+
+    <h4>2. Poaching of Wildlife</h4>
+    <ul>
+      <li>Illegal hunting and trade of wild animals for meat, traditional medicine, exotic pets</li>
+      <li>Tiger poaching for bones (traditional Chinese medicine); elephant poaching for ivory</li>
+      <li>Rhinoceros horn, sea turtle eggs, pangolin scales — all targeted by poachers</li>
+      <li><strong>Blackbuck case</strong>: Bollywood actor Salman Khan sentenced to 5 years imprisonment for poaching blackbucks — highlights the issue</li>
+      <li>CITES (Convention on International Trade in Endangered Species) regulates wildlife trade</li>
+    </ul>
+
+    <h4>3. Biological Invasions</h4>
+    <p>Introduction of <strong>alien/invasive species</strong> that outcompete native species, disrupt ecosystems.</p>
+    <ul>
+      <li><strong>Water Hyacinth (Eichhornia crassipes)</strong> — covers water bodies, depletes oxygen, kills aquatic life</li>
+      <li><strong>Lantana camara</strong> — invasive weed in Indian forests that outcompetes native vegetation</li>
+      <li><strong>Nile Perch</strong> in Lake Victoria — caused extinction of 200+ cichlid fish species</li>
+      <li><strong>Parthenium (Congress grass)</strong> — toxic invasive weed in India</li>
+    </ul>
+
+    <h4>4. Human-Wildlife Conflict</h4>
+    <p>Encounters between humans and wildlife that lead to negative results — loss of property, livelihoods, and even life.</p>
+    <div class="callout callout-amber">
+      <strong>🐘 Examples from India</strong>
+      <br>• Elephants kill ~500 people annually in India (especially Kerala)
+      <br>• Corbett National Park (Uttarakhand) leopards responsible for 400+ attacks on humans
+      <br>• Bengal tigers in Sundarbans kill 50–250 people per year in India and Bangladesh
+    </div>
+    <h4>Causes of Human-Wildlife Conflict</h4>
+    <ul>
+      <li>Agricultural expansion into forest areas</li>
+      <li>Deforestation — animals lose habitat, venture into human areas</li>
+      <li>Urbanisation — shrinking wildlife corridors</li>
+      <li>Transport networks cutting through forests (road-kills)</li>
+      <li>Lack of corridors — animals can't move between forest patches</li>
+      <li>Collection of timber and NTFPs (Non-Timber Forest Products)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 6. SPECIES OF CONSERVATION CONCERN -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="section" id="species">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <h2 class="section-title">Species of Conservation Concern</h2>
+  </div>
+
+  <div class="note-card">
+    <h3>Conservation Status Categories (IUCN Red List)</h3>
+    <p>The <strong>IUCN Red List</strong> is the world's most comprehensive inventory of the global conservation status of species. Introduced by IUCN in the <strong>late 1960s</strong>.</p>
+    <div class="species-grid">
+      <div class="sp-pill extinct">EX — Extinct</div>
+      <div class="sp-pill extinct" style="background:#f5d0f0;border-color:#a020a0;color:#a020a0">EW — Extinct in Wild</div>
+      <div class="sp-pill endangered" style="background:#ffe0c0;border-color:#e04000;color:#e04000">CR — Critically Endangered</div>
+      <div class="sp-pill endangered">EN — Endangered</div>
+      <div class="sp-pill vulnerable">VU — Vulnerable</div>
+      <div class="sp-pill rare">NT — Near Threatened</div>
+      <div class="sp-pill" style="background:#e8f8e8;border-color:#208020;color:#208020">LC — Least Concern</div>
+      <div class="sp-pill" style="background:#e8e8e8;border-color:#808080;color:#606060">DD — Data Deficient</div>
+    </div>
+  </div>
+
+  <div class="note-card">
+    <h3>1. Extinct Species</h3>
+    <p>Species that <strong>no longer exist anywhere on Earth</strong>. The last individual has died — no possibility of recovery in wild or captivity. IUCN category: <strong>EX</strong>.</p>
+    <h4>Famous Extinct Species</h4>
+    <ul>
+      <li>🦕 <strong>Dinosaurs</strong> — mass extinction ~66 million years ago</li>
+      <li>🐦 <strong>Dodo (Raphus cucullatus)</strong> — extinct 1681, Mauritius</li>
+      <li>🐯 <strong>Tasmanian Tiger (Thylacinus cynocephalus)</strong> — extinct 1936</li>
+      <li>🦣 <strong>Woolly Mammoth</strong> — extinct ~4,000 years ago</li>
+      <li>🐸 <strong>Golden Toad</strong> — extinct 1989 due to climate change</li>
+      <li>🕊️ <strong>Passenger Pigeon</strong> — extinct 1914; once billions existed!</li>
+      <li><strong>Indian Cheetah (Acinonyx jubatus venaticus)</strong> — extinct in India by 1952</li>
+    </ul>
+    <div class="callout callout-red">
+      <strong>⚠️ Key Fact</strong>
+      We are currently experiencing the <strong>6th Mass Extinction</strong> — at a rate 100–1,000 times faster than natural background extinction rates, primarily driven by human activity.
+    </div>
+  </div>
+
+  <div class="note-card">
+    <h3>2. Endangered Species</h3>
+    <p>Plants, animals or other organisms <strong>at risk of becoming extinct</strong>. Risk arises from habitat loss, climate change, poaching, pollution, and invasive species. WWF and IUCN work to identify and protect these species.</p>
+    <h4>10 Most Endangered Species in India</h4>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Species</th><th>Main Threat</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Bengal Tiger</td><td>Poaching, habitat loss</td><td>Endangered</td></tr>
+        <tr><td>2</td><td>Asiatic Lion</td><td>Single population (Gir)</td><td>Endangered</td></tr>
+        <tr><td>3</td><td>Snow Leopard</td><td>Poaching, climate change</td><td>Vulnerable</td></tr>
+        <tr><td>4</td><td>One-horned Rhinoceros</td><td>Poaching (horn), floods</td><td>Vulnerable</td></tr>
+        <tr><td>5</td><td>Blackbuck</td><td>Poaching, habitat loss</td><td>Least Concern (but threatened locally)</td></tr>
+        <tr><td>6</td><td>Lion-tailed Macaque</td><td>Deforestation (Western Ghats)</td><td>Endangered</td></tr>
+        <tr><td>7</td><td>Resplendent Tree Frog</td><td>Habitat loss</td><td>Endangered</td></tr>
+        <tr><td>8</td><td>Kashmiri Red Stag (Hangul)</td><td>Poaching, habitat loss</td><td>Critically Endangered</td></tr>
+        <tr><td>9</td><td>Nilgiri Tahr</td><td>Habitat loss</td><td>Endangered</td></tr>
+        <tr><td>10</td><td>Indian Bison (Gaur)</td><td>Poaching, disease</td><td>Vulnerable</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout callout-amber">
+      <strong>📌 Blackbuck (Kala Hiran)</strong>
+      Due to large-scale poaching and habitat destruction, the blackbuck's existence is now restricted to parts of Punjab, Gujarat, Rajasthan, Uttarakhand and Haryana.
+    </div>
+  </div>
+
+  <div class="note-card">
+    <h3>3. Vulnerable Species</h3>
+    <p>A species considered to be at <strong>high risk of extinction in the wild in the medium-term future</strong> if the causal factors continue to operate. IUCN category: <strong>VU</strong>.</p>
+    <h4>Causes of Vulnerability</h4>
+    <ul>
+      <li>Habitat destruction (deforestation, urbanisation, mining)</li>
+      <li>Poaching and overexploitation</li>
+      <li>Climate change altering habitats</li>
+      <li>Pollution (water, air, soil)</li>
+    </ul>
+    <h4>Examples from India</h4>
+    <ul>
+      <li>🐦 <strong>Sarus Crane</strong> (Grus antigone) — tallest flying bird; threatened by wetland loss</li>
+      <li>🐒 <strong>Nilgiri Langur</strong> — found in Western Ghats</li>
+      <li>🦌 <strong>Barasingha (Swamp Deer)</strong> — found in Kanha National Park</li>
+      <li>🦁 <strong>Asiatic Lion</strong> — only ~700 individuals remaining in Gir Forest</li>
+    </ul>
+  </div>
+
+  <div class="note-card">
+    <h3>4. Rare Species</h3>
+    <p>Species that <strong>exists in small population numbers or is found in limited geographical areas</strong>, but is NOT currently endangered or vulnerable. They may become threatened if their habitat is disturbed, but at present they are relatively stable.</p>
+    <h4>Key Difference: Rare vs Endangered</h4>
+    <div class="callout callout-blue">
+      <strong>Rare species</strong> → small populations but NOT necessarily declining<br>
+      <strong>Vulnerable/Endangered species</strong> → declining populations with real extinction risk
+    </div>
+    <h4>Causes of Rarity</h4>
+    <ul>
+      <li>Restricted habitat range (endemic to small area)</li>
+      <li>Low reproductive rates</li>
+      <li>Over-specialisation (dependence on particular food or conditions)</li>
+      <li>Human activities — deforestation, hunting, pollution</li>
+    </ul>
+    <h4>Examples in India</h4>
+    <ul>
+      <li>Nilgiri Tahr · Greater One-horned Rhinoceros · Asiatic Lion · Snow Leopard · Blackbuck</li>
+    </ul>
+  </div>
+
+  <div class="note-card">
+    <h3>5. EDGE Species</h3>
+    <p><strong>EDGE = Evolutionarily Distinct and Globally Endangered</strong>. A framework developed to highlight conservation of species that are:</p>
+    <ul>
+      <li>At <strong>high risk of extinction</strong> (globally endangered)</li>
+      <li>Possess <strong>unique evolutionary significance</strong> — represent isolated branches on the tree of life</li>
+    </ul>
+    <div class="callout callout-blue">
+      <strong>🧬 Why EDGE matters</strong>
+      If an EDGE species goes extinct, an entire unique branch of evolutionary history is lost forever — a loss far greater than losing a "non-distinct" species.
+    </div>
+    <h4>Examples of EDGE Species</h4>
+    <ul>
+      <li>🐘 <strong>Asian Elephants</strong> — only two living genera of elephants; ancient lineage</li>
+      <li>🦔 <strong>Chinese Pangolin</strong> — most trafficked mammal on Earth</li>
+      <li>🐾 <strong>Malayan Tapir</strong> — odd-toed ungulate; unchanged for millions of years</li>
+      <li>🦊 <strong>Red Panda</strong> — only living member of family Ailuridae</li>
+    </ul>
+  </div>
+
+  <div class="note-card">
+    <h3>The Red Data Book</h3>
+    <p>A document established by IUCN for documenting <strong>rare and endangered species</strong> of plants, animals, and fungi. Introduced in the <strong>late 1960s</strong>. The IUCN Red List of Threatened Species is the most well-known and widely used version globally.</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Category</th><th>Code</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Extinct</td><td>EX</td><td>No longer known to exist anywhere</td></tr>
+        <tr><td>Extinct in the Wild</td><td>EW</td><td>Survives only in captivity or cultivation</td></tr>
+        <tr><td>Critically Endangered</td><td>CR</td><td>Extremely high risk of extinction in wild</td></tr>
+        <tr><td>Endangered</td><td>EN</td><td>Very high risk of extinction in wild</td></tr>
+        <tr><td>Vulnerable</td><td>VU</td><td>High risk of extinction in wild</td></tr>
+        <tr><td>Near Threatened</td><td>NT</td><td>Close to qualifying for threatened category</td></tr>
+        <tr><td>Least Concern</td><td>LC</td><td>Widespread, not at risk currently</td></tr>
+        <tr><td>Data Deficient</td><td>DD</td><td>Inadequate information to assess risk</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 7. CONSERVATION OF BIODIVERSITY -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="section" id="conservation">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <h2 class="section-title">Conservation of Biodiversity</h2>
+  </div>
+
+  <div class="note-card">
+    <h3>Introduction</h3>
+    <p><strong>Wildlife conservation</strong> is the practice of protecting animal species and their habitats. There are two main approaches:</p>
+    <div class="compare-grid">
+      <div class="compare-box insitu">
+        <h4>🌿 In-Situ Conservation</h4>
+        <p>Protection of species <strong>in their natural habitat</strong></p>
+        <ul style="font-size:.9rem">
+          <li>National Parks</li>
+          <li>Wildlife Sanctuaries</li>
+          <li>Biosphere Reserves</li>
+          <li>Sacred Groves</li>
+        </ul>
+      </div>
+      <div class="compare-box exsitu">
+        <h4>🏛️ Ex-Situ Conservation</h4>
+        <p>Protection in a place <strong>away from natural habitat</strong></p>
+        <ul style="font-size:.9rem">
+          <li>Zoos &amp; Aquaria</li>
+          <li>Botanical Gardens</li>
+          <li>Gene Banks / Seed Banks</li>
+          <li>Tissue Culture</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-card">
+    <h3>In-Situ Conservation</h3>
+
+    <h4>A. National Parks</h4>
+    <ul>
+      <li>Areas dedicated to conserve wild animals and natural scenery</li>
+      <li>All <strong>private rights are non-existent</strong></li>
+      <li>Forestry operations, grazing of domestic animals — all <strong>prohibited</strong></li>
+      <li>No human inhabitation except on-duty public servants &amp; people permitted by Chief Wildlife Warden</li>
+      <li>Comprises the <strong>Core Zone</strong> only</li>
+      <li>Examples: Jim Corbett (India's first NP, 1936), Kaziranga, Ranthambore, Gir, Kanha</li>
+    </ul>
+
+    <h4>B. Wildlife Sanctuaries</h4>
+    <ul>
+      <li>Areas where it is <strong>illegal to interfere with natural life</strong> — hunting, shooting, fishing prohibited</li>
+      <li>Killing or capturing of any animal prohibited except under authority orders</li>
+      <li>Provides protection and optimum living conditions to wild animals</li>
+      <li>Boundary is <strong>NOT fixed by legislation</strong> (unlike national parks)</li>
+      <li>Comprises Core, Buffer &amp; Restoration zones</li>
+      <li>Example: Vedanthangal Bird Sanctuary (TN), Chilika Sanctuary (Odisha)</li>
+    </ul>
+
+    <h4>C. Biosphere Reserves</h4>
+    <p>Areas of terrestrial and coastal ecosystems promoting solutions to reconcile <strong>conservation of biodiversity with its sustainable use</strong>. Internationally recognised, nominated by national governments.</p>
+
+    <div class="diagram">
+      <div class="diagram-title hand">Zones of a Biosphere Reserve</div>
+      <div class="zone-diagram">
+        <div class="zone transition">TRANSITION ZONE — Human settlements, cropping, recreation, forestry</div>
+        <div class="zone-label">↕️</div>
+        <div class="zone restoration">RESTORATION ZONE — Degraded areas being restored to natural state</div>
+        <div class="zone-label">↕️</div>
+        <div class="zone buffer">BUFFER ZONE — Limited activities: research, education, eco-tourism</div>
+        <div class="zone-label">↕️</div>
+        <div class="zone core">CORE ZONE — No human activity; legally protected, undisturbed ecosystem</div>
+      </div>
+    </div>
+
+    <h4>India's Biosphere Reserves (18 total)</h4>
+    <p>Examples: Nilgiri (1st in India, 1986), Sundarbans, Nanda Devi, Gulf of Mannar, Great Nicobar, Pachmarhi, Achanakmar-Amarkantak, Agasthyamala, etc.</p>
+
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Parameter</th><th>National Park</th><th>Wildlife Sanctuary</th><th>Biosphere Reserve</th></tr></thead>
+      <tbody>
+        <tr><td>Objective</td><td>Conserve species &amp; habitats with minimal human activity</td><td>Conserve species by manipulative management</td><td>Conserve natural resources + human-environment relationship</td></tr>
+        <tr><td>Human Activity</td><td>No person (except on duty)</td><td>No person (except on duty)</td><td>Substantial human settlement (transition zone)</td></tr>
+        <tr><td>Zones</td><td>Core only</td><td>Core, Buffer, Restoration</td><td>Core, Buffer, Restoration, Transition</td></tr>
+        <tr><td>Boundary</td><td>Fixed by state legislation</td><td>NOT fixed by legislation</td><td>Internationally designated</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h4>Advantages of In-Situ Conservation</h4>
+    <ul>
+      <li>Ecological integrity is maintained and managed</li>
+      <li>Better opportunity for conservation as well as evolution</li>
+      <li>Cheaper way of conservation</li>
+    </ul>
+    <h4>Disadvantages</h4>
+    <ul>
+      <li>Less protection against pollution</li>
+      <li>Poachers and eco-tourists may cause damage</li>
+    </ul>
+  </div>
+
+  <div class="note-card">
+    <h3>Ex-Situ Conservation</h3>
+
+    <h4>A. Zoos</h4>
+    <ul>
+      <li>Originally display facilities for public enjoyment &amp; education</li>
+      <li>Modern zoos take on captive breeding programmes to increase populations</li>
+      <li>Example: Delhi Zoo, Mysore Zoo; captive breeding of Indian rhinoceros</li>
+    </ul>
+
+    <h4>B. Aquaria</h4>
+    <ul>
+      <li>Mainly used for threatened and endangered <strong>freshwater species</strong></li>
+      <li>Also help in marine species conservation research</li>
+    </ul>
+
+    <h4>C. Botanical Gardens</h4>
+    <ul>
+      <li>Conservation of <strong>rare and endangered plant species</strong></li>
+      <li>Study and research of plant characters; disseminate scientific information</li>
+      <li>Examples: Indian Botanical Garden (Howrah), Lalbagh (Bengaluru), Lloyd Botanical Garden (Darjeeling)</li>
+    </ul>
+
+    <h4>D. Gene Banks</h4>
+    <ul>
+      <li><strong>Seed Bank</strong> — Seeds stored at low temperature &amp; humidity for long periods</li>
+      <li><strong>Pollen Bank</strong> — Pollen grains of plants cryopreserved</li>
+      <li><strong>Sperm Bank</strong> — Animal reproductive cells stored cryogenically</li>
+      <li><strong>Ova Bank</strong> — Egg cells stored for future use</li>
+      <li>Famous: National Bureau of Plant Genetic Resources (NBPGR), New Delhi; Svalbard Global Seed Vault (Norway)</li>
+    </ul>
+
+    <h4>E. Tissue Culture Technique</h4>
+    <p>Asexual propagation in plants — a small piece of shoot apex, leaf section or individual cell is cut and placed in sterile culture in test tube/petri dish. Used to propagate rare and endangered plants rapidly.</p>
+
+    <h4>F. DNA Technology</h4>
+    <p>DNA of plant or animal cell is preserved. DNA technology provides an innovative approach for biodiversity conservation — extracting and storing genetic material of threatened species.</p>
+
+    <h4>Advantages of Ex-Situ Conservation</h4>
+    <ul>
+      <li>Organisms completely protected from predation and poaching</li>
+      <li>Species survive longer and may breed more offspring than usual</li>
+      <li>Quality of offspring may be improved by genetic techniques</li>
+      <li>Breeding of hybrid species is possible</li>
+    </ul>
+    <h4>Disadvantages</h4>
+    <ul>
+      <li>Animals may not behave normally → reproduction difficult</li>
+      <li>Animals may not survive reintroduction into wild</li>
+      <li>Overprotection may result in loss of natural occurrence</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 8. BIOGEOGRAPHIC ZONES OF INDIA -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="section" id="biogeography">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <h2 class="section-title">Biogeographic Zones of India &amp; Mega-Diversity</h2>
+  </div>
+
+  <div class="note-card">
+    <h3>Major Biogeographic Zones (10 Zones)</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Zone</th><th>Biogeographic Zone</th><th>Biotic Provinces</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Trans-Himalayan</td><td>Upper region (Ladakh, Spiti, Lahaul)</td></tr>
+        <tr><td>2</td><td>Himalayan</td><td>NW Himalayas, West Himalayas, Central &amp; East Himalayas</td></tr>
+        <tr><td>3</td><td>Desert</td><td>Kutch, Thar, Ladakh</td></tr>
+        <tr><td>4</td><td>Semi-Arid</td><td>Central India, Gujarat-Rajwara</td></tr>
+        <tr><td>5</td><td>Western Ghats</td><td>Malabar Coast, Western Ghat mountains</td></tr>
+        <tr><td>6</td><td>Deccan Peninsula</td><td>Deccan Plateau, Chhota Nagpur, Central Highlands</td></tr>
+        <tr><td>7</td><td>Gangetic Plain</td><td>Upper &amp; Lower Gangetic Plains</td></tr>
+        <tr><td>8</td><td>North-East India</td><td>Brahmaputra Valley, North-Eastern Hills</td></tr>
+        <tr><td>9</td><td>Islands</td><td>Andaman, Nicobar, Lakshadweep Islands</td></tr>
+        <tr><td>10</td><td>Coasts</td><td>West Coast, East Coast</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h4>Phyto-Geographical Regions (Plant-based)</h4>
+    <p>India divided into 9 phytogeographical regions based on flora: Western Himalayas, Eastern Himalayas, Western Deserts, Gangetic Plains, Central India, Western Coast, Deccan Plateau, North-East India, Andaman &amp; Nicobar Islands.</p>
+
+    <h4>Zoo-Geographical Regions (Animal-based)</h4>
+    <p>India divided into 6 zoogeographical regions based on fauna: Himalayan Region, Malabar Region, Nilgiri Region, Northern Plains, Desert Lands, Deccan Plateau Region.</p>
+  </div>
+
+  <div class="note-card">
+    <h3>India as a Mega-Diversity Nation</h3>
+    <div class="callout callout-green">
+      <strong>🌏 Conservation International, 1998</strong>
+      Identified <strong>18 mega-diverse countries</strong> that collectively harbour over 70% of Earth's biodiversity. India is one of them.
+    </div>
+    <h4>Fields of India's Diversity</h4>
+    <ul>
+      <li>🗺️ <strong>Geographical diversity</strong> — from sea level to 8,000+ m (Himalayas)</li>
+      <li>🌦️ <strong>Climatic diversity</strong> — desert (Thar) to tropical rainforest (Western Ghats) to arctic (Ladakh)</li>
+      <li>🌿 <strong>Biodiversity</strong> — 45,000+ plant species, 91,000+ animal species</li>
+      <li>🏡 <strong>Habitat diversity</strong> — 10 biogeographic zones with vastly different habitats</li>
+      <li>👥 <strong>Cultural diversity</strong> — 700+ tribal communities with traditional ecological knowledge</li>
+    </ul>
+    <h4>India's Biodiversity in Numbers</h4>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Category</th><th>Number of Species in India</th><th>% of World Total</th></tr></thead>
+      <tbody>
+        <tr><td>Plant Species</td><td>~45,000</td><td>~11%</td></tr>
+        <tr><td>Animal Species</td><td>~91,000</td><td>~7.4%</td></tr>
+        <tr><td>Mammals</td><td>~500</td><td>~8.8%</td></tr>
+        <tr><td>Birds</td><td>~1,300</td><td>~13%</td></tr>
+        <tr><td>Reptiles</td><td>~500</td><td>~5%</td></tr>
+        <tr><td>Freshwater Fish</td><td>~2,500</td><td>~12%</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 9. QUICK REVISION -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="section" id="revision">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <h2 class="section-title">Quick Revision Sheet</h2>
+  </div>
+
+  <div class="revision-grid">
+    <div class="revision-card">
+      <h4>Biodiversity Definition</h4>
+      <ul>
+        <li>Bio = life, Diversity = variety</li>
+        <li>CBD 1992, Rio Earth Summit</li>
+        <li>3 levels: Genetic, Species, Ecosystem</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>India's Rankings</h4>
+      <ul>
+        <li>10th: Plant-rich countries</li>
+        <li>11th: Endemic vertebrates</li>
+        <li>6th: Agricultural crop diversity</li>
+        <li>One of 18 mega-diversity nations</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>Hotspot Criteria</h4>
+      <ul>
+        <li>≥1,500 endemic vascular plants</li>
+        <li>Lost ≥70% original habitat</li>
+        <li>4 hotspots in India</li>
+        <li>36 hotspots worldwide</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>India's 4 Hotspots</h4>
+      <ul>
+        <li>Western Ghats</li>
+        <li>Eastern Himalayas</li>
+        <li>Indo-Burma</li>
+        <li>Sundaland (Nicobar)</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>IUCN Categories</h4>
+      <ul>
+        <li>EX → Extinct</li>
+        <li>EW → Extinct in Wild</li>
+        <li>CR → Critically Endangered</li>
+        <li>EN → Endangered</li>
+        <li>VU → Vulnerable</li>
+        <li>NT → Near Threatened</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>EDGE Species</h4>
+      <ul>
+        <li>Evolutionarily Distinct &amp; Globally Endangered</li>
+        <li>Asian Elephant, Chinese Pangolin</li>
+        <li>Red Panda, Malayan Tapir</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>In-Situ Conservation</h4>
+      <ul>
+        <li>National Parks — Core zone only</li>
+        <li>Wildlife Sanctuaries — Core+Buffer+Restoration</li>
+        <li>Biosphere Reserves — all 4 zones</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>Ex-Situ Conservation</h4>
+      <ul>
+        <li>Zoos (captive breeding)</li>
+        <li>Aquaria (freshwater species)</li>
+        <li>Botanical Gardens (plants)</li>
+        <li>Gene Banks: Seed, Pollen, Sperm, Ova</li>
+        <li>Tissue Culture, DNA Tech</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>Biogeographic Zones</h4>
+      <ul>
+        <li>10 zones in India</li>
+        <li>Trans-Himalayan, Himalayan, Desert</li>
+        <li>Semi-Arid, W. Ghats, Deccan</li>
+        <li>Gangetic, NE India, Islands, Coasts</li>
+      </ul>
+    </div>
+    <div class="revision-card">
+      <h4>Threats (HIPPO)</h4>
+      <ul>
+        <li>H — Habitat loss</li>
+        <li>I — Invasive species</li>
+        <li>P — Pollution</li>
+        <li>P — Population growth</li>
+        <li>O — Overexploitation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note-card" style="margin-top:20px">
+    <h3>Unit Summary</h3>
+    <p>Unit III covers the <strong>definition and levels of biodiversity</strong> (genetic, species, ecosystem), its <strong>immense importance</strong> (ecosystem services, economic, ecological, social, aesthetic, informational), <strong>biodiversity hotspots</strong> of India and the world, <strong>threats</strong> to biodiversity (HIPPO mnemonic), and <strong>species of conservation concern</strong> (extinct, endangered, vulnerable, rare, EDGE species with IUCN Red Data Book categories). The unit then covers the two major <strong>conservation approaches</strong> — in-situ (national parks, wildlife sanctuaries, biosphere reserves) and ex-situ (zoos, botanical gardens, gene banks, tissue culture) — and finally India's <strong>10 biogeographic zones</strong> and its status as a <strong>mega-diversity nation</strong>.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 10. MCQs -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="section" id="mcq-section">
+  <div class="section-header">
+    <div class="section-num">💯</div>
+    <h2 class="section-title">Unit III Practice MCQs (60 Questions)</h2>
+  </div>
+
+  <div class="mcq-controls">
+    <button class="mcq-filter active" onclick="filterMCQ('all',this)">All (60)</button>
+    <button class="mcq-filter" onclick="filterMCQ('easy',this)">🟢 Easy (20)</button>
+    <button class="mcq-filter" onclick="filterMCQ('medium',this)">🟡 Medium (25)</button>
+    <button class="mcq-filter" onclick="filterMCQ('hard',this)">🔴 Hard (15)</button>
+    <span class="mcq-stats">Score: <strong id="score-display">0</strong> / <strong id="total-display">0</strong> answered</span>
+  </div>
+
+  <div id="mcq-container"></div>
+</section>
+
+</main>
+
+<button id="back-top" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ─── MCQ Data ─── */
+const mcqs = [
+  // EASY (20)
+  {q:"What does the term 'Biodiversity' literally mean?",o:["Many habitats","Variety of life","Study of genes","Ecosystem services"],a:1,d:"easy"},
+  {q:"Biodiversity was formally defined at which international event?",o:["Stockholm Conference 1972","Rio Earth Summit 1992","Kyoto Protocol 1997","Paris Agreement 2015"],a:1,d:"easy"},
+  {q:"Which of the following is NOT a level of biodiversity?",o:["Genetic diversity","Species diversity","Ecosystem diversity","Population diversity"],a:3,d:"easy"},
+  {q:"Genetic diversity refers to variation in:",o:["Number of ecosystems","DNA sequences within a species","Number of species in an area","Habitat types"],a:1,d:"easy"},
+  {q:"India ranks how many in the world for number of plant-rich countries?",o:["5th","8th","10th","15th"],a:2,d:"easy"},
+  {q:"Which organisation maintains the IUCN Red List?",o:["WWF","UNEP","International Union for Conservation of Nature","UNESCO"],a:2,d:"easy"},
+  {q:"What does 'EX' stand for in the IUCN Red List?",o:["Exotic","Extinct","Extreme","Excluded"],a:1,d:"easy"},
+  {q:"National Parks in India consist of which zone?",o:["Buffer zone only","Transition zone only","Core zone only","All four zones"],a:2,d:"easy"},
+  {q:"Which of the following is an example of ex-situ conservation?",o:["National Park","Wildlife Sanctuary","Biosphere Reserve","Botanical Garden"],a:3,d:"easy"},
+  {q:"How many biodiversity hotspots does India have?",o:["2","3","4","6"],a:2,d:"easy"},
+  {q:"The term 'EDGE' in EDGE species stands for:",o:["Ecologically Distinct and Globally Evaluated","Evolutionarily Distinct and Globally Endangered","Evolutionarily Dependent and Geographically Endangered","Ecologically Dependent and Globally Endangered"],a:1,d:"easy"},
+  {q:"Which conservation method is cheaper?",o:["Ex-situ conservation","In-situ conservation","Both are equally costly","DNA banking"],a:1,d:"easy"},
+  {q:"What is a biodiversity hotspot primarily characterised by?",o:["High species diversity and abundance","High endemism and serious threat","Low species diversity","Only marine species"],a:1,d:"easy"},
+  {q:"Red panda is classified as which type of species?",o:["Vulnerable","Extinct","Least Concern","Near Threatened"],a:0,d:"easy"},
+  {q:"Which animal is also known as 'Kala Hiran' in India?",o:["Bengal Tiger","Indian Rhinoceros","Blackbuck","Snow Leopard"],a:2,d:"easy"},
+  {q:"Biosphere Reserves are designated by:",o:["State governments","Union government only","National governments with international recognition","Forest departments"],a:2,d:"easy"},
+  {q:"What is the main purpose of a Gene Bank?",o:["Breeding animals in captivity","Storing genetic material of species","Protecting forest areas","Conducting wildlife surveys"],a:1,d:"easy"},
+  {q:"Which of the following is an invasive weed in India?",o:["Lantana camara","Paddy","Banyan","Teak"],a:0,d:"easy"},
+  {q:"India is one of how many mega-diversity nations identified by Conservation International?",o:["10","18","25","36"],a:1,d:"easy"},
+  {q:"Convention on Biological Diversity was held in which year?",o:["1972","1987","1992","2002"],a:2,d:"easy"},
+
+  // MEDIUM (25)
+  {q:"Alpha diversity refers to:",o:["Total regional diversity","Change in species between communities","Local species richness within one community","Global species richness"],a:2,d:"medium"},
+  {q:"Which of the following is the MOST significant cause of biodiversity loss globally?",o:["Climate change","Habitat loss and fragmentation","Poaching","Invasive species"],a:1,d:"medium"},
+  {q:"The Nilgiri Biosphere Reserve was established in which year?",o:["1973","1980","1986","1990"],a:2,d:"medium"},
+  {q:"A species is classified as vulnerable when:",o:["It is already extinct","It has extremely high risk of extinction immediately","It has high risk of extinction in wild in medium-term","It has small but stable populations"],a:2,d:"medium"},
+  {q:"Which zone of a Biosphere Reserve allows human settlement and activities?",o:["Core zone","Buffer zone","Restoration zone","Transition zone"],a:3,d:"medium"},
+  {q:"Tissue culture is a method of:",o:["In-situ conservation","Ex-situ conservation","Both in-situ and ex-situ","Neither"],a:1,d:"medium"},
+  {q:"The Sarus Crane (Grus antigone) is classified as:",o:["Critically Endangered","Endangered","Vulnerable","Near Threatened"],a:2,d:"medium"},
+  {q:"Poaching of wildlife primarily refers to:",o:["Legal hunting","Illegal hunting and trade","Habitat destruction","Introduction of alien species"],a:1,d:"medium"},
+  {q:"Which India hotspot is located on the western coast?",o:["Eastern Himalayas","Indo-Burma","Western Ghats","Sundaland"],a:2,d:"medium"},
+  {q:"Beta diversity measures:",o:["Local species richness","Change in species composition between two communities","Total regional biodiversity","Number of ecosystems"],a:1,d:"medium"},
+  {q:"The CITES convention regulates:",o:["Climate change","International wildlife trade","Pollution control","Deforestation"],a:1,d:"medium"},
+  {q:"What percentage of modern medicines are estimated to be derived from plants?",o:["5%","15%","25%","50%"],a:2,d:"medium"},
+  {q:"Which IUCN category includes species that survive only in captivity?",o:["EX","EW","CR","EN"],a:1,d:"medium"},
+  {q:"How many biogeographic zones does India have?",o:["6","8","10","12"],a:2,d:"medium"},
+  {q:"The Sundaland hotspot in India includes which island group?",o:["Andaman Islands","Nicobar Islands","Lakshadweep Islands","Majuli"],a:1,d:"medium"},
+  {q:"Ecological value of biodiversity includes:",o:["Nutrient cycling and soil formation","Tourism revenue","Spiritual practices","Art and music"],a:0,d:"medium"},
+  {q:"Which of the following best describes a rare species?",o:["Declining rapidly toward extinction","Small population but not necessarily declining","Already extinct in wild","Highly abundant but localised"],a:1,d:"medium"},
+  {q:"The concept of biodiversity hotspots was proposed by:",o:["E.O. Wilson","Norman Myers","Gaylord Nelson","Peter Raven"],a:1,d:"medium"},
+  {q:"In-situ conservation maintains:",o:["Only genetic diversity","Only species diversity","Ecological integrity","Only ecosystem diversity"],a:2,d:"medium"},
+  {q:"Which region is a habitat for Asiatic Lions in India?",o:["Sundarbans","Corbett National Park","Gir Forest","Kaziranga"],a:2,d:"medium"},
+  {q:"The Passenger Pigeon became extinct in which year?",o:["1889","1914","1936","1960"],a:1,d:"medium"},
+  {q:"Ecotourism provides which type of value for biodiversity?",o:["Genetic value","Informational value","Economic value","Ecological value"],a:2,d:"medium"},
+  {q:"What is the key difference between a national park and wildlife sanctuary?",o:["Size","Legal boundary","Zones present","Number of species"],a:1,d:"medium"},
+  {q:"Biological invasion refers to:",o:["Study of invasive species","Introduction of alien species that harm native biodiversity","Legal hunting of animals","Conservation of marine species"],a:1,d:"medium"},
+  {q:"India's Indo-Burma hotspot includes parts of which Indian region?",o:["Western Ghats","North-East India","Andaman Islands","Gangetic Plains"],a:1,d:"medium"},
+
+  // HARD (15)
+  {q:"The Shannon-Wiener Index (H') is used to measure:",o:["Genetic diversity","Species diversity","Ecosystem diversity","All three levels"],a:1,d:"hard"},
+  {q:"Which of the following criteria is NOT used to identify a biodiversity hotspot?",o:["Minimum 1,500 endemic vascular plant species","Loss of at least 70% original habitat","Presence of at least 3 threatened animal species","Degree of threat from human activities"],a:2,d:"hard"},
+  {q:"Trophic cascade is best illustrated by:",o:["Introduction of water hyacinth","Reintroduction of wolves in Yellowstone","Removal of sharks from ocean","Planting of Lantana in forests"],a:1,d:"hard"},
+  {q:"Cyclooporin (immunosuppressant drug) is derived from which organism?",o:["Plant","Marine sponge","Soil fungus","Bacteria"],a:2,d:"hard"},
+  {q:"The LAL test used to check vaccines for bacterial contamination uses blood from which species?",o:["Sea turtle","Horseshoe crab","Manta ray","Whale shark"],a:1,d:"hard"},
+  {q:"The current rate of species extinction compared to natural background extinction is approximately:",o:["5-10 times faster","50 times faster","100-1000 times faster","Same as background rate"],a:2,d:"hard"},
+  {q:"Gamma (γ) diversity represents:",o:["Local species richness","Difference between communities","Total diversity across a large landscape/region","Average diversity of multiple sites"],a:2,d:"hard"},
+  {q:"The National Bureau of Plant Genetic Resources (NBPGR) is located in:",o:["Mumbai","Chennai","Kolkata","New Delhi"],a:3,d:"hard"},
+  {q:"Svalbard Global Seed Vault is located in which country?",o:["Sweden","Norway","Finland","Iceland"],a:1,d:"hard"},
+  {q:"Which of the following is a correct statement about the IUCN 'Data Deficient (DD)' category?",o:["These species are not threatened","These species are extinct","There is inadequate data to assess their extinction risk","These species are least of concern"],a:2,d:"hard"},
+  {q:"What is the minimum number of endemic vascular plant species required for a hotspot designation?",o:["500","1,000","1,500","2,000"],a:2,d:"hard"},
+  {q:"Which India biogeographic zone includes Kutch and Thar?",o:["Trans-Himalayan","Semi-Arid","Desert","Western Ghats"],a:2,d:"hard"},
+  {q:"In phytogeographical classification of India, how many regions are recognised?",o:["6","7","9","10"],a:2,d:"hard"},
+  {q:"The concept of 'sacred groves' in India represents which conservation approach?",o:["Ex-situ conservation","Community-based in-situ conservation","National park approach","Gene bank approach"],a:1,d:"hard"},
+  {q:"Which of these best describes 'bioprospecting'?",o:["Illegal collection of wildlife","Search of biodiversity for commercially valuable resources","Conservation of marine species","Captive breeding of endangered mammals"],a:1,d:"hard"},
+];
+
+/* ─── Render MCQs ─── */
+let answered = 0, correct = 0;
+function renderMCQs(data){
+  const container = document.getElementById('mcq-container');
+  container.innerHTML = '';
+  data.forEach((mcq, i) => {
+    const realIdx = mcqs.indexOf(mcq);
+    const card = document.createElement('div');
+    card.className = 'mcq-card';
+    card.dataset.diff = mcq.d;
+    const diffLabel = {easy:'🟢 Easy',medium:'🟡 Medium',hard:'🔴 Hard'}[mcq.d];
+    const diffClass = mcq.d;
+    const opts = mcq.o.map((opt,oi)=>`
+      <button class="mcq-opt" data-q="${realIdx}" data-i="${oi}" onclick="pickOpt(this,${realIdx},${oi})">
+        <strong>${['A','B','C','D'][oi]})</strong> ${opt}
+      </button>`).join('');
+    card.innerHTML = `
+      <div class="mcq-header">
+        <div class="mcq-num">Q${realIdx+1}</div>
+        <div class="mcq-q">${mcq.q}</div>
+        <span class="mcq-diff ${diffClass}">${diffLabel}</span>
+      </div>
+      <div class="mcq-options">${opts}</div>
+      <button class="show-ans-btn" onclick="showAns(${realIdx})">Show Answer</button>
+      <div class="mcq-answer" id="ans-${realIdx}">
+        ✅ <strong>Correct Answer: ${['A','B','C','D'][mcq.a]}) ${mcq.o[mcq.a]}</strong>
+      </div>`;
+    container.appendChild(card);
+  });
+}
+renderMCQs(mcqs);
+
+function pickOpt(btn, qIdx, optIdx){
+  const mcq = mcqs[qIdx];
+  const container = btn.closest('.mcq-options');
+  if(container.dataset.answered) return;
+  container.dataset.answered = '1';
+  container.querySelectorAll('.mcq-opt').forEach((b,i)=>{
+    if(i===mcq.a) b.classList.add('correct');
+    else if(i===optIdx && optIdx!==mcq.a) b.classList.add('wrong');
+  });
+  document.getElementById('ans-'+qIdx).classList.add('visible');
+  answered++;
+  if(optIdx===mcq.a) correct++;
+  document.getElementById('score-display').textContent = correct;
+  document.getElementById('total-display').textContent = answered;
+}
+
+function showAns(qIdx){
+  document.getElementById('ans-'+qIdx).classList.add('visible');
+}
+
+function filterMCQ(diff, btn){
+  document.querySelectorAll('.mcq-filter').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = diff==='all' ? mcqs : mcqs.filter(m=>m.d===diff);
+  renderMCQs(filtered);
+}
+
+/* ─── Dark Mode ─── */
+function toggleDark(){
+  const body = document.body;
+  const isDark = body.dataset.theme==='dark';
+  body.dataset.theme = isDark ? 'light' : 'dark';
+}
+
+/* ─── Search ─── */
+function toggleSearch(){
+  document.getElementById('search-overlay').classList.toggle('active');
+  document.getElementById('search-input').focus();
+}
+function closeSearch(e){
+  if(e.target===document.getElementById('search-overlay'))
+    document.getElementById('search-overlay').classList.remove('active');
+}
+function doSearch(val){
+  const results = document.getElementById('search-results');
+  if(!val.trim()){results.innerHTML='';return}
+  const sections = document.querySelectorAll('.note-card h3, .note-card h4, .callout');
+  const hits = [];
+  sections.forEach(el=>{
+    if(el.textContent.toLowerCase().includes(val.toLowerCase())){
+      hits.push({text:el.textContent.slice(0,80),id:el.closest('section')?.id||''});
+    }
+  });
+  results.innerHTML = hits.length
+    ? hits.slice(0,8).map(h=>`<div class="search-result-item" onclick="goTo('${h.id}')">${h.text}</div>`).join('')
+    : '<div style="padding:10px;color:var(--ink2)">No results found</div>';
+}
+function goTo(id){
+  document.getElementById('search-overlay').classList.remove('active');
+  if(id) document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+}
+
+/* ─── Progress Bar ─── */
+window.addEventListener('scroll',()=>{
+  const doc = document.documentElement;
+  const total = doc.scrollHeight - doc.clientHeight;
+  const pct = total > 0 ? (window.scrollY/total)*100 : 0;
+  document.getElementById('progress-bar').style.width = pct+'%';
+  const btn = document.getElementById('back-top');
+  window.scrollY > 400 ? btn.classList.add('visible') : btn.classList.remove('visible');
+});
+
+/* ─── Animate sections on scroll ─── */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting) e.target.style.animationPlayState='running'});
+},{threshold:.1});
+document.querySelectorAll('.section').forEach(s=>{
+  s.style.animationPlayState='paused';
+  observer.observe(s);
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ================= INJECTED UI SCRIPT ================= -->
+<script>
+(function() {
+  if(!document.querySelector('link[href*="Kalam"]')) {
+    document.head.insertAdjacentHTML('beforeend', '<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>');
+  }
+  
+  const style = document.createElement('style');
+  style.textContent = `
+    :root, body[data-theme="light"] {
+      --white: #FFFFFF !important;
+      --beige: #F8F5EE !important;
+      --paper: #FFFDF7 !important;
+      --sky: #87CEEB !important;
+      --sky-light: #E8F4FD !important;
+      --yellow: #FFF3B0 !important;
+      --yellow-dark: #F7C948 !important;
+      --pink: #FFE4E8 !important;
+      --pink-dark: #F78FA7 !important;
+      --lavender: #EDE7F6 !important;
+      --lavender-dark: #9C6FE4 !important;
+      --mint: #E8F5E9 !important;
+      --mint-dark: #4CAF82 !important;
+      --ink: #2C2C2C !important;
+      --ink-light: #555 !important;
+      --blue-accent: #4A90D9 !important;
+      --red-accent: #E74C3C !important;
+      --orange-accent: #F39C12 !important;
+      --green-accent: #27AE60 !important;
+      --purple-accent: #8E44AD !important;
+      --shadow: rgba(0, 0, 0, 0.08) !important;
+    }
+    [data-theme="dark"], body.dark {
+      --white: #1a1a2e !important;
+      --beige: #16213e !important;
+      --paper: #0f3460 !important;
+      --ink: #e0e0e0 !important;
+      --ink-light: #bbb !important;
+      --sky-light: #1a2a3a !important;
+      --yellow: #2a2a00 !important;
+      --pink: #2a0a10 !important;
+      --lavender: #1a1030 !important;
+      --mint: #0a2a15 !important;
+    }
+    
+    html {
+      font-size: 125% !important; /* Scale entire UI slightly larger */
+    }
+    
+    body {
+      background-color: var(--beige) !important;
+      font-family: 'Nunito', sans-serif !important;
+      color: var(--ink) !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, #e8e0d0 27px, #e8e0d0 28px), repeating-linear-gradient(90deg, transparent, transparent 27px, transparent 27px) !important;
+      background-size: 100% 28px !important;
+      font-size: 1.05rem !important; /* Extra boost for base font if ems aren't used */
+    }
+    body[data-theme="dark"], body.dark {
+      background-color: #16213e !important;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(255, 255, 255, 0.05) 27px, rgba(255, 255, 255, 0.05) 28px) !important;
+    }
+
+    h1, h2, h3, h4, .section-title, p {
+      font-family: 'Nunito', sans-serif !important;
+    }
+    
+    .nav-brand {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      color: var(--blue-accent) !important;
+      font-size: 1.5rem !important;
+    }
+    
+    nav, .nav-sticky, #navbar {
+      background: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(12px) !important;
+      border-bottom: 2px dashed #e0d5c5 !important;
+      box-shadow: 0 2px 20px var(--shadow) !important;
+    }
+    body.dark nav, body[data-theme="dark"] nav, body.dark .nav-sticky, body.dark #navbar {
+      background: rgba(22, 33, 62, 0.9) !important;
+      border-bottom-color: #333 !important;
+    }
+    
+    header.hero, section#hero, .hero {
+      background: var(--paper) !important;
+      border: 3px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      margin: 30px auto !important;
+      max-width: 960px !important;
+      box-shadow: 4px 4px 0 #e0d5c5, 8px 8px 0 #d8ccb8 !important;
+    }
+    header.hero::before, section#hero::before, .hero::before {
+      display: none !important;
+    }
+    
+    .hero-title {
+      font-family: 'Kalam', cursive !important;
+      color: var(--blue-accent) !important;
+      border-bottom: 3px dashed var(--blue-accent) !important;
+      display: inline-block !important;
+      padding-bottom: 4px !important;
+    }
+    
+    .hero-subtitle, .hero-unit-badge, .hero-unit {
+      font-family: 'Caveat', cursive !important;
+      color: #999 !important;
+      letter-spacing: 2px !important;
+      background: transparent !important;
+      border: none !important;
+    }
+
+    h2.section-heading, .section-header {
+      font-family: 'Caveat', cursive !important;
+      font-weight: 700 !important;
+      border-bottom: 2px dashed #e8dfc8 !important;
+      padding-bottom: 8px !important;
+    }
+    
+    .note-card, .resource-card, .def-box {
+      background: var(--paper) !important;
+      border-radius: 12px !important;
+      border-left: 5px solid var(--blue-accent) !important;
+      box-shadow: 2px 2px 8px var(--shadow) !important;
+      font-family: 'Kalam', cursive !important;
+    }
+    
+    .note-card.green, .def-box.green { border-left-color: var(--mint-dark) !important; }
+    .note-card.red, .def-box.red { border-left-color: var(--pink-dark) !important; }
+    .note-card.yellow, .def-box.yellow { border-left-color: var(--yellow-dark) !important; }
+    
+    /* Make index.html cards look PEL125 style */
+    .unit-card {
+      background: var(--paper) !important;
+      border: 2px solid #e8dfc8 !important;
+      border-radius: 16px !important;
+      box-shadow: 3px 3px 0 #e0d5c5 !important;
+      transition: transform 0.2s !important;
+    }
+    .unit-card:hover {
+      transform: translateY(-5px) !important;
+      box-shadow: 5px 5px 0 #d8ccb8 !important;
+    }
+    .unit-badge {
+      background: var(--sky-light) !important;
+      color: var(--blue-accent) !important;
+      font-family: 'Caveat', cursive !important;
+    }
+  `;
+  document.head.appendChild(style);
+
+})();
+</script>
+
+</body>
+</html>

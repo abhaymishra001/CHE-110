@@ -1,3166 +1,1836 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CHE 110 – Environmental Studies | Unit 5 Notes</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Kalam:wght@300;400;700&display=swap"
-    rel="stylesheet" />
-  <style>
-    /* ===================== CSS VARIABLES ===================== */
-    :root {
-      --paper: #faf8f2;
-      --paper-2: #f5f1e8;
-      --paper-3: #ede8db;
-      --ink: #1a1209;
-      --ink-2: #3d2e14;
-      --ink-light: #6b5a3e;
-      --blue: #2563a8;
-      --blue-light: #dbeafe;
-      --blue-mid: #93c5fd;
-      --green: #2d6a4f;
-      --green-light: #d1fae5;
-      --green-mid: #6ee7b7;
-      --amber: #92400e;
-      --amber-light: #fef3c7;
-      --amber-mid: #fcd34d;
-      --red: #991b1b;
-      --red-light: #fee2e2;
-      --purple: #6b21a8;
-      --purple-light: #f3e8ff;
-      --teal: #0f766e;
-      --teal-light: #ccfbf1;
-      --beige: #c9a96e;
-      --beige-light: #fdf6e3;
-      --brown: #78350f;
-      --shadow-sm: 0 2px 8px rgba(120, 80, 30, 0.10);
-      --shadow-md: 0 4px 20px rgba(120, 80, 30, 0.14);
-      --shadow-lg: 0 8px 40px rgba(120, 80, 30, 0.18);
-      --radius: 12px;
-      --radius-lg: 20px;
-      --font-hand: 'Kalam', cursive;
-      --font-notes: 'Caveat', cursive;
-      --font-heading: 'DM Serif Display', serif;
-      --font-body: 'Crimson Pro', serif;
-    }
-
-    /* DARK MODE */
-    [data-theme="dark"] {
-      --paper: #1a1612;
-      --paper-2: #221e18;
-      --paper-3: #2a2520;
-      --ink: #f0ead8;
-      --ink-2: #d4c5a0;
-      --ink-light: #b0a080;
-      --blue: #60a5fa;
-      --blue-light: #1e3a5f;
-      --blue-mid: #1d4ed8;
-      --green: #34d399;
-      --green-light: #064e3b;
-      --amber: #fbbf24;
-      --amber-light: #451a03;
-      --amber-mid: #92400e;
-      --beige: #d4a760;
-      --beige-light: #2d2318;
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
-      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
-    }
-
-    /* ===================== RESET & BASE ===================== */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
-    body {
-      background-color: var(--paper);
-      color: var(--ink);
-      font-family: var(--font-body);
-      font-size: 1.1rem;
-      line-height: 1.7;
-      transition: background 0.3s, color 0.3s;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* Paper texture overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(120, 80, 30, 0.06) 28px),
-        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(120, 80, 30, 0.02) 61px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ===================== PROGRESS BAR ===================== */
-    #progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--blue), var(--green), var(--amber));
-      width: 0%;
-      z-index: 9999;
-      transition: width 0.1s;
-      border-radius: 0 2px 2px 0;
-    }
-
-    /* ===================== NAVBAR ===================== */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(250, 248, 242, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 2px solid var(--paper-3);
-      padding: 10px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      box-shadow: var(--shadow-sm);
-      transition: background 0.3s;
-    }
-
-    [data-theme="dark"] nav {
-      background: rgba(26, 22, 18, 0.92);
-      border-bottom-color: var(--paper-3);
-    }
-
-    .nav-brand {
-      font-family: var(--font-notes);
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--blue);
-      white-space: nowrap;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .nav-links a {
-      font-family: var(--font-notes);
-      font-size: 0.95rem;
-      color: var(--ink-light);
-      text-decoration: none;
-      padding: 4px 10px;
-      border-radius: 20px;
-      transition: all 0.2s;
-    }
-
-    .nav-links a:hover {
-      background: var(--blue-light);
-      color: var(--blue);
-    }
-
-    .nav-actions {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .btn-icon {
-      background: var(--paper-2);
-      border: 1.5px solid var(--paper-3);
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.2s;
-      color: var(--ink);
-      text-decoration: none;
-    }
-
-    .btn-icon:hover {
-      background: var(--blue-light);
-      border-color: var(--blue);
-      color: var(--blue);
-      transform: scale(1.1);
-    }
-
-    /* ===================== SEARCH ===================== */
-    #search-box {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 200;
-      display: none;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 80px;
-    }
-
-    #search-box.open {
-      display: flex;
-    }
-
-    #search-inner {
-      background: var(--paper);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      width: min(600px, 90vw);
-      box-shadow: var(--shadow-lg);
-    }
-
-    #search-input {
-      width: 100%;
-      font-family: var(--font-notes);
-      font-size: 1.3rem;
-      border: 2px solid var(--paper-3);
-      border-radius: var(--radius);
-      padding: 10px 16px;
-      background: var(--paper-2);
-      color: var(--ink);
-      outline: none;
-    }
-
-    #search-input:focus {
-      border-color: var(--blue);
-    }
-
-    #search-results {
-      margin-top: 14px;
-      max-height: 300px;
-      overflow-y: auto;
-    }
-
-    .search-result-item {
-      padding: 10px 14px;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: background 0.15s;
-      font-family: var(--font-notes);
-    }
-
-    .search-result-item:hover {
-      background: var(--blue-light);
-    }
-
-    .search-result-item .match-text {
-      color: var(--blue);
-      font-weight: 600;
-    }
-
-    /* ===================== HERO ===================== */
-    .hero {
-      position: relative;
-      text-align: center;
-      padding: 80px 24px 60px;
-      background: linear-gradient(175deg, var(--beige-light) 0%, var(--paper) 60%);
-      border-bottom: 3px solid var(--paper-3);
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(37, 99, 168, 0.08) 0%, transparent 70%);
-      top: -100px;
-      right: -100px;
-      border-radius: 50%;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(45, 106, 79, 0.07) 0%, transparent 70%);
-      bottom: -80px;
-      left: -80px;
-      border-radius: 50%;
-    }
-
-    .hero-subtitle {
-      font-family: var(--font-notes);
-      font-size: 1.1rem;
-      color: var(--beige);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-      animation: fadeInUp 0.6s ease both;
-    }
-
-    .hero-title {
-      font-family: var(--font-heading);
-      font-size: clamp(2.2rem, 6vw, 4rem);
-      color: var(--ink);
-      line-height: 1.15;
-      margin-bottom: 12px;
-      animation: fadeInUp 0.7s 0.1s ease both;
-    }
-
-    .hero-title em {
-      font-style: italic;
-      color: var(--blue);
-    }
-
-    .hero-unit-badge {
-      display: inline-block;
-      font-family: var(--font-hand);
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: var(--ink);
-      color: var(--paper);
-      padding: 6px 28px;
-      border-radius: 40px;
-      margin: 16px 0 24px;
-      letter-spacing: 2px;
-      animation: fadeInUp 0.7s 0.2s ease both;
-      box-shadow: 4px 4px 0 var(--beige);
-    }
-
-    .hero-desc {
-      font-family: var(--font-notes);
-      font-size: 1.15rem;
-      color: var(--ink-light);
-      max-width: 600px;
-      margin: 0 auto 32px;
-      animation: fadeInUp 0.7s 0.3s ease both;
-    }
-
-    .hero-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      animation: fadeInUp 0.7s 0.4s ease both;
-    }
-
-    .chip {
-      font-family: var(--font-notes);
-      font-size: 0.9rem;
-      padding: 4px 14px;
-      border-radius: 20px;
-      border: 1.5px solid;
-    }
-
-    .chip-blue {
-      background: var(--blue-light);
-      color: var(--blue);
-      border-color: var(--blue-mid);
-    }
-
-    .chip-green {
-      background: var(--green-light);
-      color: var(--green);
-      border-color: var(--green-mid);
-    }
-
-    .chip-amber {
-      background: var(--amber-light);
-      color: var(--amber);
-      border-color: var(--amber-mid);
-    }
-
-    /* ===================== MAIN LAYOUT ===================== */
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 20px;
-      position: relative;
-      z-index: 1;
-    }
-
-    section {
-      padding: 56px 0 32px;
-      border-bottom: 1.5px dashed var(--paper-3);
-    }
-
-    section:last-child {
-      border-bottom: none;
-    }
-
-    /* ===================== SECTION HEADINGS ===================== */
-    .section-label {
-      font-family: var(--font-notes);
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--beige);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-label::before {
-      content: '';
-      display: inline-block;
-      width: 24px;
-      height: 2px;
-      background: var(--beige);
-      border-radius: 2px;
-    }
-
-    .section-title {
-      font-family: var(--font-heading);
-      font-size: clamp(1.7rem, 4vw, 2.5rem);
-      color: var(--ink);
-      line-height: 1.2;
-      margin-bottom: 28px;
-      padding-bottom: 12px;
-      border-bottom: 3px solid var(--paper-3);
-      position: relative;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background: var(--blue);
-      border-radius: 2px;
-    }
-
-    /* ===================== NOTE CARDS ===================== */
-    .note-card {
-      background: var(--paper-2);
-      border: 1.5px solid var(--paper-3);
-      border-radius: var(--radius-lg);
-      padding: 28px 32px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      transition: box-shadow 0.25s, transform 0.25s;
-    }
-
-    .note-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-
-    /* Spiral binding dots */
-    .note-card::before {
-      content: '• • •';
-      position: absolute;
-      top: 12px;
-      right: 18px;
-      font-size: 0.7rem;
-      color: var(--paper-3);
-      letter-spacing: 4px;
-    }
-
-    .note-card h3 {
-      font-family: var(--font-hand);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--blue);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .note-card h3 .icon {
-      font-size: 1.3rem;
-    }
-
-    .note-card h4 {
-      font-family: var(--font-hand);
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--ink-2);
-      margin: 18px 0 8px;
-      padding-left: 12px;
-      border-left: 3px solid var(--amber);
-    }
-
-    .note-card p {
-      font-family: var(--font-notes);
-      font-size: 1.08rem;
-      color: var(--ink-2);
-      line-height: 1.75;
-      margin-bottom: 10px;
-    }
-
-    /* ===================== HIGHLIGHT BOXES ===================== */
-    .highlight {
-      border-radius: var(--radius);
-      padding: 14px 18px;
-      margin: 14px 0;
-      font-family: var(--font-notes);
-      font-size: 1.05rem;
-      border-left: 4px solid;
-      position: relative;
-    }
-
-    .highlight-blue {
-      background: var(--blue-light);
-      border-color: var(--blue);
-      color: var(--ink);
-    }
-
-    .highlight-green {
-      background: var(--green-light);
-      border-color: var(--green);
-      color: var(--ink);
-    }
-
-    .highlight-amber {
-      background: var(--amber-light);
-      border-color: var(--amber);
-      color: var(--ink);
-    }
-
-    .highlight-red {
-      background: var(--red-light);
-      border-color: var(--red);
-      color: var(--ink);
-    }
-
-    .highlight-purple {
-      background: var(--purple-light);
-      border-color: var(--purple);
-      color: var(--ink);
-    }
-
-    .highlight-teal {
-      background: var(--teal-light);
-      border-color: var(--teal);
-      color: var(--ink);
-    }
-
-    .highlight strong {
-      font-weight: 700;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    /* ===================== LISTS ===================== */
-    .note-list {
-      list-style: none;
-      padding: 0;
-      margin: 10px 0 14px;
-    }
-
-    .note-list li {
-      font-family: var(--font-notes);
-      font-size: 1.05rem;
-      color: var(--ink-2);
-      padding: 5px 0 5px 24px;
-      position: relative;
-      line-height: 1.6;
-    }
-
-    .note-list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--blue);
-      font-weight: 700;
-    }
-
-    .note-list.check li::before {
-      content: '✓';
-      color: var(--green);
-    }
-
-    .note-list.star li::before {
-      content: '★';
-      color: var(--amber);
-      font-size: 0.8rem;
-      top: 8px;
-    }
-
-    .note-list.dot li::before {
-      content: '●';
-      color: var(--beige);
-      font-size: 0.6rem;
-      top: 9px;
-    }
-
-    /* ===================== TABLES ===================== */
-    .table-wrap {
-      overflow-x: auto;
-      margin: 18px 0;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: var(--font-notes);
-      font-size: 1rem;
-    }
-
-    thead th {
-      background: var(--ink);
-      color: var(--paper);
-      padding: 12px 16px;
-      text-align: left;
-      font-family: var(--font-hand);
-      font-weight: 700;
-      font-size: 1.05rem;
-    }
-
-    thead th:first-child {
-      border-radius: var(--radius) 0 0 0;
-    }
-
-    thead th:last-child {
-      border-radius: 0 var(--radius) 0 0;
-    }
-
-    tbody tr {
-      transition: background 0.15s;
-    }
-
-    tbody tr:nth-child(even) {
-      background: var(--paper-3);
-    }
-
-    tbody tr:hover {
-      background: var(--blue-light);
-    }
-
-    tbody td {
-      padding: 10px 16px;
-      border-bottom: 1px solid var(--paper-3);
-      color: var(--ink-2);
-    }
-
-    /* ===================== MCQ SECTION ===================== */
-    #mcqs {
-      background: var(--paper-2);
-      border-radius: var(--radius-lg);
-      padding: 40px 32px;
-      margin-bottom: 40px;
-    }
-
-    .mcq-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .mcq-filter {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      font-family: var(--font-notes);
-      font-size: 0.9rem;
-      padding: 5px 14px;
-      border-radius: 20px;
-      border: 1.5px solid var(--paper-3);
-      background: var(--paper);
-      cursor: pointer;
-      transition: all 0.2s;
-      color: var(--ink);
-    }
-
-    .filter-btn.active,
-    .filter-btn:hover {
-      background: var(--ink);
-      color: var(--paper);
-      border-color: var(--ink);
-    }
-
-    .mcq-stats {
-      font-family: var(--font-notes);
-      font-size: 0.95rem;
-      color: var(--ink-light);
-    }
-
-    #score-display {
-      font-family: var(--font-hand);
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--blue);
-      text-align: center;
-      padding: 14px;
-      background: var(--blue-light);
-      border-radius: var(--radius);
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    .mcq-item {
-      background: var(--paper);
-      border: 1.5px solid var(--paper-3);
-      border-radius: var(--radius);
-      padding: 20px 22px;
-      margin-bottom: 16px;
-      transition: box-shadow 0.2s;
-    }
-
-    .mcq-item:hover {
-      box-shadow: var(--shadow-sm);
-    }
-
-    .mcq-item[data-difficulty="easy"] {
-      border-left: 4px solid var(--green);
-    }
-
-    .mcq-item[data-difficulty="medium"] {
-      border-left: 4px solid var(--amber);
-    }
-
-    .mcq-item[data-difficulty="hard"] {
-      border-left: 4px solid var(--red);
-    }
-
-    .mcq-q {
-      font-family: var(--font-hand);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 14px;
-      line-height: 1.5;
-    }
-
-    .mcq-q .q-num {
-      font-size: 0.85rem;
-      background: var(--ink);
-      color: var(--paper);
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin-right: 8px;
-    }
-
-    .mcq-difficulty {
-      font-family: var(--font-notes);
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      border-radius: 10px;
-      float: right;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .diff-easy {
-      background: var(--green-light);
-      color: var(--green);
-    }
-
-    .diff-medium {
-      background: var(--amber-light);
-      color: var(--amber);
-    }
-
-    .diff-hard {
-      background: var(--red-light);
-      color: var(--red);
-    }
-
-    .mcq-options {
-      display: grid;
-      gap: 8px;
-    }
-
-    .mcq-option {
-      font-family: var(--font-notes);
-      font-size: 1rem;
-      padding: 9px 14px;
-      border-radius: var(--radius);
-      border: 1.5px solid var(--paper-3);
-      background: var(--paper-2);
-      cursor: pointer;
-      transition: all 0.15s;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-align: left;
-      color: var(--ink);
-    }
-
-    .mcq-option:hover {
-      background: var(--blue-light);
-      border-color: var(--blue);
-    }
-
-    .mcq-option.correct {
-      background: var(--green-light);
-      border-color: var(--green);
-      font-weight: 600;
-    }
-
-    .mcq-option.wrong {
-      background: var(--red-light);
-      border-color: var(--red);
-    }
-
-    .mcq-option.revealed {
-      background: var(--green-light);
-      border-color: var(--green);
-    }
-
-    .option-letter {
-      font-family: var(--font-hand);
-      font-weight: 700;
-      font-size: 1rem;
-      min-width: 24px;
-      height: 24px;
-      background: var(--paper-3);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ink);
-    }
-
-    .mcq-answer {
-      margin-top: 10px;
-      padding: 8px 12px;
-      background: var(--green-light);
-      border-radius: var(--radius);
-      font-family: var(--font-notes);
-      font-size: 0.95rem;
-      color: var(--green);
-      display: none;
-    }
-
-    .mcq-answer.show {
-      display: block;
-    }
-
-    .btn-show-answer {
-      font-family: var(--font-notes);
-      font-size: 0.88rem;
-      padding: 5px 12px;
-      border-radius: 20px;
-      border: 1.5px solid var(--paper-3);
-      background: var(--paper);
-      cursor: pointer;
-      margin-top: 10px;
-      transition: all 0.2s;
-      color: var(--ink);
-    }
-
-    .btn-show-answer:hover {
-      background: var(--amber-light);
-      border-color: var(--amber);
-    }
-
-    .mcq-actions {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      font-family: var(--font-hand);
-      font-size: 1rem;
-      font-weight: 700;
-      padding: 10px 22px;
-      border-radius: 28px;
-      border: 2px solid var(--ink);
-      background: var(--ink);
-      color: var(--paper);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-primary:hover {
-      background: var(--blue);
-      border-color: var(--blue);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      font-family: var(--font-hand);
-      font-size: 1rem;
-      padding: 10px 22px;
-      border-radius: 28px;
-      border: 2px solid var(--paper-3);
-      background: var(--paper);
-      color: var(--ink);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--ink);
-    }
-
-    /* ===================== BACK TO TOP ===================== */
-    #back-top {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      width: 44px;
-      height: 44px;
-      background: var(--ink);
-      color: var(--paper);
-      border-radius: 50%;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.3s, transform 0.3s;
-      z-index: 50;
-      box-shadow: var(--shadow-md);
-    }
-
-    #back-top.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    #back-top:hover {
-      background: var(--blue);
-    }
-
-    /* ===================== ANIMATIONS ===================== */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.5s, transform 0.5s;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    footer {
-      text-align: center;
-      padding: 32px 24px;
-      font-family: var(--font-notes);
-      font-size: 0.95rem;
-      color: var(--ink-light);
-      background: var(--paper-3);
-      border-top: 2px solid var(--paper-3);
-    }
-
-    .def-box {
-      background: var(--beige-light);
-      border: 2px dashed var(--beige);
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      margin: 14px 0;
-      font-family: var(--font-notes);
-      font-size: 1.05rem;
-      position: relative;
-    }
-
-    /* ===================== IMAGE STYLES ===================== */
-    .note-img {
-      width: 100%;
-      max-width: 600px;
-      margin: 18px auto;
-      display: block;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
-      border: 3px solid var(--paper-3);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .note-img:hover {
-      transform: scale(1.02);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .img-caption {
-      text-align: center;
-      font-family: var(--font-notes);
-      font-size: 0.9rem;
-      color: var(--ink-light);
-      margin: -8px 0 18px 0;
-      font-style: italic;
-    }
-
-    .img-row {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 18px 0;
-    }
-
-    .img-row .note-img {
-      max-width: 280px;
-      margin: 0;
-    }
-
-    .detail-box {
-      background: linear-gradient(135deg, var(--blue-light), var(--paper));
-      border-left: 4px solid var(--blue);
-      padding: 16px 20px;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      margin: 16px 0;
-      font-family: var(--font-body);
-    }
-
-    .detail-box h4 {
-      font-family: var(--font-hand);
-      color: var(--blue);
-      margin: 0 0 8px 0;
-    }
-
-    .fun-fact {
-      background: linear-gradient(135deg, var(--amber-light), var(--paper));
-      border-left: 4px solid var(--amber);
-      padding: 14px 18px;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      margin: 14px 0;
-      font-family: var(--font-body);
-    }
-
-    .fun-fact::before {
-      content: '💡 Did You Know?';
-      display: block;
-      font-family: var(--font-hand);
-      font-weight: 700;
-      color: var(--amber);
-      margin-bottom: 6px;
-    }
-
-    .exam-tip {
-      background: linear-gradient(135deg, var(--green-light), var(--paper));
-      border-left: 4px solid var(--green);
-      padding: 14px 18px;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      margin: 14px 0;
-      font-family: var(--font-body);
-    }
-
-    .exam-tip::before {
-      content: '📝 Exam Tip';
-      display: block;
-      font-family: var(--font-hand);
-      font-weight: 700;
-      color: var(--green);
-      margin-bottom: 6px;
-    }
-
-    .key-point {
-      background: linear-gradient(135deg, var(--purple-light), var(--paper));
-      border-left: 4px solid var(--purple);
-      padding: 14px 18px;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      margin: 14px 0;
-      font-family: var(--font-body);
-    }
-
-    .key-point::before {
-      content: '⭐ Key Point';
-      display: block;
-      font-family: var(--font-hand);
-      font-weight: 700;
-      color: var(--purple);
-      margin-bottom: 6px;
-    }
-
-    @media (max-width: 768px) {
-      .img-row .note-img {
-        max-width: 100%;
-      }
-
-      .note-img {
-        max-width: 100%;
-      }
-    }
-  </style>
-</head>
-<body data-theme="light">
-  <div id="progress-bar"></div>
-  <nav>
-    <div class="nav-brand">📗 CHE 110</div>
-    <div class="nav-links">
-      <a href="#population">Population Growth</a>
-      <a href="#ethics">Ethics & Culture</a>
-      <a href="#laws">Environmental Laws</a>
-      <a href="#movements">Movements</a>
-      <a href="#mcqs">MCQs</a>
-    </div>
-    <div class="nav-actions">
-      <a href="index.html" class="btn-icon" title="Home" style="text-decoration:none;">🏠</a>
-      <button class="btn-icon" id="search-btn" title="Search Notes">🔍</button>
-      <button class="btn-icon" id="theme-btn" title="Toggle Dark Mode">🌙</button>
-      <button class="btn-icon" id="print-btn" title="Print Notes">🖨️</button>
-    </div>
-  </nav>
-
-  <div id="search-box">
-    <div id="search-inner">
-      <input type="text" id="search-input" placeholder="Search notes... (e.g. Kyoto, Chipko, Water Act, ethics)" />
-      <div id="search-results"></div>
-      <p style="font-family:var(--font-notes);font-size:0.85rem;color:var(--ink-light);margin-top:10px;">Press <strong>Esc</strong> to close</p>
-    </div>
-  </div>
-
-  <header class="hero">
-    <div class="hero-subtitle">B.Tech CSE • LPU • CHE 110</div>
-    <h1 class="hero-title">Human Communities & <em>Environment</em></h1>
-    <div class="hero-unit-badge">UNIT 6</div>
-    <p class="hero-desc">Population Explosion, Ethics, Indian Legislations, International Protocols, and Grassroots Movements</p>
-  </header>
-
-  <div class="container">
-
-    <!-- ===== POPULATION GROWTH ===== -->
-    <section id="population">
-      <div class="section-label">Topic 1</div>
-      <h2 class="section-title">Human Population Growth & Impacts</h2>
-
-      <div class="note-card fade-in">
-        <h3><span class="icon">📈</span> The Population Explosion</h3>
-        <p>The human population has grown exponentially over the last two centuries, primarily due to advances in medicine, sanitation, food security, and agriculture lowering death rates while birth rates remained relatively high.</p>
-        <ul class="note-list star">
-          <li><strong>Resource Depletion:</strong> High population density leads to rapid exploitation of water, minerals, fossil fuels, and arable land.</li>
-          <li><strong>Environmental Degradation:</strong> Deforestation for urban sprawl, habitat fragmentation, and biodiversity loss (the Anthropocene epoch).</li>
-          <li><strong>Pollution:</strong> Massive increases in municipal waste, industrial effluents, and greenhouse gases leading to climate change.</li>
-        </ul>
-        
-        <div class="def-box">
-          <strong>The IPAT Equation:</strong> Proposed by Ehrlich and Holdren:<br>
-          <code>Impact (I) = Population (P) × Affluence (A) × Technology (T)</code><br>
-          This describes how environmental impact (I) is a function of the size of the population (P), consumption per capita or wealth (A), and the environmental impact of the technology used to produce that wealth (T).
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== ETHICS & CULTURE ===== -->
-    <section id="ethics">
-      <div class="section-label">Topic 2</div>
-      <h2 class="section-title">Environmental Ethics & Culture</h2>
-
-      <div class="note-card fade-in">
-        <h3><span class="icon">🧘🏽‍♂️</span> Philosophical Worldviews</h3>
-        <p>Environmental ethics is the discipline that studies the moral relationship of human beings to, and also the value and moral status of, the environment and its non-human contents.</p>
-        
-        <div class="revision-grid">
-          <div class="revision-card">
-            <h4>🚶‍♂️ Anthropocentrism</h4>
-            <p>A human-centered view. Nature is seen merely as a resource or instrument to satisfy human needs and desires. Non-human entities have no intrinsic value.</p>
-          </div>
-          <div class="revision-card">
-            <h4>🌿 Biocentrism</h4>
-            <p>A life-centered view. All living organisms (plants and animals) have inherent worth and a right to exist, independent of their utility to humans.</p>
-          </div>
-          <div class="revision-card" style="grid-column: 1 / -1;">
-            <h4>🌎 Ecocentrism & Deep Ecology</h4>
-            <p>Ecosystem-centered view. Intrinsic value is placed on whole ecological systems (including abiotic elements like soil, rivers, rocks). Coined by philosopher Arne Naess, Deep Ecology demands a fundamental shift in how humans interact with nature, advocating for lifestyle changes that match carrying capacity.</p>
-          </div>
-        </div>
-
-        <img src="images/Unit6_CHE110/Unit6_CHE110_img2.jpg" alt="Ethics" class="note-img fade-in" />
-        <p class="img-caption">The great ecological dilemma — Industrial expansion vs. planetary boundary limits 🌎</p>
-
-        <h4>Indian Culture and Traditional Conservation</h4>
-        <p>Indian cultural practices are deeply tied to nature conservation:
-          <br>• <strong>Peepal (Ficus religiosa) & Banyan</strong> trees are worshipped, preventing them from being cut.
-          <br>• **Ahimsa** (non-violence) in Buddhism and Jainism protects animal life.
-          <br>• **Sacred Groves:** Forest patches dedicated to local deities where all hunting and cutting are strictly prohibited, preserving rare species.
-        </p>
-
-        <div class="fun-fact fade-in">
-          <strong>CNG Transition Case Study (Delhi):</strong> Facing severe air pollution, the Supreme Court of India in 1998 directed all public transport buses, autos, and taxis in Delhi to switch to **CNG (Compressed Natural Gas)**. It became one of the most successful judicial and public interventions, drastically reducing particulate matter (PM10) and carbon emissions.
-        </div>
-
-        <h4>Resettlement and Rehabilitation (R&R)</h4>
-        <p>Developmental projects like dams, highways, and mines lead to large-scale displacement of local populations, primarily tribal communities (Project Affected Persons - PAPs). R&R is the policy of relocating these populations, providing them alternative livelihoods, housing, and compensation, although historically poor execution has led to major social conflicts.</p>
-      </div>
-    </section>
-
-    <!-- ===== ENVIRONMENTAL LAWS ===== -->
-    <section id="laws">
-      <div class="section-label">Topic 3</div>
-      <h2 class="section-title">Environmental Laws & Policies</h2>
-
-      <div class="note-card fade-in">
-        <h3><span class="icon">⚖️</span> Constitutional Provisions in India</h3>
-        <ul class="note-list check">
-          <li><strong>Article 48A (DPSP):</strong> Directs the State to protect and improve the environment and safeguard the forests and wildlife of the country.</li>
-          <li><strong>Article 51A(g) (Fundamental Duties):</strong> It is the duty of every citizen of India to protect and improve the natural environment including forests, lakes, rivers, and wildlife.</li>
-          <li><strong>Article 21 (Right to Life):</strong> The Supreme Court has interpreted the Right to Life to include the right to a clean, pollution-free, and healthy environment.</li>
-        </ul>
-      </div>
-
-      <div class="note-card fade-in">
-        <h3><span class="icon">📜</span> Key Indian Environmental Acts</h3>
-        
-        <img src="images/Unit6_CHE110/Unit6_CHE110_img6.jpg" alt="Environmental Laws chart" class="note-img fade-in" />
-        <p class="img-caption">Summary of major environmental acts in India 📜</p>
-
-        <ul class="note-list star">
-          <li><strong>Wildlife (Protection) Act, 1972:</strong> Restricts hunting of wild animals, establishes National Parks and Sanctuaries, and classifies protected species into Schedules.</li>
-          <li><strong>Water (Prevention and Control of Pollution) Act, 1974:</strong> Established the Central Pollution Control Board (CPCB) and State Pollution Control Boards (SPCB) to monitor and maintain water quality.</li>
-          <li><strong>Forest (Conservation) Act, 1980:</strong> Restricts the diversion of forest lands for non-forest purposes without central government permission.</li>
-          <li><strong>Air (Prevention and Control of Pollution) Act, 1981:</strong> Targets air quality control; amended in <strong>1987</strong> to include **Noise** under the definition of air pollutants.</li>
-          <li><strong>Environment (Protection) Act, 1986:</strong> An umbrella legislation enacted in the wake of the 1984 Bhopal Gas Tragedy. It gives the central government broad power to set standards, coordinate state boards, and mandate Environmental Impact Assessment (EIA).</li>
-        </ul>
-      </div>
-
-      <div class="note-card fade-in">
-        <h3><span class="icon">🤝</span> International Agreements & Protocols</h3>
-        <ul class="note-list">
-          <li><strong>Montreal Protocol (1987):</strong> An internationally binding treaty designed to protect the ozone layer by phasing out the production of Ozone Depleting Substances (ODS) like chlorofluorocarbons (CFCs). Highly successful.</li>
-          <li><strong>Kyoto Protocol (1997):</strong> Commits industrialized nations to reduce greenhouse gas emissions based on the principle of **CBDR (Common But Differentiated Responsibilities)**. Introduced Carbon Trading and the Clean Development Mechanism (CDM).</li>
-          <li><strong>Paris Agreement (2015):</strong> A global treaty aimed at limiting global warming to well below 2°C, preferably **1.5°C**, compared to pre-industrial levels, through Nationally Determined Contributions (NDCs).</li>
-          <li><strong>Convention on Biological Diversity (CBD - 1992):</strong> Focuses on conservation, sustainable use, and fair benefit sharing of genetic resources (supplemented by Cartagena and Nagoya Protocols).</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ===== MOVEMENTS ===== -->
-    <section id="movements">
-      <div class="section-label">Topic 4</div>
-      <h2 class="section-title">Environmental Movements in India</h2>
-
-      <div class="note-card fade-in">
-        <h3><span class="icon">🌳</span> Historical Grassroots Movements</h3>
-        
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Movement</th>
-                <th>Key Leader / Location</th>
-                <th>Core objective & Method</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Bishnoi Sacrifice (1730)</strong></td>
-                <td>Amrita Devi Bishnoi / Khejarli, Rajasthan</td>
-                <td>363 Bishnois sacrificed their lives hugging Khejri trees to prevent them from being cut by the Jodhpur King's soldiers. Led to royal decree protecting trees and wildlife.</td>
-              </tr>
-              <tr>
-                <td><strong>Chipko Movement (1973)</strong></td>
-                <td>Sunderlal Bahuguna, Gaura Devi / Garhwal, Uttarakhand</td>
-                <td>Villagers, mainly women, hugged trees to stop commercial logging in the Himalayas. Slogan: <em>"Ecology is permanent economy."</em> Led to a 15-year ban on green felling.</td>
-              </tr>
-              <tr>
-                <td><strong>Appiko Movement (1983)</strong></td>
-                <td>Pandurang Hegde / Western Ghats, Karnataka</td>
-                <td>Inspired by Chipko ('Appiko' means to hug in Kannada). Aimed to protect tropical forests of Western Ghats from commercial felling.</td>
-              </tr>
-              <tr>
-                <td><strong>Silent Valley Movement (1973)</strong></td>
-                <td>Kerala Sastra Sahitya Parishad / Kerala</td>
-                <td>Protested a hydroelectric dam on the Kunthipuzha river that threatened the unique Silent Valley evergreen rainforests. Dam cancelled; declared a National Park.</td>
-              </tr>
-              <tr>
-                <td><strong>Narmada Bachao Andolan (1985)</strong></td>
-                <td>Medha Patkar, Baba Amte / Gujarat & MP</td>
-                <td>Mobilized tribals and farmers against displacement caused by building the Sardar Sarovar Dam on the Narmada River, demanding proper Rehabilitation & Resettlement.</td>
-              </tr>
-              <tr>
-                <td><strong>Jungle Bachao Andolan (1982)</strong></td>
-                <td>Tribals of Singhbhum / Bihar (now Jharkhand)</td>
-                <td>Protested the government's decision to replace natural, biodiverse Sal forests with commercial Teak plantations (known as 'Greed Game').</td>
-              </tr>
-              <tr>
-                <td><strong>Tehri Dam Conflict</strong></td>
-                <td>Sunderlal Bahuguna / Uttarakhand</td>
-                <td>Opposed building the giant Tehri Dam on the Bhagirathi River due to seismic threats (located in Zone V) and massive displacement of historical town.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <img src="images/Unit6_CHE110/Unit6_CHE110_img4.jpg" alt="Amrita Devi Bishnoi painting" class="note-img fade-in" />
-        <p class="img-caption">Painting depicting Amrita Devi Bishnoi and her daughters hugging the Khejri trees in 1730 🌳</p>
-
-        <div class="exam-tip fade-in">
-          The Government of India has instituted the **Amrita Devi Bishnoi National Award** for wildlife conservation in honor of her ultimate sacrifice. Be prepared to name the leaders and states for all 7 movements in the exam!
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== MCQS ===== -->
-    <section id="mcqs">
-      <div class="mcq-header">
-        <h2 class="section-title" style="margin:0; border:none; padding:0;">Unit 6 Practice MCQs</h2>
-        <div class="mcq-filter">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="easy">Easy</button>
-          <button class="filter-btn" data-filter="medium">Medium</button>
-          <button class="filter-btn" data-filter="hard">Difficult</button>
-        </div>
-      </div>
-
-      <div class="mcq-actions">
-        <button class="btn-primary" id="start-quiz-btn">Start Practice Quiz</button>
-      </div>
-      <div id="score-display"></div>
-
-      <div id="mcq-container">
-
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q1</span> What does the letter 'P' represent in the IPAT equation?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Pollution
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Population
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Poverty
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Policy
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q2</span> The statistical study of human population characteristics is known as:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Ecology
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Demography
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Geography
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Sociology
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q3</span> Which article of the Indian Constitution states that it is the fundamental duty of every citizen to protect and improve the natural environment?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Article 21
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Article 48A
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> Article 51A(g)
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Article 370
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q4</span> Which act is considered the umbrella legislation for environmental protection in India?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Water Act, 1974
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Wildlife Protection Act, 1972
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> Environment (Protection) Act, 1986
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Air Act, 1981
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q5</span> The famous 'Chipko Movement' originated in which Indian state?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Rajasthan
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Karnataka
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> Uttarakhand (then UP)
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Kerala
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q6</span> Who was the prominent leader of the Chipko Movement who coined the slogan 'Ecology is permanent economy'?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">A</div> Sunderlal Bahuguna
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Medha Patkar
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Pandurang Hegde
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Baba Amte
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: A</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q7</span> In which year was the Wildlife (Protection) Act enacted in India?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">A</div> 1972
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> 1974
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> 1980
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> 1986
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: A</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q8</span> Which international agreement focuses on the phasing out of ozone-depleting substances like CFCs?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Kyoto Protocol
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Montreal Protocol
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Paris Agreement
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Basel Convention
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q9</span> Which environmental movement was started in Karnataka as a sister movement of Chipko?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Silent Valley
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Appiko Movement
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Narmada Bachao
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Jungle Bachao
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q10</span> The Environment (Protection) Act was passed in 1986 in the wake of which tragedy?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Chernobyl Disaster
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Bhopal Gas Tragedy
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Fukushima Meltdown
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Tsunami
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q11</span> Which article of the Constitution directs the 'State' to protect and improve the environment?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Article 21
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Article 48A
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Article 51A(g)
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Article 14
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q12</span> The primary objective of the Montreal Protocol is to protect:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Biodiversity
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Forest cover
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> The Ozone Layer
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Wetlands
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q13</span> The lead figure in the Narmada Bachao Andolan is:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Sunderlal Bahuguna
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Medha Patkar
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Pandurang Hegde
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Vandana Shiva
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q14</span> In Indian culture, which of the following is traditionally worshipped and protected?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Eucalyptus tree
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Peepal tree
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Parthenium weed
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Acacia tree
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q15</span> The Water Act in India was enacted in which year?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> 1972
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> 1974
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> 1981
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> 1986
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q16</span> The Air Act, 1981 was amended in 1987 to include which of the following as a pollutant?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Carbon Dioxide
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Dust particles
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> Noise
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Soot
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q17</span> The historical sacrifice of 363 Bishnois in 1730 was to protect which trees?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Teak trees
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Khejri trees
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Sal trees
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Deodar trees
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q18</span> Which fuel was mandated for all public buses in Delhi to control air pollution?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Liquid Petroleum Gas (LPG)
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Compressed Natural Gas (CNG)
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Biodiesel
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Ethanol-blended petrol
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q19</span> The term 'Anthropocentrism' refers to a worldview that is:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Nature-centered
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Life-centered
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> Human-centered
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Ecosystem-centered
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="easy">
-          <div class="mcq-difficulty diff-easy">easy</div>
-          <div class="mcq-q"><span class="q-num">Q20</span> The Forest (Conservation) Act in India was passed in which year?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> 1972
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> 1974
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> 1980
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> 1986
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q21</span> The principle of CBDR in the Kyoto Protocol stands for:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Conservation of Biodiversity and Disaster Resilience
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Common But Differentiated Responsibilities
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Carbon Budget and Development Rights
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Control of Biological Disease Outbreaks
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q22</span> Deep Ecology differs from anthropocentric environmentalism by advocating:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Scientific resource management
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> The intrinsic right of all nature to exist regardless of human utility
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> High economic growth
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Building more solar panels
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q23</span> The Forest Rights Act (FRA), 2006 recognizes the rights of:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Paper industries to harvest wood
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Forest-dwelling scheduled tribes and other traditional forest dwellers
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Zoos to capture wild animals
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> State Forest Departments to clear land
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q24</span> The Silent Valley Movement in Kerala successfully prevented the construction of a dam on which river?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Narmada River
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Kunthipuzha River
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Periyar River
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Kaveri River
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q25</span> Which of the following is the target limit of global warming under the Paris Agreement (2015)?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Below 1.0°C
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Well below 2.0°C, aiming for 1.5°C
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Below 3.0°C
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> No specific limit
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q26</span> Which movement protested against replacing natural Sal forests with commercial Teak plantations?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Chipko Movement
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Appiko Movement
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> Jungle Bachao Andolan
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Narmada Bachao Andolan
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q27</span> The Kyoto Protocol's Clean Development Mechanism (CDM) allows developed nations to:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Build coal plants in poor nations
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Earn carbon credits by investing in green projects in developing countries
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Export chemical waste to developing countries
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Trade nuclear fuel
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q28</span> The 'Ecocentric' worldview proposed by Aldo Leopold in his Land Ethic states that:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Only humans have moral standing
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Only animals have rights
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> The entire biotic community (soil, water, plants, animals) has intrinsic value
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Technology is the solution to all pollution
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q29</span> Which Indian environmental legislation gives CPCB the power to set national ambient air quality standards?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">A</div> Air Act, 1981
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Environment (Protection) Act, 1986
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Water Act, 1974
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> National Green Tribunal Act
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: A</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q30</span> The Tehri Dam Conflict in Uttarakhand was primarily due to its construction in which highly sensitive area?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> A dense mangrove forest
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> A seismically active Zone V region on the Bhagirathi River
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> A wildlife corridor for tigers
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> A desert biome
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q31</span> Under Article 21, the Right to a clean environment was first recognized by the Supreme Court in which landmark case?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Kesavananda Bharati case
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Subhash Kumar vs. State of Bihar
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Maneka Gandhi vs. Union of India
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Vishaka vs. State of Rajasthan
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q32</span> The Cartagena Protocol is a supplement to the CBD that regulates:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Carbon emissions from ships
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Transboundary movement of Living Modified Organisms (LMOs)
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> The trade of endangered birds
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Illegal logging
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q33</span> The main conflict in Narmada Bachao Andolan centered around:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Logging in the forest
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Siltation of the river delta
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> Inadequate rehabilitation and resettlement of thousands of displaced tribal families
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Toxic industrial pollution
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q34</span> Which of the following describes the relationship in the IPAT equation?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Environmental impact decreases as affluence increases
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Environmental impact is directly proportional to population, affluence, and technology footprint
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Technology always reduces environmental impact
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Population is the only factor affecting impact
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q35</span> The Nagoya Protocol under CBD regulates:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">A</div> Access to genetic resources and fair benefit-sharing (ABS)
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Biosafety of GM crops
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Phase-out of HFCs
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Protection of migratory birds
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: A</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q36</span> In India, the Eco-Mark label (an earthen pot) is issued by:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> NITI Aayog
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Bureau of Indian Standards (BIS)
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Ministry of Commerce
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Central Pollution Control Board
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q37</span> Which philosophy believes that nature exists solely to serve human interests, treating it as an instrument?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Biocentrism
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Ecocentrism
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> Anthropocentrism
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Deep Ecology
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q38</span> The Air Act of 1981 allows the State Pollution Control Boards to declare:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Forest reserves
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Air pollution control areas where certain fuels are restricted
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> National Parks
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Silent zones for birds
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q39</span> The Chipko Movement was highly successful because it:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Used violence against loggers
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Involved large-scale participation of local women hugging trees
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Was funded by international organizations
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Destroyed the factories
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q40</span> Which of the following is a key issue for Project Affected Persons (PAPs) in development projects?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Access to high-speed internet
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Loss of traditional land, livelihood, and breakdown of cultural ties without proper rehabilitation
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Excessive cash compensation
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Changes in weather patterns
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q41</span> Agenda 21, adopted at the 1992 Rio Earth Summit, is a blueprint for:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Ozone layer restoration
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Sustainable development in the 21st century
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Nuclear disarmament
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Global pandemic control
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q42</span> Which Indian Act requires industries to obtain 'Consent to Establish' (CTE) and 'Consent to Operate' (CTO)?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Environment (Protection) Act, 1986
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Water (Prevention and Control of Pollution) Act, 1974
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Factories Act, 1948
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Wildlife Protection Act
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q43</span> Which school of environmental ethics was founded by Arne Naess in 1973?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Shallow Ecology
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Deep Ecology
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Social Ecology
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Eco-feminism
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q44</span> The National Green Tribunal (NGT) was established in 2010 to:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Provide research funds for forestry
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Expedite disposal of environmental cases and disputes in India
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Monitor forest fires via satellite
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Manage zoos
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="medium">
-          <div class="mcq-difficulty diff-medium">medium</div>
-          <div class="mcq-q"><span class="q-num">Q45</span> Which environmental movement in India is also referred to as the 'Greed Game' protest?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Chipko
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Silent Valley
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">C</div> Jungle Bachao Andolan
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Appiko
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: C</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q46</span> Under the Wildlife (Protection) Act, 1972, which schedule provides absolute protection with the highest penalties?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">A</div> Schedule I
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">B</div> Schedule III
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Schedule IV
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Schedule V
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: A</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q47</span> The principle of 'Intra-generational equity' in sustainable development means:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Equity between the present and future generations
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Equity and fairness among people of the same generation within and between nations
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Equality of income among all government employees
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Equal rights for animals and plants
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q48</span> Which international agreement was amended by the Kigali Amendment in 2016 to phase out Hydrofluorocarbons (HFCs)?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Kyoto Protocol
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Montreal Protocol
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Paris Agreement
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> CBD
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q49</span> The concept of 'Carrying Capacity' is ecologically defined as:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> The weight of biomass in a trophic level
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> The maximum population size of a species that an environment can sustain indefinitely given resources
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> The carrying limit of a food chain
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> The capacity of a tree canopy to hold water
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q50</span> How did the 1987 Brundtland Report define Sustainable Development?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Development that increases GDP by 10% annually
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Development that meets the needs of the present without compromising the ability of future generations to meet their own needs
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Development focusing exclusively on forest conservation
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Development using zero fossil fuels
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q51</span> In environmental ethics, Paul Taylor's 'Biocentric Outlook' argues that:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Only humans have rational souls
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> All living things are teleological centers of life, having equal inherent worth
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Ecosystems have more value than individual organisms
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Nature should be priced in stock markets
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q52</span> The principle of 'Common But Differentiated Responsibilities' (CBDR) recognizes that:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> All countries must cut emissions by the same percentage
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Developed countries have contributed more to global emissions and have more wealth, thus bearing a larger burden in mitigation
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Developing countries must stop industrialization
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Only developing countries need to protect biodiversity
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q53</span> Which case study demonstrated the power of judicial activism in India by enforcing the CNG transition in public transport?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Ganga Pollution Case
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> M.C. Mehta vs. Union of India (Delhi Vehicular Pollution Case)
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Narmada Dam case
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Bhopal Gas leak compensation case
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q54</span> What was the main reason for the failure of the original resettlement plan for Sardar Sarovar Dam Project PAPs?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Lack of cash compensation
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Resettlement in barren lands without water, agricultural base, or community infrastructure
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> The tribals refused to leave the forests
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Protests by environmentalists from cities
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q55</span> The 'Jungle Bachao Andolan' began in the Singhbhum district of Bihar when the government decided to replace:</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Natural Teak with Sal
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Natural Sal with Teak
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Peepal trees with Eucalyptus
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Mangroves with agricultural fields
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q56</span> The definition of 'carrying capacity' includes which two basic components?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Birth capacity and Death capacity
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Supporting capacity (regeneration) and Assimilative capacity (waste tolerance)
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Resource volume and Population speed
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Rainfall capacity and Soil depth
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q57</span> Which of the following protocols specifically addresses Biosafety and LMOs (Living Modified Organisms)?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Nagoya Protocol
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Cartagena Protocol
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Montreal Protocol
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Kyoto Protocol
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q58</span> The Appiko Movement in Karnataka used which three slogans to educate the masses?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> Save, Plant, Grow
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> Ulisu (Save), Belesu (Grow), Balasu (Use rationally)
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> Hug, Save, Protect
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> Water, Soil, Trees
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q59</span> Which constitutional amendment added Article 48A and 51A(g) to the Indian Constitution in 1976?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> 44th Amendment
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> 42nd Amendment
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> 86th Amendment
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> 73rd Amendment
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-        <div class="mcq-item fade-in" data-difficulty="hard">
-          <div class="mcq-difficulty diff-hard">difficult</div>
-          <div class="mcq-q"><span class="q-num">Q60</span> What does the IPAT equation help us analyze?</div>
-          <div class="mcq-options">
-  
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">A</div> The rate of global warming
-            </div>
-    
-            <div class="mcq-option" data-correct="true">
-              <div class="option-letter">B</div> The environmental footprint of a nation based on population, wealth, and technological impact
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">C</div> The success of conservation laws
-            </div>
-    
-            <div class="mcq-option" data-correct="false">
-              <div class="option-letter">D</div> The migration rate of human populations
-            </div>
-    
-          </div>
-          <div class="mcq-answer">Correct Answer: B</div>
-        </div>
-  
-      </div>
-    </section>
-  </div>
-
-  <button id="back-top" title="Back to Top">⬆️</button>
-
-  <footer>
-    <p>CHE 110 Environmental Studies | Detailed Handwritten Style Notes</p>
-  </footer>
-
-  <script>
-    // Progress Bar
-    window.addEventListener('scroll', () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      document.getElementById('progress-bar').style.width = (winScroll / height) * 100 + '%';
-    });
-
-    // Theme Toggle
-    const themeBtn = document.getElementById('theme-btn');
-    themeBtn.addEventListener('click', () => {
-      const currentTheme = document.body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      document.body.setAttribute('data-theme', newTheme);
-      themeBtn.textContent = newTheme === 'light' ? '🌙' : '☀️';
-    });
-
-    // Search Notes
-    const searchBtn = document.getElementById('search-btn');
-    const searchBox = document.getElementById('search-box');
-    const searchInput = document.getElementById('search-input');
-    const searchResults = document.getElementById('search-results');
-
-    searchBtn.addEventListener('click', () => {
-      searchBox.classList.add('open');
-      searchInput.focus();
-    });
-
-    searchBox.addEventListener('click', (e) => {
-      if (e.target === searchBox) searchBox.classList.remove('open');
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') searchBox.classList.remove('open');
-    });
-
-    // Back to Top
-    const backTop = document.getElementById('back-top');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) backTop.classList.add('visible');
-      else backTop.classList.remove('visible');
-    });
-    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // Print
-    document.getElementById('print-btn').addEventListener('click', () => window.print());
-
-    // Fade In Animation observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // MCQ Logic
-    const mcqs = document.querySelectorAll('.mcq-item');
-
-    // MCQ Filtering
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.getAttribute('data-filter');
-
-        mcqs.forEach(mcq => {
-          if (filter === 'all' || mcq.getAttribute('data-difficulty') === filter) {
-            mcq.style.display = 'block';
-          } else {
-            mcq.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // MCQ Interaction
-    mcqs.forEach(mcq => {
-      const options = mcq.querySelectorAll('.mcq-option');
-      const answerBox = mcq.querySelector('.mcq-answer');
-      const showAnsBtn = mcq.querySelector('.btn-show-answer');
-      let answered = false;
-
-      options.forEach(opt => {
-        opt.addEventListener('click', () => {
-          if (answered) return;
-          answered = true;
-
-          const isCorrect = opt.getAttribute('data-correct') === 'true';
-
-          if (isCorrect) {
-            opt.classList.add('correct');
-          } else {
-            opt.classList.add('wrong');
-            // highlight correct
-            options.forEach(o => {
-              if (o.getAttribute('data-correct') === 'true') {
-                o.classList.add('revealed');
-              }
-            });
-          }
-          answerBox.classList.add('show');
-          if (showAnsBtn) showAnsBtn.style.display = 'none';
-        });
-      });
-
-      if (showAnsBtn) {
-        showAnsBtn.addEventListener('click', () => {
-          answered = true;
-          options.forEach(o => {
-            if (o.getAttribute('data-correct') === 'true') {
-              o.classList.add('revealed');
-            }
-          });
-          answerBox.classList.add('show');
-          showAnsBtn.style.display = 'none';
-        });
-      }
-    });
-
-    // Quiz Mode
-    document.getElementById('start-quiz-btn').addEventListener('click', () => {
-      mcqs.forEach(mcq => {
-        const options = mcq.querySelectorAll('.mcq-option');
-        options.forEach(opt => {
-          opt.classList.remove('correct', 'wrong', 'revealed');
-        });
-        mcq.querySelector('.mcq-answer').classList.remove('show');
-        const btn = mcq.querySelector('.btn-show-answer');
-        if (btn) btn.style.display = 'block';
-      });
-      document.getElementById('score-display').style.display = 'none';
-    });
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ================= INJECTED UI SCRIPT ================= -->
-<script>
-(function() {
-  if(!document.querySelector('link[href*="Kalam"]')) {
-    document.head.insertAdjacentHTML('beforeend', '<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHE110 – Unit 6: Human Communities & Environment</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #faf8f2;
+    --paper2: #f4f0e6;
+    --ink: #1a1208;
+    --ink-light: #3d3220;
+    --blue: #2563a8;
+    --blue-light: #dbeafe;
+    --beige: #e8dcc8;
+    --brown: #7c5c38;
+    --brown-light: #f0e6d4;
+    --green: #2d6a4f;
+    --green-light: #d8f3dc;
+    --red: #c0392b;
+    --red-light: #fde8e6;
+    --yellow: #f0c040;
+    --yellow-light: #fef9e7;
+    --grey: #8c8070;
+    --shadow: 0 4px 24px rgba(60,40,10,0.10);
+    --shadow-hover: 0 8px 36px rgba(60,40,10,0.18);
+    --radius: 12px;
+    --line: #c8b89a;
   }
-  
-  const style = document.createElement('style');
-  style.textContent = `
-    :root, body[data-theme="light"] {
-      --white: #FFFFFF !important;
-      --beige: #F8F5EE !important;
-      --paper: #FFFDF7 !important;
-      --sky: #87CEEB !important;
-      --sky-light: #E8F4FD !important;
-      --yellow: #FFF3B0 !important;
-      --yellow-dark: #F7C948 !important;
-      --pink: #FFE4E8 !important;
-      --pink-dark: #F78FA7 !important;
-      --lavender: #EDE7F6 !important;
-      --lavender-dark: #9C6FE4 !important;
-      --mint: #E8F5E9 !important;
-      --mint-dark: #4CAF82 !important;
-      --ink: #2C2C2C !important;
-      --ink-light: #555 !important;
-      --blue-accent: #4A90D9 !important;
-      --red-accent: #E74C3C !important;
-      --orange-accent: #F39C12 !important;
-      --green-accent: #27AE60 !important;
-      --purple-accent: #8E44AD !important;
-      --shadow: rgba(0, 0, 0, 0.08) !important;
-    }
-    [data-theme="dark"], body.dark {
-      --white: #1a1a2e !important;
-      --beige: #16213e !important;
-      --paper: #0f3460 !important;
-      --ink: #e0e0e0 !important;
-      --ink-light: #bbb !important;
-      --sky-light: #1a2a3a !important;
-      --yellow: #2a2a00 !important;
-      --pink: #2a0a10 !important;
-      --lavender: #1a1030 !important;
-      --mint: #0a2a15 !important;
-    }
-    
-    html {
-      font-size: 125% !important; /* Scale entire UI slightly larger */
-    }
-    
-    body {
-      background-color: var(--beige) !important;
-      font-family: 'Nunito', sans-serif !important;
-      color: var(--ink) !important;
-      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, #e8e0d0 27px, #e8e0d0 28px), repeating-linear-gradient(90deg, transparent, transparent 27px, transparent 27px) !important;
-      background-size: 100% 28px !important;
-      font-size: 1.05rem !important; /* Extra boost for base font if ems aren't used */
-    }
-    body[data-theme="dark"], body.dark {
-      background-color: #16213e !important;
-      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(255, 255, 255, 0.05) 27px, rgba(255, 255, 255, 0.05) 28px) !important;
-    }
+  body.dark {
+    --paper: #1a1710;
+    --paper2: #221f14;
+    --ink: #f0ead8;
+    --ink-light: #c8b89a;
+    --blue-light: #1e3a5f;
+    --beige: #2a2418;
+    --brown-light: #2e2418;
+    --green-light: #1a2e22;
+    --red-light: #2e1810;
+    --yellow-light: #2a2008;
+    --line: #3a3020;
+    --shadow: 0 4px 24px rgba(0,0,0,0.40);
+    --shadow-hover: 0 8px 36px rgba(0,0,0,0.55);
+  }
 
-    h1, h2, h3, h4, .section-title, p {
-      font-family: 'Nunito', sans-serif !important;
-    }
-    
-    .nav-brand {
-      font-family: 'Caveat', cursive !important;
-      font-weight: 700 !important;
-      color: var(--blue-accent) !important;
-      font-size: 1.5rem !important;
-    }
-    
-    nav, .nav-sticky, #navbar {
-      background: rgba(255, 255, 255, 0.85) !important;
-      backdrop-filter: blur(12px) !important;
-      border-bottom: 2px dashed #e0d5c5 !important;
-      box-shadow: 0 2px 20px var(--shadow) !important;
-    }
-    body.dark nav, body[data-theme="dark"] nav, body.dark .nav-sticky, body.dark #navbar {
-      background: rgba(22, 33, 62, 0.9) !important;
-      border-bottom-color: #333 !important;
-    }
-    
-    header.hero, section#hero, .hero {
-      background: var(--paper) !important;
-      border: 3px solid #e8dfc8 !important;
-      border-radius: 16px !important;
-      margin: 30px auto !important;
-      max-width: 960px !important;
-      box-shadow: 4px 4px 0 #e0d5c5, 8px 8px 0 #d8ccb8 !important;
-    }
-    header.hero::before, section#hero::before, .hero::before {
-      display: none !important;
-    }
-    
-    .hero-title {
-      font-family: 'Kalam', cursive !important;
-      color: var(--blue-accent) !important;
-      border-bottom: 3px dashed var(--blue-accent) !important;
-      display: inline-block !important;
-      padding-bottom: 4px !important;
-    }
-    
-    .hero-subtitle, .hero-unit-badge, .hero-unit {
-      font-family: 'Caveat', cursive !important;
-      color: #999 !important;
-      letter-spacing: 2px !important;
-      background: transparent !important;
-      border: none !important;
-    }
+  * { margin:0; padding:0; box-sizing:border-box; }
 
-    h2.section-heading, .section-header {
-      font-family: 'Caveat', cursive !important;
-      font-weight: 700 !important;
-      border-bottom: 2px dashed #e8dfc8 !important;
-      padding-bottom: 8px !important;
-    }
-    
-    .note-card, .resource-card, .def-box {
-      background: var(--paper) !important;
-      border-radius: 12px !important;
-      border-left: 5px solid var(--blue-accent) !important;
-      box-shadow: 2px 2px 8px var(--shadow) !important;
-      font-family: 'Kalam', cursive !important;
-    }
-    
-    .note-card.green, .def-box.green { border-left-color: var(--mint-dark) !important; }
-    .note-card.red, .def-box.red { border-left-color: var(--pink-dark) !important; }
-    .note-card.yellow, .def-box.yellow { border-left-color: var(--yellow-dark) !important; }
-    
-    /* Make index.html cards look PEL125 style */
-    .unit-card {
-      background: var(--paper) !important;
-      border: 2px solid #e8dfc8 !important;
-      border-radius: 16px !important;
-      box-shadow: 3px 3px 0 #e0d5c5 !important;
-      transition: transform 0.2s !important;
-    }
-    .unit-card:hover {
-      transform: translateY(-5px) !important;
-      box-shadow: 5px 5px 0 #d8ccb8 !important;
-    }
-    .unit-badge {
-      background: var(--sky-light) !important;
-      color: var(--blue-accent) !important;
-      font-family: 'Caveat', cursive !important;
-    }
-  `;
-  document.head.appendChild(style);
+  html { scroll-behavior: smooth; }
 
-})();
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  /* PROGRESS BAR */
+  #progress-bar {
+    position: fixed; top:0; left:0; height:4px;
+    background: linear-gradient(90deg, var(--blue), var(--brown));
+    width: 0%; z-index: 9999;
+    transition: width 0.1s;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top:0; z-index: 999;
+    background: rgba(250,248,242,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--line);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+    box-shadow: 0 2px 12px rgba(60,40,10,0.07);
+    transition: background 0.3s;
+  }
+  body.dark nav { background: rgba(26,23,16,0.97); }
+
+  .nav-logo {
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--blue); letter-spacing: 0.5px;
+  }
+  .nav-links {
+    display: flex; gap: 1.5rem; list-style:none;
+    font-size: 0.82rem; font-weight: 500;
+  }
+  .nav-links a {
+    color: var(--ink-light); text-decoration:none;
+    padding: 4px 8px; border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { background: var(--beige); color: var(--blue); }
+
+  .nav-actions { display:flex; gap:0.5rem; align-items:center; }
+  .btn-icon {
+    background: var(--paper2); border: 1.5px solid var(--line);
+    border-radius: 8px; padding: 6px 12px; cursor: pointer;
+    font-size: 0.8rem; color: var(--ink);
+    transition: all 0.2s; display:flex; align-items:center; gap:5px;
+  }
+  .btn-icon:hover { background: var(--beige); border-color: var(--brown); }
+
+  /* SEARCH */
+  #search-bar {
+    position: fixed; top: 60px; left:0; right:0; z-index: 998;
+    background: var(--paper); border-bottom: 2px solid var(--blue);
+    padding: 0.8rem 2rem; display:none; align-items:center; gap:1rem;
+    box-shadow: var(--shadow);
+  }
+  #search-bar.active { display:flex; }
+  #search-input {
+    flex:1; border: 1.5px solid var(--line); border-radius: 8px;
+    padding: 8px 14px; font-size: 0.95rem;
+    background: var(--paper2); color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+  }
+  #search-input:focus { border-color: var(--blue); }
+  #search-count { font-size: 0.85rem; color: var(--grey); }
+
+  /* HERO */
+  .hero {
+    background: var(--paper2);
+    border-bottom: 3px solid var(--line);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(
+      transparent, transparent 27px,
+      var(--line) 28px
+    );
+    opacity: 0.4;
+    pointer-events:none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--blue); color: #fff;
+    font-size: 0.75rem; font-weight: 600;
+    padding: 4px 14px; border-radius: 20px;
+    letter-spacing: 1px; margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 700; color: var(--ink);
+    line-height: 1.2; margin-bottom: 0.5rem;
+  }
+  .hero-unit {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    color: var(--brown); font-weight: 600;
+    border: 2px dashed var(--brown);
+    display: inline-block;
+    padding: 6px 28px; border-radius: 8px;
+    margin: 1rem 0;
+    background: var(--brown-light);
+  }
+  .hero-desc {
+    font-size: 1rem; color: var(--ink-light);
+    max-width: 600px; margin: 1rem auto 0;
+  }
+
+  /* MAIN LAYOUT */
+  main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+  /* SECTIONS */
+  .section {
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius);
+    padding: 2rem 2.2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow);
+    position: relative;
+    transition: box-shadow 0.2s;
+  }
+  .section:hover { box-shadow: var(--shadow-hover); }
+
+  .section-label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--grey);
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.9rem; font-weight: 700; color: var(--blue);
+    margin-bottom: 1.2rem; border-bottom: 2px solid var(--beige);
+    padding-bottom: 0.5rem;
+    display: flex; align-items:center; gap:0.5rem;
+  }
+  h3 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem; color: var(--brown);
+    margin: 1.5rem 0 0.6rem;
+    display: flex; align-items:center; gap:0.4rem;
+  }
+  h4 {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem; color: var(--ink);
+    margin: 1.2rem 0 0.4rem; font-style: italic;
+  }
+
+  p { margin-bottom: 0.8rem; color: var(--ink); font-size: 0.97rem; }
+
+  /* NOTE PAPER LINES */
+  .lined {
+    background-image: repeating-linear-gradient(
+      transparent, transparent 27px,
+      var(--line) 28px
+    );
+    background-size: 100% 28px;
+    padding: 0.2rem 0;
+  }
+
+  /* CALLOUTS */
+  .callout {
+    border-left: 4px solid var(--blue);
+    background: var(--blue-light);
+    padding: 1rem 1.2rem;
+    border-radius: 0 10px 10px 0;
+    margin: 1rem 0;
+    font-family: 'Caveat', cursive;
+    font-size: 1.08rem;
+  }
+  .callout.green { border-color: var(--green); background: var(--green-light); }
+  .callout.brown { border-color: var(--brown); background: var(--brown-light); }
+  .callout.red { border-color: var(--red); background: var(--red-light); }
+  .callout.yellow { border-color: var(--yellow); background: var(--yellow-light); }
+
+  /* HIGHLIGHT */
+  .highlight { background: var(--yellow); border-radius: 3px; padding: 0 3px; }
+  .highlight.blue { background: #bfdbfe; }
+  .highlight.green { background: #bbf7d0; }
+  .highlight.pink { background: #fbcfe8; }
+
+  /* LISTS */
+  ul.notes-list, ol.notes-list {
+    padding-left: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+  ul.notes-list li, ol.notes-list li {
+    margin-bottom: 0.5rem;
+    font-size: 0.97rem;
+    line-height: 1.6;
+  }
+  ul.notes-list li::marker { color: var(--blue); }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.77rem;
+    font-weight: 600;
+    margin: 2px;
+  }
+  .tag.blue { background: var(--blue-light); color: var(--blue); }
+  .tag.green { background: var(--green-light); color: var(--green); }
+  .tag.brown { background: var(--brown-light); color: var(--brown); }
+  .tag.red { background: var(--red-light); color: var(--red); }
+
+  /* TABLE */
+  .table-wrap { overflow-x:auto; margin: 1rem 0; }
+  table {
+    width:100%; border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th {
+    background: var(--blue); color:#fff;
+    padding: 10px 14px; text-align:left;
+    font-family: 'Lora', serif; font-weight:600;
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--paper2); }
+  tr:hover td { background: var(--beige); }
+
+  /* MOVEMENT CARDS */
+  .movement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem; margin-top: 1.2rem;
+  }
+  .movement-card {
+    background: var(--paper2);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.3rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .movement-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+  .movement-card h4 { font-family: 'Caveat', cursive; font-size:1.2rem; color: var(--blue); margin-bottom: 0.5rem; font-style:normal; }
+  .movement-card .year { font-size: 0.78rem; color: var(--grey); font-weight:600; letter-spacing:1px; }
+  .movement-card p { font-size: 0.9rem; margin: 0.5rem 0 0; }
+
+  /* QUICK REVISION */
+  .revision-grid {
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem; margin-top: 1rem;
+  }
+  .revision-card {
+    background: var(--paper2);
+    border: 1.5px dashed var(--brown);
+    border-radius: var(--radius); padding: 1rem;
+    text-align:center;
+  }
+  .revision-card .icon { font-size: 2rem; margin-bottom: 0.4rem; }
+  .revision-card h4 { font-family: 'Caveat', cursive; font-size:1.1rem; color: var(--brown); font-style:normal; margin:0 0 0.3rem; }
+  .revision-card p { font-size: 0.82rem; color: var(--ink-light); margin:0; }
+
+  /* LAW CARDS */
+  .law-card {
+    background: var(--paper2);
+    border: 1.5px solid var(--line);
+    border-left: 4px solid var(--green);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 0.8rem 1rem;
+    margin: 0.6rem 0;
+    transition: box-shadow 0.2s;
+  }
+  .law-card:hover { box-shadow: var(--shadow); }
+  .law-card strong { color: var(--green); font-size:0.93rem; }
+  .law-card p { margin:0.2rem 0 0; font-size:0.88rem; color: var(--ink-light); }
+
+  /* MCQ SECTION */
+  .mcq-section { margin-top: 1rem; }
+  .mcq-difficulty {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem; color: var(--brown);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px dashed var(--line);
+  }
+  .mcq-item {
+    background: var(--paper2);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+    transition: box-shadow 0.2s;
+  }
+  .mcq-item:hover { box-shadow: var(--shadow); }
+  .mcq-q {
+    font-weight: 600; font-size: 0.95rem;
+    margin-bottom: 0.7rem; color: var(--ink);
+    font-family: 'Lora', serif;
+  }
+  .mcq-qnum {
+    display: inline-block;
+    background: var(--blue); color:#fff;
+    border-radius: 50%; width:26px; height:26px;
+    font-size: 0.78rem; font-weight:700;
+    text-align:center; line-height:26px;
+    margin-right: 8px; flex-shrink:0;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .mcq-options { display:grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 0.7rem; }
+  .mcq-opt {
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    border-radius: 8px; padding: 7px 12px;
+    font-size: 0.88rem;
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .mcq-answer {
+    background: var(--green-light);
+    border: 1.5px solid var(--green);
+    border-radius: 8px; padding: 8px 14px;
+    font-size: 0.88rem; font-weight: 600; color: var(--green);
+    display: inline-block;
+    font-family: 'Caveat', cursive; font-size: 1rem;
+  }
+
+  /* SUMMARY BOX */
+  .summary-box {
+    background: linear-gradient(135deg, var(--blue-light), var(--green-light));
+    border: 1.5px solid var(--blue);
+    border-radius: var(--radius); padding: 1.5rem;
+    text-align:center; margin-top:1rem;
+  }
+  .summary-box h3 { color: var(--blue); font-size:1.3rem; margin:0 0 0.5rem; }
+  .summary-box p { font-size: 0.92rem; color: var(--ink); margin: 0; }
+
+  /* BACK TO TOP */
+  #back-top {
+    position: fixed; bottom: 2rem; right: 1.5rem;
+    background: var(--blue); color:#fff;
+    border: none; border-radius: 50%;
+    width:48px; height:48px; font-size:1.3rem;
+    cursor: pointer; z-index: 900;
+    box-shadow: 0 4px 16px rgba(37,99,168,0.35);
+    display: none; align-items:center; justify-content:center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  #back-top:hover { transform:translateY(-3px); box-shadow: 0 8px 24px rgba(37,99,168,0.45); }
+  #back-top.visible { display:flex; }
+
+  /* PRINT */
+  @media print {
+    nav, #back-top, #search-bar, #progress-bar, .nav-actions { display:none !important; }
+    .section { box-shadow:none; break-inside:avoid; }
+    body { background: #fff; }
+  }
+
+  @media(max-width:700px) {
+    main { padding: 1rem 1rem 5rem; }
+    .nav-links { display:none; }
+    .mcq-options { grid-template-columns: 1fr; }
+    h2 { font-size: 1.5rem; }
+    .movement-grid { grid-template-columns: 1fr; }
+    .revision-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ANIMATIONS */
+  .section { animation: fadeUp 0.5s ease both; }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(18px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  .section:nth-child(1) { animation-delay:0.05s; }
+  .section:nth-child(2) { animation-delay:0.10s; }
+  .section:nth-child(3) { animation-delay:0.15s; }
+  .section:nth-child(4) { animation-delay:0.20s; }
+  .section:nth-child(5) { animation-delay:0.25s; }
+  .section:nth-child(6) { animation-delay:0.30s; }
+  .section:nth-child(7) { animation-delay:0.35s; }
+
+  .search-highlight { background: #fde047; border-radius: 2px; }
+
+  .toc-list { list-style:none; padding:0; }
+  .toc-list li { border-bottom: 1px solid var(--line); }
+  .toc-list a { display:flex; justify-content:space-between; align-items:center; padding: 9px 4px; text-decoration:none; color: var(--ink); font-size: 0.93rem; transition: color 0.2s, padding 0.2s; }
+  .toc-list a:hover { color: var(--blue); padding-left:10px; }
+  .toc-list a span { font-size:0.8rem; color: var(--grey); }
+
+  .pill { background: var(--blue); color:#fff; border-radius:20px; padding:1px 8px; font-size:0.75rem; font-weight:600; margin-left:6px; }
+
+  .important-concepts-grid {
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem; margin-top: 1rem;
+  }
+  .concept-card {
+    border: 1.5px solid var(--line); border-radius: var(--radius);
+    padding: 1rem 1.2rem; background: var(--paper2);
+  }
+  .concept-card h4 { font-family:'Caveat',cursive; font-size:1.15rem; color:var(--blue); font-style:normal; margin-bottom:0.4rem; }
+  .concept-card p { font-size: 0.87rem; color: var(--ink-light); margin:0; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav>
+  <div class="nav-logo">📓 CHE 110</div>
+  <ul class="nav-links">
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#population">Population</a></li>
+    <li><a href="#ethics">Ethics</a></li>
+    <li><a href="#awareness">Awareness</a></li>
+    <li><a href="#cultural">Cultural</a></li>
+    <li><a href="#tribal">Tribal</a></li>
+    <li><a href="#laws">Laws</a></li>
+    <li><a href="#movements">Movements</a></li>
+    <li><a href="#mcq">MCQs</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-icon" id="search-btn">🔍 Search</button>
+    <button class="btn-icon" id="dark-btn">🌙 Dark</button>
+    <button class="btn-icon" onclick="window.print()">🖨 Print</button>
+  </div>
+</nav>
+
+<div id="search-bar">
+  <input type="text" id="search-input" placeholder="Search notes…" />
+  <span id="search-count"></span>
+  <button class="btn-icon" id="search-close">✕ Close</button>
+</div>
+
+<div class="hero">
+  <div class="hero-badge">CHE 110 · Environmental Studies</div>
+  <h1>Human Communities & Environment</h1>
+  <div class="hero-unit">UNIT VI</div>
+  <p class="hero-desc">Complete handwritten-style study notes covering human population, ethics, tribal communities, environmental laws, and landmark movements in India.</p>
+</div>
+
+<main>
+
+<!-- TABLE OF CONTENTS -->
+<div class="section" id="toc">
+  <div class="section-label">Navigation</div>
+  <h2>📋 Table of Contents</h2>
+  <ul class="toc-list">
+    <li><a href="#intro">Introduction <span>→</span></a></li>
+    <li><a href="#population">Human Population Growth <span>→</span></a></li>
+    <li><a href="#impacts">Impacts on Environment & Health <span>→</span></a></li>
+    <li><a href="#ethics">Environmental Ethics <span>→</span></a></li>
+    <li><a href="#awareness">Public Awareness <span>→</span></a></li>
+    <li><a href="#cultural">Cultural Practices for Conservation <span>→</span></a></li>
+    <li><a href="#tribal">Tribal Populations & Conservation <span>→</span></a></li>
+    <li><a href="#laws">Environmental Laws in India <span>→</span></a></li>
+    <li><a href="#movements">Environmental Movements <span>→</span></a></li>
+    <li><a href="#revision">Quick Revision Sheet <span>→</span></a></li>
+    <li><a href="#summary">Unit Summary <span>→</span></a></li>
+    <li><a href="#mcq">60 Practice MCQs <span class="pill">60 Qs</span><span>→</span></a></li>
+  </ul>
+</div>
+
+<!-- INTRODUCTION -->
+<div class="section" id="intro">
+  <div class="section-label">Unit 6 · Overview</div>
+  <h2>🌍 Introduction</h2>
+  <p>Unit 6 explores the complex relationship between <span class="highlight">human communities</span> and the environment. As the human population grows, it exerts increasing pressure on natural systems — affecting air, water, land, biodiversity, and climate.</p>
+  <p>This unit covers:</p>
+  <ul class="notes-list">
+    <li>Human population growth and its environmental & social impacts</li>
+    <li>Environmental ethics — our moral duties toward nature</li>
+    <li>Public awareness — spreading environmental knowledge</li>
+    <li>Cultural and tribal practices that support conservation</li>
+    <li>Key environmental laws enacted in India</li>
+    <li>Famous environmental movements that shaped India's conservation history</li>
+  </ul>
+  <div class="callout">
+    💡 <strong>Core Idea:</strong> Humans are both the <em>cause</em> of environmental degradation and the <em>key</em> to solving it — through ethics, awareness, law, and community action.
+  </div>
+</div>
+
+<!-- HUMAN POPULATION GROWTH -->
+<div class="section" id="population">
+  <div class="section-label">Topic 1</div>
+  <h2>👥 Human Population Growth</h2>
+
+  <p><strong>Human population growth</strong> refers to the increase in the total number of people on Earth over time. It occurs mainly when <span class="highlight blue">birth rates exceed death rates</span>.</p>
+
+  <div class="callout yellow">
+    📊 World population crossed <strong>8 billion</strong> in 2022 and is projected to reach ~10 billion by 2058 (UN Population Division).
+  </div>
+
+  <h3>📈 Key Statistics (2025 estimates)</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Rank</th><th>Country</th><th>Population</th></tr>
+      <tr><td>1</td><td>🇮🇳 India</td><td>~1.46 Billion</td></tr>
+      <tr><td>2</td><td>🇨🇳 China</td><td>~1.42 Billion</td></tr>
+      <tr><td>3</td><td>🇺🇸 USA</td><td>~347 Million</td></tr>
+      <tr><td>4</td><td>🇮🇩 Indonesia</td><td>~286 Million</td></tr>
+      <tr><td>5</td><td>🇵🇰 Pakistan</td><td>~255 Million</td></tr>
+      <tr><td>6</td><td>🇳🇬 Nigeria</td><td>~238 Million</td></tr>
+      <tr><td>7</td><td>🇧🇷 Brazil</td><td>~213 Million</td></tr>
+      <tr><td>8</td><td>🇧🇩 Bangladesh</td><td>~176 Million</td></tr>
+      <tr><td>9</td><td>🇷🇺 Russia</td><td>~144 Million</td></tr>
+      <tr><td>10</td><td>🇪🇹 Ethiopia</td><td>~135 Million</td></tr>
+    </table>
+  </div>
+
+  <h3>⚡ Causes of Population Growth</h3>
+  <ul class="notes-list">
+    <li>✅ <strong>Advances in medicine:</strong> Cures for many life-threatening diseases have reduced death rates</li>
+    <li>✅ <strong>High birth rates:</strong> Many communities still have high fertility rates</li>
+    <li>✅ <strong>Son preference:</strong> Cultural pressure to have male children leads to larger families</li>
+    <li>✅ <strong>High illiteracy:</strong> Lack of education reduces awareness of family planning</li>
+    <li>✅ <strong>Poverty:</strong> Poor families may rely on more children for economic support</li>
+    <li>✅ <strong>Lack of awareness:</strong> Limited access to family planning information</li>
+    <li>✅ <strong>Early marriages:</strong> Child marriages lead to more reproductive years</li>
+  </ul>
+
+  <h3>💥 Effects of Overpopulation</h3>
+  <ul class="notes-list">
+    <li>Excessive exploitation of natural resources</li>
+    <li>Widespread unemployment</li>
+    <li>Inadequate health and sanitation facilities</li>
+    <li>Increased environmental pollution</li>
+    <li>Rising demand for food and water</li>
+    <li>Increased waste generation</li>
+    <li>Shortage of schools and medical facilities</li>
+    <li>Rise in crime rates</li>
+  </ul>
+</div>
+
+<!-- IMPACTS -->
+<div class="section" id="impacts">
+  <div class="section-label">Topic 2</div>
+  <h2>🌱 Impacts on Environment, Health & Welfare</h2>
+
+  <h3>🌏 Impact on Environment</h3>
+  <ul class="notes-list">
+    <li><strong>Deforestation & Habitat Loss:</strong> Increased demand for land drives forest clearing</li>
+    <li><strong>Resource Depletion:</strong> More food, water, and energy needed → heavy pressure on natural resources</li>
+    <li><strong>Urban Sprawl:</strong> City expansion causes biodiversity loss and ecosystem fragmentation</li>
+    <li><strong>Pollution:</strong> More waste = more contamination of air, water, and soil</li>
+    <li><strong>Climate Change:</strong> Higher greenhouse gas emissions from growing industrial & domestic activity</li>
+  </ul>
+
+  <h3>🏥 Impact on Human Health & Welfare</h3>
+  <ul class="notes-list">
+    <li><strong>Healthcare strain:</strong> Overpopulation reduces quality and accessibility of medical care</li>
+    <li><strong>Disease spread:</strong> Overcrowding increases infectious diseases and worsens sanitation</li>
+    <li><strong>Malnutrition:</strong> Scarcity of food and water leads to hunger and deficiencies</li>
+    <li><strong>Poverty & Unemployment:</strong> High density reduces job availability and increases poverty</li>
+    <li><strong>Slums:</strong> Housing pressure creates unsafe living conditions</li>
+    <li><strong>Declining welfare:</strong> Resources and services can't keep pace with growth</li>
+  </ul>
+
+  <div class="callout green">
+    🌿 <strong>Solutions:</strong> Education, family planning programs, women empowerment, sustainable development policies, and urbanization management can help slow population growth.
+  </div>
+</div>
+
+<!-- ENVIRONMENTAL ETHICS -->
+<div class="section" id="ethics">
+  <div class="section-label">Topic 3</div>
+  <h2>⚖️ Environmental Ethics</h2>
+
+  <p><strong>Environmental ethics</strong> is the branch of philosophy that studies the moral principles guiding human behavior toward nature and the environment.</p>
+
+  <div class="callout blue">
+    💭 <em>"Environmental ethics asks: Do we have moral duties to nature, to animals, and to future generations — not just to other humans today?"</em>
+  </div>
+
+  <h3>🌿 Core Principles</h3>
+  <ul class="notes-list">
+    <li>Respect for all living beings and natural ecosystems</li>
+    <li>Sustainable use of resources to protect the planet</li>
+    <li>Minimizing pollution and reducing human environmental impact</li>
+    <li>Supporting conservation and preservation of biodiversity</li>
+    <li>Ensuring a healthy environment for present and future generations</li>
+  </ul>
+
+  <h3>📌 Key Ethical Principles</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Principle</th><th>Meaning</th></tr>
+      <tr><td>Environmental Equity</td><td>All living beings have an equal right to exist in a healthy environment</td></tr>
+      <tr><td>Priority Principle</td><td>When human rights and environmental rights conflict, balance must be carefully sought</td></tr>
+      <tr><td>Sustainability Principle</td><td>Use resources in a way that does not compromise future generations</td></tr>
+      <tr><td>Precautionary Principle</td><td>When in doubt, err on the side of protecting the environment</td></tr>
+    </table>
+  </div>
+
+  <h3>✅ Practical Applications</h3>
+  <ul class="notes-list">
+    <li>Respect the power of the environment and apply it for human benefit responsibly</li>
+    <li>Prioritize health, safety, and environmental protection in all decisions</li>
+    <li>Be sensitive to ethical and social issues regarding the environment</li>
+    <li>Avoid activities that cause irreversible damage to ecosystems</li>
+  </ul>
+
+  <div class="callout">
+    📚 <strong>Types of Environmental Ethics:</strong><br>
+    <strong>Anthropocentrism</strong> – Human-centered; nature exists for human benefit<br>
+    <strong>Biocentrism</strong> – All living beings have inherent value<br>
+    <strong>Ecocentrism</strong> – Entire ecosystems (not just individuals) have value and rights
+  </div>
+</div>
+
+<!-- PUBLIC AWARENESS -->
+<div class="section" id="awareness">
+  <div class="section-label">Topic 4</div>
+  <h2>📢 Public Awareness</h2>
+
+  <p><strong>Public awareness</strong> refers to the degree to which people understand important environmental issues and their responsibilities toward solving them.</p>
+
+  <h3>🔑 Why It Matters</h3>
+  <ul class="notes-list">
+    <li>Helps communities recognize environmental problems</li>
+    <li>Encourages responsible and eco-friendly behavior</li>
+    <li>Supports government and NGO efforts for environmental protection</li>
+    <li>Motivates collective action and policy change</li>
+  </ul>
+
+  <h3>📚 Methods of Spreading Environmental Awareness</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Category</th><th>Method</th><th>Examples</th></tr>
+      <tr><td><span class="tag blue">Formal</span></td><td>Education System</td><td>Environmental Studies as a compulsory course in schools and colleges (like CHE 110!)</td></tr>
+      <tr><td rowspan="4"><span class="tag brown">Non-Formal</span></td><td>Mass Media</td><td>Newspapers, magazines, radio, television</td></tr>
+      <tr><td>Events & Campaigns</td><td>Seminars, conferences, awareness drives, competitions</td></tr>
+      <tr><td>Arts & Culture</td><td>Folk songs, street plays, TV serials, documentaries</td></tr>
+      <tr><td>Digital Media</td><td>Social media campaigns, online petitions, environmental blogs</td></tr>
+    </table>
+  </div>
+
+  <div class="callout green">
+    🎯 <strong>Key Awareness Days:</strong> World Environment Day (June 5), Earth Day (April 22), World Water Day (March 22), International Biodiversity Day (May 22)
+  </div>
+</div>
+
+<!-- CULTURAL PRACTICES -->
+<div class="section" id="cultural">
+  <div class="section-label">Topic 5</div>
+  <h2>🏺 Cultural Practices for Environmental Conservation</h2>
+
+  <p>Many indigenous and traditional cultures around the world have developed practices that naturally protect and conserve the environment — often long before modern conservation science existed.</p>
+
+  <h3>🌾 Traditional Practices</h3>
+  <ul class="notes-list">
+    <li><strong>Crop rotation & organic manuring:</strong> Traditional farming methods that maintain soil health</li>
+    <li><strong>Rainwater harvesting:</strong> Indigenous water conservation techniques</li>
+    <li><strong>Protecting sacred animals & plants:</strong> Religious/spiritual beliefs protect certain species</li>
+    <li><strong>Ritual restrictions on hunting & fishing:</strong> Protect wildlife during breeding seasons</li>
+    <li><strong>Community-managed grazing:</strong> Prevents overgrazing and protects grasslands</li>
+  </ul>
+
+  <h3>📍 Specific Examples</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Practice</th><th>Region/Community</th><th>Environmental Benefit</th></tr>
+      <tr><td>Sacred Groves (Dev Vans)</td><td>India (various regions)</td><td>Protected patches of forest conserved for religious reasons</td></tr>
+      <tr><td>Johads (earthen check dams)</td><td>Rajasthan</td><td>Traditional water harvesting; recharges groundwater</td></tr>
+      <tr><td>Stepwells (Baolis)</td><td>Gujarat, Rajasthan</td><td>Sustainable water storage structures</td></tr>
+      <tr><td>Bamboo drip irrigation</td><td>Meghalaya (Khasi, Jaintia)</td><td>Efficient water conservation in hilly terrain</td></tr>
+      <tr><td>Shifting cultivation (Jhum) with fallow</td><td>Northeast India</td><td>Maintains soil fertility when practiced traditionally</td></tr>
+      <tr><td>Organic farming with bio-pesticides</td><td>Multiple tribal communities</td><td>Reduces chemical pollution</td></tr>
+    </table>
+  </div>
+
+  <div class="callout brown">
+    🌳 <strong>Remember:</strong> Sacred Groves are among the oldest forms of forest conservation in India — community-protected patches of forests with cultural and religious significance.
+  </div>
+</div>
+
+<!-- TRIBAL POPULATIONS -->
+<div class="section" id="tribal">
+  <div class="section-label">Topic 6</div>
+  <h2>🏕️ Tribal Populations & Environmental Conservation</h2>
+
+  <p>Tribal (indigenous) communities are among the original stewards of Earth's natural environments. They have traditionally lived in harmony with nature for thousands of years.</p>
+
+  <h3>🔍 Who Are Tribal Communities?</h3>
+  <ul class="notes-list">
+    <li>Live traditionally in forests, hilly areas, or remote regions</li>
+    <li>Have distinct cultures, languages, and customs</li>
+    <li>Follow unique social, economic, and religious practices</li>
+    <li>Depend closely on nature for their livelihood</li>
+    <li>Protected by special constitutional rights and policies</li>
+  </ul>
+
+  <div class="callout blue">
+    📝 <strong>Common Tribal Communities in India:</strong><br>
+    Gonds, Bhils, Santhals, Todas, Nagas, Mizos, Bhutias, Oraon, Khasi, Bodo, Jarawa, etc.
+  </div>
+
+  <h3>🌿 Role in Environmental Conservation</h3>
+  <ul class="notes-list">
+    <li><strong>Forest Protection:</strong> Through traditional practices, sacred groves, and community rules</li>
+    <li><strong>Sustainable Resource Use:</strong> Take only what is needed for livelihood</li>
+    <li><strong>Biodiversity Conservation:</strong> Traditional ecological knowledge helps conserve plant and animal diversity</li>
+    <li><strong>Wildlife Protection:</strong> Tribal taboos and rituals restrict hunting</li>
+    <li><strong>Afforestation:</strong> Active participation in forest management and fire prevention</li>
+    <li><strong>Low-impact Living:</strong> Lifestyle maintains ecological balance</li>
+  </ul>
+
+  <div class="callout green">
+    ✨ <strong>Traditional Ecological Knowledge (TEK)</strong> is the accumulated wisdom of indigenous communities about local ecosystems — increasingly recognized by modern conservation science as invaluable.
+  </div>
+</div>
+
+<!-- ENVIRONMENTAL LAWS -->
+<div class="section" id="laws">
+  <div class="section-label">Topic 7</div>
+  <h2>⚖️ Environmental Laws in India</h2>
+
+  <p>India has enacted a comprehensive set of environmental laws to regulate pollution, protect biodiversity, conserve forests, and ensure environmental justice.</p>
+
+  <div class="law-card">
+    <strong>🏛️ The Environment (Protection) Act, 1986</strong>
+    <p>An <em>umbrella legislation</em> empowering the central government to protect and improve the environment, regulate pollution, and issue directives to industries.</p>
+  </div>
+  <div class="law-card">
+    <strong>💨 The Air (Prevention and Control of Pollution) Act, 1981</strong>
+    <p>Controls air pollution by regulating industrial emissions. Established Central and State Pollution Control Boards (CPCB & SPCB).</p>
+  </div>
+  <div class="law-card">
+    <strong>💧 The Water (Prevention and Control of Pollution) Act, 1974</strong>
+    <p>Ensures prevention and control of water pollution. Maintains water quality through regulatory bodies. <em>India's first major environmental law.</em></p>
+  </div>
+  <div class="law-card">
+    <strong>🦁 The Wildlife Protection Act, 1972</strong>
+    <p>Protects wildlife, national parks, sanctuaries, and endangered species. Prohibits hunting of scheduled animals.</p>
+  </div>
+  <div class="law-card">
+    <strong>🌲 The Forest Conservation Act, 1980</strong>
+    <p>Restricts the use of forest land for non-forest purposes. Requires central government approval to divert forest land.</p>
+  </div>
+  <div class="law-card">
+    <strong>🧬 The Biological Diversity Act, 2002</strong>
+    <p>Conserves biological resources and regulates access to genetic resources and traditional knowledge. Established National Biodiversity Authority (NBA).</p>
+  </div>
+  <div class="law-card">
+    <strong>☢️ The Hazardous Waste Management Rules (1989 & updated)</strong>
+    <p>Regulates handling, storage, transportation, and disposal of hazardous and toxic waste.</p>
+  </div>
+  <div class="law-card">
+    <strong>🏛️ The National Green Tribunal (NGT) Act, 2010</strong>
+    <p>Establishes a special court (tribunal) to address environmental disputes and ensure speedy justice. India is among few nations with such a dedicated environmental court.</p>
+  </div>
+  <div class="law-card">
+    <strong>🛡️ The Public Liability Insurance Act, 1991</strong>
+    <p>Provides immediate relief to people affected by accidents involving hazardous substances. Companies must carry insurance for such incidents.</p>
+  </div>
+  <div class="law-card">
+    <strong>🌊 The Coastal Regulation Zone (CRZ) Notification, 2011</strong>
+    <p>Regulates activities along coastal areas to protect marine ecosystems and prevent unplanned development near coastlines.</p>
+  </div>
+
+  <div class="table-wrap" style="margin-top:1.5rem;">
+    <table>
+      <tr><th>Law</th><th>Year</th><th>Key Focus</th></tr>
+      <tr><td>Water Act</td><td>1974</td><td>Water pollution control</td></tr>
+      <tr><td>Wildlife Protection Act</td><td>1972</td><td>Wildlife & habitat protection</td></tr>
+      <tr><td>Air Act</td><td>1981</td><td>Air pollution control</td></tr>
+      <tr><td>Forest Conservation Act</td><td>1980</td><td>Forest land protection</td></tr>
+      <tr><td>Environment Protection Act</td><td>1986</td><td>Umbrella environmental law</td></tr>
+      <tr><td>Hazardous Waste Rules</td><td>1989</td><td>Toxic waste management</td></tr>
+      <tr><td>Public Liability Insurance Act</td><td>1991</td><td>Compensation for victims</td></tr>
+      <tr><td>Biological Diversity Act</td><td>2002</td><td>Biodiversity conservation</td></tr>
+      <tr><td>NGT Act</td><td>2010</td><td>Environmental courts</td></tr>
+      <tr><td>CRZ Notification</td><td>2011</td><td>Coastal protection</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ENVIRONMENTAL MOVEMENTS -->
+<div class="section" id="movements">
+  <div class="section-label">Topic 8</div>
+  <h2>✊ Environmental Movements in India</h2>
+
+  <p>India has a rich history of grassroots environmental activism. These movements show how ordinary citizens — farmers, women, tribal communities — have fought to protect their environment.</p>
+
+  <div class="movement-grid">
+
+    <div class="movement-card">
+      <div class="year">1730 AD · Rajasthan</div>
+      <h4>🌳 Bishnois of Rajasthan</h4>
+      <p>The Bishnoi community, guided by Guru Jambheshwar's 29 principles, have long protected nature. In the <strong>1730 Khejarli Massacre</strong>, 363 Bishnois — led by Amrita Devi — sacrificed their lives to protect khejri trees from being felled for a king's palace. They protect blackbucks and chinkaras as sacred animals. This event inspired India's conservation movements.</p>
+    </div>
+
+    <div class="movement-card">
+      <div class="year">1973 · Uttarakhand</div>
+      <h4>🤗 Chipko Movement</h4>
+      <p>Started in <strong>Chamoli district</strong> in 1973. Local villagers — especially women of Reni village led by <strong>Gaura Devi</strong> — hugged trees to prevent commercial logging. Key leaders included <strong>Chandi Prasad Bhatt</strong> and <strong>Sunderlal Bahuguna</strong>. "Chipko" means "to cling." It succeeded in halting logging and led to a 15-year ban on tree felling in the Himalayas.</p>
+    </div>
+
+    <div class="movement-card">
+      <div class="year">1983 · Karnataka</div>
+      <h4>🌿 Appiko Movement</h4>
+      <p>Inspired by Chipko, this movement in Karnataka's <strong>Western Ghats</strong> adopted the same tree-hugging method ("Appiko" = embrace in Kannada). Led by <strong>Pandurang Hegde</strong> with support from villagers, women, and children. Its three themes: <strong>Regeneration, Conservation, and Sustainable Use</strong>. Successfully halted tree felling in several districts.</p>
+    </div>
+
+    <div class="movement-card">
+      <div class="year">1973–1983 · Kerala</div>
+      <h4>🏔️ Silent Valley Movement</h4>
+      <p>Fought to protect the tropical rainforest of Silent Valley in Kerala's Palakkad district. The Kerala State Electricity Board proposed a hydroelectric dam on the <strong>Kunthipuzha River</strong>. The forest was home to the endangered <strong>lion-tailed macaque</strong>. Activists like <strong>Dr. Salim Ali</strong> and Sunderlal Bahuguna opposed it. <strong>Indira Gandhi declared protection in 1981</strong>; the project was cancelled in November 1983. Silent Valley became a <strong>National Park in 1985</strong> (inaugurated by Rajiv Gandhi).</p>
+    </div>
+
+    <div class="movement-card">
+      <div class="year">1982 · Jharkhand/Odisha</div>
+      <h4>🪵 Jungle Bachao Andolan</h4>
+      <p>Tribal communities in Jharkhand and Odisha protested the felling of <strong>sal forests</strong> and their replacement with commercial plantations like teak. The movement emphasized <strong>forest rights, conservation, and sustainable use</strong>. It strengthened tribal participation in environmental activism and asserted communities' right over local forest resources.</p>
+    </div>
+
+    <div class="movement-card">
+      <div class="year">1985 · Madhya Pradesh/Gujarat</div>
+      <h4>💧 Narmada Bachao Andolan</h4>
+      <p>Led by <strong>Medha Patkar</strong>, this movement opposed the <strong>Sardar Sarovar Dam</strong> and large dams on the Narmada River. The Narmada River Development Project planned over 3,000 dams, threatening to submerge 245 villages, displace 200,000+ people, and destroy ecologically sensitive areas — mainly affecting Adivasi, Dalit, and marginalized communities. NBA demanded proper rehabilitation and environmental assessment.</p>
+    </div>
+
+    <div class="movement-card">
+      <div class="year">Late 1970s–2000s · Uttarakhand</div>
+      <h4>🌊 Tehri Dam Conflict</h4>
+      <p>Controversy over a large hydroelectric dam on the <strong>Bhagirathi River</strong> in Tehri, Uttarakhand. The dam was planned for electricity, irrigation, and water supply. Construction submerged the old Tehri town and displaced thousands. Environmental concerns included deforestation, landslides, and seismic risk. <strong>Sunderlal Bahuguna</strong> led protests in the 1980s. Despite activism, the dam was completed — a reminder that not all movements succeed.</p>
+    </div>
+
+  </div>
+
+  <div class="callout blue" style="margin-top:1.5rem;">
+    📊 <strong>Comparative Summary of Movements</strong>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Movement</th><th>Year</th><th>Location</th><th>Leader(s)</th><th>Cause</th><th>Outcome</th></tr>
+      <tr><td>Bishnoi</td><td>1730</td><td>Rajasthan</td><td>Amrita Devi</td><td>Tree protection</td><td>363 martyred; khejri saved</td></tr>
+      <tr><td>Chipko</td><td>1973</td><td>Uttarakhand</td><td>Gaura Devi, S. Bahuguna</td><td>Anti-logging</td><td>15-year logging ban</td></tr>
+      <tr><td>Appiko</td><td>1983</td><td>Karnataka</td><td>Pandurang Hegde</td><td>Western Ghats forests</td><td>Halted tree felling</td></tr>
+      <tr><td>Silent Valley</td><td>1973–83</td><td>Kerala</td><td>Dr. Salim Ali, Bahuguna</td><td>Hydro dam</td><td>National Park declared</td></tr>
+      <tr><td>Jungle Bachao</td><td>1982</td><td>Jharkhand</td><td>Tribal communities</td><td>Commercial plantations</td><td>Forest rights awareness</td></tr>
+      <tr><td>Narmada Bachao</td><td>1985</td><td>MP/Gujarat</td><td>Medha Patkar</td><td>Sardar Sarovar Dam</td><td>Partial – project modified</td></tr>
+      <tr><td>Tehri Dam</td><td>1978+</td><td>Uttarakhand</td><td>Sunderlal Bahuguna</td><td>Bhagirathi River dam</td><td>Dam built despite protests</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- IMPORTANT CONCEPTS -->
+<div class="section" id="concepts">
+  <div class="section-label">Key Concepts</div>
+  <h2>💡 Important Concepts at a Glance</h2>
+  <div class="important-concepts-grid">
+    <div class="concept-card">
+      <h4>Birth Rate</h4>
+      <p>Number of live births per 1000 people per year. High birth rate = faster population growth.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Death Rate</h4>
+      <p>Number of deaths per 1000 people per year. When birth > death, population grows.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Carrying Capacity</h4>
+      <p>Maximum population an environment can sustainably support. Overpopulation exceeds this limit.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Demographic Transition</h4>
+      <p>Shift from high birth+death rates to low birth+death rates as a country develops economically.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Biocentrism</h4>
+      <p>Ethical view that all living beings have inherent value — not just humans.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Ecocentrism</h4>
+      <p>Ethical view that entire ecosystems (rivers, forests) have rights and intrinsic value.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Sacred Groves</h4>
+      <p>Forest patches protected by communities for religious/cultural reasons. India has thousands.</p>
+    </div>
+    <div class="concept-card">
+      <h4>TEK</h4>
+      <p>Traditional Ecological Knowledge — indigenous wisdom about local ecosystems, used for sustainable resource management.</p>
+    </div>
+    <div class="concept-card">
+      <h4>NGT</h4>
+      <p>National Green Tribunal — India's specialized court for fast resolution of environmental disputes (est. 2010).</p>
+    </div>
+    <div class="concept-card">
+      <h4>CPCB / SPCB</h4>
+      <p>Central/State Pollution Control Boards — established under Water Act 1974 and Air Act 1981 to monitor pollution.</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK REVISION -->
+<div class="section" id="revision">
+  <div class="section-label">Exam Prep</div>
+  <h2>⚡ Quick Revision Sheet</h2>
+
+  <div class="revision-grid">
+    <div class="revision-card">
+      <div class="icon">👥</div>
+      <h4>Pop Growth</h4>
+      <p>Birth rate &gt; Death rate. World = 8 billion (2022). India = #1 with ~1.46 billion.</p>
+    </div>
+    <div class="revision-card">
+      <div class="icon">⚖️</div>
+      <h4>Ethics</h4>
+      <p>Anthropocentrism → Biocentrism → Ecocentrism. Respect nature, minimize harm.</p>
+    </div>
+    <div class="revision-card">
+      <div class="icon">📢</div>
+      <h4>Awareness</h4>
+      <p>Formal (schools) + Non-formal (media, campaigns, folk arts).</p>
+    </div>
+    <div class="revision-card">
+      <div class="icon">🏺</div>
+      <h4>Cultural</h4>
+      <p>Sacred groves, johads, stepwells, bamboo drip irrigation, organic farming.</p>
+    </div>
+    <div class="revision-card">
+      <div class="icon">🏕️</div>
+      <h4>Tribal</h4>
+      <p>Live in forests, low-impact lifestyle, Traditional Ecological Knowledge (TEK).</p>
+    </div>
+    <div class="revision-card">
+      <div class="icon">📜</div>
+      <h4>Key Laws</h4>
+      <p>Water (1974), WPA (1972), Air (1981), EPA (1986), NGT (2010).</p>
+    </div>
+    <div class="revision-card">
+      <div class="icon">🌳</div>
+      <h4>Chipko</h4>
+      <p>1973, Chamoli, Gaura Devi. "Hug trees" to stop logging.</p>
+    </div>
+    <div class="revision-card">
+      <div class="icon">🌿</div>
+      <h4>Appiko</h4>
+      <p>1983, Karnataka, Pandurang Hegde. Inspired by Chipko.</p>
+    </div>
+    <div class="revision-card">
+      <div class="icon">🏔️</div>
+      <h4>Silent Valley</h4>
+      <p>Kerala, 1973–83. Protected lion-tailed macaque. National Park 1985.</p>
+    </div>
+    <div class="revision-card">
+      <div class="icon">💧</div>
+      <h4>Narmada</h4>
+      <p>1985, Medha Patkar. Opposed Sardar Sarovar Dam. 200,000+ displaced.</p>
+    </div>
+    <div class="revision-card">
+      <div class="icon">🌊</div>
+      <h4>Tehri</h4>
+      <p>Bhagirathi River, Uttarakhand. Sunderlal Bahuguna protested. Dam was built.</p>
+    </div>
+    <div class="revision-card">
+      <div class="icon">🪵</div>
+      <h4>Jungle Bachao</h4>
+      <p>1982, Jharkhand. Tribal protest against replacing sal with commercial forests.</p>
+    </div>
+  </div>
+
+  <div class="callout yellow" style="margin-top:1.5rem;">
+    🧠 <strong>Memory Trick for Movements:</strong> <strong>B</strong>ishnois → <strong>C</strong>hipko → <strong>A</strong>ppiko → <strong>S</strong>ilent Valley → <strong>J</strong>ungle Bachao → <strong>N</strong>armada → <strong>T</strong>ehri<br>
+    → <strong>"Big Cats Always Stay Just Near Trees"</strong> 🐆
+  </div>
+</div>
+
+<!-- UNIT SUMMARY -->
+<div class="section" id="summary">
+  <div class="section-label">Wrap Up</div>
+  <h2>📖 Unit Summary</h2>
+  <p>Unit 6 draws a powerful connection between human communities and their environment:</p>
+  <ul class="notes-list">
+    <li><strong>Population Growth</strong> drives environmental degradation through deforestation, pollution, and resource depletion</li>
+    <li><strong>Environmental Ethics</strong> provides the moral foundation for sustainable living and responsible behavior</li>
+    <li><strong>Public Awareness</strong> — through education and media — is essential for behavioral change</li>
+    <li><strong>Cultural and Tribal Knowledge</strong> offers time-tested, sustainable approaches to living with nature</li>
+    <li><strong>Environmental Laws</strong> in India provide a strong legal framework for pollution control and nature conservation</li>
+    <li><strong>Environmental Movements</strong> demonstrate that collective community action can shape national policy</li>
+  </ul>
+  <div class="summary-box">
+    <h3>🌍 Core Message of Unit 6</h3>
+    <p>Human communities are the <em>biggest threat</em> to the environment — but also its <em>greatest hope</em>. Through ethics, law, awareness, and grassroots action, people can protect and restore the planet.</p>
+  </div>
+</div>
+
+<!-- MCQ SECTION -->
+<div class="section" id="mcq">
+  <div class="section-label">Practice · 60 Questions</div>
+  <h2>📝 Unit 6 Practice MCQs</h2>
+  <p>60 Multiple Choice Questions covering all topics of Unit 6. Difficulty: 20 Easy · 25 Medium · 15 Difficult.</p>
+
+  <div class="mcq-section">
+
+    <div class="mcq-difficulty">🟢 Easy Questions (Q1–Q20)</div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">1</span>Human population growth mainly occurs when:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Death rates exceed birth rates</div>
+        <div class="mcq-opt">B) Birth rates exceed death rates</div>
+        <div class="mcq-opt">C) Birth rates equal death rates</div>
+        <div class="mcq-opt">D) Migration rates are high</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Birth rates exceed death rates</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">2</span>As of 2022, the world population crossed:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 6 billion</div>
+        <div class="mcq-opt">B) 7 billion</div>
+        <div class="mcq-opt">C) 8 billion</div>
+        <div class="mcq-opt">D) 9 billion</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) 8 billion</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">3</span>Which country has the highest population as of 2025?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) China</div>
+        <div class="mcq-opt">B) USA</div>
+        <div class="mcq-opt">C) India</div>
+        <div class="mcq-opt">D) Indonesia</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) India</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">4</span>The Chipko Movement began in which year?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 1965</div>
+        <div class="mcq-opt">B) 1973</div>
+        <div class="mcq-opt">C) 1980</div>
+        <div class="mcq-opt">D) 1983</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) 1973</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">5</span>"Chipko" literally means:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) To cut</div>
+        <div class="mcq-opt">B) To plant</div>
+        <div class="mcq-opt">C) To cling/hug</div>
+        <div class="mcq-opt">D) To protest</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) To cling/hug</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">6</span>The Narmada Bachao Andolan was led by:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Sunderlal Bahuguna</div>
+        <div class="mcq-opt">B) Gaura Devi</div>
+        <div class="mcq-opt">C) Medha Patkar</div>
+        <div class="mcq-opt">D) Pandurang Hegde</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Medha Patkar</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">7</span>The Environment (Protection) Act was enacted in:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 1974</div>
+        <div class="mcq-opt">B) 1980</div>
+        <div class="mcq-opt">C) 1986</div>
+        <div class="mcq-opt">D) 1992</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) 1986</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">8</span>The Wildlife Protection Act was enacted in:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 1968</div>
+        <div class="mcq-opt">B) 1972</div>
+        <div class="mcq-opt">C) 1976</div>
+        <div class="mcq-opt">D) 1981</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) 1972</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">9</span>Environmental ethics is the study of:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Environmental laws</div>
+        <div class="mcq-opt">B) Moral principles guiding human behavior toward nature</div>
+        <div class="mcq-opt">C) Ecology and ecosystems</div>
+        <div class="mcq-opt">D) Pollution control</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Moral principles guiding human behavior toward nature</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">10</span>The Appiko Movement began in:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Kerala</div>
+        <div class="mcq-opt">B) Uttarakhand</div>
+        <div class="mcq-opt">C) Karnataka</div>
+        <div class="mcq-opt">D) Rajasthan</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Karnataka</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">11</span>Johads are traditional:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Sacred forests</div>
+        <div class="mcq-opt">B) Earthen check dams for water harvesting</div>
+        <div class="mcq-opt">C) Tribal settlements</div>
+        <div class="mcq-opt">D) Types of organic fertilizer</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Earthen check dams for water harvesting</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">12</span>The National Green Tribunal (NGT) Act was enacted in:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 2002</div>
+        <div class="mcq-opt">B) 2006</div>
+        <div class="mcq-opt">C) 2010</div>
+        <div class="mcq-opt">D) 2014</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) 2010</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">13</span>The Bishnoi community is located in:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Uttarakhand</div>
+        <div class="mcq-opt">B) Rajasthan</div>
+        <div class="mcq-opt">C) Gujarat</div>
+        <div class="mcq-opt">D) Karnataka</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Rajasthan</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">14</span>Public awareness methods can be classified into:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Active and passive methods</div>
+        <div class="mcq-opt">B) Formal and non-formal methods</div>
+        <div class="mcq-opt">C) Legal and social methods</div>
+        <div class="mcq-opt">D) Individual and group methods</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Formal and non-formal methods</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">15</span>Silent Valley is located in:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Tamil Nadu</div>
+        <div class="mcq-opt">B) Karnataka</div>
+        <div class="mcq-opt">C) Kerala</div>
+        <div class="mcq-opt">D) Andhra Pradesh</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Kerala</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">16</span>The Water (Prevention and Control of Pollution) Act was enacted in:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 1970</div>
+        <div class="mcq-opt">B) 1972</div>
+        <div class="mcq-opt">C) 1974</div>
+        <div class="mcq-opt">D) 1976</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) 1974</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">17</span>Jungle Bachao Andolan began in which state?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Uttar Pradesh</div>
+        <div class="mcq-opt">B) Rajasthan</div>
+        <div class="mcq-opt">C) Jharkhand</div>
+        <div class="mcq-opt">D) Odisha</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Jharkhand (and Odisha)</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">18</span>Formal method of environmental awareness includes:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Street plays</div>
+        <div class="mcq-opt">B) TV documentaries</div>
+        <div class="mcq-opt">C) Environmental Studies in schools/colleges</div>
+        <div class="mcq-opt">D) Folk songs</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Environmental Studies in schools/colleges</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">19</span>Traditional Ecological Knowledge (TEK) refers to:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Scientific research in ecology</div>
+        <div class="mcq-opt">B) Indigenous wisdom about local ecosystems</div>
+        <div class="mcq-opt">C) Government policies on ecology</div>
+        <div class="mcq-opt">D) Technological solutions to ecological problems</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Indigenous wisdom about local ecosystems</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">20</span>The Air (Prevention and Control of Pollution) Act was enacted in:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 1974</div>
+        <div class="mcq-opt">B) 1978</div>
+        <div class="mcq-opt">C) 1981</div>
+        <div class="mcq-opt">D) 1986</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) 1981</div>
+    </div>
+
+    <div class="mcq-difficulty">🟡 Medium Questions (Q21–Q45)</div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">21</span>In the 1730 Khejarli Massacre, how many Bishnois sacrificed their lives?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 163</div>
+        <div class="mcq-opt">B) 263</div>
+        <div class="mcq-opt">C) 363</div>
+        <div class="mcq-opt">D) 463</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) 363</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">22</span>The Chipko Movement was primarily started in which district?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Dehradun</div>
+        <div class="mcq-opt">B) Chamoli</div>
+        <div class="mcq-opt">C) Nainital</div>
+        <div class="mcq-opt">D) Pithoragarh</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Chamoli</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">23</span>Which endangered species was a key reason for protecting Silent Valley?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Indian elephant</div>
+        <div class="mcq-opt">B) Bengal tiger</div>
+        <div class="mcq-opt">C) Lion-tailed macaque</div>
+        <div class="mcq-opt">D) Nilgiri tahr</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Lion-tailed macaque</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">24</span>The Sardar Sarovar Dam is built on which river?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Godavari</div>
+        <div class="mcq-opt">B) Narmada</div>
+        <div class="mcq-opt">C) Mahanadi</div>
+        <div class="mcq-opt">D) Tapti</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Narmada</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">25</span>Which three themes defined the Appiko Movement?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Protest, Plantation, Preservation</div>
+        <div class="mcq-opt">B) Regeneration, Conservation, Sustainable Use</div>
+        <div class="mcq-opt">C) Awareness, Action, Accountability</div>
+        <div class="mcq-opt">D) Education, Employment, Environment</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Regeneration, Conservation, Sustainable Use</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">26</span>Sacred groves are primarily conserved for which reason?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Timber production</div>
+        <div class="mcq-opt">B) Tourist attractions</div>
+        <div class="mcq-opt">C) Religious and cultural significance</div>
+        <div class="mcq-opt">D) Scientific research</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Religious and cultural significance</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">27</span>The Biological Diversity Act was enacted in:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 1998</div>
+        <div class="mcq-opt">B) 2000</div>
+        <div class="mcq-opt">C) 2002</div>
+        <div class="mcq-opt">D) 2005</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) 2002</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">28</span>Bamboo drip irrigation is a traditional practice used by which community?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Bishnois of Rajasthan</div>
+        <div class="mcq-opt">B) Khasi and Jaintia of Meghalaya</div>
+        <div class="mcq-opt">C) Santhals of Jharkhand</div>
+        <div class="mcq-opt">D) Nagas of Nagaland</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Khasi and Jaintia of Meghalaya</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">29</span>Which environmental law provides immediate compensation to victims of hazardous substance accidents?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) NGT Act, 2010</div>
+        <div class="mcq-opt">B) EPA, 1986</div>
+        <div class="mcq-opt">C) Public Liability Insurance Act, 1991</div>
+        <div class="mcq-opt">D) CRZ Notification, 2011</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Public Liability Insurance Act, 1991</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">30</span>The Tehri Dam was built on which river?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Ganga</div>
+        <div class="mcq-opt">B) Yamuna</div>
+        <div class="mcq-opt">C) Bhagirathi</div>
+        <div class="mcq-opt">D) Alaknanda</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Bhagirathi</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">31</span>Biocentrism is an ethical view that:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Only humans have moral value</div>
+        <div class="mcq-opt">B) All living beings have inherent value</div>
+        <div class="mcq-opt">C) Entire ecosystems have intrinsic rights</div>
+        <div class="mcq-opt">D) Economic development is more important than nature</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) All living beings have inherent value</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">32</span>The Silent Valley Hydroelectric Project was proposed by:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Central Water Commission</div>
+        <div class="mcq-opt">B) Kerala State Electricity Board (KSEB)</div>
+        <div class="mcq-opt">C) NTPC</div>
+        <div class="mcq-opt">D) Kerala Forest Department</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Kerala State Electricity Board (KSEB)</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">33</span>The Forest Conservation Act restricts forest land use for:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Wildlife sanctuaries</div>
+        <div class="mcq-opt">B) Non-forest purposes</div>
+        <div class="mcq-opt">C) Tourism development</div>
+        <div class="mcq-opt">D) Afforestation programs</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Non-forest purposes</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">34</span>Which animal is specially protected by the Bishnoi community?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Tiger and leopard</div>
+        <div class="mcq-opt">B) Blackbuck and chinkara</div>
+        <div class="mcq-opt">C) Lion-tailed macaque</div>
+        <div class="mcq-opt">D) Snow leopard and Himalayan ibex</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Blackbuck and chinkara</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">35</span>Overpopulation leads to which of the following environmental impacts?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Increased biodiversity</div>
+        <div class="mcq-opt">B) Forest expansion</div>
+        <div class="mcq-opt">C) Deforestation and habitat loss</div>
+        <div class="mcq-opt">D) Reduced greenhouse gas emissions</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Deforestation and habitat loss</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">36</span>The CRZ (Coastal Regulation Zone) Notification was issued in:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 2002</div>
+        <div class="mcq-opt">B) 2007</div>
+        <div class="mcq-opt">C) 2011</div>
+        <div class="mcq-opt">D) 2015</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) 2011</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">37</span>Which of the following is NOT a traditional water conservation practice?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Johads</div>
+        <div class="mcq-opt">B) Stepwells (Baolis)</div>
+        <div class="mcq-opt">C) Shifting cultivation</div>
+        <div class="mcq-opt">D) Bamboo drip irrigation</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Shifting cultivation</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">38</span>The Appiko Movement was led by:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Gaura Devi</div>
+        <div class="mcq-opt">B) Pandurang Hegde</div>
+        <div class="mcq-opt">C) Medha Patkar</div>
+        <div class="mcq-opt">D) Sunderlal Bahuguna</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Pandurang Hegde</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">39</span>Which law established Central and State Pollution Control Boards?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Environment Protection Act, 1986</div>
+        <div class="mcq-opt">B) Air Act, 1981</div>
+        <div class="mcq-opt">C) Water Act, 1974</div>
+        <div class="mcq-opt">D) Both B and C</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: D) Both B and C</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">40</span>The Narmada River Development Project planned to build approximately how many dams?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 300</div>
+        <div class="mcq-opt">B) 1000</div>
+        <div class="mcq-opt">C) 2000</div>
+        <div class="mcq-opt">D) 3000</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: D) 3000</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">41</span>Which leader played a key role in BOTH the Silent Valley and Tehri Dam conflicts?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Medha Patkar</div>
+        <div class="mcq-opt">B) Gaura Devi</div>
+        <div class="mcq-opt">C) Sunderlal Bahuguna</div>
+        <div class="mcq-opt">D) Pandurang Hegde</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Sunderlal Bahuguna</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">42</span>In which year was Silent Valley declared a National Park?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 1981</div>
+        <div class="mcq-opt">B) 1983</div>
+        <div class="mcq-opt">C) 1985</div>
+        <div class="mcq-opt">D) 1990</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) 1985</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">43</span>Early marriages as a cause of population growth leads to:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Fewer children per family</div>
+        <div class="mcq-opt">B) More reproductive years and thus more children</div>
+        <div class="mcq-opt">C) Lower birth rates</div>
+        <div class="mcq-opt">D) Better family planning</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) More reproductive years and thus more children</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">44</span>Shifting cultivation with adequate fallow periods is practiced by tribal communities to:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Increase deforestation</div>
+        <div class="mcq-opt">B) Maintain soil fertility</div>
+        <div class="mcq-opt">C) Export timber</div>
+        <div class="mcq-opt">D) Create more pasture land</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Maintain soil fertility</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">45</span>The National Biodiversity Authority (NBA) was established under which act?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Wildlife Protection Act, 1972</div>
+        <div class="mcq-opt">B) Forest Conservation Act, 1980</div>
+        <div class="mcq-opt">C) Biological Diversity Act, 2002</div>
+        <div class="mcq-opt">D) Environment Protection Act, 1986</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Biological Diversity Act, 2002</div>
+    </div>
+
+    <div class="mcq-difficulty">🔴 Difficult Questions (Q46–Q60)</div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">46</span>The principles of Guru Jambheshwar that guided the Bishnoi community included how many commandments?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 10</div>
+        <div class="mcq-opt">B) 20</div>
+        <div class="mcq-opt">C) 29</div>
+        <div class="mcq-opt">D) 40</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) 29</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">47</span>The Reni village in the Chipko Movement is located in which district of Uttarakhand?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Uttarkashi</div>
+        <div class="mcq-opt">B) Chamoli</div>
+        <div class="mcq-opt">C) Rudraprayag</div>
+        <div class="mcq-opt">D) Pauri Garhwal</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Chamoli</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">48</span>The hydroelectric project in Silent Valley was planned on which river?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Periyar</div>
+        <div class="mcq-opt">B) Kabani</div>
+        <div class="mcq-opt">C) Kunthipuzha</div>
+        <div class="mcq-opt">D) Chaliyar</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Kunthipuzha</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">49</span>The Sardar Sarovar Dam project was estimated to displace approximately how many people?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 20,000</div>
+        <div class="mcq-opt">B) 50,000</div>
+        <div class="mcq-opt">C) 100,000</div>
+        <div class="mcq-opt">D) 200,000</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: D) 200,000</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">50</span>Which ethical view holds that entire ecosystems (not just individual organisms) have intrinsic value?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Anthropocentrism</div>
+        <div class="mcq-opt">B) Biocentrism</div>
+        <div class="mcq-opt">C) Ecocentrism</div>
+        <div class="mcq-opt">D) Utilitarianism</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Ecocentrism</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">51</span>In which year did the Planning Commission approve the Silent Valley Hydroelectric Project?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 1970</div>
+        <div class="mcq-opt">B) 1973</div>
+        <div class="mcq-opt">C) 1975</div>
+        <div class="mcq-opt">D) 1978</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) 1973</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">52</span>Which of the following is the FIRST environmental law enacted in India (chronologically)?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Forest Conservation Act, 1980</div>
+        <div class="mcq-opt">B) Wildlife Protection Act, 1972</div>
+        <div class="mcq-opt">C) Water Act, 1974</div>
+        <div class="mcq-opt">D) Air Act, 1981</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Wildlife Protection Act, 1972</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">53</span>Which tree was primarily protected by the Bishnois in the 1730 Khejarli Massacre?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Banyan</div>
+        <div class="mcq-opt">B) Peepal</div>
+        <div class="mcq-opt">C) Khejri (Prosopis cineraria)</div>
+        <div class="mcq-opt">D) Neem</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Khejri (Prosopis cineraria)</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">54</span>The Jungle Bachao Andolan was primarily a protest against replacing native forests with:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Eucalyptus plantations</div>
+        <div class="mcq-opt">B) Teak and other commercial plantations</div>
+        <div class="mcq-opt">C) Agricultural fields</div>
+        <div class="mcq-opt">D) Urban settlements</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Teak and other commercial plantations</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">55</span>Silent Valley's hydroelectric project was finally cancelled in November:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) 1980</div>
+        <div class="mcq-opt">B) 1981</div>
+        <div class="mcq-opt">C) 1983</div>
+        <div class="mcq-opt">D) 1985</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) 1983</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">56</span>The concept of "carrying capacity" in the context of population refers to:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Amount of goods an economy can produce</div>
+        <div class="mcq-opt">B) Maximum population an environment can sustainably support</div>
+        <div class="mcq-opt">C) Weight of goods transported per kilometer</div>
+        <div class="mcq-opt">D) Number of species in an ecosystem</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Maximum population an environment can sustainably support</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">57</span>Which Prime Minister formally inaugurated Silent Valley National Park in 1985?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Indira Gandhi</div>
+        <div class="mcq-opt">B) Rajiv Gandhi</div>
+        <div class="mcq-opt">C) V.P. Singh</div>
+        <div class="mcq-opt">D) P.V. Narasimha Rao</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) Rajiv Gandhi</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">58</span>The Environment Protection Act 1986 is described as an "umbrella legislation" because:</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) It was enacted during the monsoon season</div>
+        <div class="mcq-opt">B) It covers all aspects of environmental protection under one comprehensive law</div>
+        <div class="mcq-opt">C) It protects only forest and wildlife</div>
+        <div class="mcq-opt">D) It was signed by the United Nations</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: B) It covers all aspects of environmental protection under one comprehensive law</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">59</span>Which of the following correctly matches the movement with its primary leader?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Chipko → Medha Patkar</div>
+        <div class="mcq-opt">B) Narmada Bachao → Gaura Devi</div>
+        <div class="mcq-opt">C) Appiko → Pandurang Hegde</div>
+        <div class="mcq-opt">D) Silent Valley → Pandurang Hegde</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) Appiko → Pandurang Hegde</div>
+    </div>
+
+    <div class="mcq-item">
+      <div class="mcq-q"><span class="mcq-qnum">60</span>Which of the following best describes the Precautionary Principle in environmental ethics?</div>
+      <div class="mcq-options">
+        <div class="mcq-opt">A) Development should always take priority over environmental concerns</div>
+        <div class="mcq-opt">B) Scientific certainty is needed before taking any environmental action</div>
+        <div class="mcq-opt">C) When uncertain about environmental harm, prioritize protective action</div>
+        <div class="mcq-opt">D) Only humans have rights that need protection from pollution</div>
+      </div>
+      <div class="mcq-answer">✅ Answer: C) When uncertain about environmental harm, prioritize protective action</div>
+    </div>
+
+  </div><!-- end mcq-section -->
+</div><!-- end MCQ section -->
+
+</main>
+
+<button id="back-top" title="Back to top">↑</button>
+
+<script>
+// Progress bar
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  progressBar.style.width = progress + '%';
+
+  // Back to top
+  const btn = document.getElementById('back-top');
+  if (scrollTop > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+// Back to top
+document.getElementById('back-top').addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Dark mode
+const darkBtn = document.getElementById('dark-btn');
+darkBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  darkBtn.textContent = document.body.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';
+});
+
+// Search
+const searchBtn = document.getElementById('search-btn');
+const searchBar = document.getElementById('search-bar');
+const searchInput = document.getElementById('search-input');
+const searchCount = document.getElementById('search-count');
+const searchClose = document.getElementById('search-close');
+
+searchBtn.addEventListener('click', () => {
+  searchBar.classList.toggle('active');
+  if (searchBar.classList.contains('active')) searchInput.focus();
+  else clearSearch();
+});
+
+searchClose.addEventListener('click', () => {
+  searchBar.classList.remove('active');
+  clearSearch();
+});
+
+function clearSearch() {
+  searchInput.value = '';
+  searchCount.textContent = '';
+  document.querySelectorAll('.search-highlight').forEach(el => {
+    el.outerHTML = el.textContent;
+  });
+}
+
+searchInput.addEventListener('input', () => {
+  // Clear previous highlights
+  document.querySelectorAll('.search-highlight').forEach(el => {
+    el.outerHTML = el.textContent;
+  });
+
+  const query = searchInput.value.trim();
+  if (!query || query.length < 2) { searchCount.textContent = ''; return; }
+
+  const regex = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+  let count = 0;
+
+  function highlightNode(node) {
+    if (node.nodeType === 3) {
+      const text = node.textContent;
+      if (regex.test(text)) {
+        regex.lastIndex = 0;
+        const span = document.createElement('span');
+        span.innerHTML = text.replace(regex, '<mark class="search-highlight">$1</mark>');
+        node.parentNode.replaceChild(span, node);
+        count += (text.match(regex) || []).length;
+        regex.lastIndex = 0;
+      }
+    } else if (node.nodeType === 1 && !['SCRIPT','STYLE','MARK','INPUT','BUTTON'].includes(node.tagName)) {
+      Array.from(node.childNodes).forEach(highlightNode);
+    }
+  }
+
+  document.querySelectorAll('main').forEach(highlightNode);
+  searchCount.textContent = count > 0 ? `${count} result${count>1?'s':''}` : 'No results';
+
+  if (count > 0) {
+    const first = document.querySelector('.search-highlight');
+    if (first) first.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+});
+
+// Keyboard shortcut Ctrl+F / Cmd+F override
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+    e.preventDefault();
+    searchBar.classList.add('active');
+    searchInput.focus();
+  }
+  if (e.key === 'Escape') {
+    searchBar.classList.remove('active');
+    clearSearch();
+  }
+});
 </script>
-
 </body>
 </html>
